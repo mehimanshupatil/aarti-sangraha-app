@@ -2,14 +2,13 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import AboutNavigation from './aboutStack';
 import HomeStack from './homeStack';
 import React from 'react';
-import { Text } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 const { Navigator, Screen } = createDrawerNavigator();
 
-export default function MyDrawer({ apiData, fontSize, setFontSize }) {
+export default function MyDrawer({ apiData, fontSize, setFontSize, setLocalAartiData }) {
     const LocalHomeStack = () => {
         return (
-            <HomeStack apiData={apiData} fontSize={fontSize} setFontSize={setFontSize} />
+            <HomeStack apiData={apiData} fontSize={fontSize} setFontSize={setFontSize} setLocalAartiData={setLocalAartiData} />
         )
     }
 

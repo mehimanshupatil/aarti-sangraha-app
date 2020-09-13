@@ -5,10 +5,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import CommonTemplate from '../screens/commonTemplate';
 import React, { useState } from 'react';
 import Header from '../shared/header';
+import AddNew from '../screens/addNew';
 
 const { Navigator, Screen } = createStackNavigator();
 
-export default function HomeStack({ apiData, fontSize, setFontSize }) {
+export default function HomeStack({ apiData, fontSize, setFontSize, setLocalAartiData }) {
 
   const [localData, setLocalData] = useState(apiData)
   const searchInput = (text) => {
@@ -28,6 +29,11 @@ export default function HomeStack({ apiData, fontSize, setFontSize }) {
     )
   }
 
+  const LocalAddNew = ({ navigation, route }) => {
+    return (
+      <AddNew navigation={navigation} route={route} setLocalAartiData={setLocalAartiData} />
+    )
+  }
 
   return (
     // <Text>gjgj</Text>
@@ -45,6 +51,8 @@ export default function HomeStack({ apiData, fontSize, setFontSize }) {
       <Screen name="CommonComponent"
         options={({ route }) => ({ title: route.params.data?.title })}
         component={LocalCommonTemplate} />
+      <Screen name="addNew" options={{ title: 'Add New' }}
+        component={LocalAddNew} />
     </Navigator>
     // </NavigationContainer>
   )

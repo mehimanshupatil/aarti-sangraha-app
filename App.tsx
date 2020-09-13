@@ -24,7 +24,9 @@ export default function App() {
       }
 
       const data = await AsyncStorage.getItem('aartiData');
-      await fetchData(data)
+      const localdata = await AsyncStorage.getItem('localAartiData');
+
+      await fetchData(data, localdata)
 
       const value = await AsyncStorage.getItem('fontSize');
       if (value !== null) {
@@ -38,19 +40,29 @@ export default function App() {
     }
   }
 
-  const fetchData = async (data) => {
+  const fetchData = async (data, localdata = '[]') => {
+    let localParse = JSON.parse(localdata)
     if (data == null) {
       await Axios.get('https://api.jsonbin.io/b/5f5ca28e302a837e9564c179/latest', {
         headers: { 'secret-key': '$2b$10$jQMfRI73zHSDNOquzSk8eeLsivUvrwFxP0ZAyVYMSZ2WUkPbgtf9C' }
       })
         .then(async x => {
-          setApiData(x.data)
+          let newArray = localdata ? [...localParse, ...x.data] : x.data
+          setApiData(newArray)
           await AsyncStorage.setItem('aartiData', JSON.stringify(x.data));
           await AsyncStorage.setItem('refreshDate', moment().format());
         })
     } else {
-      setApiData(JSON.parse(data))
+      let newArray = localdata ? [...localParse, ...JSON.parse(data)] : JSON.parse(data)
+      setApiData(newArray)
     }
+  }
+
+  const setLocalAartiData = async (title, body) => {
+    const localdata = await AsyncStorage.getItem('localAartiData') ?? '[]';
+    let obj = [{ title, body }, ...JSON.parse(localdata)]
+    await AsyncStorage.setItem('localAartiData', JSON.stringify(obj));
+    setApiData([{ title, body }, ...apiData])
   }
 
   if (!dataLoaded) {
@@ -63,7 +75,7 @@ export default function App() {
   } else {
     return (
       <NavigationContainer>
-        <MyDrawer apiData={apiData} fontSize={fontSize} setFontSize={setFontSize} />
+        <MyDrawer apiData={apiData} fontSize={fontSize} setLocalAartiData={setLocalAartiData} setFontSize={setFontSize} />
       </NavigationContainer>
     );
   }
