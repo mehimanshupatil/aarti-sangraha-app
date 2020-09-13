@@ -26,7 +26,7 @@ color: 'rgb(24,28,63)'
   }
 });
 
-const updateFontSize=async (newSize)=>{
+const updateFontSize=async (newSize: number)=>{
   await AsyncStorage.setItem('fontSize',newSize.toString());
   setFontSize(newSize)
 }

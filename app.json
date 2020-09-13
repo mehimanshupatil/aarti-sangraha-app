@@ -24,7 +24,8 @@
       "favicon": "./assets/favicon.png"
     },
     "android": {
-      "package": "com.himanshupatil.aartisangraha"
+      "package": "com.mehimanshupatil.aartisangraha",
+      "enableDangerousExperimentalLeanBuilds" : true
     }
   }
 }
