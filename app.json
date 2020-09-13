@@ -1,14 +1,15 @@
 {
   "expo": {
-    "name": "learn",
-    "slug": "learn",
-    "version": "1.0.0",
+    "name": "आरती संग्रह",
+    "slug": "aartisangraha",
+    "privacy": "unlisted",
+    "version": "1.0.0-alpha",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffde5b"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -21,6 +22,9 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "android": {
+      "package": "com.himanshupatil.aartisangraha"
     }
   }
 }
