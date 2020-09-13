@@ -6,6 +6,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import CommonTemplate from '../screens/commonTemplate';
 import React from 'react';
 import About from '../screens/about';
+import Header from '../shared/header';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -18,11 +19,11 @@ export default function AboutNavigation() {
                 fontWeight: 'bold',
             },
         }}>
-            <Screen name="About" options={{
-                title: 'About', headerTitleStyle: {
-                    fontWeight: 'bold', alignSelf: 'center'
-                }
-            }} component={About} />
+            <Screen name="About"
+                options={({ route, navigation }) => ({
+                    headerTitle: () => <Header title='About' navigation={navigation} showSearchButton={false} />,
+                    headerTitleStyle: { fontWeight: 'bold', alignSelf: 'center' }
+                })} component={About} />
 
         </Navigator>
     )

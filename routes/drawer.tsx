@@ -4,6 +4,7 @@ import HomeStack from './homeStack';
 import React from 'react';
 import { Text } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Header from '../shared/header';
 const { Navigator, Screen } = createDrawerNavigator();
 
 export default function MyDrawer({ apiData, fontSize }) {
@@ -18,8 +19,15 @@ export default function MyDrawer({ apiData, fontSize }) {
 
     return (
         <Navigator >
-            <Screen name="HomeStack" options={{ title: 'आरती संग्रह' }} component={LocalHomeStack} />
-            <Screen name="AboutStack" options={{ title: 'About' }} component={AboutNavigation} />
+            <Screen name="HomeStack" options={() => ({
+                title: 'आरती संग्रह',
+                drawerIcon: () => <MaterialIcons name='home' color='#1c3f18' size={28} />
+            })}
+                component={LocalHomeStack} />
+            <Screen name="AboutStack" options={() => ({
+                title: 'About',
+                drawerIcon: () => <MaterialIcons name='info' color='#1c3f18' size={28} />
+            })} component={AboutNavigation} />
         </Navigator>
     );
 }
