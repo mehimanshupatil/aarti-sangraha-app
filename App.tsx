@@ -4,8 +4,8 @@ import { AppLoading } from 'expo';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { AsyncStorage, StyleSheet, Text, View } from 'react-native';
-import HomeStack from './routes/homeStack';
 import MyDrawer from './routes/drawer'
+import moment from 'moment';
 
 export default function App() {
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -14,18 +14,17 @@ export default function App() {
 
   const getData = async () => {
     try {
-      const data = await AsyncStorage.getItem('aartiData');
-      if (data !== null) {
-        setApiData(JSON.parse(data))
+      const refreshDate = await AsyncStorage.getItem('refreshDate');
+      if (refreshDate !== null) {// after 30 days refresh the data
+        let days = moment().diff(moment(refreshDate), 'days')
+        if (days > 30)
+          await fetchData(null)
       } else {
-        await Axios.get('https://api.jsonbin.io/b/5f5ca28e302a837e9564c179/latest', {
-          headers: { 'secret-key': '$2b$10$jQMfRI73zHSDNOquzSk8eeLsivUvrwFxP0ZAyVYMSZ2WUkPbgtf9C' }
-        })
-          .then(async x => {
-            setApiData(x.data)
-            await AsyncStorage.setItem('aartiData', JSON.stringify(x.data));
-          })
+        await fetchData(null)
       }
+
+      const data = await AsyncStorage.getItem('aartiData');
+      await fetchData(data)
 
       const value = await AsyncStorage.getItem('fontSize');
       if (value !== null) {
@@ -39,6 +38,21 @@ export default function App() {
     }
   }
 
+  const fetchData = async (data) => {
+    if (data == null) {
+      await Axios.get('https://api.jsonbin.io/b/5f5ca28e302a837e9564c179/latest', {
+        headers: { 'secret-key': '$2b$10$jQMfRI73zHSDNOquzSk8eeLsivUvrwFxP0ZAyVYMSZ2WUkPbgtf9C' }
+      })
+        .then(async x => {
+          setApiData(x.data)
+          await AsyncStorage.setItem('aartiData', JSON.stringify(x.data));
+          await AsyncStorage.setItem('refreshDate', moment().format());
+        })
+    } else {
+      setApiData(JSON.parse(data))
+    }
+  }
+
   if (!dataLoaded) {
     return (
       <AppLoading
@@ -49,7 +63,7 @@ export default function App() {
   } else {
     return (
       <NavigationContainer>
-        <MyDrawer apiData={apiData} fontSize={fontSize} />
+        <MyDrawer apiData={apiData} fontSize={fontSize} setFontSize={setFontSize} />
       </NavigationContainer>
     );
   }

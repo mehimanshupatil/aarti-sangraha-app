@@ -4,18 +4,14 @@ import HomeStack from './homeStack';
 import React from 'react';
 import { Text } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Header from '../shared/header';
 const { Navigator, Screen } = createDrawerNavigator();
 
-export default function MyDrawer({ apiData, fontSize }) {
-
+export default function MyDrawer({ apiData, fontSize, setFontSize }) {
     const LocalHomeStack = () => {
         return (
-            <HomeStack apiData={apiData} fontSize={fontSize} />
+            <HomeStack apiData={apiData} fontSize={fontSize} setFontSize={setFontSize} />
         )
     }
-
-
 
     return (
         <Navigator >

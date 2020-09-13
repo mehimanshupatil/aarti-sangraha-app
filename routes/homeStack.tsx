@@ -2,27 +2,29 @@
 
 import Home from '../screens/home';
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from "@react-navigation/native";
 import CommonTemplate from '../screens/commonTemplate';
-import React from 'react';
-import { Text } from 'react-native';
-import AboutNavigation from './aboutStack';
-import { MaterialIcons } from '@expo/vector-icons';
+import React, { useState } from 'react';
 import Header from '../shared/header';
 
 const { Navigator, Screen } = createStackNavigator();
 
-export default function HomeStack({ apiData, fontSize }) {
-  // console.log(apiData)
+export default function HomeStack({ apiData, fontSize, setFontSize }) {
+
+  const [localData, setLocalData] = useState(apiData)
+  const searchInput = (text) => {
+    let data = apiData.filter((x: any) => (x.title.includes(text) || x.body.includes(text)))
+    setLocalData(data)
+  }
+
   const LocalHome = ({ navigation }) => {
     return (
-      <Home navigation={navigation} apiData={apiData} />
+      <Home navigation={navigation} apiData={localData} />
     )
   }
 
   const LocalCommonTemplate = ({ navigation, route }) => {
     return (
-      <CommonTemplate navigation={navigation} route={route} fontSize={fontSize} />
+      <CommonTemplate navigation={navigation} route={route} fontSize={fontSize} setFontSize={setFontSize} />
     )
   }
 
@@ -37,7 +39,7 @@ export default function HomeStack({ apiData, fontSize }) {
       },
     }}>
       <Screen name="Home" options={({ route, navigation }) => ({
-        headerTitle: () => <Header title='आरती संग्रह' navigation={navigation} showSearchButton />
+        headerTitle: () => <Header title='आरती संग्रह' navigation={navigation} showSearchButton searchInput={searchInput} />
       })} component={LocalHome}
       />
       <Screen name="CommonComponent"
