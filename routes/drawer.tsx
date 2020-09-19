@@ -3,33 +3,20 @@ import AboutNavigation from './aboutStack';
 import HomeStack from './homeStack';
 import React, { useState } from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Favorites from '../screens/favorites';
 import FavoritesNavigation from './FavoritesStack';
 const { Navigator, Screen } = createDrawerNavigator();
 
-export default function MyDrawer({ apiData, fontSize, favorites: fav, setFontSize, setLocalAartiData }) {
-
-    const [favorites, setFavorites] = useState(fav);
-
-    const removeFav = (index, operation) => {
-
-        if (operation === 'add') {
-            setFavorites([...favorites, index])
-        } else {
-            console.log(index)
-            setFavorites(favorites.filter(x => x != index))
-        }
-    }
+export default function MyDrawer({ apiData, fontSize, setFontSize, setLocalAartiData }) {
 
     const LocalHomeStack = () => {
         return (
-            <HomeStack apiData={apiData} removeFav={removeFav} fontSize={fontSize} favorites={favorites} setFontSize={setFontSize} setLocalAartiData={setLocalAartiData} />
+            <HomeStack apiData={apiData} fontSize={fontSize} setFontSize={setFontSize} setLocalAartiData={setLocalAartiData} />
         )
     }
 
-    const FavoritesStack = ({ navigation }) => {
+    const FavoritesStack = () => {
         return (
-            <FavoritesNavigation apiData={apiData} removeFav={removeFav} navigation={navigation} favorites={favorites} />
+            <FavoritesNavigation apiData={apiData} fontSize={fontSize} setFontSize={setFontSize} />
         )
     }
 

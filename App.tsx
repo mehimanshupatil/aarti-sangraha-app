@@ -9,18 +9,18 @@ export default function App() {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [apiData, setApiData] = useState([] as any);
   const [fontSize, setFontSize] = useState(20);
-  const [favorites, setFavorites] = useState(20);
-
-
 
   const getData = async () => {
     try {
-      const data = require('./shared/data.json')
+      let data = require('./shared/data.json')
+      const aarti = await AsyncStorage.getItem('aarti')
+      if (aarti) {
+        data = JSON.parse(aarti)
+      } else {
+        await AsyncStorage.setItem('aarti', JSON.stringify(data));
+      }
       const localdata = await AsyncStorage.getItem('customAarti') ?? '[]';
       setApiData([...data, ...JSON.parse(localdata)])
-
-      const fav = await AsyncStorage.getItem('favorites') ?? '[]';
-      setFavorites(JSON.parse(fav))
 
       const value = await AsyncStorage.getItem('fontSize');
       if (value !== null) {
@@ -51,7 +51,7 @@ export default function App() {
   } else {
     return (
       <NavigationContainer>
-        <MyDrawer apiData={apiData} fontSize={fontSize} favorites={[1]} setLocalAartiData={setLocalAartiData} setFontSize={setFontSize} />
+        <MyDrawer apiData={apiData} fontSize={fontSize} setLocalAartiData={setLocalAartiData} setFontSize={setFontSize} />
       </NavigationContainer>
     );
   }

@@ -1,10 +1,9 @@
-import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, FlatList, Alert } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import SingleItem from '../components/singleItem';
 
-export default function Favorites({ navigation, apiData, favorites, removeFav, index }) {
+export default function Favorites({ navigation, apiData }) {
     const pressHandler = (item) => {
         navigation.push('CommonComponent', {
             data: item
@@ -16,7 +15,7 @@ export default function Favorites({ navigation, apiData, favorites, removeFav, i
             <FlatList
                 data={apiData}
                 renderItem={({ item, index }) => (
-                    <SingleItem favorites={favorites} removeFav={removeFav} favView index={index} item={item} pressHandler={pressHandler} />
+                    <SingleItem favView index={index} item={item} pressHandler={pressHandler} />
                 )}
                 showsVerticalScrollIndicator={false}
                 keyExtractor={item => item.title}

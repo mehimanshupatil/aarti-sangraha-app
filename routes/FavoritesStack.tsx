@@ -3,14 +3,20 @@ import React from 'react';
 import About from '../screens/about';
 import Header from '../shared/header';
 import Favorites from '../screens/favorites';
+import CommonTemplate from '../screens/commonTemplate';
 
 const { Navigator, Screen } = createStackNavigator();
 
-export default function FavoritesNavigation({ navigation, removeFav, apiData, favorites }) {
-    let data = apiData.filter((x, i) => favorites.includes(i))
+export default function FavoritesNavigation({ apiData, fontSize, setFontSize }) {
+    let data = apiData
 
-    const FavoritesCompo = () => <Favorites apiData={data} removeFav={removeFav} favorites={favorites} navigation={navigation} />
+    const FavoritesCompo = ({ navigation }) => <Favorites apiData={data} navigation={navigation} />
 
+    const LocalCommonTemplate = ({ navigation, route }) => {
+        return (
+            <CommonTemplate navigation={navigation} route={route} fontSize={fontSize} setFontSize={setFontSize} />
+        )
+    }
 
     return (
         <Navigator headerMode="screen" screenOptions={{
@@ -24,6 +30,9 @@ export default function FavoritesNavigation({ navigation, removeFav, apiData, fa
                     headerTitle: () => <Header title='Favorites' navigation={navigation} showSearchButton={false} />,
                     headerTitleStyle: { fontWeight: 'bold', alignSelf: 'center' }
                 })} component={FavoritesCompo} />
+            <Screen name="CommonComponent"
+                options={({ route }) => ({ title: route.params.data?.title })}
+                component={LocalCommonTemplate} />
 
         </Navigator>
     )

@@ -9,7 +9,7 @@ import AddNew from '../screens/addNew';
 
 const { Navigator, Screen } = createStackNavigator();
 
-export default function HomeStack({ apiData, fontSize, favorites, setFontSize, removeFav, setLocalAartiData }) {
+export default function HomeStack({ apiData, fontSize, setFontSize, setLocalAartiData }) {
 
   const [localData, setLocalData] = useState(apiData)
 
@@ -18,9 +18,19 @@ export default function HomeStack({ apiData, fontSize, favorites, setFontSize, r
     setLocalData(data)
   }
 
+  const updateFav = (item, operation) => {
+    if (operation == 'add') {
+      let obj = localData.map(obj => obj.title == item.title ? ({ ...item, favorite: true }) : obj);
+      setLocalData(obj)
+    } else {
+      let obj = localData.map(obj => obj.title == item.title ? ({ ...item, favorite: true }) : obj);
+      setLocalData(obj)
+    }
+  }
+
   const LocalHome = ({ navigation }) => {
     return (
-      <Home navigation={navigation} apiData={localData} favorites={favorites} removeFav={removeFav} />
+      <Home navigation={navigation} apiData={localData} updateFav={updateFav} />
     )
   }
 

@@ -3,14 +3,14 @@ import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 
-export default function SingleItem({ pressHandler, item, index, favorites, favView, removeFav }) {
+export default function SingleItem({ pressHandler, item, index, favView, updateFav }) {
   return (
     <TouchableOpacity style={styles.container} onPress={() => pressHandler(item)}>
       <View style={styles.firstLine}>
         <Text style={styles.title}>{item.title}</Text>
-        {!favView && (favorites.includes(index) ?
-          <MaterialIcons style={styles.icon} name='favorite' color='rgb(24,28,63)' onPress={() => removeFav(index, "remove")} />
-          : <MaterialIcons style={styles.icon} name='favorite-border' color='rgb(24,28,63)' onPress={() => removeFav(index, "add")} />)}
+        {!favView && (item.favorite ?
+          <MaterialIcons style={styles.icon} name='favorite' color='rgb(24,28,63)' onPress={() => updateFav(item, "remove")} />
+          : <MaterialIcons style={styles.icon} name='favorite-border' color='rgb(24,28,63)' onPress={() => updateFav(item, "add")} />)}
       </View>
       <Text style={styles.body}>{item.body.split("\n")[0]}</Text>
     </TouchableOpacity>
