@@ -6,11 +6,6 @@
     "version": "1.0.0-alpha",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffde5b"
-    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -20,12 +15,19 @@
     "ios": {
       "supportsTablet": true
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
     "android": {
       "package": "com.mehimanshupatil.aartisangraha",
-      "enableDangerousExperimentalLeanBuilds" : true
+      "enableDangerousExperimentalLeanBuilds": true,
+      "splash": {
+        "ldpi": "./assets/splash/drawable-ldpi.png",
+        "mdpi": "./assets/splash/drawable-mdpi.png",
+        "hdpi": "./assets/splash/drawable-hdpi.png",
+        "xhdpi": "./assets/splash/drawable-xhdpi.png",
+        "xxhdpi": "./assets/splash/drawable-xxhdpi.png",
+        "xxxhdpi": "./assets/splash/drawable-xxxhdpi.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#ffde5b"
+      },
     }
   }
 }
