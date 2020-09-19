@@ -9,9 +9,10 @@ import AddNew from '../screens/addNew';
 
 const { Navigator, Screen } = createStackNavigator();
 
-export default function HomeStack({ apiData, fontSize, setFontSize, setLocalAartiData }) {
+export default function HomeStack({ apiData, fontSize, favorites, setFontSize, removeFav, setLocalAartiData }) {
 
   const [localData, setLocalData] = useState(apiData)
+
   const searchInput = (text) => {
     let data = apiData.filter((x: any) => (x.title.includes(text) || x.body.includes(text)))
     setLocalData(data)
@@ -19,7 +20,7 @@ export default function HomeStack({ apiData, fontSize, setFontSize, setLocalAart
 
   const LocalHome = ({ navigation }) => {
     return (
-      <Home navigation={navigation} apiData={localData} />
+      <Home navigation={navigation} apiData={localData} favorites={favorites} removeFav={removeFav} />
     )
   }
 

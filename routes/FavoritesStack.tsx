@@ -2,10 +2,15 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import About from '../screens/about';
 import Header from '../shared/header';
+import Favorites from '../screens/favorites';
 
 const { Navigator, Screen } = createStackNavigator();
 
-export default function AboutNavigation() {
+export default function FavoritesNavigation({ navigation, removeFav, apiData, favorites }) {
+    let data = apiData.filter((x, i) => favorites.includes(i))
+
+    const FavoritesCompo = () => <Favorites apiData={data} removeFav={removeFav} favorites={favorites} navigation={navigation} />
+
 
     return (
         <Navigator headerMode="screen" screenOptions={{
@@ -14,11 +19,11 @@ export default function AboutNavigation() {
                 fontWeight: 'bold',
             },
         }}>
-            <Screen name="About"
+            <Screen name="Favorites"
                 options={({ route, navigation }) => ({
-                    headerTitle: () => <Header title='About' navigation={navigation} showSearchButton={false} />,
+                    headerTitle: () => <Header title='Favorites' navigation={navigation} showSearchButton={false} />,
                     headerTitleStyle: { fontWeight: 'bold', alignSelf: 'center' }
-                })} component={About} />
+                })} component={FavoritesCompo} />
 
         </Navigator>
     )
