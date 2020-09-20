@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, ScrollView, View, Text, Button, TouchableOpacity, AsyncStorage } from 'react-native';
+import { StyleSheet, ScrollView, View, Text, Button, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function CommonTemplate({ navigation, route, fontSize, setFontSize }) {
   const { data } = route.params
