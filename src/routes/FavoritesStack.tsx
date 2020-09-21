@@ -20,8 +20,7 @@ export default function FavoritesNavigation({ apiData, fontSize, setFontSize }) 
 
     return (
         <Navigator headerMode="screen" screenOptions={{
-            headerStyle: { backgroundColor: 'rgb(255,224,101)' },
-            headerTintColor: 'rgb(24,28,63)', headerTitleStyle: {
+            headerStyle: { backgroundColor: 'rgb(24,28,63)' }, headerTitleStyle: {
                 fontWeight: 'bold',
             },
         }}>

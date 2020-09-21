@@ -6,19 +6,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FavoritesNavigation from './FavoritesStack';
 const { Navigator, Screen } = createDrawerNavigator();
 
-export default function MyDrawer({ apiData, fontSize, setFontSize, setLocalAartiData }) {
-
-    const LocalHomeStack = () => {
-        return (
-            <HomeStack apiData={apiData} fontSize={fontSize} setFontSize={setFontSize} setLocalAartiData={setLocalAartiData} />
-        )
-    }
-
-    const FavoritesStack = () => {
-        return (
-            <FavoritesNavigation apiData={apiData} fontSize={fontSize} setFontSize={setFontSize} />
-        )
-    }
+export default function MyDrawer() {
 
     return (
         <Navigator >
@@ -26,11 +14,11 @@ export default function MyDrawer({ apiData, fontSize, setFontSize, setLocalAarti
                 title: 'आरती संग्रह',
                 drawerIcon: () => <MaterialIcons name='home' color='#1c3f18' size={28} />
             })}
-                component={LocalHomeStack} />
+                component={HomeStack} />
             <Screen name="favorites" options={() => ({
                 title: 'Favorites',
                 drawerIcon: () => <MaterialIcons name='favorite' color='#1c3f18' size={28} />
-            })} component={FavoritesStack} />
+            })} component={FavoritesNavigation} />
             <Screen name="AboutStack" options={() => ({
                 title: 'About',
                 drawerIcon: () => <MaterialIcons name='info' color='#1c3f18' size={28} />

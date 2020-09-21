@@ -4,41 +4,23 @@ import React, { useState } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import { StyleSheet, Text, View } from 'react-native';
 import MyDrawer from '../routes/drawer';
-export default function EntryComponent() {
+import { connect } from 'react-redux';
+import { initializeState } from '../redux/action';
+function EntryComponent({ state, initializeState }) {
     const [dataLoaded, setDataLoaded] = useState(false);
-    const [apiData, setApiData] = useState([] as any);
-    const [fontSize, setFontSize] = useState(20);
 
     const getData = async () => {
         try {
             let data = require('../shared/data.json')
-            const aarti = await AsyncStorage.getItem('aarti')
-            if (aarti) {
-                data = JSON.parse(aarti)
-            } else {
-                await AsyncStorage.setItem('aarti', JSON.stringify(data));
-            }
-            const localdata = await AsyncStorage.getItem('customAarti') ?? '[]';
-            setApiData([...data, ...JSON.parse(localdata)])
-
-            const value = await AsyncStorage.getItem('fontSize');
-            if (value !== null) {
-                setFontSize(+value)
-            } else {
-                setFontSize(20)
-                await AsyncStorage.setItem('fontSize', '20');
+            if (!state.aartis) {
+                console.log("props", state.aartis)
+                initializeState(data)
             }
         } catch (error) {
             // Error retrieving data
         }
     }
 
-    const setLocalAartiData = async (title, body) => {
-        const localdata = await AsyncStorage.getItem('customAarti') ?? '[]';
-        let obj = [...JSON.parse(localdata), { title, body }]
-        await AsyncStorage.setItem('customAarti', JSON.stringify(obj));
-        setApiData([...apiData, { title, body }])
-    }
 
     if (!dataLoaded) {
         return (
@@ -50,11 +32,25 @@ export default function EntryComponent() {
     } else {
         return (
             <NavigationContainer>
-                <MyDrawer apiData={apiData} fontSize={fontSize} setLocalAartiData={setLocalAartiData} setFontSize={setFontSize} />
+                <MyDrawer />
             </NavigationContainer>
         );
     }
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        state
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        initializeState: (data) => (dispatch(initializeState(data)))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EntryComponent)
 
 const styles = StyleSheet.create({
     container: {

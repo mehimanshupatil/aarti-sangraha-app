@@ -6,15 +6,16 @@ import CommonTemplate from '../screens/commonTemplate';
 import React, { useState } from 'react';
 import Header from '../shared/header';
 import AddNew from '../screens/addNew';
+import { connect } from 'react-redux';
 
 const { Navigator, Screen } = createStackNavigator();
 
-export default function HomeStack({ apiData, fontSize, setFontSize, setLocalAartiData }) {
+function HomeStack({ state, fontSize, setFontSize, setLocalAartiData }) {
 
-  const [localData, setLocalData] = useState(apiData)
+  const [localData, setLocalData] = useState(state.aartis)
 
   const searchInput = (text) => {
-    let data = apiData.filter((x: any) => (x.title.includes(text) || x.body.includes(text)))
+    let data = state.aartis.filter((x: any) => (x.title.includes(text) || x.body.includes(text)))
     setLocalData(data)
   }
 
@@ -28,11 +29,7 @@ export default function HomeStack({ apiData, fontSize, setFontSize, setLocalAart
     }
   }
 
-  const LocalHome = ({ navigation }) => {
-    return (
-      <Home navigation={navigation} apiData={localData} updateFav={updateFav} />
-    )
-  }
+
 
   const LocalCommonTemplate = ({ navigation, route }) => {
     return (
@@ -50,21 +47,35 @@ export default function HomeStack({ apiData, fontSize, setFontSize, setLocalAart
     // <Text>gjgj</Text>
     // <NavigationContainer>
     <Navigator headerMode="screen" screenOptions={{
-      headerStyle: { backgroundColor: 'rgb(255,224,101)' },
-      headerTintColor: 'rgb(24,28,63)', headerTitleStyle: {
+      headerStyle: { backgroundColor: 'rgb(24,28,63)' }, headerTitleStyle: {
         fontWeight: 'bold',
       },
     }}>
       <Screen name="Home" options={({ route, navigation }) => ({
         headerTitle: () => <Header title='आरती संग्रह' navigation={navigation} showSearchButton searchInput={searchInput} />
-      })} component={LocalHome}
+      })} component={Home}
       />
       <Screen name="CommonComponent"
-        options={({ route }) => ({ title: route.params.data?.title })}
+        options={({ route }) => ({ title: route.params.data?.title, headerStyle: { backgroundColor: 'rgb(255,224,101)' }, headerTintColor: 'rgb(24,28,63)' })}
         component={LocalCommonTemplate} />
-      <Screen name="addNew" options={{ title: 'Add New' }}
+      <Screen name="addNew" options={{ title: 'Add New', headerStyle: { backgroundColor: 'rgb(255,224,101)' }, headerTintColor: 'rgb(24,28,63)' }}
+
         component={LocalAddNew} />
     </Navigator>
     // </NavigationContainer>
   )
 }
+
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    state
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeStack)

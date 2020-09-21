@@ -9,8 +9,8 @@ export default function SingleItem({ pressHandler, item, index, favView, updateF
       <View style={styles.firstLine}>
         <Text style={styles.title}>{item.title}</Text>
         {!favView && (item.favorite ?
-          <MaterialIcons style={styles.icon} name='favorite' color='rgb(24,28,63)' onPress={() => updateFav(item, "remove")} />
-          : <MaterialIcons style={styles.icon} name='favorite-border' color='rgb(24,28,63)' onPress={() => updateFav(item, "add")} />)}
+          <MaterialIcons style={styles.icon} name='favorite' color='rgb(255,224,101)' onPress={() => updateFav(item, "remove")} />
+          : <MaterialIcons style={styles.icon} name='favorite-border' color='rgb(255,224,101)' onPress={() => updateFav(item, "add")} />)}
       </View>
       <Text style={styles.body}>{item.body.split("\n")[0]}</Text>
     </TouchableOpacity>
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     elevation: 3,
-    backgroundColor: '#fff',
+    backgroundColor: 'rgb(24,28,63)',
     shadowOffset: { width: 1, height: 1 },
     shadowColor: 'rgb(24,28,63)',
     shadowOpacity: 0.3,
@@ -39,10 +39,10 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: "wrap",
     fontSize: 30,
-    color: 'rgb(24,28,63)'
+    color: 'rgb(255,224,101)'
   },
   body: {
-    color: 'rgb(24,28,63)'
+    color: 'rgb(255,224,101)'
   },
   icon: {
     fontSize: 30,

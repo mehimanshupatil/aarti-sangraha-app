@@ -8,7 +8,7 @@ export default function CommonTemplate({ navigation, route, fontSize, setFontSiz
     container: {
       flex: 1,
       padding: 20,
-
+      backgroundColor: 'rgb(24,28,63)'
     },
     buttonContainer: {
       flexDirection: 'row',
@@ -21,8 +21,7 @@ export default function CommonTemplate({ navigation, route, fontSize, setFontSiz
     },
     text: {
       fontSize: fontSize,
-      color: 'rgb(24,28,63)'
-
+      color: 'rgb(255,224,101)'
     }
   });
 

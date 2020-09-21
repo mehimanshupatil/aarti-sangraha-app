@@ -18,7 +18,6 @@ export default function Favorites({ navigation, apiData }) {
                     <SingleItem favView index={index} item={item} pressHandler={pressHandler} />
                 )}
                 showsVerticalScrollIndicator={false}
-                keyExtractor={item => item.title}
             />
         </View> :
             <Text style={styles.text}>No Favorites Found.</Text>

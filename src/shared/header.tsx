@@ -3,8 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 
-export default function Header({ title, navigation, showSearchButton, searchInput }) {
-
+export default function Header({ title, navigation, showSearchButton, searchInput, textColor }) {
     const [showSearchInput, setShowSearchInput] = useState(false)
     const [text, setText] = useState('')
 
@@ -19,11 +18,11 @@ export default function Header({ title, navigation, showSearchButton, searchInpu
     return (
         (!showSearchInput && !text) ?
             <View style={styles.header}>
-                <MaterialIcons name='menu' size={28} onPress={openMenu} style={styles.menuIcon} />
+                <MaterialIcons name='menu' size={28} onPress={openMenu} style={{ ...styles.menuIcon, ...textColor }} />
                 <View>
-                    <Text style={styles.headerText}>{title}</Text>
+                    <Text style={{ ...styles.headerText, ...textColor }}>{title}</Text>
                 </View>
-                {showSearchButton && <MaterialIcons name='search' onPress={() => setShowSearchInput(true)} size={28} style={styles.searchIcon} />}
+                {showSearchButton && <MaterialIcons name='search' onPress={() => setShowSearchInput(true)} size={28} style={{ ...styles.searchIcon, ...textColor }} />}
             </View> :
             <View style={styles.header}>
                 <TextInput
@@ -50,16 +49,19 @@ const styles = StyleSheet.create({
     headerText: {
         fontWeight: 'bold',
         fontSize: 20,
-        color: '#1c3f18',
+        color: 'rgb(255,224,101)',
         letterSpacing: 1,
     },
     menuIcon: {
         position: 'absolute',
         left: 12,
+        color: 'rgb(255,224,101)',
     },
     searchIcon: {
         position: 'absolute',
         right: 12,
+        color: 'rgb(255,224,101)',
+
     },
     inputStyle: { height: 40, flex: 1, color: '#1c3f18', borderRadius: 5, borderWidth: 1, textAlign: 'center' }
 });

@@ -9,7 +9,7 @@ export default function About() {
         Linking.openURL(url);
     }
     return (
-        <ScrollView>
+        <ScrollView style={styles.root}>
             <View style={styles.container}>
                 <Text style={styles.text}>Thanks for using app. Please rate on Play Store{"\n"}{"\n"}
                  Source code of app is available at
@@ -32,6 +32,9 @@ export default function About() {
 }
 
 const styles = StyleSheet.create({
+    root: {
+        backgroundColor: 'rgb(24,28,63)'
+    },
     container: {
         flex: 1,
         padding: 20,
@@ -39,10 +42,10 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 20,
-        color: 'rgb(24,28,63)'
+        color: 'rgb(255,224,101)'
     },
     texturl: {
-        color: 'blue'
+        color: 'yellow'
     }
 });
 
