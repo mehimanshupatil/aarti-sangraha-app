@@ -18,6 +18,7 @@
     "android": {
       "package": "com.mehimanshupatil.aartisangraha",
       "enableDangerousExperimentalLeanBuilds": true,
+      "permissions": [],
       "splash": {
         "ldpi": "./assets/splash/drawable-ldpi.png",
         "mdpi": "./assets/splash/drawable-mdpi.png",
@@ -27,7 +28,7 @@
         "xxxhdpi": "./assets/splash/drawable-xxxhdpi.png",
         "resizeMode": "contain",
         "backgroundColor": "#ffde5b"
-      },
+      }
     }
   }
 }

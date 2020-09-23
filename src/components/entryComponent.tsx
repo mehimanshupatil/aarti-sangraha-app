@@ -13,7 +13,7 @@ function EntryComponent({ state, initializeState }) {
         try {
             let data = require('../shared/data.json')
             if (!state.aartis) {
-                console.log("props", state.aartis)
+                console.warn("This happen first time in presistant ")
                 initializeState(data)
             }
         } catch (error) {

@@ -3,8 +3,9 @@ import { StyleSheet, Text, View, FlatList, Alert } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import SingleItem from '../components/singleItem';
+import { globalStyle } from '../shared/styles';
 
-function Home({ navigation, updateFav, state }) {
+function Home({ navigation, state }) {
   const pressHandler = (item) => {
     navigation.push('CommonComponent', {
       data: item
@@ -14,12 +15,12 @@ function Home({ navigation, updateFav, state }) {
     navigation.push('addNew');
   }
   return (
-    <View style={styles.root}>
-      <View style={styles.container}>
+    <View style={globalStyle.homeRoot}>
+      <View style={globalStyle.homecontainer}>
         <FlatList
           data={state.aartis}
           renderItem={({ item, index }) => (
-            <SingleItem item={item} index={index} updateFav={updateFav} pressHandler={pressHandler} />
+            <SingleItem item={item} index={index} pressHandler={pressHandler} />
           )}
           showsVerticalScrollIndicator={false}
           ListFooterComponent={() =>
@@ -47,26 +48,18 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
 
 const styles = StyleSheet.create({
-  root: {
-    backgroundColor: 'rgb(255,224,101)'
-  },
-  container: {
-    margin: 20,
-    marginTop: 0,
-    marginBottom: 0
-  },
   dummyConatiner: {
     padding: 16,
     marginTop: 16,
     marginBottom: 16,
-    borderColor: 'rgb(24,28,63)',
+    borderColor: 'rgb(255,224,101)',
     borderWidth: 1,
     alignItems: 'center',
     borderRadius: 10,
     elevation: 3,
     backgroundColor: 'rgb(24,28,63)',
     shadowOffset: { width: 1, height: 1 },
-    shadowColor: 'rgb(24,28,63)',
+    shadowColor: 'rgb(255,224,101)',
     shadowOpacity: 0.3,
     shadowRadius: 2,
   },

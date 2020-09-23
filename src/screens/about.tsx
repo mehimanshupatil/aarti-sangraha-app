@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import * as Linking from 'expo-linking';
 import { ScrollView } from 'react-native-gesture-handler';
+import { globalStyle } from '../shared/styles';
 
 export default function About() {
 
@@ -11,7 +12,10 @@ export default function About() {
     return (
         <ScrollView style={styles.root}>
             <View style={styles.container}>
-                <Text style={styles.text}>Thanks for using app. Please rate on Play Store{"\n"}{"\n"}
+                <Text style={styles.text}>Thanks for using app. Please rate on
+                <Text style={styles.texturl} onPress={() => handlePress('https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha')}> Play Store </Text>/
+                    <Text style={styles.texturl} onPress={() => handlePress('https://galaxy.store/aarti')}> Samsung Store</Text>
+                    {"\n"}{"\n"}
                  Source code of app is available at
                 <Text style={styles.texturl} onPress={() => handlePress('https://github.com/mehimanshupatil/aarti-sangraha-app')}> github</Text>
 
@@ -42,7 +46,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 20,
-        color: 'rgb(255,224,101)'
+        ...globalStyle.yellowText
     },
     texturl: {
         color: 'yellow'

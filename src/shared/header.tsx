@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
+import { globalStyle } from './styles';
 
 export default function Header({ title, navigation, showSearchButton, searchInput, textColor }) {
     const [showSearchInput, setShowSearchInput] = useState(false)
@@ -28,7 +29,7 @@ export default function Header({ title, navigation, showSearchButton, searchInpu
                 <TextInput
                     style={styles.inputStyle}
                     placeholder="Type here Search"
-                    placeholderTextColor="white"
+                    placeholderTextColor="rgb(24,28,63)"
                     autoFocus={true}
                     onChangeText={text => onChange(text)}
                     defaultValue={text} />
@@ -49,19 +50,23 @@ const styles = StyleSheet.create({
     headerText: {
         fontWeight: 'bold',
         fontSize: 20,
-        color: 'rgb(255,224,101)',
+        color: 'rgb(24,28,63)',
         letterSpacing: 1,
     },
     menuIcon: {
         position: 'absolute',
         left: 12,
-        color: 'rgb(255,224,101)',
+        color: 'rgb(24,28,63)',
     },
     searchIcon: {
         position: 'absolute',
         right: 12,
-        color: 'rgb(255,224,101)',
+        color: 'rgb(24,28,63)',
 
     },
-    inputStyle: { height: 40, flex: 1, color: '#1c3f18', borderRadius: 5, borderWidth: 1, textAlign: 'center' }
+    inputStyle: {
+        height: 40, flex: 1, borderRadius: 5, borderWidth: 1, textAlign: 'center',
+        borderColor: 'rgb(24,28,63)',
+        ...globalStyle.blueText
+    }
 });

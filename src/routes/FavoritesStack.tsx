@@ -7,20 +7,19 @@ import CommonTemplate from '../screens/commonTemplate';
 
 const { Navigator, Screen } = createStackNavigator();
 
-export default function FavoritesNavigation({ apiData, fontSize, setFontSize }) {
-    let data = apiData
+export default function FavoritesNavigation({ apiData }) {
 
-    const FavoritesCompo = ({ navigation }) => <Favorites apiData={data} navigation={navigation} />
+    const FavoritesCompo = ({ navigation }) => <Favorites apiData={apiData} navigation={navigation} />
 
     const LocalCommonTemplate = ({ navigation, route }) => {
         return (
-            <CommonTemplate navigation={navigation} route={route} fontSize={fontSize} setFontSize={setFontSize} />
+            <CommonTemplate navigation={navigation} route={route} />
         )
     }
 
     return (
         <Navigator headerMode="screen" screenOptions={{
-            headerStyle: { backgroundColor: 'rgb(24,28,63)' }, headerTitleStyle: {
+            headerStyle: { backgroundColor: 'rgb(255,224,101)' }, headerTitleStyle: {
                 fontWeight: 'bold',
             },
         }}>
@@ -30,7 +29,7 @@ export default function FavoritesNavigation({ apiData, fontSize, setFontSize }) 
                     headerTitleStyle: { fontWeight: 'bold', alignSelf: 'center' }
                 })} component={FavoritesCompo} />
             <Screen name="CommonComponent"
-                options={({ route }) => ({ title: route.params.data?.title })}
+                options={({ route }) => ({ title: route.params.data?.title, headerStyle: { backgroundColor: 'rgb(255,224,101)' }, headerTintColor: 'rgb(24,28,63)' })}
                 component={LocalCommonTemplate} />
 
         </Navigator>

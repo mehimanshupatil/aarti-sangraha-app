@@ -4,30 +4,36 @@ import HomeStack from './homeStack';
 import React, { useState } from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FavoritesNavigation from './FavoritesStack';
+import { globalStyle } from '../shared/styles';
+import { StyleSheet } from 'react-native';
 const { Navigator, Screen } = createDrawerNavigator();
 
 export default function MyDrawer() {
 
     return (
-        <Navigator >
+        <Navigator drawerStyle={{
+            ...globalStyle.blueBack
+        }} drawerContentOptions={{ inactiveTintColor: 'rgb(255,224,101)' }}>
             <Screen name="HomeStack" options={() => ({
                 title: 'आरती संग्रह',
-                drawerIcon: () => <MaterialIcons name='home' color='#1c3f18' size={28} />
+                drawerIcon: () => <MaterialIcons style={styles.icon} name='home' size={28} />
             })}
                 component={HomeStack} />
             <Screen name="favorites" options={() => ({
                 title: 'Favorites',
-                drawerIcon: () => <MaterialIcons name='favorite' color='#1c3f18' size={28} />
+                drawerIcon: () => <MaterialIcons style={styles.icon} name='favorite' size={28} />
             })} component={FavoritesNavigation} />
             <Screen name="AboutStack" options={() => ({
                 title: 'About',
-                drawerIcon: () => <MaterialIcons name='info' color='#1c3f18' size={28} />
+                drawerIcon: () => <MaterialIcons style={styles.icon} name='info' size={28} />
             })} component={AboutNavigation} />
         </Navigator>
     );
 }
 
-// const DrawerIcon=()=>{
-//     return(<MaterialIcons  name="menu" size={30} style={{ width: 24 }} 
-//     color="#000" />)
-// }
+
+const styles = StyleSheet.create({
+    icon: {
+        ...globalStyle.yellowText
+    },
+});
