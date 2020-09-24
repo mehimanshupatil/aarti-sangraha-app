@@ -8,7 +8,8 @@ export const globalStyle = StyleSheet.create({
     homecontainer: {
         margin: 20,
         marginTop: 0,
-        marginBottom: 20
+        marginBottom: 20,
+        flex: 1
     },
     yellowText: {
         color: 'rgb(255,224,101)'

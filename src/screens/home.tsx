@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, FlatList, Alert } from 'react-native';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import SingleItem from '../components/singleItem';
 import { globalStyle } from '../shared/styles';
+import { MaterialIcons } from '@expo/vector-icons';
+import Search from '../shared/search';
 
-function Home({ navigation, state }) {
+function Home({ navigation, state, showSearchInput, setShowSearchInput }) {
   const pressHandler = (item) => {
     navigation.push('CommonComponent', {
       data: item
@@ -14,11 +16,20 @@ function Home({ navigation, state }) {
   const addNew = () => {
     navigation.push('addNew');
   }
+
+  const [localData, setLocalData] = useState(state.aartis)
+  const [text, setText] = useState('')
+
+  useEffect(() => {
+    setLocalData(state.aartis.filter((x: any) => (x.title.includes(text) || x.body.includes(text))))
+  }, [state.aartis, text])
+
   return (
     <View style={globalStyle.homeRoot}>
       <View style={globalStyle.homecontainer}>
+        {showSearchInput && <Search text={text} setText={setText} setShowSearchInput={setShowSearchInput} />}
         <FlatList
-          data={state.aartis}
+          data={localData}
           renderItem={({ item, index }) => (
             <SingleItem item={item} index={index} pressHandler={pressHandler} />
           )}

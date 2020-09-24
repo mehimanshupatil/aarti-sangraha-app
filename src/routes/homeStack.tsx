@@ -12,16 +12,14 @@ const { Navigator, Screen } = createStackNavigator();
 
 function HomeStack({ state }) {
 
-  const [localData, setLocalData] = useState(state.aartis)
+  const [showSearchInput, setShowSearchInput] = useState(false)
 
-  const searchInput = (text) => {
-    let data = state.aartis.filter((x: any) => (x.title.includes(text) || x.body.includes(text)))
-    setLocalData(data)
+  const localHome = ({ navigation }) => {
+
+    return <Home navigation={navigation} showSearchInput={showSearchInput} setShowSearchInput={setShowSearchInput} />
   }
 
   return (
-    // <Text>gjgj</Text>
-    // <NavigationContainer>
     <Navigator headerMode="screen" screenOptions={{
       headerStyle: { backgroundColor: 'rgb(255,224,101)' }, headerTintColor: 'rgb(24,28,63)',
       headerTitleStyle: {
@@ -29,8 +27,8 @@ function HomeStack({ state }) {
       },
     }}>
       <Screen name="Home" options={({ route, navigation }) => ({
-        headerTitle: () => <Header title='आरती संग्रह' navigation={navigation} showSearchButton searchInput={searchInput} />
-      })} component={Home}
+        headerTitle: () => <Header title='आरती संग्रह' navigation={navigation} showSearchInput={showSearchInput} setShowSearchInput={setShowSearchInput} showSearchButton />
+      })} component={localHome}
       />
       <Screen name="CommonComponent"
         options={({ route }) => ({ title: route.params.data?.title })}
@@ -39,7 +37,6 @@ function HomeStack({ state }) {
 
         component={AddNew} />
     </Navigator>
-    // </NavigationContainer>
   )
 }
 

@@ -15,7 +15,7 @@ export default function AboutNavigation() {
         }}>
             <Screen name="About"
                 options={({ route, navigation }) => ({
-                    headerTitle: () => <Header title='About' textColor={{ color: 'rgb(24,28,63)' }} navigation={navigation} showSearchButton={false} />,
+                    headerTitle: () => <Header title='About' navigation={navigation} showSearchButton={false} />,
                     headerTitleStyle: { fontWeight: 'bold', alignSelf: 'center' }
                 })} component={About} />
 

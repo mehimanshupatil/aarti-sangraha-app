@@ -1,41 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 import { globalStyle } from './styles';
 
-export default function Header({ title, navigation, showSearchButton, searchInput, textColor }) {
-    const [showSearchInput, setShowSearchInput] = useState(false)
-    const [text, setText] = useState('')
-
-    const onChange = (text: string) => {
-        setText(text)
-        searchInput(text)
-    }
+export default function Header({ title, navigation, showSearchButton, showSearchInput, setShowSearchInput }) {
 
     const openMenu = () => {
         navigation.openDrawer();
     }
     return (
-        (!showSearchInput && !text) ?
-            <View style={styles.header}>
-                <MaterialIcons name='menu' size={28} onPress={openMenu} style={{ ...styles.menuIcon, ...textColor }} />
-                <View>
-                    <Text style={{ ...styles.headerText, ...textColor }}>{title}</Text>
-                </View>
-                {showSearchButton && <MaterialIcons name='search' onPress={() => setShowSearchInput(true)} size={28} style={{ ...styles.searchIcon, ...textColor }} />}
-            </View> :
-            <View style={styles.header}>
-                <TextInput
-                    style={styles.inputStyle}
-                    placeholder="Type here Search"
-                    placeholderTextColor="rgb(24,28,63)"
-                    autoFocus={true}
-                    onChangeText={text => onChange(text)}
-                    defaultValue={text} />
-                <MaterialIcons name='close' onPress={() => { setShowSearchInput(false); onChange("") }} size={28} style={styles.searchIcon} />
+        <View style={styles.header}>
+            <MaterialIcons name='menu' size={28} onPress={openMenu} style={styles.menuIcon} />
+            <View>
+                <Text style={styles.headerText}>{title}</Text>
             </View>
-
+            {showSearchButton && <MaterialIcons name='search' onPress={() => setShowSearchInput(!showSearchInput)} size={28} style={styles.searchIcon} />}
+        </View>
     );
 }
 
@@ -64,9 +45,5 @@ const styles = StyleSheet.create({
         color: 'rgb(24,28,63)',
 
     },
-    inputStyle: {
-        height: 40, flex: 1, borderRadius: 5, borderWidth: 1, textAlign: 'center',
-        borderColor: 'rgb(24,28,63)',
-        ...globalStyle.blueText
-    }
+
 });
