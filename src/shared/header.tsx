@@ -3,8 +3,10 @@ import { StyleSheet, Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 import { globalStyle } from './styles';
+import { connect } from 'react-redux';
+import { ShowHideSearchBar } from '../redux/action';
 
-export default function Header({ title, navigation, showSearchButton, showSearchInput, setShowSearchInput }) {
+function Header({ title, navigation, showSearchButton, ShowHideSearchBar, showSearch }) {
 
     const openMenu = () => {
         navigation.openDrawer();
@@ -15,7 +17,7 @@ export default function Header({ title, navigation, showSearchButton, showSearch
             <View>
                 <Text style={styles.headerText}>{title}</Text>
             </View>
-            {showSearchButton && <MaterialIcons name='search' onPress={() => setShowSearchInput(!showSearchInput)} size={28} style={styles.searchIcon} />}
+            {showSearchButton && <MaterialIcons name='search' onPress={() => ShowHideSearchBar(!showSearch)} size={28} style={styles.searchIcon} />}
         </View>
     );
 }
@@ -47,3 +49,17 @@ const styles = StyleSheet.create({
     },
 
 });
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        showSearch: state.showSearch
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        ShowHideSearchBar: (value) => dispatch(ShowHideSearchBar(value))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

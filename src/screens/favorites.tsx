@@ -3,17 +3,18 @@ import { StyleSheet, Text, View, FlatList, Alert } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import SingleItem from '../components/singleItem';
+import { ShowHideSearchBar } from '../redux/action';
 import Search from '../shared/search';
 import { globalStyle } from '../shared/styles';
 
-function Favorites({ navigation, aartis, showSearchInput, setShowSearchInput }) {
+function Favorites({ navigation, aartis, ShowHideSearchBar, showSearch }) {
     const pressHandler = (item) => {
         navigation.push('CommonComponent', {
             data: item
         });
     };
 
-    const [localData, setLocalData] = useState(aartis.filter(x => x.favorite))
+    const [localData, setLocalData] = useState([])
     const [text, setText] = useState('')
 
     useEffect(() => {
@@ -23,7 +24,7 @@ function Favorites({ navigation, aartis, showSearchInput, setShowSearchInput }) 
     return (
         <View style={globalStyle.homeRoot}>
             <View style={globalStyle.homecontainer}>
-                {showSearchInput && <Search text={text} setText={setText} setShowSearchInput={setShowSearchInput} />}
+                {showSearch && <Search text={text} setText={setText} setShowSearchInput={ShowHideSearchBar} />}
                 {localData?.length ? <FlatList
                     data={localData}
                     renderItem={({ item, index }) => (
@@ -40,12 +41,14 @@ function Favorites({ navigation, aartis, showSearchInput, setShowSearchInput }) 
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        aartis: state.aartis
+        aartis: state.aartis,
+        showSearch: state.showSearch
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
+        ShowHideSearchBar: (value) => dispatch(ShowHideSearchBar(value))
     }
 }
 

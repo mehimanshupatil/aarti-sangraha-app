@@ -16,7 +16,7 @@ function Search({ text, setText, setShowSearchInput }) {
                 placeholderTextColor="rgb(255,224,101)"
                 autoFocus={true}
                 onChangeText={text => setText(text)}
-                defaultValue={text}
+                value={text}
             />
             <MaterialIcons name='close' onPress={() => { setShowSearchInput(false); setText("") }} size={28} style={styles.searchIcon} />
         </View>

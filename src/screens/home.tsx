@@ -6,8 +6,9 @@ import SingleItem from '../components/singleItem';
 import { globalStyle } from '../shared/styles';
 import { MaterialIcons } from '@expo/vector-icons';
 import Search from '../shared/search';
+import { ShowHideSearchBar } from '../redux/action';
 
-function Home({ navigation, state, showSearchInput, setShowSearchInput }) {
+function Home({ navigation, state, ShowHideSearchBar, showSearch }) {
   const pressHandler = (item) => {
     navigation.push('CommonComponent', {
       data: item
@@ -27,7 +28,7 @@ function Home({ navigation, state, showSearchInput, setShowSearchInput }) {
   return (
     <View style={globalStyle.homeRoot}>
       <View style={globalStyle.homecontainer}>
-        {showSearchInput && <Search text={text} setText={setText} setShowSearchInput={setShowSearchInput} />}
+        {showSearch && <Search text={text} setText={setText} setShowSearchInput={ShowHideSearchBar} />}
         <FlatList
           data={localData}
           renderItem={({ item, index }) => (
@@ -47,12 +48,15 @@ function Home({ navigation, state, showSearchInput, setShowSearchInput }) {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    state
+    state,
+    showSearch: state.showSearch
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
+    ShowHideSearchBar: (value) => dispatch(ShowHideSearchBar(value))
+
   }
 }
 
