@@ -6,9 +6,8 @@ import SingleItem from '../components/singleItem';
 import { globalStyle } from '../shared/styles';
 import { MaterialIcons } from '@expo/vector-icons';
 import Search from '../shared/search';
-import { ShowHideSearchBar } from '../redux/action';
 
-function Home({ navigation, state, ShowHideSearchBar, showSearch }) {
+function Home({ navigation, state, searchValue }) {
   const pressHandler = (item) => {
     navigation.push('CommonComponent', {
       data: item
@@ -19,16 +18,14 @@ function Home({ navigation, state, ShowHideSearchBar, showSearch }) {
   }
 
   const [localData, setLocalData] = useState(state.aartis)
-  const [text, setText] = useState('')
 
   useEffect(() => {
-    setLocalData(state.aartis.filter((x: any) => (x.title.includes(text) || x.body.includes(text))))
-  }, [state.aartis, text])
+    setLocalData(state.aartis.filter((x: any) => !searchValue || (x.title.includes(searchValue) || x.body.includes(searchValue))))
+  }, [state.aartis, searchValue])
 
   return (
     <View style={globalStyle.homeRoot}>
       <View style={globalStyle.homecontainer}>
-        {showSearch && <Search text={text} setText={setText} setShowSearchInput={ShowHideSearchBar} />}
         <FlatList
           data={localData}
           renderItem={({ item, index }) => (
@@ -49,13 +46,12 @@ function Home({ navigation, state, ShowHideSearchBar, showSearch }) {
 const mapStateToProps = (state, ownProps) => {
   return {
     state,
-    showSearch: state.showSearch
+    searchValue: state.searchValue
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    ShowHideSearchBar: (value) => dispatch(ShowHideSearchBar(value))
 
   }
 }

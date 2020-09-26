@@ -5,37 +5,50 @@ import { connect } from 'react-redux';
 import SingleItem from '../components/singleItem';
 import { globalStyle } from '../shared/styles';
 import { MaterialIcons } from '@expo/vector-icons';
+import { searchInput } from '../redux/action';
 
-function Search({ text, setText, setShowSearchInput }) {
+function Search({ setShowSearchInput, searchValue, searchInput }) {
 
     return (
         <View style={{ marginTop: 10, justifyContent: "center" }}>
             <TextInput
                 style={styles.inputStyle}
                 placeholder="Type here Search"
-                placeholderTextColor="rgb(255,224,101)"
+                placeholderTextColor="rgb(24,28,63)"
                 autoFocus={true}
-                onChangeText={text => setText(text)}
-                value={text}
+                onChangeText={text => searchInput(text)}
+                value={searchValue}
             />
-            <MaterialIcons name='close' onPress={() => { setShowSearchInput(false); setText("") }} size={28} style={styles.searchIcon} />
+            <MaterialIcons name='close' onPress={() => { setShowSearchInput(false); searchInput("") }} size={28} style={styles.searchIcon} />
         </View>
     );
 }
 
 
-export default Search
-
 const styles = StyleSheet.create({
     inputStyle: {
         height: 40, borderRadius: 5, borderWidth: 1, textAlign: 'center',
-        borderColor: 'rgb(255,224,101)',
-        ...globalStyle.yellowText
+        borderColor: 'rgb(24,28,63)',
+        ...globalStyle.blueText
     },
     searchIcon: {
         position: 'absolute',
         right: 12,
-        ...globalStyle.yellowText
+        ...globalStyle.blueText
 
     },
 });
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        searchValue: state.searchValue
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        searchInput: (value) => dispatch(searchInput(value))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search)

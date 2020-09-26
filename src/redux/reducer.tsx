@@ -1,9 +1,9 @@
-import { ADDCUSTOM, DELETEITEM, INITIALIZE, SHOWHIDESEARCH, UPDATEFAV, UPDATEFONTSIZE } from "./action"
+import { ADDCUSTOM, DELETEITEM, INITIALIZE, SEARCHINPUT, UPDATEFAV, UPDATEFONTSIZE } from "./action"
 
 const reducer = (state, action) => {
     switch (action.type) {
         case INITIALIZE:
-            return { aartis: action.data, favorites: [], fontSize: 20, showSearch: false }
+            return { aartis: action.data, favorites: [], fontSize: 20, searchValue: '' }
         case UPDATEFONTSIZE:
             return { ...state, fontSize: action.fontSize }
         case UPDATEFAV:
@@ -15,8 +15,8 @@ const reducer = (state, action) => {
             return { ...state, aartis: [action.item, ...state.aartis] }
         case DELETEITEM:
             return { ...state, aartis: state.aartis.filter(x => x.key != action.key) }
-        case SHOWHIDESEARCH:
-            return { ...state, showSearch: action.value }
+        case SEARCHINPUT:
+            return { ...state, searchValue: action.value }
         default:
             return state
     }

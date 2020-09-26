@@ -4,21 +4,28 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 import { globalStyle } from './styles';
 import { connect } from 'react-redux';
-import { ShowHideSearchBar } from '../redux/action';
+import Search from './search';
 
-function Header({ title, navigation, showSearchButton, ShowHideSearchBar, showSearch }) {
+function Header({ title, navigation, showSearchButton }) {
 
     const openMenu = () => {
         navigation.openDrawer();
     }
+
+    const [showSearch, setLocalData] = useState(true)
+
     return (
-        <View style={styles.header}>
-            <MaterialIcons name='menu' size={28} onPress={openMenu} style={styles.menuIcon} />
-            <View>
-                <Text style={styles.headerText}>{title}</Text>
+        showSearch ?
+            <View style={styles.header}>
+                <MaterialIcons name='menu' size={28} onPress={openMenu} style={styles.menuIcon} />
+                <View>
+                    <Text style={styles.headerText}>{title}</Text>
+                </View>
+                {showSearchButton && <MaterialIcons name='search' onPress={() => setLocalData(!showSearch)} size={28} style={styles.searchIcon} />}
             </View>
-            {showSearchButton && <MaterialIcons name='search' onPress={() => ShowHideSearchBar(!showSearch)} size={28} style={styles.searchIcon} />}
-        </View>
+            : <Search setShowSearchInput={() => setLocalData(!showSearch)} />
+
+
     );
 }
 
@@ -52,13 +59,11 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        showSearch: state.showSearch
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        ShowHideSearchBar: (value) => dispatch(ShowHideSearchBar(value))
     }
 }
 

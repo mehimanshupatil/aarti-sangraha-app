@@ -5,7 +5,7 @@ export const UPDATEFONTSIZE = 'UPDATEFONTSIZE'
 export const UPDATEFAV = 'UPDATEFAV'
 export const ADDCUSTOM = 'ADDCUSTOM'
 export const DELETEITEM = 'DELETEITEM'
-export const SHOWHIDESEARCH = 'SHOWHIDESEARCH'
+export const SEARCHINPUT = 'SEARCHINPUT'
 
 export const initializeState = (data) => ({
     type: INITIALIZE,
@@ -33,7 +33,7 @@ export const deleteItem = (key) => ({
     key,
 })
 
-export const ShowHideSearchBar = (value) => ({
-    type: SHOWHIDESEARCH,
+export const searchInput = (value) => ({
+    type: SEARCHINPUT,
     value,
 })
