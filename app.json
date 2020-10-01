@@ -3,7 +3,7 @@
     "name": "आरती संग्रह",
     "slug": "aartisangraha",
     "privacy": "unlisted",
-    "version": "1.0.0-alpha",
+    "version": "1.0.0-beta",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "updates": {
@@ -18,7 +18,7 @@
     "android": {
       "package": "com.mehimanshupatil.aartisangraha",
       "enableDangerousExperimentalLeanBuilds": true,
-      "versionCode": 1,
+      "versionCode": 2,
       "permissions": [],
       "splash": {
         "ldpi": "./assets/splash/drawable-ldpi.png",

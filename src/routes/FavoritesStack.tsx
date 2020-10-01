@@ -1,6 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import React, { useState } from 'react';
-import About from '../screens/about';
+import React from 'react';
 import Header from '../shared/header';
 import Favorites from '../screens/favorites';
 import CommonTemplate from '../screens/commonTemplate';

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { TextInput } from 'react-native-gesture-handler';
-import { globalStyle } from './styles';
 import { connect } from 'react-redux';
 import Search from './search';
 

@@ -1,5 +1,3 @@
-import { exp } from "react-native-reanimated"
-
 export const INITIALIZE = 'INITIALIZE'
 export const UPDATEFONTSIZE = 'UPDATEFONTSIZE'
 export const UPDATEFAV = 'UPDATEFAV'

@@ -1,17 +1,16 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import AboutNavigation from './aboutStack';
 import HomeStack from './homeStack';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FavoritesNavigation from './FavoritesStack';
 import { globalStyle } from '../shared/styles';
-import { Alert, BackHandler, StyleSheet, ToastAndroid } from 'react-native';
+import { BackHandler, StyleSheet, ToastAndroid } from 'react-native';
 const { Navigator, Screen } = createDrawerNavigator();
 let backPressed = 0
 export default function MyDrawer() {
 
     useEffect(() => {
-        console.log("Screen", Screen)
         const backAction = () => {
             if (backPressed > 0) {
                 BackHandler.exitApp();

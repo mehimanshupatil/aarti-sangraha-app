@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { StyleSheet, View, Text } from 'react-native';
 import * as Linking from 'expo-linking';
 import { ScrollView } from 'react-native-gesture-handler';
 import { globalStyle } from '../shared/styles';

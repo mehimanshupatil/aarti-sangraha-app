@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Alert, ToastAndroid } from 'react-native';
-import * as Linking from 'expo-linking';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { globalStyle } from '../shared/styles';
 import { connect } from 'react-redux';

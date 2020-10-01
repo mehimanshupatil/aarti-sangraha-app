@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList, Alert } from 'react-native';
-import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
-import SingleItem from '../components/singleItem';
 import { globalStyle } from '../shared/styles';
 import { MaterialIcons } from '@expo/vector-icons';
 import { searchInput } from '../redux/action';

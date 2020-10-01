@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { updateFav } from '../redux/action';
 
 
-function SingleItem({ pressHandler, item, updateFav }) {
+function SingleItem({ pressHandler, item, updateFav, index }) {
 
   const iconPress = (item, action) => {
     ToastAndroid.show(action === 'add' ? 'Added to Favorites' : 'Removed from Favorites', ToastAndroid.SHORT);
@@ -14,14 +14,22 @@ function SingleItem({ pressHandler, item, updateFav }) {
   }
 
   return (
-    <TouchableOpacity style={styles.container} onPress={() => pressHandler(item)}>
-      <View style={styles.firstLine}>
-        <Text style={styles.title}>{item.title}</Text>
-        {(item.favorite ?
-          <MaterialIcons style={styles.icon} name='favorite' onPress={() => iconPress(item, "remove")} />
-          : <MaterialIcons style={styles.icon} name='favorite-border' onPress={() => iconPress(item, "add")} />)}
+    <TouchableOpacity style={styles.container} onPress={() => pressHandler({ ...item, index })}>
+      <View>
+        <View style={styles.firstLine}>
+          <Text style={styles.title}>{item.title}</Text>
+          {(item.favorite ?
+            <MaterialIcons style={styles.icon} name='favorite' onPress={() => iconPress(item, "remove")} />
+            : <MaterialIcons style={styles.icon} name='favorite-border' onPress={() => iconPress(item, "add")} />)}
+        </View>
+        <View style={styles.firstLine}>
+          <Text style={[globalStyle.yellowText, {
+            flex: 1,
+            flexWrap: "wrap",
+          }]}>{item.body.split("\n")[0]}</Text>
+          <Text style={[globalStyle.yellowText, { paddingRight: 8 }]}>{index + 1}</Text>
+        </View>
       </View>
-      <Text style={globalStyle.yellowText}>{item.body.split("\n")[0]}</Text>
     </TouchableOpacity>
   )
 }

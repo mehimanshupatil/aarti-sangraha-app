@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, ScrollView, View, Text, Button, TouchableOpacity, Alert, ToastAndroid } from 'react-native';
+import { StyleSheet, ScrollView, View, Text, Alert, ToastAndroid } from 'react-native';
 import { connect } from 'react-redux';
 import { deleteItem, updateFav, updateFontSize } from '../redux/action';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -16,6 +16,7 @@ function CommonTemplate({ navigation, route, aartis, fontSize, updateFontSize, d
     buttonContainer: {
       flexDirection: 'row',
       justifyContent: 'space-between',
+      alignItems: 'center',
       padding: 10
     },
     fontButton: {
@@ -66,6 +67,7 @@ function CommonTemplate({ navigation, route, aartis, fontSize, updateFontSize, d
             : <MaterialIcons style={styles.icon} name='favorite-border' onPress={() => iconPress(selectedItem, "add")} />)}
           <MaterialIcons style={{ ...styles.icon, paddingLeft: 10 }} name='delete-forever' onPress={deletePress} />
         </View>
+        <Text style={[styles.icon]}>{data.index + 1}</Text>
         <View style={styles.fontButton}>
           <MaterialIcons style={styles.icon} name='add-circle' onPress={() => updateFontSize(fontSize + 3)} />
           <MaterialIcons style={{ ...styles.icon, paddingLeft: 10 }} name='remove-circle' onPress={() => ((fontSize > 15) && updateFontSize(fontSize - 3))} />

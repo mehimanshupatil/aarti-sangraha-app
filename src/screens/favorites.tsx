@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, FlatList, Alert } from 'react-native';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import SingleItem from '../components/singleItem';
-import Search from '../shared/search';
 import { globalStyle } from '../shared/styles';
 
 function Favorites({ navigation, aartis, searchValue }) {

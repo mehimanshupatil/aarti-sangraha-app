@@ -1,8 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { AppLoading } from 'expo';
 import React, { useState } from 'react';
-import AsyncStorage from '@react-native-community/async-storage';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import MyDrawer from '../routes/drawer';
 import { connect } from 'react-redux';
 import { initializeState } from '../redux/action';
@@ -11,13 +10,11 @@ function EntryComponent({ state, initializeState }) {
 
     const getData = async () => {
         try {
-            let data = require('../shared/data.json')
             if (!state.aartis) {
-                console.warn("This happen first time in presistant ")
+                const data = require('../shared/data.json')
                 initializeState(data)
             }
         } catch (error) {
-            // Error retrieving data
         }
     }
 
