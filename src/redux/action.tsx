@@ -4,6 +4,7 @@ export const UPDATEFAV = 'UPDATEFAV'
 export const ADDCUSTOM = 'ADDCUSTOM'
 export const DELETEITEM = 'DELETEITEM'
 export const SEARCHINPUT = 'SEARCHINPUT'
+export const UPDATEDATA = 'UPDATEDATA'
 
 export const initializeState = (data) => ({
     type: INITIALIZE,
@@ -34,4 +35,9 @@ export const deleteItem = (key) => ({
 export const searchInput = (value) => ({
     type: SEARCHINPUT,
     value,
+})
+
+export const updateData = (data) => ({
+    type: UPDATEDATA,
+    data,
 })

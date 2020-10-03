@@ -3,12 +3,17 @@ import { StyleSheet, View, Text, TouchableOpacity, Alert, ToastAndroid } from 'r
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { globalStyle } from '../shared/styles';
 import { connect } from 'react-redux';
-import { addCustom } from '../redux/action';
+import { addCustom, updateData } from '../redux/action';
 
-function AddNew({ navigation, route, addCustom }) {
+function AddNew({ navigation, route, addCustom, updateData }) {
 
-    const [title, setTitle] = useState('')
-    const [body, setBody] = useState('')
+    const { data } = route.params ?? { data: {} };
+    navigation.setOptions({
+        title: data.title ? 'Update' : 'Add New',
+    })
+
+    const [title, setTitle] = useState(data.title)
+    const [body, setBody] = useState(data.body)
 
     const onOkPress = () => {
         const item = {
@@ -19,6 +24,19 @@ function AddNew({ navigation, route, addCustom }) {
         }
         addCustom(item)
         ToastAndroid.show('Added Successfully', ToastAndroid.SHORT);
+        navigation.goBack()
+    }
+
+    const update = () => {
+        const obj = {
+            "key": data.key,
+            "title": title,
+            "body": body,
+            "favorite": data.favorite,
+            "tags": data.tags
+        }
+        updateData(obj)
+        ToastAndroid.show('Updated Successfully', ToastAndroid.SHORT);
         navigation.goBack()
     }
 
@@ -34,7 +52,7 @@ function AddNew({ navigation, route, addCustom }) {
                     onPress: () => console.log("Cancel Pressed"),
                     style: "cancel"
                 },
-                { text: "OK", onPress: onOkPress }
+                { text: "OK", onPress: data.title ? update : onOkPress }
             ])
     }
 
@@ -45,7 +63,7 @@ function AddNew({ navigation, route, addCustom }) {
                 <TextInput placeholderTextColor="rgb(255,224,101)" style={styles.input} placeholder='Body' value={body}
                     onChangeText={(text) => setBody(text)} numberOfLines={20} multiline={true} />
                 <TouchableOpacity style={styles.buttonText} onPress={addItem}>
-                    <Text style={{ ...globalStyle.yellowText, fontWeight: 'bold', fontSize: 15 }}> Add </Text>
+                    <Text style={{ ...globalStyle.yellowText, fontWeight: 'bold', fontSize: 15 }}> {data.title ? 'Update' : 'Add'} </Text>
                 </TouchableOpacity>
             </ScrollView>
         </View>
@@ -60,7 +78,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        addCustom: (item) => (dispatch(addCustom(item)))
+        addCustom: (item) => (dispatch(addCustom(item))),
+        updateData: (data) => (dispatch(updateData(data)))
+
     }
 }
 

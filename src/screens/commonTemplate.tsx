@@ -7,6 +7,7 @@ import { globalStyle } from '../shared/styles';
 
 function CommonTemplate({ navigation, route, aartis, fontSize, updateFontSize, deleteItem, updateFav }) {
   const { data } = route.params
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -35,7 +36,11 @@ function CommonTemplate({ navigation, route, aartis, fontSize, updateFontSize, d
   const [selectedItem, setSelectedItem] = useState(aartis.find(x => x.key == data.key))
 
   useEffect(() => {
-    setSelectedItem(aartis.find(x => x.key == data.key) ?? {})
+    const item = aartis.find(x => x.key == data.key) ?? {}
+    setSelectedItem(item)
+    navigation.setOptions({
+      title: item.title,
+    })
   }, [aartis])
 
   const deletePress = () => {
@@ -57,6 +62,11 @@ function CommonTemplate({ navigation, route, aartis, fontSize, updateFontSize, d
     ToastAndroid.show(action === 'add' ? 'Added to Favorites' : 'Removed from Favorites', ToastAndroid.SHORT);
     updateFav(item, action)
   }
+  const addNew = () => {
+    navigation.push('addNew', {
+      data: selectedItem
+    });
+  }
 
   return (
     <View style={{ ...styles.container, paddingTop: 5 }}>
@@ -67,7 +77,10 @@ function CommonTemplate({ navigation, route, aartis, fontSize, updateFontSize, d
             : <MaterialIcons style={styles.icon} name='favorite-border' onPress={() => iconPress(selectedItem, "add")} />)}
           <MaterialIcons style={{ ...styles.icon, paddingLeft: 10 }} name='delete-forever' onPress={deletePress} />
         </View>
-        <Text style={[styles.icon]}>{data.index + 1}</Text>
+        <View style={[styles.fontButton, { alignItems: 'center' }]}>
+          <Text style={[styles.icon]}>{data.index + 1}</Text>
+          <MaterialIcons style={[styles.icon, { paddingLeft: 10 }]} name='edit' onPress={addNew} />
+        </View>
         <View style={styles.fontButton}>
           <MaterialIcons style={styles.icon} name='add-circle' onPress={() => updateFontSize(fontSize + 3)} />
           <MaterialIcons style={{ ...styles.icon, paddingLeft: 10 }} name='remove-circle' onPress={() => ((fontSize > 15) && updateFontSize(fontSize - 3))} />

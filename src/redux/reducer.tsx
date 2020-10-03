@@ -1,4 +1,4 @@
-import { ADDCUSTOM, DELETEITEM, INITIALIZE, SEARCHINPUT, UPDATEFAV, UPDATEFONTSIZE } from "./action"
+import { ADDCUSTOM, DELETEITEM, INITIALIZE, SEARCHINPUT, UPDATEDATA, UPDATEFAV, UPDATEFONTSIZE } from "./action"
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -17,6 +17,8 @@ const reducer = (state, action) => {
             return { ...state, aartis: state.aartis.filter(x => x.key != action.key) }
         case SEARCHINPUT:
             return { ...state, searchValue: action.value }
+        case UPDATEDATA:
+            return { ...state, aartis: state.aartis.map(x => x.key == action.data.key ? action.data : x) }
         default:
             return state
     }

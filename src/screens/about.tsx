@@ -1,20 +1,49 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Share } from 'react-native';
 import * as Linking from 'expo-linking';
 import { ScrollView } from 'react-native-gesture-handler';
 import { globalStyle } from '../shared/styles';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function About() {
 
     const handlePress = (url) => {
         Linking.openURL(url);
     }
+
+    const onShare = async () => {
+        try {
+            const result = await Share.share({
+                message: `Hey there download aarti Sangrah from playstore/samsung store.
+Click the link below to download the app.
+
+https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha
+
+https://galaxy.store/aarti`,
+            });
+            if (result.action === Share.sharedAction) {
+                if (result.activityType) {
+                    // shared with activity type of result.activityType
+                } else {
+                    // shared
+                }
+            } else if (result.action === Share.dismissedAction) {
+                // dismissed
+            }
+        } catch (error) {
+            alert(error.message);
+        }
+    }
+
     return (
         <ScrollView style={styles.root}>
             <View style={styles.container}>
-                <Text style={styles.text}>Thanks for using app. Please rate on
+                <Text style={styles.text}>
+                    Thanks for using app. Please rate 5<MaterialIcons name='star' size={20} /> on
                 <Text style={styles.texturl} onPress={() => handlePress('https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha')}> Play Store </Text>/
                     <Text style={styles.texturl} onPress={() => handlePress('https://galaxy.store/aarti')}> Samsung Store</Text>
+                    {"\n"}{"\n"}
+                    <Text onPress={onShare}>Click here to <MaterialIcons name='share' size={20} /> app with <MaterialIcons name='group' size={22} /></Text>
                     {"\n"}{"\n"}
                  Source code of app is available at
                 <Text style={styles.texturl} onPress={() => handlePress('https://github.com/mehimanshupatil/aarti-sangraha-app')}> github</Text>

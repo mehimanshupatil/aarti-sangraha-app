@@ -27,7 +27,6 @@ function HomeStack({ state }) {
         options={({ route }) => ({ title: route.params.data?.title })}
         component={CommonTemplate} />
       <Screen name="addNew" options={{ title: 'Add New' }}
-
         component={AddNew} />
     </Navigator>
   )
