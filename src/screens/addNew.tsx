@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert, ToastAndroid } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Alert, ToastAndroid, Keyboard } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { globalStyle } from '../shared/styles';
 import { connect } from 'react-redux';
 import { addCustom, updateData } from '../redux/action';
-
 function AddNew({ navigation, route, addCustom, updateData }) {
 
     const { data } = route.params ?? { data: {} };
@@ -52,13 +51,13 @@ function AddNew({ navigation, route, addCustom, updateData }) {
                     onPress: () => console.log("Cancel Pressed"),
                     style: "cancel"
                 },
-                { text: "OK", onPress: data.title ? update : onOkPress }
+                { text: "OK", onPress: () => { data.title ? update() : onOkPress(); Keyboard.dismiss(); } }
             ])
     }
 
     return (
         <View style={globalStyle.homeRoot}>
-            <ScrollView style={globalStyle.homecontainer}>
+            <ScrollView style={globalStyle.homecontainer} keyboardShouldPersistTaps='handled'>
                 <TextInput placeholderTextColor="rgb(255,224,101)" style={styles.input} placeholder='Title' value={title} onChangeText={(text) => setTitle(text)} />
                 <TextInput placeholderTextColor="rgb(255,224,101)" style={styles.input} placeholder='Body' value={body}
                     onChangeText={(text) => setBody(text)} numberOfLines={20} multiline={true} />

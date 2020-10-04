@@ -36,7 +36,7 @@ https://galaxy.store/aarti`,
     }
 
     return (
-        <ScrollView style={styles.root}>
+        <ScrollView contentContainerStyle={styles.root}>
             <View style={styles.container}>
                 <Text style={styles.text}>
                     Thanks for using app. Please rate 5<MaterialIcons name='star' size={20} /> on
@@ -58,6 +58,15 @@ https://galaxy.store/aarti`,
           <Text style={styles.texturl} onPress={() => handlePress('https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4341353')}> Pixabay </Text>
                 </Text>
             </View>
+            <View style={{
+                // paddingVertical: 15,
+                // paddingHorizontal: 10,
+                // flexDirection: "row",
+                // justifyContent: "space-between",
+                alignItems: "center"
+            }}>
+                <Text style={styles.text}><MaterialIcons name='code' size={22} /> with <MaterialIcons color="red" name='favorite' size={22} /> in 🇮🇳</Text>
+            </View>
         </ScrollView>
     );
 
@@ -66,11 +75,13 @@ https://galaxy.store/aarti`,
 
 const styles = StyleSheet.create({
     root: {
+        flexGrow: 1,
+        justifyContent: 'space-between',
+        padding: 20,
         backgroundColor: 'rgb(24,28,63)'
     },
     container: {
         flex: 1,
-        padding: 20,
         fontSize: 30,
     },
     text: {

@@ -18,7 +18,7 @@ function CommonTemplate({ navigation, route, aartis, fontSize, updateFontSize, d
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      padding: 10
+      padding: 5
     },
     fontButton: {
       flexDirection: 'row',
@@ -28,7 +28,7 @@ function CommonTemplate({ navigation, route, aartis, fontSize, updateFontSize, d
       color: 'rgb(255,224,101)'
     },
     icon: {
-      fontSize: 35,
+      fontSize: 30,
       ...globalStyle.yellowText
     }
   });
