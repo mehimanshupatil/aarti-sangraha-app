@@ -12,7 +12,7 @@ const reducer = (state, action) => {
             else
                 return { ...state, aartis: state.aartis.map(x => x.key == action.item.key ? { ...action.item, favorite: false } : x) }
         case ADDCUSTOM:
-            return { ...state, aartis: [action.item, ...state.aartis] }
+            return { ...state, aartis: [...state.aartis, action.item] }
         case DELETEITEM:
             return { ...state, aartis: state.aartis.filter(x => x.key != action.key) }
         case SEARCHINPUT:
