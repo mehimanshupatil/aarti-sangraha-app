@@ -5,14 +5,14 @@ import { StyleSheet } from 'react-native';
 import MyDrawer from '../routes/drawer';
 import { connect } from 'react-redux';
 import { initializeState } from '../redux/action';
-import { singleItem } from '../shared/types';
+import { singleItemType } from '../shared/types';
 function EntryComponent({ state, initializeState }) {
     const [dataLoaded, setDataLoaded] = useState(false);
 
     const getData = async () => {
         try {
             if (!state.aartis) {
-                const data: singleItem[] = require("../shared/data.json");
+                const data: singleItemType[] = require("../shared/data.json");
                 initializeState(data)
             }
         } catch (error) {

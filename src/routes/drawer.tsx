@@ -6,6 +6,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FavoritesNavigation from './FavoritesStack';
 import { globalStyle } from '../shared/styles';
 import { BackHandler, StyleSheet, ToastAndroid } from 'react-native';
+import CustomSidebarMenu from '../components/CustomSidebarMenu';
 const { Navigator, Screen } = createDrawerNavigator();
 let backPressed = 0
 export default function MyDrawer() {
@@ -33,23 +34,45 @@ export default function MyDrawer() {
     }, []);
 
     return (
-        <Navigator drawerStyle={{
-            ...globalStyle.blueBack
-        }} drawerContentOptions={{ inactiveTintColor: 'rgb(255,224,101)' }}>
-            <Screen name="HomeStack" options={() => ({
-                title: 'आरती संग्रह',
-                drawerIcon: () => <MaterialIcons style={styles.icon} name='home' size={28} />
-            })}
-                component={HomeStack} />
-            <Screen name="favorites" options={() => ({
-                title: 'Favorites',
-                drawerIcon: () => <MaterialIcons style={styles.icon} name='favorite' size={28} />
-            })} component={FavoritesNavigation} />
-            <Screen name="AboutStack" options={() => ({
-                title: 'About',
-                drawerIcon: () => <MaterialIcons style={styles.icon} name='info' size={28} />
-            })} component={AboutNavigation} />
-        </Navigator>
+      <Navigator
+        drawerStyle={{
+          ...globalStyle.blueBack,
+          width:'60%'
+        }}
+        drawerContentOptions={{ inactiveTintColor: "rgb(255,224,101)" }}
+        drawerContent={(props) => <CustomSidebarMenu {...props} />}
+      >
+        <Screen
+          name="HomeStack"
+          options={() => ({
+            title: "आरती संग्रह",
+            drawerIcon: () => (
+              <MaterialIcons style={styles.icon} name="home" size={28} />
+            ),
+          })}
+          component={HomeStack}
+        />
+        <Screen
+          name="favorites"
+          options={() => ({
+            title: "Favorites",
+            drawerIcon: () => (
+              <MaterialIcons style={styles.icon} name="favorite" size={28} />
+            ),
+          })}
+          component={FavoritesNavigation}
+        />
+        <Screen
+          name="AboutStack"
+          options={() => ({
+            title: "About",
+            drawerIcon: () => (
+              <MaterialIcons style={styles.icon} name="info" size={28} />
+            ),
+          })}
+          component={AboutNavigation}
+        />
+      </Navigator>
     );
 }
 

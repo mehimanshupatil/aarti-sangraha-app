@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Alert, ToastAndroid, Keyboard } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { globalStyle } from '../shared/styles';
@@ -7,12 +7,15 @@ import { addCustom, updateData } from '../redux/action';
 function AddNew({ navigation, route, addCustom, updateData }) {
 
     const { data } = route.params ?? { data: {} };
-    navigation.setOptions({
-        title: data.title ? 'Update' : 'Add New',
-    })
-
+    
     const [title, setTitle] = useState(data.title)
     const [body, setBody] = useState(data.body)
+
+    useEffect(() => {
+        navigation.setOptions({
+            title: data.title ? 'Update' : 'Add New',
+        })
+    }, [])
 
     const onOkPress = () => {
         const item = {

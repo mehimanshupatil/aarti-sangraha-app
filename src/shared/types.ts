@@ -1,4 +1,4 @@
-export type singleItem = {
+export type singleItemType = {
   key: string;
   title: string;
   body: string;

@@ -6,7 +6,7 @@ import { globalStyle } from '../shared/styles';
 import { MaterialIcons } from '@expo/vector-icons';
 import { initializeState } from '../redux/action';
 import { connect } from 'react-redux';
-import { singleItem } from '../shared/types';
+import { singleItemType } from '../shared/types';
 
 function About({ initializeState, navigation }) {
 
@@ -29,7 +29,7 @@ function About({ initializeState, navigation }) {
                 {
                     text: "ठीक आहे", onPress: () => {
                         try {
-                            const data: singleItem[] = require("../shared/data.json");
+                            const data: singleItemType[] = require("../shared/data.json");
                             initializeState(data)
                             ToastAndroid.show("Data Cleared Successfully", ToastAndroid.SHORT);
                             navigation.navigate('HomeStack')
