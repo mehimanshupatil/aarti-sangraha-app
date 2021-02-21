@@ -1,3 +1,5 @@
+import { singleItem } from "../shared/types"
+
 export const INITIALIZE = 'INITIALIZE'
 export const UPDATEFONTSIZE = 'UPDATEFONTSIZE'
 export const UPDATEFAV = 'UPDATEFAV'
@@ -6,10 +8,10 @@ export const DELETEITEM = 'DELETEITEM'
 export const SEARCHINPUT = 'SEARCHINPUT'
 export const UPDATEDATA = 'UPDATEDATA'
 
-export const initializeState = (data) => ({
-    type: INITIALIZE,
-    data
-})
+export const initializeState = (data: singleItem[]) => ({
+  type: INITIALIZE,
+  data,
+});
 
 export const updateFontSize = (fontSize) => ({
     type: UPDATEFONTSIZE,

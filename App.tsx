@@ -6,7 +6,7 @@ import { createStore } from 'redux'
 import reducer from './src/redux/reducer';
 import { PersistGate } from 'redux-persist/integration/react';
 import configureStore from './src/redux/configure-store';
-import { AppLoading } from 'expo';
+import AppLoading from "expo-app-loading";
 const { persistor, store } = configureStore();
 
 export default function App() {

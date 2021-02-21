@@ -4,34 +4,10 @@ import { connect } from 'react-redux';
 import { deleteItem, updateFav, updateFontSize } from '../redux/action';
 import { MaterialIcons } from '@expo/vector-icons';
 import { globalStyle } from '../shared/styles';
-
+import { useKeepAwake } from "expo-keep-awake";
 function CommonTemplate({ navigation, route, aartis, fontSize, updateFontSize, deleteItem, updateFav }) {
   const { data } = route.params
-
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      padding: 20,
-      backgroundColor: 'rgb(24,28,63)'
-    },
-    buttonContainer: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: 5
-    },
-    fontButton: {
-      flexDirection: 'row',
-    },
-    text: {
-      fontSize: fontSize,
-      color: 'rgb(255,224,101)'
-    },
-    icon: {
-      fontSize: 30,
-      ...globalStyle.yellowText
-    }
-  });
+  useKeepAwake();
 
   const [selectedItem, setSelectedItem] = useState(aartis.find(x => x.key == data.key))
 
@@ -91,9 +67,32 @@ function CommonTemplate({ navigation, route, aartis, fontSize, updateFontSize, d
       </ScrollView>
     </View>
   );
-
-
 }
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      padding: 20,
+      backgroundColor: "rgb(24,28,63)",
+    },
+    buttonContainer: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      padding: 5,
+    },
+    fontButton: {
+      flexDirection: "row",
+    },
+    text: {
+      fontSize: fontSize,
+      color: "rgb(255,224,101)",
+    },
+    icon: {
+      fontSize: 30,
+      ...globalStyle.yellowText,
+    },
+  });
 
 const mapStateToProps = (state, ownProps) => {
   return {

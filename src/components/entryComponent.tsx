@@ -1,17 +1,18 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading';
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import MyDrawer from '../routes/drawer';
 import { connect } from 'react-redux';
 import { initializeState } from '../redux/action';
+import { singleItem } from '../shared/types';
 function EntryComponent({ state, initializeState }) {
     const [dataLoaded, setDataLoaded] = useState(false);
 
     const getData = async () => {
         try {
             if (!state.aartis) {
-                const data = require('../shared/data.json')
+                const data: singleItem[] = require("../shared/data.json");
                 initializeState(data)
             }
         } catch (error) {
@@ -24,6 +25,7 @@ function EntryComponent({ state, initializeState }) {
             <AppLoading
                 startAsync={getData}
                 onFinish={() => setDataLoaded(true)}
+                onError={()=> console.log('error')}
             />
         );
     } else {
