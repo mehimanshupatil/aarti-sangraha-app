@@ -17,8 +17,7 @@
     },
     "android": {
       "package": "com.mehimanshupatil.aartisangraha",
-      "enableDangerousExperimentalLeanBuilds": true,
-      "versionCode": 3,
+      "versionCode": 4,
       "permissions": [],
       "splash": {
         "ldpi": "./assets/splash/drawable-ldpi.png",
