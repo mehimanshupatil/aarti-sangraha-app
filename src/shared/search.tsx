@@ -26,6 +26,7 @@ function Search({ setShowSearchInput, searchValue, searchInput }) {
 
 const styles = StyleSheet.create({
     inputStyle: {
+        paddingRight: 40,
         height: 40, borderRadius: 5, borderWidth: 1, textAlign: 'center',
         borderColor: 'rgb(24,28,63)',
         ...globalStyle.blueText
