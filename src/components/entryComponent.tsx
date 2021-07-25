@@ -1,20 +1,27 @@
 import { NavigationContainer } from "@react-navigation/native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import MyDrawer from "../routes/drawer";
-import { connect } from "react-redux";
-import { initializeState } from "../redux/action";
-import { singleItemType } from "../shared/types";
+import { StorageKey } from "../shared/types";
 import AppLoading from "expo-app-loading";
+import Context from "../store/context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-function EntryComponent({ state, initializeState }) {
+function EntryComponent() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const { state, dispatch } = useContext(Context);
+
   useEffect(() => {
     const getData = async () => {
       try {
-        if (!state.aartis) {
-          const data: singleItemType[] = require("../shared/data.json");
-          initializeState(data);
-        }
+        const fontSize = await AsyncStorage.getItem(StorageKey.fontSize);
+        if (fontSize)
+          dispatch({
+            type: "UPDATEFONTSIZE",
+            fontSize: parseInt(fontSize),
+          });
+        const value = await AsyncStorage.getItem(StorageKey.aartis);
+        if (!value) return;
+        dispatch({ type: "ADDLOCAL", data: JSON.parse(value) });
       } catch (error) {}
     };
     getData().then((x) => {
@@ -32,16 +39,4 @@ function EntryComponent({ state, initializeState }) {
   );
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    state,
-  };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    initializeState: (data) => dispatch(initializeState(data)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(EntryComponent);
+export default EntryComponent;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   StyleSheet,
   ScrollView,
@@ -7,39 +7,35 @@ import {
   Alert,
   ToastAndroid,
 } from "react-native";
-import { connect } from "react-redux";
-import { deleteItem, updateFav, updateFontSize } from "../redux/action";
 import { MaterialIcons } from "@expo/vector-icons";
 import { globalStyle } from "../shared/styles";
 import { useKeepAwake } from "expo-keep-awake";
-function CommonTemplate({
-  navigation,
-  route,
-  aartis,
-  fontSize,
-  updateFontSize,
-  deleteItem,
-  updateFav,
-}) {
-  const { data } = route.params;
+import Context from "../store/context";
+import { commmonTempNav, singleItemType } from "../shared/types";
+
+const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
+  const { key, index } = route.params;
   useKeepAwake();
 
+  const { state, dispatch } = useContext(Context);
+  const { fontSize, aartis } = state;
+
   const [selectedItem, setSelectedItem] = useState(
-    aartis.find((x) => x.key == data.key)
+    aartis.find((x) => x.key == key)
   );
 
   useEffect(() => {
-    const item = aartis.find((x) => x.key == data.key) ?? {};
-    setSelectedItem(item);
+    const single = aartis.find((x) => x.key == key);
+    setSelectedItem(single);
     navigation.setOptions({
-      title: item.title,
+      title: single?.title,
     });
   }, [aartis]);
 
   const deletePress = () => {
     Alert.alert(
       "Alert",
-      `आपणास खात्री आहे की आपण ${selectedItem.title} हटवू इच्छिता. ही क्रिया पूर्ववत करणे शक्य नाही`,
+      `आपणास खात्री आहे की आपण ${selectedItem?.title} हटवू इच्छिता. ही क्रिया पूर्ववत करणे शक्य नाही`,
       [
         {
           text: "रद्द करा",
@@ -49,7 +45,7 @@ function CommonTemplate({
         {
           text: "ठीक आहे",
           onPress: () => {
-            deleteItem(selectedItem.key);
+            dispatch({ type: "DELETEITEM", key: selectedItem?.key ?? "" });
             ToastAndroid.show("यशस्वीरित्या हटविले", ToastAndroid.SHORT);
             navigation.goBack();
           },
@@ -58,16 +54,22 @@ function CommonTemplate({
     );
   };
 
-  const iconPress = (item, action) => {
+  const iconPress = (
+    item: singleItemType | undefined,
+    action: "add" | "remove"
+  ) => {
+    if (!item) return;
+
     ToastAndroid.show(
       action === "add" ? "Added to Favorites" : "Removed from Favorites",
       ToastAndroid.SHORT
     );
-    updateFav(item, action);
+    dispatch({ type: "UPDATEFAV", key: key, operation: action });
   };
   const addNew = () => {
+    if (!selectedItem) return;
     navigation.push("addNew", {
-      data: selectedItem,
+      item: selectedItem,
     });
   };
 
@@ -75,7 +77,7 @@ function CommonTemplate({
     <View style={{ ...styles.container, paddingTop: 5 }}>
       <View style={styles.buttonContainer}>
         <View style={styles.fontButton}>
-          {selectedItem.favorite ? (
+          {selectedItem?.favorite ? (
             <MaterialIcons
               style={styles.icon}
               name="favorite"
@@ -88,41 +90,50 @@ function CommonTemplate({
               onPress={() => iconPress(selectedItem, "add")}
             />
           )}
-          <MaterialIcons
-            style={{ ...styles.icon, paddingLeft: 10 }}
-            name="delete-forever"
-            onPress={deletePress}
-          />
+          {selectedItem?.isRemovable && (
+            <MaterialIcons
+              style={{ ...styles.icon, paddingLeft: 10 }}
+              name="delete-forever"
+              onPress={deletePress}
+            />
+          )}
         </View>
         <View style={[styles.fontButton, { alignItems: "center" }]}>
-          <Text style={[styles.icon]}>{data.index + 1}</Text>
-          <MaterialIcons
-            style={[styles.icon, { paddingLeft: 10 }]}
-            name="edit"
-            onPress={addNew}
-          />
+          <Text style={[styles.icon]}>{index + 1}</Text>
+          {selectedItem?.isRemovable && (
+            <MaterialIcons
+              style={[styles.icon, { paddingLeft: 10 }]}
+              name="edit"
+              onPress={addNew}
+            />
+          )}
         </View>
         <View style={styles.fontButton}>
           <MaterialIcons
             style={styles.icon}
             name="add-circle"
-            onPress={() => updateFontSize(fontSize + 3)}
+            onPress={() =>
+              dispatch({ type: "UPDATEFONTSIZE", fontSize: fontSize + 3 })
+            }
           />
           <MaterialIcons
             style={{ ...styles.icon, paddingLeft: 10 }}
             name="remove-circle"
-            onPress={() => fontSize > 15 && updateFontSize(fontSize - 3)}
+            onPress={() =>
+              fontSize > 15 &&
+              dispatch({ type: "UPDATEFONTSIZE", fontSize: fontSize - 3 })
+            }
           />
         </View>
       </View>
       <ScrollView>
         <Text style={[styles.text, { fontSize: fontSize }]}>
-          {selectedItem.body}
+          {selectedItem?.body}
         </Text>
       </ScrollView>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -148,19 +159,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    fontSize: state.fontSize,
-    aartis: state.aartis,
-  };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    updateFontSize: (newFontSize) => dispatch(updateFontSize(newFontSize)),
-    deleteItem: (key) => dispatch(deleteItem(key)),
-    updateFav: (item, operation) => dispatch(updateFav(item, operation)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CommonTemplate);
+export default CommonTemplate;

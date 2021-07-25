@@ -1,18 +1,15 @@
-import React from "react";
-import { Provider } from "react-redux";
+import React, { useReducer } from "react";
 import EntryComponent from "./src/components/entryComponent";
-import { PersistGate } from "redux-persist/integration/react";
-import configureStore from "./src/redux/configure-store";
-import AppLoading from "expo-app-loading";
-
-const { persistor, store } = configureStore();
+import Context from "./src/store/context";
+import initialState from "./src/store/initialState";
+import reducer from "./src/store/reducer";
 
 export default function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   return (
-    <Provider store={store}>
-      <PersistGate loading={<AppLoading />} persistor={persistor}>
-        <EntryComponent />
-      </PersistGate>
-    </Provider>
+    <Context.Provider value={{ state, dispatch }}>
+      <EntryComponent />
+    </Context.Provider>
   );
 }

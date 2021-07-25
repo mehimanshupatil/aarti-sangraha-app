@@ -9,15 +9,13 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "package": "com.mehimanshupatil.aartisangraha",
-      "versionCode": 4,
+      "versionCode": 5,
       "permissions": [],
       "splash": {
         "ldpi": "./assets/splash/drawable-ldpi.png",
