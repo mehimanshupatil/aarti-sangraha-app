@@ -2,7 +2,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import AboutNavigation from "./aboutStack";
 import HomeStack from "./homeStack";
 import React, { useEffect } from "react";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons } from "@expo/vector-icons";
 import FavoritesNavigation from "./FavoritesStack";
 import { globalStyle } from "../shared/styles";
 import { BackHandler, StyleSheet, ToastAndroid } from "react-native";

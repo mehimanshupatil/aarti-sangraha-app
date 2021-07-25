@@ -1,11 +1,19 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, Image, Dimensions } from "react-native";
+import {
+  SafeAreaView,
+  StyleSheet,
+  Image,
+  Dimensions,
+  Text,
+} from "react-native";
 import {
   DrawerContentComponentProps,
   DrawerContentOptions,
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
+import Constants from "expo-constants";
+import { globalStyle } from "../shared/styles";
 
 const CustomSidebarMenu = (
   props: DrawerContentComponentProps<DrawerContentOptions>
@@ -26,6 +34,10 @@ const CustomSidebarMenu = (
       <DrawerContentScrollView {...props}>
         <DrawerItemList {...props} />
       </DrawerContentScrollView>
+      <Text style={styles.textVersion}>
+        version {Constants.manifest?.version}.
+        {Constants.manifest?.android?.versionCode}
+      </Text>
     </SafeAreaView>
   );
 };
@@ -35,6 +47,12 @@ const styles = StyleSheet.create({
     borderRadius: 100 / 2,
     alignSelf: "center",
     marginTop: 50,
+  },
+  textVersion: {
+    textAlign: "center",
+    marginBottom: 20,
+    fontSize: 13,
+    ...globalStyle.yellowText,
   },
 });
 

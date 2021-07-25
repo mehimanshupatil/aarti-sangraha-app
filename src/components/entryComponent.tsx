@@ -1,4 +1,4 @@
-import { NavigationContainer } from "@react-navigation/native";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import React, { useContext, useEffect, useState } from "react";
 import MyDrawer from "../routes/drawer";
 import { StorageKey } from "../shared/types";
@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function EntryComponent() {
   const [isLoaded, setIsLoaded] = useState(false);
-  const { state, dispatch } = useContext(Context);
+  const { dispatch } = useContext(Context);
 
   useEffect(() => {
     const getData = async () => {
@@ -33,7 +33,15 @@ function EntryComponent() {
     return <AppLoading />;
   }
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      theme={{
+        dark: true,
+        colors: {
+          ...DefaultTheme.colors,
+          background: "rgb(24,28,63)",
+        },
+      }}
+    >
       <MyDrawer />
     </NavigationContainer>
   );

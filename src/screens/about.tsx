@@ -80,8 +80,7 @@ https://galaxy.store/aarti`,
     <ScrollView contentContainerStyle={styles.root}>
       <View style={styles.container}>
         <Text style={styles.text}>
-          Thanks for using app. Please rate 5
-          <MaterialIcons name="star" size={20} /> on
+          Thanks for using app. Please rate 5 ⭐️ on
           <Text
             style={styles.texturl}
             onPress={() =>
@@ -112,7 +111,7 @@ https://galaxy.store/aarti`,
           <Text onPress={reset}>Click here to reset customised data</Text>
           {"\n"}
           {"\n"}
-          For suggestion mail at{"\n"}
+          For suggestion 📧 at{"\n"}
           <Text
             style={styles.texturl}
             onPress={() => handlePress("mailto:mailhimanshupatil@gmail.com")}
@@ -150,10 +149,7 @@ https://galaxy.store/aarti`,
         </Text>
       </View>
       <View style={{ alignItems: "center" }}>
-        <Text style={styles.textVersion}>
-          version {Constants.manifest.version}.
-          {Constants.manifest.android?.versionCode}
-        </Text>
+        <Text style={styles.text}>{"🧑‍💻 with ♥️ in 🇮🇳"}</Text>
       </View>
     </ScrollView>
   );
@@ -176,11 +172,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     ...globalStyle.yellowText,
   },
-  textVersion: {
-    fontSize: 13,
-    ...globalStyle.yellowText,
-  },
   texturl: {
-    color: "yellow",
+    color: "green",
   },
 });
