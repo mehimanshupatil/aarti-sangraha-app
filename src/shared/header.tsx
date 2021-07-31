@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import Search from "./search";
+import Search from "./Search";
+import { useTheme } from "react-native-paper";
 
 const Header: React.FC<{
   title: string;
   navigation: any;
   showSearchButton: boolean;
 }> = ({ title, navigation, showSearchButton }) => {
+  const { colors } = useTheme();
+
   const openMenu = () => {
     navigation.openDrawer();
   };
@@ -20,17 +23,19 @@ const Header: React.FC<{
         name="menu"
         size={28}
         onPress={openMenu}
-        style={styles.menuIcon}
+        style={{ ...styles.menuIcon, color: colors.primary }}
       />
       <View>
-        <Text style={styles.headerText}>{title}</Text>
+        <Text style={{ ...styles.headerText, color: colors.primary }}>
+          {title}
+        </Text>
       </View>
       {showSearchButton && (
         <MaterialIcons
           name="search"
           onPress={() => setLocalData(!showSearch)}
           size={28}
-          style={styles.searchIcon}
+          style={{ ...styles.searchIcon, color: colors.primary }}
         />
       )}
     </View>
@@ -50,18 +55,15 @@ const styles = StyleSheet.create({
   headerText: {
     fontWeight: "bold",
     fontSize: 20,
-    color: "rgb(24,28,63)",
     letterSpacing: 1,
   },
   menuIcon: {
     position: "absolute",
     left: 12,
-    color: "rgb(24,28,63)",
   },
   searchIcon: {
     position: "absolute",
     right: 12,
-    color: "rgb(24,28,63)",
   },
 });
 

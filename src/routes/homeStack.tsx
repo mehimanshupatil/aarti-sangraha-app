@@ -1,19 +1,21 @@
-import Home from "../screens/home";
+import Home from "../screens/Home";
 import { createStackNavigator } from "@react-navigation/stack";
-import CommonTemplate from "../screens/commonTemplate";
+import CommonTemplate from "../screens/CommonTemplate";
 import React from "react";
-import Header from "../shared/header";
-import AddNew from "../screens/addNew";
+import Header from "../shared/Header";
+import AddNew from "../screens/AddNew";
+import { useTheme } from "react-native-paper";
 
 const { Navigator, Screen } = createStackNavigator();
 
 function HomeStack() {
+  const { colors } = useTheme();
+
   return (
     <Navigator
       headerMode="screen"
       screenOptions={{
-        headerStyle: { backgroundColor: "rgb(255,224,101)" },
-        headerTintColor: "rgb(24,28,63)",
+        headerStyle: { backgroundColor: colors.background },
         headerTitleStyle: {
           fontWeight: "bold",
         },

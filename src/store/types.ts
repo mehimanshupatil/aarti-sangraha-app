@@ -14,3 +14,6 @@ export const UPDATEDATA = "UPDATEDATA";
 export type UPDATEDATA = typeof UPDATEDATA;
 export const ADDLOCAL = "ADDLOCAL";
 export type ADDLOCAL = typeof ADDLOCAL;
+
+export const ISDARK = "ISDARK";
+export type ISDARK = typeof ISDARK;

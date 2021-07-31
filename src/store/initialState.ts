@@ -5,6 +5,7 @@ export interface IState {
   favorites: singleItemType[];
   fontSize: number;
   searchValue: string;
+  isDarkMode: boolean;
 }
 
 const data: singleItemType[] = require("../shared/data.json");
@@ -14,6 +15,7 @@ const initialState: IState = {
   favorites: [],
   fontSize: 20,
   searchValue: "",
+  isDarkMode: false,
 };
 
 export default initialState;

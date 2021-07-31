@@ -1,9 +1,9 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import Header from "../shared/header";
-import Favorites from "../screens/favorites";
-import CommonTemplate from "../screens/commonTemplate";
-import addNew from "../screens/addNew";
+import Header from "../shared/Header";
+import Favorites from "../screens/Favorites";
+import CommonTemplate from "../screens/CommonTemplate";
+import addNew from "../screens/AddNew";
 
 const { Navigator, Screen } = createStackNavigator();
 

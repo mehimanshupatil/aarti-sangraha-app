@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import SingleItem from "../components/singleItem";
+import SingleItem from "../components/SingleItem";
 import { globalStyle } from "../shared/styles";
 import { homeNav, singleItemType } from "../shared/types";
 import Context from "../store/context";

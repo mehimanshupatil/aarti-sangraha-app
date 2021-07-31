@@ -1,6 +1,6 @@
-import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import React, { useContext, useEffect, useState } from "react";
-import MyDrawer from "../routes/drawer";
+import MyDrawer from "../routes/Drawer";
 import { StorageKey } from "../shared/types";
 import AppLoading from "expo-app-loading";
 import Context from "../store/context";
@@ -33,15 +33,7 @@ function EntryComponent() {
     return <AppLoading />;
   }
   return (
-    <NavigationContainer
-      theme={{
-        dark: true,
-        colors: {
-          ...DefaultTheme.colors,
-          background: "rgb(24,28,63)",
-        },
-      }}
-    >
+    <NavigationContainer>
       <MyDrawer />
     </NavigationContainer>
   );

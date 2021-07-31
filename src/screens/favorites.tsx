@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
-import SingleItem from "../components/singleItem";
+import SingleItem from "../components/SingleItem";
 import { globalStyle } from "../shared/styles";
 import { favNav, singleItemType } from "../shared/types";
 import Context from "../store/context";

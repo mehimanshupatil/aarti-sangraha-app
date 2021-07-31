@@ -14,6 +14,7 @@ const reducer = (state: IState, action: TAction): IState => {
         favorites: [],
         fontSize: 20,
         searchValue: "",
+        isDarkMode: false,
       };
     case types.ADDLOCAL:
       return { ...state, aartis: [...state.aartis, ...action.data] };
@@ -55,6 +56,11 @@ const reducer = (state: IState, action: TAction): IState => {
         aartis: state.aartis.map((x) =>
           x.key == action.data.key ? action.data : x
         ),
+      };
+    case types.ISDARK:
+      return {
+        ...state,
+        isDarkMode: action.data,
       };
     default:
       return state;

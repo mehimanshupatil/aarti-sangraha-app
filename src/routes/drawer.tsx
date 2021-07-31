@@ -1,6 +1,6 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import AboutNavigation from "./aboutStack";
-import HomeStack from "./homeStack";
+import AboutNavigation from "./AboutStack";
+import HomeStack from "./HomeStack";
 import React, { useEffect } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import FavoritesNavigation from "./FavoritesStack";

@@ -36,6 +36,11 @@ export interface IAddLocal {
   data: singleItemType[];
 }
 
+export interface IDarkMode {
+  type: types.ISDARK;
+  data: boolean;
+}
+
 export const initializeState = (data: singleItemType[]): IInitializeState => ({
   type: types.INITIALIZE,
   data,
@@ -80,6 +85,11 @@ export const addLocal = (data: singleItemType[]): IAddLocal => ({
   data,
 });
 
+export const changeDark = (data: boolean): IDarkMode => ({
+  type: types.ISDARK,
+  data,
+});
+
 export type TAction =
   | IInitializeState
   | IUpdateFontSize
@@ -88,4 +98,5 @@ export type TAction =
   | IDeleteItem
   | ISearchInput
   | IUpdateData
-  | IAddLocal;
+  | IAddLocal
+  | IDarkMode;
