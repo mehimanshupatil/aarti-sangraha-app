@@ -1,11 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
+import { useTheme } from "react-native-paper";
 import SingleItem from "../components/SingleItem";
 import { globalStyle } from "../shared/styles";
 import { favNav, singleItemType } from "../shared/types";
-import Context from "../store/context";
+import { useData } from "../store/context";
 
 const Favorites: React.FC<favNav> = ({ navigation }) => {
+  const { colors } = useTheme();
+
   const pressHandler = (item: singleItemType, index: number) => {
     navigation.push("CommonComponent", {
       key: item.key,
@@ -13,7 +16,7 @@ const Favorites: React.FC<favNav> = ({ navigation }) => {
     });
   };
 
-  const { state } = useContext(Context);
+  const { state } = useData();
   const { aartis, searchValue } = state;
 
   const [localData, setLocalData] = useState<singleItemType[]>([]);
@@ -31,7 +34,9 @@ const Favorites: React.FC<favNav> = ({ navigation }) => {
   }, [aartis, searchValue]);
 
   return (
-    <View style={globalStyle.homeRoot}>
+    <View
+      style={{ ...globalStyle.homeRoot, backgroundColor: colors.background }}
+    >
       <View style={globalStyle.homecontainer}>
         {localData?.length ? (
           <FlatList
@@ -46,7 +51,9 @@ const Favorites: React.FC<favNav> = ({ navigation }) => {
             showsVerticalScrollIndicator={false}
           />
         ) : (
-          <Text style={styles.text}>No Favorites Found.</Text>
+          <Text style={{ ...styles.text, color: colors.primary }}>
+            No Favorites Found.
+          </Text>
         )}
       </View>
     </View>
@@ -60,6 +67,5 @@ const styles = StyleSheet.create({
     padding: 20,
     fontWeight: "bold",
     fontSize: 20,
-    color: "rgb(255,224,101)",
   },
 });

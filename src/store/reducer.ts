@@ -1,5 +1,5 @@
 import { TAction } from "./actions";
-import { IState } from "./initialState";
+import initialState, { IState } from "./initialState";
 import * as types from "./types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { singleItemType, StorageKey } from "../shared/types";
@@ -9,17 +9,10 @@ const reducer = (state: IState, action: TAction): IState => {
     case types.INITIALIZE:
       AsyncStorage.setItem(StorageKey.aartis, "");
       AsyncStorage.setItem(StorageKey.fontSize, "");
-      return {
-        aartis: action.data,
-        favorites: [],
-        fontSize: 20,
-        searchValue: "",
-        isDarkMode: false,
-      };
+      return initialState;
     case types.ADDLOCAL:
       return { ...state, aartis: [...state.aartis, ...action.data] };
     case types.UPDATEFONTSIZE:
-      AsyncStorage.setItem(StorageKey.fontSize, action.fontSize.toString());
       return { ...state, fontSize: action.fontSize };
     case types.UPDATEFAV:
       const key = action.key;

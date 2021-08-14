@@ -3,6 +3,7 @@ import { StackScreenProps } from "@react-navigation/stack";
 export enum StorageKey {
   aartis = "aartis",
   fontSize = "fontSize",
+  darkMode = "darkMode",
 }
 
 export type singleItemType = {

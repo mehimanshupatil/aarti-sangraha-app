@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -9,14 +9,16 @@ import {
   Keyboard,
 } from "react-native";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
+import { useTheme } from "react-native-paper";
 import { globalStyle } from "../shared/styles";
 import { addNewNav } from "../shared/types";
-import Context from "../store/context";
+import { useData } from "../store/context";
 
 const AddNew: React.FC<addNewNav> = ({ navigation, route }) => {
+  const { colors } = useTheme();
   const { item } = route.params;
 
-  const { dispatch } = useContext(Context);
+  const { dispatch } = useData();
 
   const [title, setTitle] = useState(item.title);
   const [body, setBody] = useState(item.body);
@@ -75,31 +77,46 @@ const AddNew: React.FC<addNewNav> = ({ navigation, route }) => {
   };
 
   return (
-    <View style={globalStyle.homeRoot}>
+    <View
+      style={{ ...globalStyle.homeRoot, backgroundColor: colors.background }}
+    >
       <ScrollView
         style={globalStyle.homecontainer}
         keyboardShouldPersistTaps="handled"
       >
         <TextInput
-          placeholderTextColor="rgb(255,224,101)"
-          style={styles.input}
+          placeholderTextColor={colors.primary}
+          style={{
+            ...styles.input,
+            color: colors.primary,
+            backgroundColor: colors.background,
+            borderColor: colors.primary,
+          }}
           placeholder="Title"
           value={title}
           onChangeText={(text) => setTitle(text)}
         />
         <TextInput
-          placeholderTextColor="rgb(255,224,101)"
-          style={styles.input}
+          placeholderTextColor={colors.primary}
+          style={{
+            ...styles.input,
+            color: colors.primary,
+            backgroundColor: colors.background,
+            borderColor: colors.primary,
+          }}
           placeholder="Body"
           value={body}
           onChangeText={(text) => setBody(text)}
           numberOfLines={20}
           multiline={true}
         />
-        <TouchableOpacity style={styles.buttonText} onPress={addItem}>
+        <TouchableOpacity
+          style={{ ...styles.buttonText, borderColor: colors.primary }}
+          onPress={addItem}
+        >
           <Text
             style={{
-              ...globalStyle.yellowText,
+              color: colors.text,
               fontWeight: "bold",
               fontSize: 15,
             }}
@@ -122,9 +139,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     textAlignVertical: "top",
     padding: 10,
-    borderColor: "rgb(255,224,101)",
-    ...globalStyle.blueBack,
-    ...globalStyle.yellowText,
   },
   buttonText: {
     alignItems: "center",
@@ -132,7 +146,5 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: "rgb(255,224,101)",
-    ...globalStyle.blueBack,
   },
 });

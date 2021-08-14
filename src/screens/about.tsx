@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   StyleSheet,
   View,
@@ -8,15 +8,16 @@ import {
   Alert,
 } from "react-native";
 import * as Linking from "expo-linking";
-import Constants from "expo-constants";
 import { ScrollView } from "react-native-gesture-handler";
 import { globalStyle } from "../shared/styles";
 import { MaterialIcons } from "@expo/vector-icons";
 import { aboutNav, singleItemType } from "../shared/types";
-import Context from "../store/context";
+import { useData } from "../store/context";
+import { useTheme } from "react-native-paper";
 
 const About: React.FC<aboutNav> = ({ navigation }) => {
-  const { dispatch } = useContext(Context);
+  const { colors } = useTheme();
+  const { dispatch } = useData();
 
   const handlePress = (url: string) => {
     Linking.openURL(url);
@@ -52,34 +53,15 @@ const About: React.FC<aboutNav> = ({ navigation }) => {
     );
   };
 
-  const onShare = async () => {
-    try {
-      const result = await Share.share({
-        message: `Hey there download aarti Sangrah from playstore/samsung store.
-Click the link below to download the app.
-
-https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha
-
-https://galaxy.store/aarti`,
-      });
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // shared with activity type of result.activityType
-        } else {
-          // shared
-        }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
-      }
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-
   return (
-    <ScrollView contentContainerStyle={styles.root}>
+    <ScrollView
+      contentContainerStyle={{
+        ...styles.root,
+        backgroundColor: colors.background,
+      }}
+    >
       <View style={styles.container}>
-        <Text style={styles.text}>
+        <Text style={{ fontSize: 20, color: colors.primary }}>
           Thanks for using app. Please rate 5 ⭐️ on
           <Text
             style={styles.texturl}
@@ -99,12 +81,6 @@ https://galaxy.store/aarti`,
           >
             {" "}
             Samsung Store
-          </Text>
-          {"\n"}
-          {"\n"}
-          <Text onPress={onShare}>
-            Click here to <MaterialIcons name="share" size={20} /> app with{" "}
-            <MaterialIcons name="group" size={22} />
           </Text>
           {"\n"}
           {"\n"}
@@ -149,7 +125,9 @@ https://galaxy.store/aarti`,
         </Text>
       </View>
       <View style={{ alignItems: "center" }}>
-        <Text style={styles.text}>{"🧑‍💻 with ♥️ in 🇮🇳"}</Text>
+        <Text style={{ fontSize: 20, color: colors.primary }}>
+          {"🧑‍💻 with ♥️ in 🇮🇳"}
+        </Text>
       </View>
     </ScrollView>
   );
@@ -162,16 +140,12 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: "space-between",
     padding: 20,
-    backgroundColor: "rgb(24,28,63)",
   },
   container: {
     flex: 1,
     fontSize: 30,
   },
-  text: {
-    fontSize: 20,
-    ...globalStyle.yellowText,
-  },
+
   texturl: {
     color: "green",
   },

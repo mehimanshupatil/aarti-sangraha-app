@@ -1,3 +1,4 @@
+import { ColorSchemeName } from "react-native";
 import { singleItemType } from "../shared/types";
 
 export interface IState {
@@ -5,7 +6,7 @@ export interface IState {
   favorites: singleItemType[];
   fontSize: number;
   searchValue: string;
-  isDarkMode: boolean;
+  isDarkMode: NonNullable<ColorSchemeName>;
 }
 
 const data: singleItemType[] = require("../shared/data.json");
@@ -15,7 +16,7 @@ const initialState: IState = {
   favorites: [],
   fontSize: 20,
   searchValue: "",
-  isDarkMode: false,
+  isDarkMode: "light",
 };
 
 export default initialState;

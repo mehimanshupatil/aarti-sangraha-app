@@ -1,14 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import { globalStyle } from "../shared/styles";
 import { MaterialIcons } from "@expo/vector-icons";
-import Context from "../store/context";
+import { useData } from "../store/context";
+import { useTheme } from "react-native-paper";
 
 const Search: React.FC<{ setShowSearchInput: (arg0: boolean) => void }> = ({
   setShowSearchInput,
 }) => {
-  const { state, dispatch } = useContext(Context);
+  const { colors } = useTheme();
+  const { state, dispatch } = useData();
 
   const searchInput = (data: string) => {
     dispatch({ type: "SEARCHINPUT", value: data });
@@ -17,9 +18,13 @@ const Search: React.FC<{ setShowSearchInput: (arg0: boolean) => void }> = ({
   return (
     <View style={{ marginTop: 10, justifyContent: "center" }}>
       <TextInput
-        style={styles.inputStyle}
+        style={{
+          ...styles.inputStyle,
+          color: colors.background,
+          borderColor: colors.background,
+        }}
         placeholder="Type here Search"
-        placeholderTextColor="rgb(24,28,63)"
+        placeholderTextColor={colors.background}
         autoFocus={true}
         onChangeText={(text) => searchInput(text)}
         value={state.searchValue}
@@ -31,6 +36,7 @@ const Search: React.FC<{ setShowSearchInput: (arg0: boolean) => void }> = ({
           searchInput("");
         }}
         size={28}
+        color={colors.background}
         style={styles.searchIcon}
       />
     </View>
@@ -44,13 +50,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     textAlign: "center",
-    borderColor: "rgb(24,28,63)",
-    ...globalStyle.blueText,
   },
   searchIcon: {
     position: "absolute",
     right: 12,
-    ...globalStyle.blueText,
   },
 });
 

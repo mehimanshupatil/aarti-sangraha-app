@@ -1,16 +1,19 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
+import { useTheme } from "react-native-paper";
 import About from "../screens/About";
 import Header from "../shared/Header";
 
 const { Navigator, Screen } = createStackNavigator();
 
 export default function AboutNavigation() {
+  const { colors } = useTheme();
+
   return (
     <Navigator
       headerMode="screen"
       screenOptions={{
-        headerStyle: { backgroundColor: "rgb(255,224,101)" },
+        headerStyle: { backgroundColor: colors.primary },
         headerTitleStyle: {
           fontWeight: "bold",
         },

@@ -17,6 +17,7 @@
       "package": "com.mehimanshupatil.aartisangraha",
       "versionCode": 6,
       "permissions": [],
+      "userInterfaceStyle": "automatic",
       "splash": {
         "ldpi": "./assets/splash/drawable-ldpi.png",
         "mdpi": "./assets/splash/drawable-mdpi.png",

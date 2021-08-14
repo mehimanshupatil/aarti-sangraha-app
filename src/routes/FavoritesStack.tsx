@@ -4,15 +4,19 @@ import Header from "../shared/Header";
 import Favorites from "../screens/Favorites";
 import CommonTemplate from "../screens/CommonTemplate";
 import addNew from "../screens/AddNew";
+import { useTheme } from "react-native-paper";
 
 const { Navigator, Screen } = createStackNavigator();
 
 export default function FavoritesNavigation() {
+  const { colors } = useTheme();
+
   return (
     <Navigator
       headerMode="screen"
       screenOptions={{
-        headerStyle: { backgroundColor: "rgb(255,224,101)" },
+        headerStyle: { backgroundColor: colors.primary },
+        headerTintColor: colors.background,
         headerTitleStyle: {
           fontWeight: "bold",
         },
@@ -37,8 +41,6 @@ export default function FavoritesNavigation() {
         options={({ route }) => ({
           // @ts-ignore
           title: route.params.data?.title,
-          headerStyle: { backgroundColor: "rgb(255,224,101)" },
-          headerTintColor: "rgb(24,28,63)",
         })}
         component={CommonTemplate}
       />

@@ -23,10 +23,10 @@ const Header: React.FC<{
         name="menu"
         size={28}
         onPress={openMenu}
-        style={{ ...styles.menuIcon, color: colors.primary }}
+        style={{ ...styles.menuIcon, color: colors.background }}
       />
       <View>
-        <Text style={{ ...styles.headerText, color: colors.primary }}>
+        <Text style={{ ...styles.headerText, color: colors.background }}>
           {title}
         </Text>
       </View>
@@ -35,7 +35,7 @@ const Header: React.FC<{
           name="search"
           onPress={() => setLocalData(!showSearch)}
           size={28}
-          style={{ ...styles.searchIcon, color: colors.primary }}
+          style={{ ...styles.searchIcon, color: colors.background }}
         />
       )}
     </View>

@@ -1,13 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useTheme } from "react-native-paper";
 import SingleItem from "../components/SingleItem";
 import { globalStyle } from "../shared/styles";
 import { homeNav, singleItemType } from "../shared/types";
-import Context from "../store/context";
+import { useData } from "../store/context";
 
 const Home: React.FC<homeNav> = ({ navigation }) => {
-  const { state } = useContext(Context);
+  const { colors } = useTheme();
+
+  const { state } = useData();
   const { aartis, searchValue } = state;
   const pressHandler = (item: singleItemType, index: number) => {
     navigation.push("CommonComponent", {
@@ -33,7 +36,9 @@ const Home: React.FC<homeNav> = ({ navigation }) => {
   }, [aartis, searchValue]);
 
   return (
-    <View style={globalStyle.homeRoot}>
+    <View
+      style={{ ...globalStyle.homeRoot, backgroundColor: colors.background }}
+    >
       <View style={globalStyle.homecontainer}>
         <FlatList
           data={localData}
@@ -43,10 +48,22 @@ const Home: React.FC<homeNav> = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
           ListFooterComponent={() => (
             <TouchableOpacity
-              style={styles.dummyConatiner}
+              style={{
+                ...styles.dummyConatiner,
+                borderColor: colors.primary,
+                backgroundColor: colors.background,
+                shadowColor: colors.background,
+              }}
               onPress={() => addNew()}
             >
-              <Text style={styles.dummyText}>+</Text>
+              <Text
+                style={{
+                  fontSize: 50,
+                  color: colors.primary,
+                }}
+              >
+                +
+              </Text>
             </TouchableOpacity>
           )}
         />
@@ -62,19 +79,13 @@ const styles = StyleSheet.create({
     padding: 16,
     marginTop: 16,
     marginBottom: 16,
-    borderColor: "rgb(255,224,101)",
+
     borderWidth: 1,
     alignItems: "center",
     borderRadius: 10,
     elevation: 3,
-    backgroundColor: "rgb(24,28,63)",
     shadowOffset: { width: 1, height: 1 },
-    shadowColor: "rgb(255,224,101)",
     shadowOpacity: 0.3,
     shadowRadius: 2,
-  },
-  dummyText: {
-    fontSize: 50,
-    color: "rgb(255,224,101)",
   },
 });

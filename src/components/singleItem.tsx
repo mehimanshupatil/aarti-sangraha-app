@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   StyleSheet,
   TouchableOpacity,
@@ -7,16 +7,18 @@ import {
   ToastAndroid,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { globalStyle } from "../shared/styles";
-import Context from "../store/context";
+import { useData } from "../store/context";
 import { singleItemType } from "../shared/types";
+import { useTheme } from "react-native-paper";
 
 const SingleItem: React.FC<{
   pressHandler: (arg0: singleItemType, index: number) => void;
   item: singleItemType;
   index: number;
 }> = ({ pressHandler, item, index }) => {
-  const { dispatch } = useContext(Context);
+  const { colors } = useTheme();
+
+  const { dispatch } = useData();
 
   const iconPress = (item: singleItemType, action: "add" | "remove") => {
     ToastAndroid.show(
@@ -28,21 +30,30 @@ const SingleItem: React.FC<{
 
   return (
     <TouchableOpacity
-      style={styles.container}
+      style={{
+        ...styles.container,
+        borderColor: colors.primary,
+        backgroundColor: colors.background,
+        shadowColor: colors.background,
+      }}
       onPress={() => pressHandler(item, index)}
     >
       <View>
         <View style={styles.firstLine}>
-          <Text style={styles.title}>{item.title}</Text>
+          <Text style={{ ...styles.title, color: colors.text }}>
+            {item.title}
+          </Text>
           {item.favorite ? (
             <MaterialIcons
-              style={styles.icon}
+              size={30}
+              color={colors.primary}
               name="favorite"
               onPress={() => iconPress(item, "remove")}
             />
           ) : (
             <MaterialIcons
-              style={styles.icon}
+              size={30}
+              color={colors.primary}
               name="favorite-border"
               onPress={() => iconPress(item, "add")}
             />
@@ -50,17 +61,15 @@ const SingleItem: React.FC<{
         </View>
         <View style={styles.firstLine}>
           <Text
-            style={[
-              globalStyle.yellowText,
-              {
-                flex: 1,
-                flexWrap: "wrap",
-              },
-            ]}
+            style={{
+              flex: 1,
+              flexWrap: "wrap",
+              color: colors.text,
+            }}
           >
             {item.body.split("\n")[0]}
           </Text>
-          <Text style={[globalStyle.yellowText, { paddingRight: 8 }]}>
+          <Text style={{ paddingRight: 8, color: colors.primary }}>
             {index + 1}
           </Text>
         </View>
@@ -75,13 +84,10 @@ const styles = StyleSheet.create({
   container: {
     padding: 16,
     marginTop: 16,
-    borderColor: "rgb(255,224,101)",
     borderWidth: 1,
     borderRadius: 10,
     elevation: 3,
-    backgroundColor: "rgb(24,28,63)",
     shadowOffset: { width: 1, height: 1 },
-    shadowColor: "rgb(255,224,101)",
     shadowOpacity: 0.3,
     shadowRadius: 2,
   },
@@ -93,10 +99,5 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: "wrap",
     fontSize: 30,
-    ...globalStyle.yellowText,
-  },
-  icon: {
-    fontSize: 30,
-    ...globalStyle.yellowText,
   },
 });

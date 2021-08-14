@@ -1,3 +1,4 @@
+import { ColorSchemeName } from "react-native";
 import { singleItemType } from "../shared/types";
 import * as types from "./types";
 
@@ -38,7 +39,7 @@ export interface IAddLocal {
 
 export interface IDarkMode {
   type: types.ISDARK;
-  data: boolean;
+  data: NonNullable<ColorSchemeName>;
 }
 
 export const initializeState = (data: singleItemType[]): IInitializeState => ({
@@ -85,7 +86,7 @@ export const addLocal = (data: singleItemType[]): IAddLocal => ({
   data,
 });
 
-export const changeDark = (data: boolean): IDarkMode => ({
+export const changeDark = (data: NonNullable<ColorSchemeName>): IDarkMode => ({
   type: types.ISDARK,
   data,
 });

@@ -4,12 +4,15 @@ import HomeStack from "./HomeStack";
 import React, { useEffect } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import FavoritesNavigation from "./FavoritesStack";
-import { globalStyle } from "../shared/styles";
-import { BackHandler, StyleSheet, ToastAndroid } from "react-native";
+import { BackHandler, ToastAndroid } from "react-native";
 import CustomSidebarMenu from "../components/CustomSidebarMenu";
+import { useTheme } from "react-native-paper";
 const { Navigator, Screen } = createDrawerNavigator();
 let backPressed = 0;
+
 export default function MyDrawer() {
+  const { colors } = useTheme();
+
   useEffect(() => {
     const backAction = () => {
       if (backPressed > 0) {
@@ -37,10 +40,10 @@ export default function MyDrawer() {
   return (
     <Navigator
       drawerStyle={{
-        ...globalStyle.blueBack,
+        backgroundColor: colors.background,
         width: "60%",
       }}
-      drawerContentOptions={{ inactiveTintColor: "rgb(255,224,101)" }}
+      drawerContentOptions={{ inactiveTintColor: colors.primary }}
       drawerContent={(props) => <CustomSidebarMenu {...props} />}
     >
       <Screen
@@ -48,7 +51,11 @@ export default function MyDrawer() {
         options={() => ({
           title: "आरती संग्रह",
           drawerIcon: () => (
-            <MaterialIcons style={styles.icon} name="home" size={28} />
+            <MaterialIcons
+              style={{ color: colors.primary }}
+              name="home"
+              size={28}
+            />
           ),
         })}
         component={HomeStack}
@@ -58,7 +65,11 @@ export default function MyDrawer() {
         options={() => ({
           title: "Favorites",
           drawerIcon: () => (
-            <MaterialIcons style={styles.icon} name="favorite" size={28} />
+            <MaterialIcons
+              style={{ color: colors.primary }}
+              name="favorite"
+              size={28}
+            />
           ),
         })}
         component={FavoritesNavigation}
@@ -68,7 +79,11 @@ export default function MyDrawer() {
         options={() => ({
           title: "About",
           drawerIcon: () => (
-            <MaterialIcons style={styles.icon} name="info" size={28} />
+            <MaterialIcons
+              style={{ color: colors.primary }}
+              name="info"
+              size={28}
+            />
           ),
         })}
         component={AboutNavigation}
@@ -76,9 +91,3 @@ export default function MyDrawer() {
     </Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  icon: {
-    ...globalStyle.yellowText,
-  },
-});
