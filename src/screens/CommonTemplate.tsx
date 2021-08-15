@@ -7,10 +7,9 @@ import {
   Alert,
   ToastAndroid,
 } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
 import { useKeepAwake } from "expo-keep-awake";
 import { commmonTempNav, singleItemType, StorageKey } from "../shared/types";
-import { useTheme } from "react-native-paper";
+import { IconButton, useTheme } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useData } from "../store/context";
 
@@ -87,47 +86,52 @@ const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
       <View style={styles.buttonContainer}>
         <View style={styles.fontButton}>
           {selectedItem?.favorite ? (
-            <MaterialIcons
+            <IconButton
+              icon="heart"
               size={30}
-              style={{ color: colors.primary }}
-              name="favorite"
+              style={styles.unsetbuttonStyle}
+              color={colors.primary}
               onPress={() => iconPress(selectedItem, "remove")}
             />
           ) : (
-            <MaterialIcons
+            <IconButton
+              icon="heart-outline"
               size={30}
-              style={{ color: colors.primary }}
-              name="favorite-border"
+              style={styles.unsetbuttonStyle}
+              color={colors.primary}
               onPress={() => iconPress(selectedItem, "add")}
             />
           )}
           {selectedItem?.isRemovable && (
-            <MaterialIcons
+            <IconButton
+              icon="delete-forever"
               size={30}
-              style={{ color: colors.primary, paddingLeft: 10 }}
-              name="delete-forever"
+              style={styles.unsetbuttonStyle}
+              color={colors.primary}
               onPress={deletePress}
             />
           )}
         </View>
         <View style={[styles.fontButton, { alignItems: "center" }]}>
-          <Text style={{ color: colors.primary, fontSize: 30 }}>
+          <Text style={{ color: colors.primary, fontSize: 25 }}>
             {index + 1}
           </Text>
           {selectedItem?.isRemovable && (
-            <MaterialIcons
+            <IconButton
+              icon="file-document-edit-outline"
               size={30}
-              style={{ color: colors.primary, paddingLeft: 10 }}
-              name="edit"
+              style={styles.unsetbuttonStyle}
+              color={colors.primary}
               onPress={addNew}
             />
           )}
         </View>
         <View style={styles.fontButton}>
-          <MaterialIcons
+          <IconButton
+            icon="plus-circle"
             size={30}
-            style={{ color: colors.primary }}
-            name="add-circle"
+            style={styles.unsetbuttonStyle}
+            color={colors.primary}
             onPress={() => {
               if (fontSize < 40) {
                 AsyncStorage.setItem(
@@ -138,10 +142,12 @@ const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
               }
             }}
           />
-          <MaterialIcons
+
+          <IconButton
+            icon="minus-circle"
             size={30}
-            style={{ color: colors.primary, paddingLeft: 10 }}
-            name="remove-circle"
+            style={styles.unsetbuttonStyle}
+            color={colors.primary}
             onPress={() => {
               if (fontSize > 15) {
                 AsyncStorage.setItem(
@@ -172,10 +178,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 5,
   },
   fontButton: {
     flexDirection: "row",
+  },
+  unsetbuttonStyle: {
+    margin: 0,
   },
 });
 

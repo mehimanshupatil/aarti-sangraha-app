@@ -1,16 +1,7 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  Share,
-  ToastAndroid,
-  Alert,
-} from "react-native";
+import { StyleSheet, View, Text, ToastAndroid, Alert } from "react-native";
 import * as Linking from "expo-linking";
 import { ScrollView } from "react-native-gesture-handler";
-import { globalStyle } from "../shared/styles";
-import { MaterialIcons } from "@expo/vector-icons";
 import { aboutNav, singleItemType } from "../shared/types";
 import { useData } from "../store/context";
 import { useTheme } from "react-native-paper";

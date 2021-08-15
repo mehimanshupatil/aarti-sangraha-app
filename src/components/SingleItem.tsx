@@ -1,15 +1,8 @@
 import React from "react";
-import {
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  View,
-  ToastAndroid,
-} from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+import { StyleSheet, Text, View, ToastAndroid } from "react-native";
 import { useData } from "../store/context";
 import { singleItemType } from "../shared/types";
-import { useTheme } from "react-native-paper";
+import { IconButton, TouchableRipple, useTheme } from "react-native-paper";
 
 const SingleItem: React.FC<{
   pressHandler: (arg0: singleItemType, index: number) => void;
@@ -29,52 +22,70 @@ const SingleItem: React.FC<{
   };
 
   return (
-    <TouchableOpacity
+    <View
       style={{
         ...styles.container,
         borderColor: colors.primary,
         backgroundColor: colors.background,
         shadowColor: colors.background,
       }}
-      onPress={() => pressHandler(item, index)}
     >
-      <View>
-        <View style={styles.firstLine}>
-          <Text style={{ ...styles.title, color: colors.text }}>
-            {item.title}
-          </Text>
-          {item.favorite ? (
-            <MaterialIcons
-              size={30}
-              color={colors.primary}
-              name="favorite"
-              onPress={() => iconPress(item, "remove")}
-            />
-          ) : (
-            <MaterialIcons
-              size={30}
-              color={colors.primary}
-              name="favorite-border"
-              onPress={() => iconPress(item, "add")}
-            />
-          )}
+      <TouchableRipple
+        borderless
+        style={styles.ripple}
+        onPress={() => pressHandler(item, index)}
+      >
+        <View>
+          <View style={styles.firstLine}>
+            <Text
+              style={{ ...styles.title, color: colors.text }}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+            >
+              {item.title}
+            </Text>
+            {item.favorite ? (
+              <IconButton
+                icon="heart"
+                size={30}
+                style={styles.unsetbuttonStyle}
+                color={colors.primary}
+                onPress={() => iconPress(item, "remove")}
+              />
+            ) : (
+              <IconButton
+                icon="heart-outline"
+                size={30}
+                style={styles.unsetbuttonStyle}
+                color={colors.primary}
+                onPress={() => iconPress(item, "add")}
+              />
+            )}
+          </View>
+          <View style={styles.firstLine}>
+            <Text
+              style={{
+                flex: 1,
+                color: colors.text,
+              }}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+            >
+              {item.body.split("\n")[0]}
+            </Text>
+            <Text
+              style={{
+                paddingLeft: 5,
+                paddingRight: 15,
+                color: colors.primary,
+              }}
+            >
+              {index + 1}
+            </Text>
+          </View>
         </View>
-        <View style={styles.firstLine}>
-          <Text
-            style={{
-              flex: 1,
-              flexWrap: "wrap",
-              color: colors.text,
-            }}
-          >
-            {item.body.split("\n")[0]}
-          </Text>
-          <Text style={{ paddingRight: 8, color: colors.primary }}>
-            {index + 1}
-          </Text>
-        </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableRipple>
+    </View>
   );
 };
 
@@ -82,7 +93,6 @@ export default SingleItem;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
     marginTop: 16,
     borderWidth: 1,
     borderRadius: 10,
@@ -90,6 +100,12 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.3,
     shadowRadius: 2,
+  },
+  ripple: {
+    borderRadius: 10,
+    padding: 12,
+    paddingBottom: 16,
+    paddingHorizontal: 16,
   },
   firstLine: {
     flexDirection: "row",
@@ -99,5 +115,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: "wrap",
     fontSize: 30,
+  },
+  unsetbuttonStyle: {
+    margin: 0,
   },
 });

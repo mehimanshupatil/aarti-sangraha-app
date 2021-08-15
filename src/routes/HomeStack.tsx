@@ -4,8 +4,7 @@ import CommonTemplate from "../screens/CommonTemplate";
 import React from "react";
 import Header from "../shared/Header";
 import AddNew from "../screens/AddNew";
-import { useTheme } from "react-native-paper";
-import { MaterialIcons } from "@expo/vector-icons";
+import { IconButton, useTheme } from "react-native-paper";
 import { useData } from "../store/context";
 import { Share } from "react-native";
 import { singleItemType } from "../shared/types";
@@ -66,10 +65,11 @@ https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha 
           // @ts-ignore
           title: route.params.data?.title,
           headerRight: () => (
-            <MaterialIcons
-              size={20}
-              style={{ color: colors.background, paddingRight: 20 }}
-              name="share"
+            <IconButton
+              icon="share-variant"
+              size={24}
+              color={colors.background}
+              style={{ marginRight: 10 }}
               onPress={() =>
                 // @ts-ignore
                 onShare(aartis.find((x) => x.key === route.params?.key))
