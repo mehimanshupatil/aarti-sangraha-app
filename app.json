@@ -15,7 +15,7 @@
     },
     "android": {
       "package": "com.mehimanshupatil.aartisangraha",
-      "versionCode": 8,
+      "versionCode": 9,
       "permissions": [],
       "userInterfaceStyle": "automatic",
       "splash": {
