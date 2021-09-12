@@ -6,6 +6,10 @@ export const UPDATEFAV = "UPDATEFAV";
 export type UPDATEFAV = typeof UPDATEFAV;
 export const ADDCUSTOM = "ADDCUSTOM";
 export type ADDCUSTOM = typeof ADDCUSTOM;
+
+export const ADDFAVLIST = "ADDFAVLIST";
+export type ADDFAVLIST = typeof ADDFAVLIST;
+
 export const DELETEITEM = "DELETEITEM";
 export type DELETEITEM = typeof DELETEITEM;
 export const SEARCHINPUT = "SEARCHINPUT";

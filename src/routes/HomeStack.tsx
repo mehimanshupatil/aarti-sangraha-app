@@ -31,7 +31,7 @@ https://galaxy.store/aarti
 https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha \`\`\``,
       });
     } catch (error) {
-      alert(error.message);
+      alert(error);
     }
   };
 

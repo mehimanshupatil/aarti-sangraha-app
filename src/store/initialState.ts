@@ -3,7 +3,7 @@ import { singleItemType } from "../shared/types";
 
 export interface IState {
   aartis: singleItemType[];
-  favorites: singleItemType[];
+  favorites: string[];
   fontSize: number;
   searchValue: string;
   isDarkMode: NonNullable<ColorSchemeName>;

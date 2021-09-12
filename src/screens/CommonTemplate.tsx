@@ -14,13 +14,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useData } from "../store/context";
 
 const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
-  const { key, index } = route.params;
+  const { key } = route.params;
   useKeepAwake();
 
   const { colors } = useTheme();
 
   const { state, dispatch } = useData();
-  const { fontSize, aartis } = state;
+  const { fontSize, aartis, favorites } = state;
 
   const [selectedItem, setSelectedItem] = useState(
     aartis.find((x) => x.key == key)
@@ -85,7 +85,7 @@ const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
     >
       <View style={styles.buttonContainer}>
         <View style={styles.fontButton}>
-          {selectedItem?.favorite ? (
+          {favorites.includes(selectedItem?.key ?? "") ? (
             <IconButton
               icon="heart"
               size={30}
@@ -114,7 +114,7 @@ const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
         </View>
         <View style={[styles.fontButton, { alignItems: "center" }]}>
           <Text style={{ color: colors.primary, fontSize: 25 }}>
-            {index + 1}
+            {selectedItem?.key}
           </Text>
           {selectedItem?.isRemovable && (
             <IconButton

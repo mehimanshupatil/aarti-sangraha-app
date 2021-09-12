@@ -9,29 +9,35 @@ const reducer = (state: IState, action: TAction): IState => {
     case types.INITIALIZE:
       AsyncStorage.setItem(StorageKey.aartis, "");
       AsyncStorage.setItem(StorageKey.fontSize, "");
+      AsyncStorage.setItem(StorageKey.favList, "[]");
       return initialState;
     case types.ADDLOCAL:
       return { ...state, aartis: [...state.aartis, ...action.data] };
     case types.UPDATEFONTSIZE:
       return { ...state, fontSize: action.fontSize };
+    case types.ADDFAVLIST:
+      return { ...state, favorites: action.favList };
     case types.UPDATEFAV:
       const key = action.key;
-      const item = state.aartis.find((x) => x.key === key);
-      if (!item) return state;
-      const updatedItem = {
-        ...item,
-        favorite: action.operation === "add" ? true : false,
-      };
-      if (updatedItem.isRemovable) {
-        updateLocalAartiState(updatedItem);
-      }
+      const favList =
+        action.operation === "add"
+          ? [...state.favorites, key]
+          : state.favorites.filter((x) => x !== key);
+      AsyncStorage.setItem(StorageKey.favList, JSON.stringify(favList));
       return {
         ...state,
-        aartis: state.aartis.map((x) => (x.key === key ? updatedItem : x)),
+        favorites: favList,
       };
     case types.ADDCUSTOM:
-      addLocalAartiState(action.item);
-      return { ...state, aartis: [...state.aartis, action.item] };
+      const aartiToAdd = {
+        ...action.item,
+        key: (state.aartis.length + 1).toString(),
+      };
+      addLocalAartiState(aartiToAdd);
+      return {
+        ...state,
+        aartis: [...state.aartis, aartiToAdd],
+      };
     case types.DELETEITEM:
       removeLocalAartiState(action.key);
       return {

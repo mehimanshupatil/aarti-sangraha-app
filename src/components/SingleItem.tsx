@@ -5,13 +5,12 @@ import { singleItemType } from "../shared/types";
 import { IconButton, TouchableRipple, useTheme } from "react-native-paper";
 
 const SingleItem: React.FC<{
-  pressHandler: (arg0: singleItemType, index: number) => void;
+  pressHandler: (arg0: singleItemType) => void;
   item: singleItemType;
-  index: number;
-}> = ({ pressHandler, item, index }) => {
+}> = ({ pressHandler, item }) => {
   const { colors } = useTheme();
 
-  const { dispatch } = useData();
+  const { dispatch, state } = useData();
 
   const iconPress = (item: singleItemType, action: "add" | "remove") => {
     ToastAndroid.show(
@@ -33,7 +32,7 @@ const SingleItem: React.FC<{
       <TouchableRipple
         borderless
         style={styles.ripple}
-        onPress={() => pressHandler(item, index)}
+        onPress={() => pressHandler(item)}
       >
         <View>
           <View style={styles.firstLine}>
@@ -44,7 +43,7 @@ const SingleItem: React.FC<{
             >
               {item.title}
             </Text>
-            {item.favorite ? (
+            {state.favorites.includes(item.key) ? (
               <IconButton
                 icon="heart"
                 size={30}
@@ -80,7 +79,7 @@ const SingleItem: React.FC<{
                 color: colors.primary,
               }}
             >
-              {index + 1}
+              {item.key}
             </Text>
           </View>
         </View>

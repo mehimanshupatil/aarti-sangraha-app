@@ -37,6 +37,11 @@ export interface IAddLocal {
   data: singleItemType[];
 }
 
+export interface IADDFAVLIST {
+  type: types.ADDFAVLIST;
+  favList: string[];
+}
+
 export interface IDarkMode {
   type: types.ISDARK;
   data: NonNullable<ColorSchemeName>;
@@ -91,6 +96,11 @@ export const changeDark = (data: NonNullable<ColorSchemeName>): IDarkMode => ({
   data,
 });
 
+export const addFav = (favList: string[]): IADDFAVLIST => ({
+  type: types.ADDFAVLIST,
+  favList,
+});
+
 export type TAction =
   | IInitializeState
   | IUpdateFontSize
@@ -100,4 +110,5 @@ export type TAction =
   | ISearchInput
   | IUpdateData
   | IAddLocal
-  | IDarkMode;
+  | IDarkMode
+  | IADDFAVLIST;

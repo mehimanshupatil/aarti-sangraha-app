@@ -31,6 +31,11 @@ function EntryComponent() {
             ? colorScheme
             : "light",
         });
+        const favList = await AsyncStorage.getItem(StorageKey.favList);
+        dispatch({
+          type: "ADDFAVLIST",
+          favList: favList ? JSON.parse(favList) : [],
+        });
         const value = await AsyncStorage.getItem(StorageKey.aartis);
         if (!value) return;
         dispatch({ type: "ADDLOCAL", data: JSON.parse(value) });

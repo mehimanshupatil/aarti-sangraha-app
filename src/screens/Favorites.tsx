@@ -9,15 +9,14 @@ import { useData } from "../store/context";
 const Favorites: React.FC<favNav> = ({ navigation }) => {
   const { colors } = useTheme();
 
-  const pressHandler = (item: singleItemType, index: number) => {
+  const pressHandler = (item: singleItemType) => {
     navigation.push("CommonComponent", {
       key: item.key,
-      index,
     });
   };
 
   const { state } = useData();
-  const { aartis, searchValue } = state;
+  const { aartis, searchValue, favorites } = state;
 
   const [localData, setLocalData] = useState<singleItemType[]>([]);
 
@@ -26,12 +25,12 @@ const Favorites: React.FC<favNav> = ({ navigation }) => {
       setLocalData(
         aartis.filter(
           (x) =>
-            x.favorite &&
+            favorites.includes(x.key) &&
             (x.title.includes(searchValue) || x.body.includes(searchValue))
         )
       );
-    else setLocalData(aartis.filter((x: any) => x.favorite));
-  }, [aartis, searchValue]);
+    else setLocalData(aartis.filter((x) => favorites.includes(x.key)));
+  }, [aartis, favorites, searchValue]);
 
   return (
     <View
@@ -41,12 +40,8 @@ const Favorites: React.FC<favNav> = ({ navigation }) => {
         {localData?.length ? (
           <FlatList
             data={localData}
-            renderItem={({ item, index }) => (
-              <SingleItem
-                index={index}
-                item={item}
-                pressHandler={pressHandler}
-              />
+            renderItem={({ item }) => (
+              <SingleItem item={item} pressHandler={pressHandler} />
             )}
             showsVerticalScrollIndicator={false}
           />

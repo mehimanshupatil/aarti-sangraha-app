@@ -4,13 +4,13 @@ export enum StorageKey {
   aartis = "aartis",
   fontSize = "fontSize",
   darkMode = "darkMode",
+  favList = "favList",
 }
 
 export type singleItemType = {
   key: string;
   title: string;
   body: string;
-  favorite: boolean;
   tags: string[];
   isRemovable: boolean | undefined;
 };
@@ -18,7 +18,7 @@ export type singleItemType = {
 export type RootParamList = {
   Home: undefined;
   Favorites: undefined;
-  CommonComponent: { key: string; index: number };
+  CommonComponent: { key: string };
   addNew: { item: singleItemType };
   About: undefined;
   HomeStack: undefined;

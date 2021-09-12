@@ -12,10 +12,9 @@ const Home: React.FC<homeNav> = ({ navigation }) => {
 
   const { state } = useData();
   const { aartis, searchValue } = state;
-  const pressHandler = (item: singleItemType, index: number) => {
+  const pressHandler = (item: singleItemType) => {
     navigation.push("CommonComponent", {
       key: item.key,
-      index,
     });
   };
   const addNew = () => {
@@ -27,7 +26,7 @@ const Home: React.FC<homeNav> = ({ navigation }) => {
   useEffect(() => {
     setLocalData(
       aartis.filter(
-        (x: any) =>
+        (x) =>
           !searchValue ||
           x.title.includes(searchValue) ||
           x.body.includes(searchValue)
@@ -42,8 +41,8 @@ const Home: React.FC<homeNav> = ({ navigation }) => {
       <View style={globalStyle.homecontainer}>
         <FlatList
           data={localData}
-          renderItem={({ item, index }) => (
-            <SingleItem item={item} index={index} pressHandler={pressHandler} />
+          renderItem={({ item }) => (
+            <SingleItem item={item} pressHandler={pressHandler} />
           )}
           showsVerticalScrollIndicator={false}
           ListFooterComponent={() => (
