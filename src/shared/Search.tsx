@@ -1,9 +1,7 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
-import { MaterialIcons } from "@expo/vector-icons";
-import { useData } from "../store/context";
-import { useTheme } from "react-native-paper";
+import React from 'react';
+import { StyleSheet, View, TextInput } from 'react-native';
+import { useData } from '../store/context';
+import { IconButton, useTheme } from 'react-native-paper';
 
 const Search: React.FC<{ setShowSearchInput: (arg0: boolean) => void }> = ({
   setShowSearchInput,
@@ -12,30 +10,36 @@ const Search: React.FC<{ setShowSearchInput: (arg0: boolean) => void }> = ({
   const { state, dispatch } = useData();
 
   const searchInput = (data: string) => {
-    dispatch({ type: "SEARCHINPUT", value: data });
+    dispatch({ type: 'SEARCHINPUT', value: data });
   };
 
   return (
-    <View style={{ marginTop: 10, justifyContent: "center" }}>
+    <View
+      style={{
+        flexGrow: 1,
+        margin: 10,
+        justifyContent: 'center',
+      }}
+    >
       <TextInput
         style={{
           ...styles.inputStyle,
           color: colors.background,
           borderColor: colors.background,
         }}
-        placeholder="Type here Search"
+        placeholder='Type here Search'
         placeholderTextColor={colors.background}
         autoFocus={true}
         onChangeText={(text) => searchInput(text)}
         value={state.searchValue}
       />
-      <MaterialIcons
-        name="close"
+      <IconButton
+        icon='close'
         onPress={() => {
           setShowSearchInput(false);
-          searchInput("");
+          searchInput('');
         }}
-        size={28}
+        size={24}
         color={colors.background}
         style={styles.searchIcon}
       />
@@ -49,10 +53,10 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 5,
     borderWidth: 1,
-    textAlign: "center",
+    textAlign: 'center',
   },
   searchIcon: {
-    position: "absolute",
+    position: 'absolute',
     right: 12,
   },
 });

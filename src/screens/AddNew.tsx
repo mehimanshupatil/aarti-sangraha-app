@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -7,12 +7,13 @@ import {
   Alert,
   ToastAndroid,
   Keyboard,
-} from "react-native";
-import { ScrollView, TextInput } from "react-native-gesture-handler";
-import { useTheme } from "react-native-paper";
-import { globalStyle } from "../shared/styles";
-import { addNewNav } from "../shared/types";
-import { useData } from "../store/context";
+  ScrollView,
+  TextInput,
+} from 'react-native';
+import { useTheme } from 'react-native-paper';
+import { globalStyle } from '../shared/styles';
+import { addNewNav } from '../shared/types';
+import { useData } from '../store/context';
 
 const AddNew: React.FC<addNewNav> = ({ navigation, route }) => {
   const { colors } = useTheme();
@@ -25,7 +26,7 @@ const AddNew: React.FC<addNewNav> = ({ navigation, route }) => {
 
   useEffect(() => {
     navigation.setOptions({
-      title: item.title ? "Update" : "Add New",
+      title: item.title ? 'Update' : 'Add New',
     });
   }, []);
 
@@ -38,8 +39,8 @@ const AddNew: React.FC<addNewNav> = ({ navigation, route }) => {
       tags: [],
       isRemovable: true,
     };
-    dispatch({ type: "ADDCUSTOM", item });
-    ToastAndroid.show("Added Successfully", ToastAndroid.SHORT);
+    dispatch({ type: 'ADDCUSTOM', item });
+    ToastAndroid.show('Added Successfully', ToastAndroid.SHORT);
     navigation.goBack();
   };
 
@@ -49,24 +50,24 @@ const AddNew: React.FC<addNewNav> = ({ navigation, route }) => {
       title: title,
       body: body,
     };
-    dispatch({ type: "UPDATEDATA", data });
-    ToastAndroid.show("Updated Successfully", ToastAndroid.SHORT);
+    dispatch({ type: 'UPDATEDATA', data });
+    ToastAndroid.show('Updated Successfully', ToastAndroid.SHORT);
     navigation.goBack();
   };
 
   const addItem = () => {
     if (!title || !body) return;
     Alert.alert(
-      "Alert",
+      'Alert',
       `The data is stored Locally on your Device. So clearing or uninstalling app will remove customized data.`,
       [
         {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
         },
         {
-          text: "OK",
+          text: 'OK',
           onPress: () => {
             item.title ? update() : onOkPress();
             Keyboard.dismiss();
@@ -77,13 +78,8 @@ const AddNew: React.FC<addNewNav> = ({ navigation, route }) => {
   };
 
   return (
-    <View
-      style={{ ...globalStyle.homeRoot, backgroundColor: colors.background }}
-    >
-      <ScrollView
-        style={globalStyle.homecontainer}
-        keyboardShouldPersistTaps="handled"
-      >
+    <View style={{ ...globalStyle.homeRoot, backgroundColor: colors.background }}>
+      <ScrollView style={globalStyle.homecontainer} keyboardShouldPersistTaps='handled'>
         <TextInput
           placeholderTextColor={colors.primary}
           style={{
@@ -92,7 +88,7 @@ const AddNew: React.FC<addNewNav> = ({ navigation, route }) => {
             backgroundColor: colors.background,
             borderColor: colors.primary,
           }}
-          placeholder="Title"
+          placeholder='Title'
           value={title}
           onChangeText={(text) => setTitle(text)}
         />
@@ -104,7 +100,7 @@ const AddNew: React.FC<addNewNav> = ({ navigation, route }) => {
             backgroundColor: colors.background,
             borderColor: colors.primary,
           }}
-          placeholder="Body"
+          placeholder='Body'
           value={body}
           onChangeText={(text) => setBody(text)}
           numberOfLines={20}
@@ -117,11 +113,11 @@ const AddNew: React.FC<addNewNav> = ({ navigation, route }) => {
           <Text
             style={{
               color: colors.text,
-              fontWeight: "bold",
+              fontWeight: 'bold',
               fontSize: 15,
             }}
           >
-            {item.title ? "Update" : "Add"}
+            {item.title ? 'Update' : 'Add'}
           </Text>
         </TouchableOpacity>
       </ScrollView>
@@ -137,11 +133,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     borderRadius: 5,
     borderWidth: 1,
-    textAlignVertical: "top",
+    textAlignVertical: 'top',
     padding: 10,
   },
   buttonText: {
-    alignItems: "center",
+    alignItems: 'center',
     padding: 10,
     marginTop: 10,
     borderRadius: 5,

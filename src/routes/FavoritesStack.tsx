@@ -1,10 +1,10 @@
-import { createStackNavigator } from "@react-navigation/stack";
-import React from "react";
-import Header from "../shared/Header";
-import Favorites from "../screens/Favorites";
-import CommonTemplate from "../screens/CommonTemplate";
-import addNew from "../screens/AddNew";
-import { useTheme } from "react-native-paper";
+import { createStackNavigator } from '@react-navigation/stack';
+import React from 'react';
+import Header from '../shared/Header';
+import Favorites from '../screens/Favorites';
+import CommonTemplate from '../screens/CommonTemplate';
+import addNew from '../screens/AddNew';
+import { useTheme } from 'react-native-paper';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -13,38 +13,31 @@ export default function FavoritesNavigation() {
 
   return (
     <Navigator
-      headerMode="screen"
       screenOptions={{
+        headerMode: 'screen',
         headerStyle: { backgroundColor: colors.primary },
         headerTintColor: colors.background,
         headerTitleStyle: {
-          fontWeight: "bold",
+          fontWeight: 'bold',
         },
       }}
     >
       <Screen
-        name="Favorites"
+        name='Favorites'
         options={({ route, navigation }) => ({
-          headerTitle: () => (
-            <Header
-              title="Favorites"
-              navigation={navigation}
-              showSearchButton
-            />
-          ),
-          headerTitleStyle: { fontWeight: "bold", alignSelf: "center" },
+          header: () => <Header title='Favorites' navigation={navigation} showSearchButton />,
         })}
         component={Favorites}
       />
       <Screen
-        name="CommonComponent"
+        name='CommonComponent'
         options={({ route }) => ({
           // @ts-ignore
           title: route.params.data?.title,
         })}
         component={CommonTemplate}
       />
-      <Screen name="addNew" options={{ title: "Add New" }} component={addNew} />
+      <Screen name='addNew' options={{ title: 'Add New' }} component={addNew} />
     </Navigator>
   );
 }

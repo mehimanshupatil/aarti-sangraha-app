@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { useTheme } from "react-native-paper";
-import SingleItem from "../components/SingleItem";
-import { globalStyle } from "../shared/styles";
-import { homeNav, singleItemType } from "../shared/types";
-import { useData } from "../store/context";
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { IconButton, useTheme } from 'react-native-paper';
+import SingleItem from '../components/SingleItem';
+import { globalStyle } from '../shared/styles';
+import { homeNav, singleItemType } from '../shared/types';
+import { useData } from '../store/context';
 
 const Home: React.FC<homeNav> = ({ navigation }) => {
   const { colors } = useTheme();
@@ -13,12 +12,12 @@ const Home: React.FC<homeNav> = ({ navigation }) => {
   const { state } = useData();
   const { aartis, searchValue } = state;
   const pressHandler = (item: singleItemType) => {
-    navigation.push("CommonComponent", {
+    navigation.push('CommonComponent', {
       key: item.key,
     });
   };
   const addNew = () => {
-    navigation.push("addNew", { item: {} as any });
+    navigation.push('addNew', { item: {} as any });
   };
 
   const [localData, setLocalData] = useState(aartis);
@@ -26,27 +25,21 @@ const Home: React.FC<homeNav> = ({ navigation }) => {
   useEffect(() => {
     setLocalData(
       aartis.filter(
-        (x) =>
-          !searchValue ||
-          x.title.includes(searchValue) ||
-          x.body.includes(searchValue)
+        (x) => !searchValue || x.title.includes(searchValue) || x.body.includes(searchValue)
       )
     );
   }, [aartis, searchValue]);
 
   return (
-    <View
-      style={{ ...globalStyle.homeRoot, backgroundColor: colors.background }}
-    >
+    <View style={{ ...globalStyle.homeRoot, backgroundColor: colors.background }}>
       <View style={globalStyle.homecontainer}>
         <FlatList
           data={localData}
-          renderItem={({ item }) => (
-            <SingleItem item={item} pressHandler={pressHandler} />
-          )}
+          renderItem={({ item }) => <SingleItem item={item} pressHandler={pressHandler} />}
           showsVerticalScrollIndicator={false}
           ListFooterComponent={() => (
-            <TouchableOpacity
+            <IconButton
+              icon='plus'
               style={{
                 ...styles.dummyConatiner,
                 borderColor: colors.primary,
@@ -54,16 +47,9 @@ const Home: React.FC<homeNav> = ({ navigation }) => {
                 shadowColor: colors.background,
               }}
               onPress={() => addNew()}
-            >
-              <Text
-                style={{
-                  fontSize: 50,
-                  color: colors.primary,
-                }}
-              >
-                +
-              </Text>
-            </TouchableOpacity>
+              color={colors.primary}
+              size={50}
+            />
           )}
         />
       </View>
@@ -75,12 +61,12 @@ export default Home;
 
 const styles = StyleSheet.create({
   dummyConatiner: {
-    padding: 16,
-    marginTop: 16,
-    marginBottom: 16,
+    marginVertical: 16,
+    marginHorizontal: 0,
+    alignItems: 'center',
+    width: '100%',
 
     borderWidth: 1,
-    alignItems: "center",
     borderRadius: 10,
     elevation: 3,
     shadowOffset: { width: 1, height: 1 },

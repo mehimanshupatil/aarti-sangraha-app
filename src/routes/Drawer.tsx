@@ -1,12 +1,11 @@
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import AboutNavigation from "./AboutStack";
-import HomeStack from "./HomeStack";
-import React, { useEffect } from "react";
-import { MaterialIcons } from "@expo/vector-icons";
-import FavoritesNavigation from "./FavoritesStack";
-import { BackHandler, ToastAndroid } from "react-native";
-import CustomSidebarMenu from "../components/CustomSidebarMenu";
-import { useTheme } from "react-native-paper";
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import AboutNavigation from './AboutStack';
+import HomeStack from './HomeStack';
+import React, { useEffect } from 'react';
+import FavoritesNavigation from './FavoritesStack';
+import { BackHandler, ToastAndroid, StyleSheet } from 'react-native';
+import CustomSidebarMenu from '../components/CustomSidebarMenu';
+import { IconButton, useTheme } from 'react-native-paper';
 const { Navigator, Screen } = createDrawerNavigator();
 let backPressed = 0;
 
@@ -20,7 +19,7 @@ export default function MyDrawer() {
         backPressed = 0;
       } else {
         backPressed++;
-        ToastAndroid.show("Press Again To Exit", ToastAndroid.SHORT);
+        ToastAndroid.show('Press Again To Exit', ToastAndroid.SHORT);
         setTimeout(() => {
           backPressed = 0;
         }, 2000);
@@ -29,45 +28,43 @@ export default function MyDrawer() {
       return true;
     };
 
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      backAction
-    );
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
 
     return () => backHandler.remove();
   }, []);
 
   return (
     <Navigator
-      drawerStyle={{
-        backgroundColor: colors.background,
-        width: "60%",
+      screenOptions={{
+        drawerStyle: {
+          backgroundColor: colors.background,
+          width: '60%',
+        },
+        drawerInactiveTintColor: colors.primary,
       }}
-      drawerContentOptions={{ inactiveTintColor: colors.primary }}
       drawerContent={(props) => <CustomSidebarMenu {...props} />}
     >
       <Screen
-        name="HomeStack"
+        name='HomeStack'
         options={() => ({
-          title: "आरती संग्रह",
+          headerShown: false,
+          drawerLabel: 'Home',
           drawerIcon: () => (
-            <MaterialIcons
-              style={{ color: colors.primary }}
-              name="home"
-              size={28}
-            />
+            <IconButton color={colors.primary} style={styles.drawerIcon} icon='home' size={28} />
           ),
         })}
         component={HomeStack}
       />
       <Screen
-        name="favorites"
+        name='favorites'
         options={() => ({
-          title: "Favorites",
+          headerShown: false,
+          drawerLabel: 'Favorites',
           drawerIcon: () => (
-            <MaterialIcons
-              style={{ color: colors.primary }}
-              name="favorite"
+            <IconButton
+              color={colors.primary}
+              style={styles.drawerIcon}
+              icon='cards-heart'
               size={28}
             />
           ),
@@ -75,13 +72,15 @@ export default function MyDrawer() {
         component={FavoritesNavigation}
       />
       <Screen
-        name="AboutStack"
+        name='AboutStack'
         options={() => ({
-          title: "About",
+          headerShown: false,
+          drawerLabel: 'About',
           drawerIcon: () => (
-            <MaterialIcons
-              style={{ color: colors.primary }}
-              name="info"
+            <IconButton
+              color={colors.primary}
+              style={styles.drawerIcon}
+              icon='information'
               size={28}
             />
           ),
@@ -91,3 +90,9 @@ export default function MyDrawer() {
     </Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  drawerIcon: {
+    margin: 0,
+  },
+});

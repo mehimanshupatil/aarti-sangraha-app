@@ -1,13 +1,13 @@
-import Home from "../screens/Home";
-import { createStackNavigator } from "@react-navigation/stack";
-import CommonTemplate from "../screens/CommonTemplate";
-import React from "react";
-import Header from "../shared/Header";
-import AddNew from "../screens/AddNew";
-import { IconButton, useTheme } from "react-native-paper";
-import { useData } from "../store/context";
-import { Share } from "react-native";
-import { singleItemType } from "../shared/types";
+import Home from '../screens/Home';
+import { createStackNavigator } from '@react-navigation/stack';
+import CommonTemplate from '../screens/CommonTemplate';
+import React from 'react';
+import Header from '../shared/Header';
+import AddNew from '../screens/AddNew';
+import { IconButton, useTheme } from 'react-native-paper';
+import { useData } from '../store/context';
+import { Share } from 'react-native';
+import { singleItemType } from '../shared/types';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -37,36 +37,30 @@ https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha 
 
   return (
     <Navigator
-      headerMode="screen"
       screenOptions={{
+        headerMode: 'screen',
         headerStyle: { backgroundColor: colors.primary },
         headerTintColor: colors.background,
         headerTitleStyle: {
-          fontWeight: "bold",
+          fontWeight: 'bold',
         },
       }}
     >
       <Screen
-        name="Home"
+        name='Home'
         options={({ route, navigation }) => ({
-          headerTitle: () => (
-            <Header
-              title="आरती संग्रह"
-              navigation={navigation}
-              showSearchButton
-            />
-          ),
+          header: () => <Header title='आरती संग्रह' navigation={navigation} showSearchButton />,
         })}
         component={Home}
       />
       <Screen
-        name="CommonComponent"
+        name='CommonComponent'
         options={({ route }) => ({
           // @ts-ignore
           title: route.params.data?.title,
           headerRight: () => (
             <IconButton
-              icon="share-variant"
+              icon='share-variant'
               size={24}
               color={colors.background}
               style={{ marginRight: 10 }}
@@ -79,7 +73,7 @@ https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha 
         })}
         component={CommonTemplate}
       />
-      <Screen name="addNew" options={{ title: "Add New" }} component={AddNew} />
+      <Screen name='addNew' options={{ title: 'Add New' }} component={AddNew} />
     </Navigator>
   );
 }
