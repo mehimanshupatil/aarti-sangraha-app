@@ -6,11 +6,14 @@ import FavoritesNavigation from './FavoritesStack';
 import { BackHandler, ToastAndroid, StyleSheet } from 'react-native';
 import CustomSidebarMenu from '../components/CustomSidebarMenu';
 import { IconButton, useTheme } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+
 const { Navigator, Screen } = createDrawerNavigator();
 let backPressed = 0;
 
 export default function MyDrawer() {
   const { colors } = useTheme();
+  const navigation = useNavigation();
 
   useEffect(() => {
     const backAction = () => {
@@ -18,6 +21,11 @@ export default function MyDrawer() {
         BackHandler.exitApp();
         backPressed = 0;
       } else {
+        if (navigation.canGoBack()) {
+          navigation.goBack();
+          return true;
+        }
+
         backPressed++;
         ToastAndroid.show('Press Again To Exit', ToastAndroid.SHORT);
         setTimeout(() => {
