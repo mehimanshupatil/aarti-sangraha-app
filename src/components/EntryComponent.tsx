@@ -1,20 +1,22 @@
 import { NavigationContainer } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import MyDrawer from '../routes/Drawer';
 import { StorageKey } from '../shared/types';
-import AppLoading from 'expo-app-loading';
+import * as SplashScreen from 'expo-splash-screen';
+
 import { useData } from '../store/context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useColorScheme } from 'react-native';
+import { useColorScheme, View } from 'react-native';
 
 function EntryComponent() {
   const [isLoaded, setIsLoaded] = useState(false);
-  const { state, dispatch } = useData();
+  const { dispatch } = useData();
 
   let colorScheme = useColorScheme();
 
   useEffect(() => {
     const getData = async () => {
+      await SplashScreen.preventAutoHideAsync();
       try {
         const fontSize = await AsyncStorage.getItem(StorageKey.fontSize);
         if (fontSize)
@@ -39,11 +41,12 @@ function EntryComponent() {
     };
     getData().then((x) => {
       setIsLoaded(true);
+      SplashScreen.hideAsync();
     });
   }, []);
 
   if (!isLoaded) {
-    return <AppLoading />;
+    return null;
   }
   return (
     <NavigationContainer>
