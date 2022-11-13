@@ -16,7 +16,7 @@ const About: React.FC<aboutNav> = ({ navigation }) => {
   const reset = async () => {
     Alert.alert(
       'Alert',
-      `ही क्रिया सानुकूलित आणि सुधारित आरती हटवेल. ही क्रिया पूर्ववत करणे शक्य नाही`,
+      `This action will delete customized and modified Aarti. This action cannot be undone`,
       [
         {
           text: 'रद्द करा',

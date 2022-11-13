@@ -37,7 +37,7 @@ const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
   const deletePress = () => {
     Alert.alert(
       "Alert",
-      `आपणास खात्री आहे की आपण ${selectedItem?.title} हटवू इच्छिता. ही क्रिया पूर्ववत करणे शक्य नाही`,
+      `Are you sure you want to delete ${selectedItem?.title}. This action cannot be undone`,
       [
         {
           text: "रद्द करा",
