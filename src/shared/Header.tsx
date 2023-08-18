@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Search from './Search';
-import { IconButton, useTheme } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getDefaultHeaderHeight } from '@react-navigation/elements';
+import { useAppTheme } from '../../App';
 
 const Header: React.FC<{
   title: string;
@@ -15,7 +16,7 @@ const Header: React.FC<{
 
   const headerHeight = getDefaultHeaderHeight(frame, false, insets.top);
 
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
 
   const openMenu = () => {
     navigation.openDrawer();
@@ -31,7 +32,7 @@ const Header: React.FC<{
             icon='menu'
             size={28}
             onPress={openMenu}
-            color={colors.background}
+            iconColor={colors.background}
             style={styles.menuIcon}
           />
           <View>
@@ -42,7 +43,7 @@ const Header: React.FC<{
               icon='text-box-search-outline'
               onPress={() => setLocalData(!showSearch)}
               size={28}
-              color={colors.background}
+              iconColor={colors.background}
               style={styles.searchIcon}
             />
           )}

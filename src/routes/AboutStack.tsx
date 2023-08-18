@@ -1,6 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import { useTheme } from 'react-native-paper';
 import About from '../screens/About';
 import Header from '../shared/Header';
 

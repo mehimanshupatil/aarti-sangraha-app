@@ -1,12 +1,12 @@
 import { NavigationContainer } from '@react-navigation/native';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MyDrawer from '../routes/Drawer';
 import { StorageKey } from '../shared/types';
 import * as SplashScreen from 'expo-splash-screen';
 
 import { useData } from '../store/context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useColorScheme, View } from 'react-native';
+import { useColorScheme } from 'react-native';
 
 function EntryComponent() {
   const [isLoaded, setIsLoaded] = useState(false);

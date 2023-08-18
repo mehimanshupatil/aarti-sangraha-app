@@ -7,13 +7,14 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import Constants from 'expo-constants';
-import { IconButton, useTheme } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StorageKey } from '../shared/types';
 import { useData } from '../store/context';
+import { useAppTheme } from '../../App';
 
 const CustomSidebarMenu = (props: DrawerContentComponentProps) => {
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
   const { state, dispatch } = useData();
 
   const windowWidth = Dimensions.get('window').width;
@@ -50,7 +51,7 @@ https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha 
           label={`${state.isDarkMode === 'light' ? 'Light' : 'Dark'} Theme`}
           icon={() => (
             <IconButton
-              color={colors.primary}
+            iconColor={colors.primary}
               style={styles.drawerIcon}
               icon='theme-light-dark'
               size={28}
@@ -68,7 +69,7 @@ https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha 
           label='Share App'
           icon={({}) => (
             <IconButton
-              color={colors.primary}
+            iconColor={colors.primary}
               style={styles.drawerIcon}
               icon='share-variant'
               size={28}
@@ -78,7 +79,7 @@ https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha 
         />
       </DrawerContentScrollView>
       <Text style={{ ...styles.textVersion, color: colors.primary }}>
-        version {Constants.manifest?.version}.{Constants.manifest?.android?.versionCode}
+        version {Constants.expoConfig?.version}.{Constants.expoConfig?.android?.versionCode}
       </Text>
     </SafeAreaView>
   );

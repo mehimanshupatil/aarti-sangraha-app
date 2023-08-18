@@ -5,14 +5,15 @@ import React, { useEffect } from 'react';
 import FavoritesNavigation from './FavoritesStack';
 import { BackHandler, ToastAndroid, StyleSheet } from 'react-native';
 import CustomSidebarMenu from '../components/CustomSidebarMenu';
-import { IconButton, useTheme } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import { useAppTheme } from '../../App';
 
 const { Navigator, Screen } = createDrawerNavigator();
 let backPressed = 0;
 
 export default function MyDrawer() {
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -58,7 +59,7 @@ export default function MyDrawer() {
           headerShown: false,
           drawerLabel: 'Home',
           drawerIcon: () => (
-            <IconButton color={colors.primary} style={styles.drawerIcon} icon='home' size={28} />
+            <IconButton iconColor={colors.primary} style={styles.drawerIcon} icon='home' size={28} />
           ),
         })}
         component={HomeStack}
@@ -70,7 +71,7 @@ export default function MyDrawer() {
           drawerLabel: 'Favorites',
           drawerIcon: () => (
             <IconButton
-              color={colors.primary}
+            iconColor={colors.primary}
               style={styles.drawerIcon}
               icon='cards-heart'
               size={28}
@@ -86,7 +87,7 @@ export default function MyDrawer() {
           drawerLabel: 'About',
           drawerIcon: () => (
             <IconButton
-              color={colors.primary}
+              iconColor={colors.primary}
               style={styles.drawerIcon}
               icon='information'
               size={28}

@@ -2,11 +2,11 @@ import React from 'react';
 import { StyleSheet, View, Text, ToastAndroid, Alert, ScrollView } from 'react-native';
 import * as Linking from 'expo-linking';
 import { aboutNav, singleItemType } from '../shared/types';
-import { useData } from '../store/context';
-import { useTheme } from 'react-native-paper';
+import { useData } from '../store/context'; 
+import { useAppTheme } from '../../App';
 
 const About: React.FC<aboutNav> = ({ navigation }) => {
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
   const { dispatch } = useData();
 
   const handlePress = (url: string) => {

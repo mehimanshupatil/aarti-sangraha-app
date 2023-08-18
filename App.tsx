@@ -2,7 +2,7 @@ import React from 'react';
 import 'react-native-gesture-handler';
 import EntryComponent from './src/components/EntryComponent';
 import Context, { DataProvider } from './src/store/context';
-import { DarkTheme, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { MD3DarkTheme, DefaultTheme, Provider as PaperProvider, useTheme } from 'react-native-paper';
 import { StatusBar } from 'react-native';
 
 declare global {
@@ -28,9 +28,9 @@ const light = {
   },
 };
 const dark = {
-  ...DarkTheme,
+  ...MD3DarkTheme,
   colors: {
-    ...DefaultTheme.colors,
+    ...MD3DarkTheme.colors,
     primary: '#FFE065', //yellow
     accent: '#FFE065',
     text: '#FFE065',
@@ -40,6 +40,11 @@ const dark = {
     yellow: '#181C3F',
   },
 };
+
+export type AppTheme = typeof light;
+
+export const useAppTheme = () => useTheme<AppTheme>();
+
 
 export default function App() {
   return (

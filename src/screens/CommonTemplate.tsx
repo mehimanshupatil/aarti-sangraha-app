@@ -9,15 +9,16 @@ import {
 } from "react-native";
 import { useKeepAwake } from "expo-keep-awake";
 import { commmonTempNav, singleItemType, StorageKey } from "../shared/types";
-import { IconButton, useTheme } from "react-native-paper";
+import { IconButton } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useData } from "../store/context";
+import { useAppTheme } from '../../App';
 
 const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
   const { key } = route.params;
   useKeepAwake();
 
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
 
   const { state, dispatch } = useData();
   const { fontSize, aartis, favorites } = state;
@@ -90,7 +91,7 @@ const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
               icon="heart"
               size={30}
               style={styles.unsetbuttonStyle}
-              color={colors.primary}
+              iconColor={colors.primary}
               onPress={() => iconPress(selectedItem, "remove")}
             />
           ) : (
@@ -98,7 +99,7 @@ const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
               icon="heart-outline"
               size={30}
               style={styles.unsetbuttonStyle}
-              color={colors.primary}
+              iconColor={colors.primary}
               onPress={() => iconPress(selectedItem, "add")}
             />
           )}
@@ -107,7 +108,7 @@ const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
               icon="delete-forever"
               size={30}
               style={styles.unsetbuttonStyle}
-              color={colors.primary}
+              iconColor={colors.primary}
               onPress={deletePress}
             />
           )}
@@ -121,7 +122,7 @@ const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
               icon="file-document-edit-outline"
               size={30}
               style={styles.unsetbuttonStyle}
-              color={colors.primary}
+              iconColor={colors.primary}
               onPress={addNew}
             />
           )}
@@ -131,7 +132,7 @@ const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
             icon="plus-circle"
             size={30}
             style={styles.unsetbuttonStyle}
-            color={colors.primary}
+            iconColor={colors.primary}
             onPress={() => {
               if (fontSize < 40) {
                 AsyncStorage.setItem(
@@ -147,7 +148,7 @@ const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
             icon="minus-circle"
             size={30}
             style={styles.unsetbuttonStyle}
-            color={colors.primary}
+            iconColor={colors.primary}
             onPress={() => {
               if (fontSize > 15) {
                 AsyncStorage.setItem(

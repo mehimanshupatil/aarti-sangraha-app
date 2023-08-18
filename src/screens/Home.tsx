@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-import { IconButton, useTheme } from 'react-native-paper';
+import { StyleSheet, View, FlatList } from 'react-native';
+import { IconButton } from 'react-native-paper';
 import SingleItem from '../components/SingleItem';
 import { globalStyle } from '../shared/styles';
 import { homeNav, singleItemType } from '../shared/types';
 import { useData } from '../store/context';
+import { useAppTheme } from '../../App';
 
 const Home: React.FC<homeNav> = ({ navigation }) => {
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
 
   const { state } = useData();
   const { aartis, searchValue } = state;
@@ -47,7 +48,7 @@ const Home: React.FC<homeNav> = ({ navigation }) => {
                 shadowColor: colors.background,
               }}
               onPress={() => addNew()}
-              color={colors.primary}
+              iconColor={colors.primary}
               size={50}
             />
           )}

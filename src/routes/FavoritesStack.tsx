@@ -4,12 +4,13 @@ import Header from '../shared/Header';
 import Favorites from '../screens/Favorites';
 import CommonTemplate from '../screens/CommonTemplate';
 import addNew from '../screens/AddNew';
-import { IconButton, useTheme } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
+import { useAppTheme } from '../../App';
 
 const { Navigator, Screen } = createStackNavigator();
 
 export default function FavoritesNavigation() {
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
 
   return (
     <Navigator
@@ -38,7 +39,7 @@ export default function FavoritesNavigation() {
             <IconButton
               icon='share-variant'
               size={24}
-              color={colors.background}
+              iconColor={colors.background}
               style={{ marginRight: 10 }}
               onPress={() =>
                 // @ts-ignore

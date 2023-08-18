@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
-import { useTheme } from "react-native-paper";
+import { StyleSheet, Text, View, FlatList } from "react-native"; 
 import SingleItem from "../components/SingleItem";
 import { globalStyle } from "../shared/styles";
 import { favNav, singleItemType } from "../shared/types";
 import { useData } from "../store/context";
+import { useAppTheme } from '../../App';
 
 const Favorites: React.FC<favNav> = ({ navigation }) => {
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
 
   const pressHandler = (item: singleItemType) => {
     navigation.push("CommonComponent", {

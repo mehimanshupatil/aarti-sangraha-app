@@ -4,15 +4,16 @@ import CommonTemplate from '../screens/CommonTemplate';
 import React from 'react';
 import Header from '../shared/Header';
 import AddNew from '../screens/AddNew';
-import { IconButton, useTheme } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 import { useData } from '../store/context';
 import { Share } from 'react-native';
 import { singleItemType } from '../shared/types';
+import { useAppTheme } from '../../App';
 
 const { Navigator, Screen } = createStackNavigator();
 
 function HomeStack() {
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
   const { state } = useData();
   const { aartis } = state;
 
@@ -62,7 +63,7 @@ https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha 
             <IconButton
               icon='share-variant'
               size={24}
-              color={colors.background}
+              iconColor={colors.background}
               style={{ marginRight: 10 }}
               onPress={() =>
                 // @ts-ignore

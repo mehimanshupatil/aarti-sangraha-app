@@ -2,13 +2,14 @@ import React from "react";
 import { StyleSheet, Text, View, ToastAndroid } from "react-native";
 import { useData } from "../store/context";
 import { singleItemType } from "../shared/types";
-import { IconButton, TouchableRipple, useTheme } from "react-native-paper";
+import { IconButton, TouchableRipple } from "react-native-paper";
+import { useAppTheme } from '../../App';
 
 const SingleItem: React.FC<{
   pressHandler: (arg0: singleItemType) => void;
   item: singleItemType;
 }> = ({ pressHandler, item }) => {
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
 
   const { dispatch, state } = useData();
 
@@ -48,7 +49,7 @@ const SingleItem: React.FC<{
                 icon="heart"
                 size={30}
                 style={styles.unsetbuttonStyle}
-                color={colors.primary}
+                iconColor={colors.primary}
                 onPress={() => iconPress(item, "remove")}
               />
             ) : (
@@ -56,7 +57,7 @@ const SingleItem: React.FC<{
                 icon="heart-outline"
                 size={30}
                 style={styles.unsetbuttonStyle}
-                color={colors.primary}
+                iconColor={colors.primary}
                 onPress={() => iconPress(item, "add")}
               />
             )}

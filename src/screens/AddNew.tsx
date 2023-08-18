@@ -9,14 +9,14 @@ import {
   Keyboard,
   ScrollView,
   TextInput,
-} from 'react-native';
-import { useTheme } from 'react-native-paper';
+} from 'react-native'; 
 import { globalStyle } from '../shared/styles';
 import { addNewNav } from '../shared/types';
 import { useData } from '../store/context';
+import { useAppTheme } from '../../App';
 
 const AddNew: React.FC<addNewNav> = ({ navigation, route }) => {
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
   const { item } = route.params;
 
   const { dispatch } = useData();

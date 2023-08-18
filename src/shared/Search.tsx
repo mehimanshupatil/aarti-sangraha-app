@@ -1,12 +1,13 @@
 import React from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
 import { useData } from '../store/context';
-import { IconButton, useTheme } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
+import { useAppTheme } from '../../App';
 
 const Search: React.FC<{ setShowSearchInput: (arg0: boolean) => void }> = ({
   setShowSearchInput,
 }) => {
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
   const { state, dispatch } = useData();
 
   const searchInput = (data: string) => {
@@ -40,7 +41,7 @@ const Search: React.FC<{ setShowSearchInput: (arg0: boolean) => void }> = ({
           searchInput('');
         }}
         size={24}
-        color={colors.background}
+        iconColor={colors.background}
         style={styles.searchIcon}
       />
     </View>
