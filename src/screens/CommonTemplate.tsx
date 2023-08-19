@@ -8,12 +8,11 @@ import {
   ToastAndroid,
 } from "react-native";
 import { useKeepAwake } from "expo-keep-awake";
-import { commmonTempNav, singleItemType, StorageKey } from "../shared/types";
+import { commmonTempNav, singleItemType, StorageKey, useAppTheme } from "../shared/types";
 import { IconButton } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useData } from "../store/context";
-import { useAppTheme } from '../../App';
-
+ 
 const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
   const { key } = route.params;
   useKeepAwake();

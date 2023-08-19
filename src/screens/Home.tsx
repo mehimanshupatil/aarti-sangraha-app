@@ -3,10 +3,9 @@ import { StyleSheet, View, FlatList } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import SingleItem from '../components/SingleItem';
 import { globalStyle } from '../shared/styles';
-import { homeNav, singleItemType } from '../shared/types';
+import { homeNav, singleItemType, useAppTheme } from '../shared/types';
 import { useData } from '../store/context';
-import { useAppTheme } from '../../App';
-
+ 
 const Home: React.FC<homeNav> = ({ navigation }) => {
   const { colors } = useAppTheme();
 

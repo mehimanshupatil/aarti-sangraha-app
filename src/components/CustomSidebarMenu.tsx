@@ -9,13 +9,12 @@ import {
 import Constants from 'expo-constants';
 import { IconButton } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { StorageKey } from '../shared/types';
-import { useData } from '../store/context';
-import { useAppTheme } from '../../App';
-
+import { StorageKey, useAppTheme } from '../shared/types'; 
+import { useDataStore } from '../store/store';
+ 
 const CustomSidebarMenu = (props: DrawerContentComponentProps) => {
-  const { colors } = useAppTheme();
-  const { state, dispatch } = useData();
+  const { colors } = useAppTheme(); 
+  const [displayMode, setDisplayMode] =  useDataStore(s=> [s.displayMode, s.setDisplayMode])
 
   const windowWidth = Dimensions.get('window').width;
   //since width of sidenav is 60%
@@ -48,7 +47,7 @@ https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha 
         <DrawerItem
           {...props}
           labelStyle={{ color: colors.text }}
-          label={`${state.isDarkMode === 'light' ? 'Light' : 'Dark'} Theme`}
+          label={`${displayMode === 'light' ? 'Light' : 'Dark'} Theme`}
           icon={() => (
             <IconButton
             iconColor={colors.primary}
@@ -58,9 +57,9 @@ https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha 
             />
           )}
           onPress={() => {
-            const dark = state.isDarkMode === 'light' ? 'dark' : 'light';
-            AsyncStorage.setItem(StorageKey.darkMode, dark);
-            dispatch({ type: 'ISDARK', data: dark });
+            const mode = displayMode === 'light' ? 'dark' : 'light';
+            AsyncStorage.setItem(StorageKey.darkMode, mode);
+            setDisplayMode(mode);
           }}
         />
         <DrawerItem

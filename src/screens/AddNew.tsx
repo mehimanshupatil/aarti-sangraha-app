@@ -11,10 +11,9 @@ import {
   TextInput,
 } from 'react-native'; 
 import { globalStyle } from '../shared/styles';
-import { addNewNav } from '../shared/types';
+import { addNewNav, useAppTheme } from '../shared/types';
 import { useData } from '../store/context';
-import { useAppTheme } from '../../App';
-
+ 
 const AddNew: React.FC<addNewNav> = ({ navigation, route }) => {
   const { colors } = useAppTheme();
   const { item } = route.params;

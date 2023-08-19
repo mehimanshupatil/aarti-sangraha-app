@@ -1,4 +1,6 @@
 import { StackScreenProps } from "@react-navigation/stack";
+import { useTheme } from 'react-native-paper';
+import { light } from '../../App';
 
 export enum StorageKey {
   aartis = "aartis",
@@ -29,3 +31,8 @@ export type homeNav = StackScreenProps<RootParamList, "Home">;
 export type addNewNav = StackScreenProps<RootParamList, "addNew">;
 export type favNav = StackScreenProps<RootParamList, "Favorites">;
 export type commmonTempNav = StackScreenProps<RootParamList, "CommonComponent">;
+
+
+export type AppTheme = typeof light;
+
+export const useAppTheme = () => useTheme<AppTheme>();

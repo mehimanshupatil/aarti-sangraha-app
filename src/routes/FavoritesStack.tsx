@@ -5,9 +5,9 @@ import Favorites from '../screens/Favorites';
 import CommonTemplate from '../screens/CommonTemplate';
 import addNew from '../screens/AddNew';
 import { IconButton } from 'react-native-paper';
-import { useAppTheme } from '../../App';
+import { RootParamList, useAppTheme } from '../shared/types';
 
-const { Navigator, Screen } = createStackNavigator();
+const { Navigator, Screen } = createStackNavigator<RootParamList>();
 
 export default function FavoritesNavigation() {
   const { colors } = useAppTheme();

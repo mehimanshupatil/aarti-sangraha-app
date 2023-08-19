@@ -4,6 +4,7 @@ import EntryComponent from './src/components/EntryComponent';
 import Context, { DataProvider } from './src/store/context';
 import { MD3DarkTheme, DefaultTheme, Provider as PaperProvider, useTheme } from 'react-native-paper';
 import { StatusBar } from 'react-native';
+import { useDataStore } from './src/store/store';
 
 declare global {
   namespace ReactNativePaper {
@@ -14,7 +15,7 @@ declare global {
   }
 }
 
-const light = {
+export const light = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
@@ -41,22 +42,19 @@ const dark = {
   },
 };
 
-export type AppTheme = typeof light;
-
-export const useAppTheme = () => useTheme<AppTheme>();
-
-
 export default function App() {
+ const displayMode =  useDataStore(s=> s.displayMode)
   return (
     <DataProvider>
       <Context.Consumer>
-        {(state) => {
-          const { isDarkMode } = state.state;
+        {(state) => { 
           return (
-            <PaperProvider theme={isDarkMode === 'dark' ? dark : light}>
+            <PaperProvider
+              theme={displayMode === 'dark' ? dark : light}
+            >
               <StatusBar
-                barStyle={isDarkMode === 'dark' ? 'dark-content' : 'light-content'}
-                backgroundColor={isDarkMode === 'dark' ? '#FFE065' : '#181C3F'}
+                barStyle={displayMode === 'dark' ? 'dark-content' : 'light-content'}
+                backgroundColor={displayMode === 'dark' ? '#FFE065' : '#181C3F'}
               />
               <EntryComponent />
             </PaperProvider>

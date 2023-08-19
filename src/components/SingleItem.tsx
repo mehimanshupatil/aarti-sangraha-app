@@ -1,10 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View, ToastAndroid } from "react-native";
 import { useData } from "../store/context";
-import { singleItemType } from "../shared/types";
+import { singleItemType, useAppTheme } from "../shared/types";
 import { IconButton, TouchableRipple } from "react-native-paper";
-import { useAppTheme } from '../../App';
-
+ 
 const SingleItem: React.FC<{
   pressHandler: (arg0: singleItemType) => void;
   item: singleItemType;

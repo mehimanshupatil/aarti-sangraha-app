@@ -7,10 +7,9 @@ import AddNew from '../screens/AddNew';
 import { IconButton } from 'react-native-paper';
 import { useData } from '../store/context';
 import { Share } from 'react-native';
-import { singleItemType } from '../shared/types';
-import { useAppTheme } from '../../App';
+import { RootParamList, singleItemType, useAppTheme } from '../shared/types';
 
-const { Navigator, Screen } = createStackNavigator();
+const { Navigator, Screen } = createStackNavigator<RootParamList>();
 
 function HomeStack() {
   const { colors } = useAppTheme();

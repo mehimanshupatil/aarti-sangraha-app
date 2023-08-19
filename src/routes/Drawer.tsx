@@ -7,8 +7,8 @@ import { BackHandler, ToastAndroid, StyleSheet } from 'react-native';
 import CustomSidebarMenu from '../components/CustomSidebarMenu';
 import { IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { useAppTheme } from '../../App';
-
+import { useAppTheme } from '../shared/types';
+ 
 const { Navigator, Screen } = createDrawerNavigator();
 let backPressed = 0;
 

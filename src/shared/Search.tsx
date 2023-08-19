@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
 import { useData } from '../store/context';
 import { IconButton } from 'react-native-paper';
-import { useAppTheme } from '../../App';
-
+import { useAppTheme } from './types';
+ 
 const Search: React.FC<{ setShowSearchInput: (arg0: boolean) => void }> = ({
   setShowSearchInput,
 }) => {

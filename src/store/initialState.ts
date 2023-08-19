@@ -9,7 +9,7 @@ export interface IState {
   isDarkMode: NonNullable<ColorSchemeName>;
 }
 
-const data: singleItemType[] = require("../shared/data.json");
+import data from "../shared/data.json";
 
 const initialState: IState = {
   aartis: data.map((x) => ({ ...x, isRemovable: false })),

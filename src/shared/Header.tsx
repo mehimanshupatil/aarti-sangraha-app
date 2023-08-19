@@ -4,8 +4,8 @@ import Search from './Search';
 import { IconButton } from 'react-native-paper';
 import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getDefaultHeaderHeight } from '@react-navigation/elements';
-import { useAppTheme } from '../../App';
-
+import { useAppTheme } from './types';
+ 
 const Header: React.FC<{
   title: string;
   navigation: any;

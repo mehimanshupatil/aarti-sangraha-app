@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native"; 
 import SingleItem from "../components/SingleItem";
 import { globalStyle } from "../shared/styles";
-import { favNav, singleItemType } from "../shared/types";
+import { favNav, singleItemType, useAppTheme } from "../shared/types";
 import { useData } from "../store/context";
-import { useAppTheme } from '../../App';
-
+ 
 const Favorites: React.FC<favNav> = ({ navigation }) => {
   const { colors } = useAppTheme();
 
