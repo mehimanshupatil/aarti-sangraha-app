@@ -1,43 +1,14 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import MyDrawer from '../routes/Drawer';
-import { StorageKey } from '../shared/types';
-import * as SplashScreen from 'expo-splash-screen';
-
-import { useData } from '../store/context';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useColorScheme } from 'react-native';
-
+import MyDrawer from '../routes/Drawer'; 
+import * as SplashScreen from 'expo-splash-screen'; 
+ 
 function EntryComponent() {
   const [isLoaded, setIsLoaded] = useState(false);
-  const { dispatch } = useData();
-
-  let colorScheme = useColorScheme();
-
+ 
   useEffect(() => {
     const getData = async () => {
       await SplashScreen.preventAutoHideAsync();
-      try {
-        const fontSize = await AsyncStorage.getItem(StorageKey.fontSize);
-        if (fontSize)
-          dispatch({
-            type: 'UPDATEFONTSIZE',
-            fontSize: parseInt(fontSize),
-          });
-        const darkmode = await AsyncStorage.getItem(StorageKey.darkMode);
-        dispatch({
-          type: 'ISDARK',
-          data: darkmode ? (darkmode as 'light' | 'dark') : colorScheme ? colorScheme : 'light',
-        });
-        const favList = await AsyncStorage.getItem(StorageKey.favList);
-        dispatch({
-          type: 'ADDFAVLIST',
-          favList: favList ? JSON.parse(favList) : [],
-        });
-        const value = await AsyncStorage.getItem(StorageKey.aartis);
-        if (!value) return;
-        dispatch({ type: 'ADDLOCAL', data: JSON.parse(value) });
-      } catch (error) {}
     };
     getData().then((x) => {
       setIsLoaded(true);

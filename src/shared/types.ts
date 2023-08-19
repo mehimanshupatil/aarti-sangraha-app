@@ -1,20 +1,14 @@
 import { StackScreenProps } from "@react-navigation/stack";
 import { useTheme } from 'react-native-paper';
 import { light } from '../../App';
-
-export enum StorageKey {
-  aartis = "aartis",
-  fontSize = "fontSize",
-  darkMode = "darkMode",
-  favList = "favList",
-}
-
+ 
 export type singleItemType = {
   key: string;
   title: string;
   body: string;
   tags: string[];
   isRemovable: boolean | undefined;
+  isFavorite: boolean | undefined;
 };
 
 export type RootParamList = {

@@ -7,9 +7,8 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import Constants from 'expo-constants';
-import { IconButton } from 'react-native-paper';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { StorageKey, useAppTheme } from '../shared/types'; 
+import { IconButton } from 'react-native-paper'; 
+import {  useAppTheme } from '../shared/types'; 
 import { useDataStore } from '../store/store';
  
 const CustomSidebarMenu = (props: DrawerContentComponentProps) => {
@@ -58,7 +57,6 @@ https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha 
           )}
           onPress={() => {
             const mode = displayMode === 'light' ? 'dark' : 'light';
-            AsyncStorage.setItem(StorageKey.darkMode, mode);
             setDisplayMode(mode);
           }}
         />

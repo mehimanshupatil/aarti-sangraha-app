@@ -6,11 +6,14 @@ import CommonTemplate from '../screens/CommonTemplate';
 import addNew from '../screens/AddNew';
 import { IconButton } from 'react-native-paper';
 import { RootParamList, useAppTheme } from '../shared/types';
+import { onShare } from './HomeStack';
+import { useDataStore } from '../store/store';
 
 const { Navigator, Screen } = createStackNavigator<RootParamList>();
 
 export default function FavoritesNavigation() {
   const { colors } = useAppTheme();
+  const [aartis] = useDataStore(s=>[ s.aartis])
 
   return (
     <Navigator
@@ -41,8 +44,7 @@ export default function FavoritesNavigation() {
               size={24}
               iconColor={colors.background}
               style={{ marginRight: 10 }}
-              onPress={() =>
-                // @ts-ignore
+              onPress={() => 
                 onShare(aartis.find((x) => x.key === route.params?.key))
               }
             />

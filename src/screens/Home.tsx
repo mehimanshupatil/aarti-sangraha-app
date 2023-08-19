@@ -4,13 +4,12 @@ import { IconButton } from 'react-native-paper';
 import SingleItem from '../components/SingleItem';
 import { globalStyle } from '../shared/styles';
 import { homeNav, singleItemType, useAppTheme } from '../shared/types';
-import { useData } from '../store/context';
- 
+import { useDataStore } from '../store/store';
+  
 const Home: React.FC<homeNav> = ({ navigation }) => {
   const { colors } = useAppTheme();
-
-  const { state } = useData();
-  const { aartis, searchValue } = state;
+  const [aartis, searchValue] = useDataStore(s=> [s.aartis, s.searchValue])
+ 
   const pressHandler = (item: singleItemType) => {
     navigation.push('CommonComponent', {
       key: item.key,
@@ -34,7 +33,7 @@ const Home: React.FC<homeNav> = ({ navigation }) => {
     <View style={{ ...globalStyle.homeRoot, backgroundColor: colors.background }}>
       <View style={globalStyle.homecontainer}>
         <FlatList
-          data={localData}
+         data={localData}
           renderItem={({ item }) => <SingleItem item={item} pressHandler={pressHandler} />}
           showsVerticalScrollIndicator={false}
           ListFooterComponent={() => (

@@ -8,24 +8,21 @@ import {
   ToastAndroid,
 } from "react-native";
 import { useKeepAwake } from "expo-keep-awake";
-import { commmonTempNav, singleItemType, StorageKey, useAppTheme } from "../shared/types";
+import { commmonTempNav, singleItemType, useAppTheme } from "../shared/types";
 import { IconButton } from "react-native-paper";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useData } from "../store/context";
- 
+import { useDataStore } from '../store/store';
+
 const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
   const { key } = route.params;
   useKeepAwake();
 
   const { colors } = useAppTheme();
-
-  const { state, dispatch } = useData();
-  const { fontSize, aartis, favorites } = state;
+  const [aartis, fontSize] = useDataStore(s => [s.aartis, s.fontSize])
+  const [setFontSize, toggleFav, deleteAarti] = useDataStore(s => [s.setFontSize, s.toggleFav, s.deleteAarti])
 
   const [selectedItem, setSelectedItem] = useState(
     aartis.find((x) => x.key == key)
   );
-
   useEffect(() => {
     const single = aartis.find((x) => x.key == key);
     setSelectedItem(single);
@@ -47,7 +44,7 @@ const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
         {
           text: "ठीक आहे",
           onPress: () => {
-            dispatch({ type: "DELETEITEM", key: selectedItem?.key ?? "" });
+            deleteAarti((selectedItem?.key ?? 0).toString());
             ToastAndroid.show("यशस्वीरित्या हटविले", ToastAndroid.SHORT);
             navigation.goBack();
           },
@@ -57,17 +54,17 @@ const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
   };
 
   const iconPress = (
-    item: singleItemType | undefined,
-    action: "add" | "remove"
+    item: singleItemType | undefined
   ) => {
     if (!item) return;
 
     ToastAndroid.show(
-      action === "add" ? "Added to Favorites" : "Removed from Favorites",
+      !item.isFavorite ? "Added to Favorites" : "Removed from Favorites",
       ToastAndroid.SHORT
     );
-    dispatch({ type: "UPDATEFAV", key: key, operation: action });
+    toggleFav(key);
   };
+
   const addNew = () => {
     if (!selectedItem) return;
     navigation.push("addNew", {
@@ -85,23 +82,13 @@ const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
     >
       <View style={styles.buttonContainer}>
         <View style={styles.fontButton}>
-          {favorites.includes(selectedItem?.key ?? "") ? (
-            <IconButton
-              icon="heart"
-              size={30}
-              style={styles.unsetbuttonStyle}
-              iconColor={colors.primary}
-              onPress={() => iconPress(selectedItem, "remove")}
-            />
-          ) : (
-            <IconButton
-              icon="heart-outline"
-              size={30}
-              style={styles.unsetbuttonStyle}
-              iconColor={colors.primary}
-              onPress={() => iconPress(selectedItem, "add")}
-            />
-          )}
+          <IconButton
+            icon={selectedItem?.isFavorite ? "heart" : "heart-outline"}
+            size={30}
+            style={styles.unsetbuttonStyle}
+            iconColor={colors.primary}
+            onPress={() => iconPress(selectedItem)}
+          />
           {selectedItem?.isRemovable && (
             <IconButton
               icon="delete-forever"
@@ -134,11 +121,7 @@ const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
             iconColor={colors.primary}
             onPress={() => {
               if (fontSize < 40) {
-                AsyncStorage.setItem(
-                  StorageKey.fontSize,
-                  (fontSize + 3).toString()
-                );
-                dispatch({ type: "UPDATEFONTSIZE", fontSize: fontSize + 3 });
+                setFontSize(fontSize + 3);
               }
             }}
           />
@@ -150,11 +133,7 @@ const CommonTemplate: React.FC<commmonTempNav> = ({ navigation, route }) => {
             iconColor={colors.primary}
             onPress={() => {
               if (fontSize > 15) {
-                AsyncStorage.setItem(
-                  StorageKey.fontSize,
-                  (fontSize - 3).toString()
-                );
-                dispatch({ type: "UPDATEFONTSIZE", fontSize: fontSize - 3 });
+                setFontSize(fontSize - 3);
               }
             }}
           />

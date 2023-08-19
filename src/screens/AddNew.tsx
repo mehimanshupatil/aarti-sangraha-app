@@ -9,16 +9,15 @@ import {
   Keyboard,
   ScrollView,
   TextInput,
-} from 'react-native'; 
+} from 'react-native';
 import { globalStyle } from '../shared/styles';
 import { addNewNav, useAppTheme } from '../shared/types';
-import { useData } from '../store/context';
- 
+import { useDataStore } from '../store/store';
+
 const AddNew: React.FC<addNewNav> = ({ navigation, route }) => {
   const { colors } = useAppTheme();
   const { item } = route.params;
-
-  const { dispatch } = useData();
+  const [addAarti, updateAarti] = useDataStore(s => [s.addAarti, s.updateAarti])
 
   const [title, setTitle] = useState(item.title);
   const [body, setBody] = useState(item.body);
@@ -34,11 +33,11 @@ const AddNew: React.FC<addNewNav> = ({ navigation, route }) => {
       title,
       body,
       key: (Math.random() * 900 + 100).toString(), //key between 100 to 1k
-      favorite: true,
+      isFavorite: true,
       tags: [],
       isRemovable: true,
     };
-    dispatch({ type: 'ADDCUSTOM', item });
+    addAarti(item);
     ToastAndroid.show('Added Successfully', ToastAndroid.SHORT);
     navigation.goBack();
   };
@@ -49,7 +48,7 @@ const AddNew: React.FC<addNewNav> = ({ navigation, route }) => {
       title: title,
       body: body,
     };
-    dispatch({ type: 'UPDATEDATA', data });
+    updateAarti(data);
     ToastAndroid.show('Updated Successfully', ToastAndroid.SHORT);
     navigation.goBack();
   };

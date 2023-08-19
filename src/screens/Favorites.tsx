@@ -3,20 +3,18 @@ import { StyleSheet, Text, View, FlatList } from "react-native";
 import SingleItem from "../components/SingleItem";
 import { globalStyle } from "../shared/styles";
 import { favNav, singleItemType, useAppTheme } from "../shared/types";
-import { useData } from "../store/context";
- 
+import { useDataStore } from '../store/store';
+  
 const Favorites: React.FC<favNav> = ({ navigation }) => {
   const { colors } = useAppTheme();
+  const [aartis, searchValue] = useDataStore(s => [s.aartis,s.searchValue ])
 
   const pressHandler = (item: singleItemType) => {
     navigation.push("CommonComponent", {
       key: item.key,
     });
   };
-
-  const { state } = useData();
-  const { aartis, searchValue, favorites } = state;
-
+ 
   const [localData, setLocalData] = useState<singleItemType[]>([]);
 
   useEffect(() => {
@@ -24,12 +22,12 @@ const Favorites: React.FC<favNav> = ({ navigation }) => {
       setLocalData(
         aartis.filter(
           (x) =>
-            favorites.includes(x.key) &&
+          x.isFavorite &&
             (x.title.includes(searchValue) || x.body.includes(searchValue))
         )
       );
-    else setLocalData(aartis.filter((x) => favorites.includes(x.key)));
-  }, [aartis, favorites, searchValue]);
+    else setLocalData(aartis.filter((x) => x.isFavorite));
+  }, [aartis, searchValue]);
 
   return (
     <View

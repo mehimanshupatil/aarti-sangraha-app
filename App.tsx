@@ -1,7 +1,6 @@
 import React from 'react';
 import 'react-native-gesture-handler';
 import EntryComponent from './src/components/EntryComponent';
-import Context, { DataProvider } from './src/store/context';
 import { MD3DarkTheme, DefaultTheme, Provider as PaperProvider, useTheme } from 'react-native-paper';
 import { StatusBar } from 'react-native';
 import { useDataStore } from './src/store/store';
@@ -43,24 +42,15 @@ const dark = {
 };
 
 export default function App() {
- const displayMode =  useDataStore(s=> s.displayMode)
-  return (
-    <DataProvider>
-      <Context.Consumer>
-        {(state) => { 
-          return (
-            <PaperProvider
-              theme={displayMode === 'dark' ? dark : light}
-            >
-              <StatusBar
-                barStyle={displayMode === 'dark' ? 'dark-content' : 'light-content'}
-                backgroundColor={displayMode === 'dark' ? '#FFE065' : '#181C3F'}
-              />
-              <EntryComponent />
-            </PaperProvider>
-          );
-        }}
-      </Context.Consumer>
-    </DataProvider>
+  const displayMode = useDataStore(s => s.displayMode)
+  return (<PaperProvider
+    theme={displayMode === 'dark' ? dark : light}
+  >
+    <StatusBar
+      barStyle={displayMode === 'dark' ? 'dark-content' : 'light-content'}
+      backgroundColor={displayMode === 'dark' ? '#FFE065' : '#181C3F'}
+    />
+    <EntryComponent />
+  </PaperProvider>
   );
 }

@@ -5,22 +5,17 @@ import React from 'react';
 import Header from '../shared/Header';
 import AddNew from '../screens/AddNew';
 import { IconButton } from 'react-native-paper';
-import { useData } from '../store/context';
-import { Share } from 'react-native';
+ import { Share } from 'react-native';
 import { RootParamList, singleItemType, useAppTheme } from '../shared/types';
+import { useDataStore } from '../store/store';
 
 const { Navigator, Screen } = createStackNavigator<RootParamList>();
 
-function HomeStack() {
-  const { colors } = useAppTheme();
-  const { state } = useData();
-  const { aartis } = state;
-
-  const onShare = (aarti: singleItemType | undefined) => {
-    try {
-      if (!aarti) return;
-      Share.share({
-        message: `*${aarti.title}*
+export const onShare = (aarti: singleItemType | undefined) => {
+  try {
+    if (!aarti) return;
+    Share.share({
+      message: `*${aarti.title}*
 
 ${aarti.body}
 
@@ -29,11 +24,15 @@ ${aarti.body}
 https://galaxy.store/aarti
 
 https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha \`\`\``,
-      });
-    } catch (error) {
-      alert(error);
-    }
-  };
+    });
+  } catch (error) {
+    alert(error);
+  }
+};
+
+function HomeStack() {
+  const { colors } = useAppTheme();
+    const [aartis] = useDataStore(s=> [s.aartis])
 
   return (
     <Navigator
@@ -64,8 +63,7 @@ https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha 
               size={24}
               iconColor={colors.background}
               style={{ marginRight: 10 }}
-              onPress={() =>
-                // @ts-ignore
+              onPress={() => 
                 onShare(aartis.find((x) => x.key === route.params?.key))
               }
             />

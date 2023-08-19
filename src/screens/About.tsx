@@ -2,12 +2,10 @@ import React from 'react';
 import { StyleSheet, View, Text, ToastAndroid, Alert, ScrollView } from 'react-native';
 import * as Linking from 'expo-linking';
 import { aboutNav, singleItemType, useAppTheme } from '../shared/types';
-import { useData } from '../store/context'; 
- 
+  
 const About: React.FC<aboutNav> = ({ navigation }) => {
   const { colors } = useAppTheme();
-  const { dispatch } = useData();
-
+ 
   const handlePress = (url: string) => {
     Linking.openURL(url);
   };
@@ -27,7 +25,7 @@ const About: React.FC<aboutNav> = ({ navigation }) => {
           onPress: () => {
             try {
               const data: singleItemType[] = require('../shared/data.json');
-              dispatch({ type: 'INITIALIZE', data });
+              // dispatch({ type: 'INITIALIZE', data });
               ToastAndroid.show('Data Cleared Successfully', ToastAndroid.SHORT);
               navigation.navigate('HomeStack');
             } catch (error) {

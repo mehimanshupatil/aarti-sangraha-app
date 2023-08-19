@@ -1,23 +1,23 @@
 import React from "react";
 import { StyleSheet, Text, View, ToastAndroid } from "react-native";
-import { useData } from "../store/context";
 import { singleItemType, useAppTheme } from "../shared/types";
 import { IconButton, TouchableRipple } from "react-native-paper";
- 
+import { useDataStore } from '../store/store';
+
 const SingleItem: React.FC<{
   pressHandler: (arg0: singleItemType) => void;
   item: singleItemType;
 }> = ({ pressHandler, item }) => {
   const { colors } = useAppTheme();
+  const [toggleFav] = useDataStore(s => [s.toggleFav])
 
-  const { dispatch, state } = useData();
-
-  const iconPress = (item: singleItemType, action: "add" | "remove") => {
+  const iconPress = (item: singleItemType) => {
     ToastAndroid.show(
-      action === "add" ? "Added to Favorites" : "Removed from Favorites",
+      !item.isFavorite ? "Added to Favorites" : "Removed from Favorites",
       ToastAndroid.SHORT
     );
-    dispatch({ type: "UPDATEFAV", key: item.key, operation: action });
+    toggleFav(item.key)
+
   };
 
   return (
@@ -43,23 +43,13 @@ const SingleItem: React.FC<{
             >
               {item.title}
             </Text>
-            {state.favorites.includes(item.key) ? (
-              <IconButton
-                icon="heart"
-                size={30}
-                style={styles.unsetbuttonStyle}
-                iconColor={colors.primary}
-                onPress={() => iconPress(item, "remove")}
-              />
-            ) : (
-              <IconButton
-                icon="heart-outline"
-                size={30}
-                style={styles.unsetbuttonStyle}
-                iconColor={colors.primary}
-                onPress={() => iconPress(item, "add")}
-              />
-            )}
+            <IconButton
+              icon={item.isFavorite ? "heart" : "heart-outline"}
+              size={30}
+              style={styles.unsetbuttonStyle}
+              iconColor={colors.primary}
+              onPress={() => iconPress(item)}
+            /> 
           </View>
           <View style={styles.firstLine}>
             <Text

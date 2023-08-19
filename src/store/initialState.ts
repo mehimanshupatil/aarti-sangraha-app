@@ -1,22 +1,18 @@
-import { ColorSchemeName } from "react-native";
+ 
 import { singleItemType } from "../shared/types";
 
 export interface IState {
   aartis: singleItemType[];
-  favorites: string[];
   fontSize: number;
-  searchValue: string;
-  isDarkMode: NonNullable<ColorSchemeName>;
+  searchValue: string; 
 }
 
 import data from "../shared/data.json";
 
 const initialState: IState = {
-  aartis: data.map((x) => ({ ...x, isRemovable: false })),
-  favorites: [],
+  aartis: data.map((x) => ({ ...x, isRemovable: false, isFavorite: false })),
   fontSize: 20,
-  searchValue: "",
-  isDarkMode: "light",
+  searchValue: "", 
 };
 
 export default initialState;

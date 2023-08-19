@@ -1,17 +1,17 @@
 import React from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
-import { useData } from '../store/context';
 import { IconButton } from 'react-native-paper';
 import { useAppTheme } from './types';
- 
+import { useDataStore } from '../store/store';
+
 const Search: React.FC<{ setShowSearchInput: (arg0: boolean) => void }> = ({
   setShowSearchInput,
 }) => {
   const { colors } = useAppTheme();
-  const { state, dispatch } = useData();
+  const [searchValue, setSearchValue] = useDataStore(s => [s.searchValue, s.setSearchValue])
 
   const searchInput = (data: string) => {
-    dispatch({ type: 'SEARCHINPUT', value: data });
+    setSearchValue(data);
   };
 
   return (
@@ -32,7 +32,7 @@ const Search: React.FC<{ setShowSearchInput: (arg0: boolean) => void }> = ({
         placeholderTextColor={colors.background}
         autoFocus={true}
         onChangeText={(text) => searchInput(text)}
-        value={state.searchValue}
+        value={searchValue}
       />
       <IconButton
         icon='close'
