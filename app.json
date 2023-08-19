@@ -9,13 +9,15 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "package": "com.mehimanshupatil.aartisangraha",
-      "versionCode": 13,
+      "versionCode": 14,
       "permissions": [],
       "userInterfaceStyle": "automatic",
       "splash": {
@@ -27,6 +29,11 @@
         "xxxhdpi": "./assets/splash/drawable-xxxhdpi.png",
         "resizeMode": "contain",
         "backgroundColor": "#ffde5b"
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "558c0ad3-5c21-4264-8630-94f9a48c12fc"
       }
     }
   }
