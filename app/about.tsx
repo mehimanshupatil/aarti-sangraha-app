@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, ToastAndroid, Alert, ScrollView } from 'react-native';
 import * as Linking from 'expo-linking';
-import { aboutNav, singleItemType, useAppTheme } from '../src/shared/types';
+import { singleItemType, useAppTheme } from '../src/shared/types';
 import { router } from 'expo-router';
   
 const About: React.FC = () => {

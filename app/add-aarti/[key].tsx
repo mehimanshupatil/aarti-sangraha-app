@@ -15,7 +15,7 @@ import { addNewNav, useAppTheme } from '../../src/shared/types';
 import { useDataStore } from '../../src/store/store';
 import { Stack, router, useLocalSearchParams } from 'expo-router';
 
-const AddNew: React.FC<addNewNav> = ({ navigation, route }) => {
+const AddNew: React.FC = () => {
   const { colors } = useAppTheme();
   const { key } = useLocalSearchParams();
 

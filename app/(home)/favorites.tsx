@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, FlatList } from "react-native";
 import SingleItem from "../../src/components/SingleItem";
 import { globalStyle } from "../../src/shared/styles";
 import { useDataStore } from '../../src/store/store';
-import { favNav, singleItemType, useAppTheme } from "../../src/shared/types";
+import { singleItemType, useAppTheme } from "../../src/shared/types";
 import { router } from 'expo-router';
  
 const Favorites: React.FC = () => {

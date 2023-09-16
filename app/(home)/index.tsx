@@ -3,11 +3,10 @@ import { StyleSheet, View, FlatList } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import SingleItem from '../../src/components/SingleItem';
 import { globalStyle } from '../../src/shared/styles';
-import { homeNav, singleItemType, useAppTheme } from '../../src/shared/types';
+import { singleItemType, useAppTheme } from '../../src/shared/types';
 import { useDataStore } from '../../src/store/store';
 import { router } from 'expo-router';
- 
-  
+
 const Home: React.FC = () => {
   const { colors } = useAppTheme();
   const [aartis, searchValue] = useDataStore(s=> [s.aartis, s.searchValue])

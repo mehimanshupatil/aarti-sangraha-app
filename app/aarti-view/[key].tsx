@@ -8,13 +8,13 @@ import {
     ToastAndroid,
 } from "react-native";
 import { useKeepAwake } from "expo-keep-awake";
-import { commmonTempNav, singleItemType, useAppTheme } from "../../src/shared/types";
+import { singleItemType, useAppTheme } from "../../src/shared/types";
 import { IconButton } from "react-native-paper";
 import { useDataStore } from '../../src/store/store';
 import { Stack, router, useLocalSearchParams } from 'expo-router';
 import { onShare } from '../../src/routes/HomeStack';
 
-const CommonTemplate: React.FC<commmonTempNav> = () => {
+const CommonTemplate: React.FC = () => {
 
     const { key } = useLocalSearchParams();
     useKeepAwake();

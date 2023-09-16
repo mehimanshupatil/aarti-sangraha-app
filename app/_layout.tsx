@@ -3,12 +3,9 @@ import { Stack } from 'expo-router';
 
 import React from 'react';
 import 'react-native-gesture-handler';
-import { MD3DarkTheme, DefaultTheme, Provider as PaperProvider, useTheme, IconButton } from 'react-native-paper';
-import { StatusBar } from 'react-native';
+import { MD3DarkTheme, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { useDataStore } from '../src/store/store';
 import Header from '../src/shared/Header';
-import { onShare } from '../src/routes/HomeStack';
-import { useAppTheme } from '../src/shared/types';
 
 declare global {
     namespace ReactNativePaper {
@@ -46,7 +43,6 @@ const dark = {
     },
 };
 
-
 export default function RootLayout() {
     const displayMode = useDataStore(s => s.displayMode)
 
@@ -60,7 +56,8 @@ export default function RootLayout() {
                 <Stack.Screen
                     name="(home)"
                     options={{
-                        title: 'Home Screen', headerShown: !false,
+                        title: 'Home Screen',
+                        headerShown: !false,
                         header: () => <Header title='आरती संग्रह' showSearchButton />,
                     }}
                 />
