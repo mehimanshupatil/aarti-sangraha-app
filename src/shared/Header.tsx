@@ -8,7 +8,7 @@ import { useAppTheme } from './types';
  
 const Header: React.FC<{
   title: string;
-  navigation: any;
+  navigation?: any;
   showSearchButton: boolean;
 }> = ({ title, navigation, showSearchButton }) => {
   const frame = useSafeAreaFrame();

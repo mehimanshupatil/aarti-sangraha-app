@@ -1,9 +1,9 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import Header from '../shared/Header';
-import Favorites from '../screens/Favorites';
-import CommonTemplate from '../screens/CommonTemplate';
-import addNew from '../screens/AddNew';
+import Favorites from '../screens/---Favorites';
+import CommonTemplate from '../screens/--CommonTemplate';
+import addNew from '../screens/--AddNew';
 import { IconButton } from 'react-native-paper';
 import { RootParamList, useAppTheme } from '../shared/types';
 import { onShare } from './HomeStack';

@@ -3,6 +3,7 @@
     "name": "आरती संग्रह",
     "slug": "aartisangraha",
     "privacy": "unlisted",
+    "scheme": "aartisangraha",
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
@@ -35,6 +36,15 @@
       "eas": {
         "projectId": "558c0ad3-5c21-4264-8630-94f9a48c12fc"
       }
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
+  },
+  "experiments": {
+    "typedRoutes": true
+  },
+  "web": {
+    "bundler": "metro"
   }
 }

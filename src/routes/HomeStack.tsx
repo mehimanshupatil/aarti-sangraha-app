@@ -1,9 +1,9 @@
-import Home from '../screens/Home';
+import Home from '../screens/--Home';
 import { createStackNavigator } from '@react-navigation/stack';
-import CommonTemplate from '../screens/CommonTemplate';
+import CommonTemplate from '../screens/--CommonTemplate';
 import React from 'react';
 import Header from '../shared/Header';
-import AddNew from '../screens/AddNew';
+import AddNew from '../screens/--AddNew';
 import { IconButton } from 'react-native-paper';
  import { Share } from 'react-native';
 import { RootParamList, singleItemType, useAppTheme } from '../shared/types';
