@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
 import { IconButton } from 'react-native-paper';
-import { useAppTheme } from '../../src/shared/types';
+import { useAppTheme } from '../../../../shared/types';
 
 export default function HomeLayout() {
   const { colors } = useAppTheme();
@@ -12,8 +12,7 @@ export default function HomeLayout() {
         backgroundColor: colors.text
       },
       tabBarActiveTintColor: colors.background,
-      tabBarInactiveTintColor: '#ffe06580'
-
+      tabBarInactiveTintColor: colors.background + '80'
     }}
   >
     <Tabs.Screen name='index' options={{
@@ -23,7 +22,7 @@ export default function HomeLayout() {
       }
     }} />
     <Tabs.Screen name='favorites' options={{
-      title: 'Favorites', 
+      title: 'Favorites',
       tabBarIcon: ({ color, size }) => {
         return <IconButton icon='heart-outline' size={size} iconColor={color} />
       }

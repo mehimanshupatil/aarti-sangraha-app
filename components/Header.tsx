@@ -4,8 +4,10 @@ import Search from './Search';
 import { IconButton } from 'react-native-paper';
 import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getDefaultHeaderHeight } from '@react-navigation/elements';
-import { useAppTheme } from './types';
- 
+import { useAppTheme } from '../shared/types';
+import { fontStyle } from '../shared/styles';
+import { useDataStore } from '../store/store';
+
 const Header: React.FC<{
   title: string;
   navigation?: any;
@@ -22,11 +24,14 @@ const Header: React.FC<{
     navigation.openDrawer();
   };
 
-  const [showSearch, setLocalData] = useState(true);
+  const [showSearch, setShowSearch] = useDataStore(s => [
+    s.showSearch,
+    s.setShowSearch
+  ])
 
   return (
     <View style={{ ...styles.header, height: headerHeight, backgroundColor: colors.primary }}>
-      {showSearch ? (
+      {!showSearch ? (
         <>
           <IconButton
             icon='menu'
@@ -36,12 +41,12 @@ const Header: React.FC<{
             style={styles.menuIcon}
           />
           <View>
-            <Text style={{ ...styles.headerText, color: colors.background }}>{title}</Text>
+            <Text style={[{ ...styles.headerText, color: colors.background }, fontStyle.font]}>{title}</Text>
           </View>
           {showSearchButton && (
             <IconButton
               icon='text-box-search-outline'
-              onPress={() => setLocalData(!showSearch)}
+              onPress={() => setShowSearch(true)}
               size={28}
               iconColor={colors.background}
               style={styles.searchIcon}
@@ -49,7 +54,7 @@ const Header: React.FC<{
           )}
         </>
       ) : (
-        <Search setShowSearchInput={() => setLocalData(!showSearch)} />
+        <Search />
       )}
     </View>
   );

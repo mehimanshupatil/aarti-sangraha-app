@@ -39,10 +39,10 @@
     },
     "plugins": [
       "expo-router"
-    ]
-  },
-  "experiments": {
-    "typedRoutes": true
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
   },
   "web": {
     "bundler": "metro"

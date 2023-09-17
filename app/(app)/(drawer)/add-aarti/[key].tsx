@@ -10,47 +10,55 @@ import {
   ScrollView,
   TextInput,
 } from 'react-native';
-import { globalStyle } from '../shared/styles';
-import { addNewNav, useAppTheme } from '../shared/types';
-import { useDataStore } from '../store/store';
+import { globalStyle } from '../../../../shared/styles';
+import {  useAppTheme } from '../../../../shared/types';
+import { useDataStore } from '../../../../store/store';
+import { Stack, router, useLocalSearchParams } from 'expo-router';
 
-const AddNew: React.FC<addNewNav> = ({ navigation, route }) => {
+const AddNew: React.FC = () => {
   const { colors } = useAppTheme();
-  const { item } = route.params;
-  const [addAarti, updateAarti] = useDataStore(s => [s.addAarti, s.updateAarti])
+  const { key } = useLocalSearchParams();
 
-  const [title, setTitle] = useState(item.title);
-  const [body, setBody] = useState(item.body);
+  const [aartis, addAarti, updateAarti] = useDataStore(s => [s.aartis,s.addAarti, s.updateAarti])
 
-  useEffect(() => {
-    navigation.setOptions({
-      title: item.title ? 'Update' : 'Add New',
-    });
-  }, []);
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
+
+  const [selectedItem, setSelectedItem] = useState(
+    aartis.find((x) => x.key == key)
+);
+useEffect(() => {
+    const single = aartis.find((x) => x.key == key);
+    if(!single) return
+    setSelectedItem(single);
+    setTitle(single.title)
+    setBody(single.body)
+}, [aartis, key]);
 
   const onOkPress = () => {
     const item = {
       title,
       body,
-      key: (Math.random() * 900 + 100).toString(), //key between 100 to 1k
+      key: (aartis.length+1).toString(), //key between 100 to 1k
       isFavorite: true,
       tags: [],
       isRemovable: true,
     };
     addAarti(item);
     ToastAndroid.show('Added Successfully', ToastAndroid.SHORT);
-    navigation.goBack();
+    router.back();
   };
 
   const update = () => {
+    if(!selectedItem) return;
     const data = {
-      ...item,
+      ...selectedItem,
       title: title,
       body: body,
     };
     updateAarti(data);
     ToastAndroid.show('Updated Successfully', ToastAndroid.SHORT);
-    navigation.goBack();
+    router.back();
   };
 
   const addItem = () => {
@@ -67,7 +75,7 @@ const AddNew: React.FC<addNewNav> = ({ navigation, route }) => {
         {
           text: 'OK',
           onPress: () => {
-            item.title ? update() : onOkPress();
+            selectedItem ? update() : onOkPress();
             Keyboard.dismiss();
           },
         },
@@ -77,6 +85,15 @@ const AddNew: React.FC<addNewNav> = ({ navigation, route }) => {
 
   return (
     <View style={{ ...globalStyle.homeRoot, backgroundColor: colors.background }}>
+         <Stack.Screen
+                options={{
+                    title: selectedItem ? 'Update' : 'Add',
+                    headerTintColor: colors.background,
+                    headerStyle: {
+                        backgroundColor: colors.text
+                    }
+                }}
+            />
       <ScrollView style={globalStyle.homecontainer} keyboardShouldPersistTaps='handled'>
         <TextInput
           placeholderTextColor={colors.primary}
@@ -115,7 +132,7 @@ const AddNew: React.FC<addNewNav> = ({ navigation, route }) => {
               fontSize: 15,
             }}
           >
-            {item.title ? 'Update' : 'Add'}
+            {selectedItem ? 'Update' : 'Add'}
           </Text>
         </TouchableOpacity>
       </ScrollView>

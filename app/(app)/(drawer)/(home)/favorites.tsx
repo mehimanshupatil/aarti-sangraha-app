@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native"; 
-import SingleItem from "../../src/components/SingleItem";
-import { globalStyle } from "../../src/shared/styles";
-import { useDataStore } from '../../src/store/store';
-import { singleItemType, useAppTheme } from "../../src/shared/types";
+import { StyleSheet, Text, View, FlatList } from "react-native";
+import SingleItem from "../../../../components/SingleItem";
+import { globalStyle } from "../../../../shared/styles";
+import { useDataStore } from '../../../../store/store';
+import { singleItemType, useAppTheme } from "../../../../shared/types";
 import { router } from 'expo-router';
- 
+
 const Favorites: React.FC = () => {
   const { colors } = useAppTheme();
-  const [aartis, searchValue] = useDataStore(s => [s.aartis,s.searchValue ])
+  const [aartis, searchValue] = useDataStore(s => [s.aartis, s.searchValue])
 
   const pressHandler = (item: singleItemType) => {
     router.push(`/aarti-view/${item.key}`);
+    router.setParams({favorites: 'true'})
   };
- 
+
   const [localData, setLocalData] = useState<singleItemType[]>([]);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ const Favorites: React.FC = () => {
       setLocalData(
         aartis.filter(
           (x) =>
-          x.isFavorite &&
+            x.isFavorite &&
             (x.title.includes(searchValue) || x.body.includes(searchValue))
         )
       );

@@ -1,12 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, Text, ToastAndroid, Alert, ScrollView } from 'react-native';
 import * as Linking from 'expo-linking';
-import { singleItemType, useAppTheme } from '../src/shared/types';
-import { router } from 'expo-router';
-  
+import { singleItemType, useAppTheme } from '../../shared/types';
+
 const About: React.FC = () => {
   const { colors } = useAppTheme();
- 
+
   const handlePress = (url: string) => {
     Linking.openURL(url);
   };
@@ -26,9 +25,9 @@ const About: React.FC = () => {
           onPress: () => {
             try {
               const data: singleItemType[] = require('../shared/data.json');
-              // dispatch({ type: 'INITIALIZE', data });
+              //  dispatch({ type: 'INITIALIZE', data });
               ToastAndroid.show('Data Cleared Successfully', ToastAndroid.SHORT);
-              router.back();
+
             } catch (error) {
               console.error(error);
             }
@@ -47,7 +46,7 @@ const About: React.FC = () => {
     >
       <View style={styles.container}>
         <Text style={{ fontSize: 20, color: colors.primary }}>
-          Thanks for using app. Please rate 5 ⭐️ on
+          If you're enjoying the app, please consider sharing your feedback with a 5-star rating
           <Text
             style={styles.texturl}
             onPress={() =>
@@ -66,15 +65,15 @@ const About: React.FC = () => {
           </Text>
           {'\n'}
           {'\n'}
-          <Text onPress={reset}>Click here to reset customised data</Text>
-          {'\n'}
-          {'\n'}
-          For suggestion 📧 at{'\n'}
+          {/* <Text onPress={reset}>Click here to reset customised data</Text> */}
+          {/* {'\n'}
+          {'\n'} */}
+          If you have suggestions, questions, or encounter any issues, don't hesitate to reach out:{'\n'}
           <Text
             style={styles.texturl}
             onPress={() => handlePress('mailto:mailhimanshupatil@gmail.com')}
           >
-            mailhimanshupatil@gmail.com
+            dev@himanshupatil.dev
           </Text>
           {'\n'}
           {'\n'}

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ToastAndroid } from "react-native";
 import { singleItemType, useAppTheme } from "../shared/types";
 import { IconButton, TouchableRipple } from "react-native-paper";
 import { useDataStore } from '../store/store';
+import { fontStyle } from '../shared/styles';
 
 const SingleItem: React.FC<{
   pressHandler: (arg0: singleItemType) => void;
@@ -37,7 +38,7 @@ const SingleItem: React.FC<{
         <View>
           <View style={styles.firstLine}>
             <Text
-              style={{ ...styles.title, color: colors.text }}
+              style={[{ ...styles.title, color: colors.text }, fontStyle.font]}
               ellipsizeMode="tail"
               numberOfLines={1}
             >
@@ -53,10 +54,10 @@ const SingleItem: React.FC<{
           </View>
           <View style={styles.firstLine}>
             <Text
-              style={{
+              style={[{
                 flex: 1,
                 color: colors.text,
-              }}
+              }, fontStyle.font]}
               ellipsizeMode="tail"
               numberOfLines={1}
             >

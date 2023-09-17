@@ -11,3 +11,9 @@ export const globalStyle = StyleSheet.create({
     flex: 1,
   },
 });
+
+export const fontStyle = StyleSheet.create({
+  font: {
+    fontFamily: 'nono_devanagari'
+  }
+})

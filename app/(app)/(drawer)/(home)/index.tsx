@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 import { IconButton } from 'react-native-paper';
-import SingleItem from '../components/SingleItem';
-import { globalStyle } from '../shared/styles';
-import { homeNav, singleItemType, useAppTheme } from '../shared/types';
-import { useDataStore } from '../store/store';
-  
-const Home: React.FC<homeNav> = ({ navigation }) => {
+import SingleItem from '../../../../components/SingleItem';
+import { globalStyle } from '../../../../shared/styles';
+import { singleItemType, useAppTheme } from '../../../../shared/types';
+import { useDataStore } from '../../../../store/store';
+import { router } from 'expo-router';
+
+const Home: React.FC = () => {
   const { colors } = useAppTheme();
-  const [aartis, searchValue] = useDataStore(s=> [s.aartis, s.searchValue])
- 
+  const [aartis, searchValue] = useDataStore(s => [s.aartis, s.searchValue])
+
   const pressHandler = (item: singleItemType) => {
-    navigation.push('CommonComponent', {
-      key: item.key,
-    });
+    router.push(`/aarti-view/${item.key}`);
+    router.setParams({favorites: 'false'})
   };
   const addNew = () => {
-    navigation.push('addNew', { item: {} as any });
+    router.push(`/add-aarti/0`);
   };
 
   const [localData, setLocalData] = useState(aartis);
@@ -33,14 +33,14 @@ const Home: React.FC<homeNav> = ({ navigation }) => {
     <View style={{ ...globalStyle.homeRoot, backgroundColor: colors.background }}>
       <View style={globalStyle.homecontainer}>
         <FlatList
-         data={localData}
+          data={localData}
           renderItem={({ item }) => <SingleItem item={item} pressHandler={pressHandler} />}
           showsVerticalScrollIndicator={false}
           ListFooterComponent={() => (
             <IconButton
               icon='plus'
               style={{
-                ...styles.dummyConatiner,
+                ...styles.dummyContainer,
                 borderColor: colors.primary,
                 backgroundColor: colors.background,
                 shadowColor: colors.background,
@@ -59,7 +59,7 @@ const Home: React.FC<homeNav> = ({ navigation }) => {
 export default Home;
 
 const styles = StyleSheet.create({
-  dummyConatiner: {
+  dummyContainer: {
     marginVertical: 16,
     marginHorizontal: 0,
     alignItems: 'center',

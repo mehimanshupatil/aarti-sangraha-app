@@ -4,21 +4,23 @@ import { singleItemType } from '../shared/types';
 import { ColorSchemeName } from "react-native";
 import { immer } from 'zustand/middleware/immer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import data from "../shared/data.json";
+import data from "./data.json";
 import { shallow } from 'zustand/shallow'
 
 interface DataState {
     aartis: singleItemType[];
-    fontSize: number;
-    searchValue: string;
-    displayMode: NonNullable<ColorSchemeName>;
-    toggleFav: (id: singleItemType['key']) => void
-    addAarti: (size: singleItemType) => void;
     updateAarti: (size: singleItemType) => void;
     deleteAarti: (id: singleItemType['key']) => void;
-    setFontSize: (size: number) => void;
-    setSearchValue: (text: string) => void;
+    toggleFav: (id: singleItemType['key']) => void
+    addAarti: (size: singleItemType) => void;
+    displayMode: NonNullable<ColorSchemeName>;
     setDisplayMode: (mode: NonNullable<ColorSchemeName>) => void
+    fontSize: number;
+    setFontSize: (size: number) => void;
+    showSearch: boolean;
+    setShowSearch: (arg: boolean) => void;
+    searchValue: string;
+    setSearchValue: (text: string) => void;
 }
 
 export const useDataStore = createWithEqualityFn<DataState>()(
@@ -30,6 +32,11 @@ export const useDataStore = createWithEqualityFn<DataState>()(
                     fontSize: 20,
                     searchValue: '',
                     displayMode: 'light',
+                    showSearch: false,
+                    setShowSearch: (arg) => 
+                        set(state => {
+                            state.showSearch = arg
+                        }) ,
                     toggleFav: (key) =>
                         set(state => {
                             const index = state.aartis.findIndex(x => x.key === key)

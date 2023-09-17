@@ -38,7 +38,7 @@ https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha 
     <SafeAreaView style={{ flex: 1 }}>
       <Image
         resizeMode='contain'
-        source={require('../../assets/icon.png')}
+        source={require('../assets/icon.png')}
         style={[styles.sideMenuProfileIcon, { width: imgWidth, height: imgWidth }]}
       />
       <DrawerContentScrollView {...props}>

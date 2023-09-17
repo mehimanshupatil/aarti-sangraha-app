@@ -1,14 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
 import { IconButton } from 'react-native-paper';
-import { useAppTheme } from './types';
+import { useAppTheme } from '../shared/types';
 import { useDataStore } from '../store/store';
 
-const Search: React.FC<{ setShowSearchInput: (arg0: boolean) => void }> = ({
-  setShowSearchInput,
-}) => {
+const Search: React.FC = ( ) => {
   const { colors } = useAppTheme();
-  const [searchValue, setSearchValue] = useDataStore(s => [s.searchValue, s.setSearchValue])
+  const [searchValue, setSearchValue, setShowSearch] = useDataStore(s => [s.searchValue, s.setSearchValue, s.setShowSearch])
 
   const searchInput = (data: string) => {
     setSearchValue(data);
@@ -37,7 +35,7 @@ const Search: React.FC<{ setShowSearchInput: (arg0: boolean) => void }> = ({
       <IconButton
         icon='close'
         onPress={() => {
-          setShowSearchInput(false);
+          setShowSearch(false);
           searchInput('');
         }}
         size={24}

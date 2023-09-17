@@ -1,5 +1,6 @@
  
 import { singleItemType } from "../shared/types";
+import data from "./data.json";
 
 export interface IState {
   aartis: singleItemType[];
@@ -7,7 +8,6 @@ export interface IState {
   searchValue: string; 
 }
 
-import data from "../shared/data.json";
 
 const initialState: IState = {
   aartis: data.map((x) => ({ ...x, isRemovable: false, isFavorite: false })),
