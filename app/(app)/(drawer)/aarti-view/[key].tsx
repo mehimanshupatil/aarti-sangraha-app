@@ -15,6 +15,7 @@ import { onShare } from '../../../../shared/helper';
 import { fontStyle as fontStyle } from '../../../../shared/styles';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
+import Head from 'expo-router/head';
 
 const CommonTemplate: React.FC = () => {
     useKeepAwake();
@@ -113,7 +114,7 @@ const CommonTemplate: React.FC = () => {
             // If at the beginning, wrap around to the end
             newKey = index === 0 ? tempList[tempList.length - 1] : tempList[index - 1];
         }
- 
+
         handlePress()
         router.setParams({ key: newKey });
     }
@@ -124,6 +125,10 @@ const CommonTemplate: React.FC = () => {
             onSwipeableClose={nextPrev}
             childrenContainerStyle={{ flex: 1 }}
             containerStyle={{ flex: 1, backgroundColor: colors.background }}  >
+            <Head>
+                <title>{selectedItem?.title}</title>
+                <meta name="description" content={selectedItem?.body} />
+            </Head>
             <Stack.Screen
                 options={{
                     title: selectedItem?.title,
@@ -212,10 +217,10 @@ const CommonTemplate: React.FC = () => {
                         />
                     </View>
                 </View>
-                
+
                 <ScrollView onLayout={(evt) => {
                     const { height, y } = evt.nativeEvent.layout;
-                     setScrollHeight(Math.round(height) - y - (fontSize))
+                    setScrollHeight(Math.round(height) - y - (fontSize))
                 }} >
                     <Text style={[{ color: colors.primary, fontSize: fontSize }, fontStyle.font]}>
                         {selectedItem?.body}
@@ -227,7 +232,7 @@ const CommonTemplate: React.FC = () => {
                         संचित नयनरेखा ठेवण्यासाठी जागा सोडली आहे.
                     </Text>
                 </ScrollView>
-               
+
             </Animated.View>
         </Swipeable>
     );
@@ -236,7 +241,7 @@ const CommonTemplate: React.FC = () => {
 const styles = StyleSheet.create({
     container: {
         padding: 20,
-        height: '100%', 
+        height: '100%',
     },
     buttonContainer: {
         flexDirection: "row",

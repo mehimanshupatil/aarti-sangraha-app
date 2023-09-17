@@ -6,6 +6,7 @@ import { globalStyle } from '../../../../shared/styles';
 import { singleItemType, useAppTheme } from '../../../../shared/types';
 import { useDataStore } from '../../../../store/store';
 import { router } from 'expo-router';
+import Head from 'expo-router/head';
 
 const Home: React.FC = () => {
   const { colors } = useAppTheme();
@@ -13,7 +14,7 @@ const Home: React.FC = () => {
 
   const pressHandler = (item: singleItemType) => {
     router.push(`/aarti-view/${item.key}`);
-    router.setParams({favorites: 'false'})
+    router.setParams({ favorites: 'false' })
   };
   const addNew = () => {
     router.push(`/add-aarti/0`);
@@ -31,6 +32,10 @@ const Home: React.FC = () => {
 
   return (
     <View style={{ ...globalStyle.homeRoot, backgroundColor: colors.background }}>
+     <Head>
+        <title>आरती संग्रह</title>
+        <meta name="description" content="आरती संग्रह" />
+      </Head>
       <View style={globalStyle.homecontainer}>
         <FlatList
           data={localData}
@@ -51,7 +56,7 @@ const Home: React.FC = () => {
             />
           )}
         />
-      </View>
+      H</View>
     </View>
   );
 };

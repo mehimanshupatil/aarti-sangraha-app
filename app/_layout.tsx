@@ -106,6 +106,7 @@ export default function RootLayout2() {
 
     return (
         <PaperProvider theme={displayMode === 'dark' ? dark : light}  >
+
             <Stack screenOptions={{
                 statusBarStyle: displayMode === 'dark' ? 'dark' : 'light',
                 statusBarColor: displayMode === 'dark' ? '#FFE065' : '#181C3F',

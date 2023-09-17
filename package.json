@@ -13,38 +13,42 @@
   "bugs": {
     "url": "https://github.com/mehimanshupatil/aarti-sangraha-app/issues"
   },
-  "homepage": "https://github.com/mehimanshupatil/aarti-sangraha-app",
+  "homepage": "https://aarti-sangraha.himanshupatil.dev",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "web:build": "npx expo export -p web",
-    "eject": "expo eject"
+    "web:build": "npx expo export --platform web && node ./scripts/postBuild.js",
+    "eject": "expo eject",
+    "predeploy": "npm run web:build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@expo/webpack-config": "^19.0.0",
     "@react-native-async-storage/async-storage": "1.18.2",
     "@react-navigation/drawer": "^6.6.3",
     "expo": "^49.0.7",
+    "expo-clipboard": "~4.3.1",
     "expo-constants": "~14.4.2",
     "expo-font": "~11.4.0",
     "expo-keep-awake": "~12.3.0",
     "expo-linking": "~5.0.2",
     "expo-module-scripts": "^3.1.0",
     "expo-router": "^2.0.0",
+    "expo-status-bar": "^1.7.1",
     "immer": "^9.0.21",
+    "metro": "^0.79.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.72.4",
     "react-native-gesture-handler": "~2.12.0",
     "react-native-paper": "^5.10.1",
-    "react-native-reanimated": "~3.3.0",
+    "react-native-reanimated": "^3.5.2",
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
     "react-native-web": "~0.19.6",
-    "zustand": "^4.4.1",
-    "expo-clipboard": "~4.3.1"
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
@@ -56,7 +60,15 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.24.0",
+    "gh-pages": "^6.0.0",
+    "glob": "^10.3.4",
     "prettier": "^3.0.2",
     "typescript": "^5.1.3"
+  },
+  "overrides": {
+    "react-refresh": "~0.14.0"
+  },
+  "resolutions": {
+    "react-refresh": "~0.14.0"
   }
 }

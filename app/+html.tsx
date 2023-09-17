@@ -10,7 +10,12 @@ export default function Root({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <link rel="icon" type="image/x-icon" href="/assets/assets/icon.png" />
+        <title>आरती संग्रह</title>
+        <meta name="theme-color" content="#FFE065" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
         {/* 
           This viewport disables scaling which makes the mobile website act more like a native app.
           However this does reduce built-in accessibility. If you want to enable scaling, use this instead:
@@ -29,6 +34,30 @@ export default function Root({ children }: { children: React.ReactNode }) {
         {/* Using raw CSS styles as an escape-hatch to ensure the background color never flickers in dark-mode. */}
         <style dangerouslySetInnerHTML={{ __html: responsiveBackground }} />
         {/* Add any additional <head> elements that you want globally available on web... */}
+
+        {/* <!-- Start Single Page Apps for GitHub Pages --> */}
+        {/* // Single Page Apps for GitHub Pages
+            MIT License
+        https://github.com/rafgraph/spa-github-pages
+       */}
+         <script dangerouslySetInnerHTML={{
+          __html: `
+          (function(l) {
+            if (l.search[1] === '/' ) {
+              var decoded = l.search.slice(1).split('&').map(function(s) { 
+                return s.replace(/~and~/g, '&')
+              }).join('?');
+              window.history.replaceState(null, '',
+                  l.pathname.slice(0, -1) + decoded + l.hash
+              );
+            }
+          }(window.location))
+          `
+        }} /> 
+
+
+        {/* <!-- End Single Page Apps for GitHub Pages --> */}
+
       </head>
       <body>{children}</body>
     </html>
