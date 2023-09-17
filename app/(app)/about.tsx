@@ -61,7 +61,12 @@ const About: React.FC = () => {
           /
           <Text style={styles.texturl} onPress={() => handlePress('https://galaxy.store/aarti')}>
             {' '}
-            Samsung Store
+            Samsung Store{' '}
+          </Text>
+           also web Version of app is available at 
+          <Text style={styles.texturl} onPress={() => handlePress('https://aarti-sangraha.himanshupatil.dev/')}>
+            {' '} 
+          https://aarti-sangraha.himanshupatil.dev/
           </Text>
           {'\n'}
           {'\n'}

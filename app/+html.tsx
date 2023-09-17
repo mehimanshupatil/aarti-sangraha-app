@@ -16,6 +16,27 @@ export default function Root({ children }: { children: React.ReactNode }) {
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
+
+        {/* <!-- Primary Meta Tags --> */}
+        
+        <meta name="title" content="आरती संग्रह" />
+        <meta name="description" content="marathi aarti sangraha" />
+
+        {/* <!-- Open Graph / Facebook --> */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://aarti-sangraha.himanshupatil.dev/" />
+        <meta property="og:title" content="आरती संग्रह" />
+        <meta property="og:description" content="आरती संग्रह" />
+        <meta property="og:image" content="/apple-touch-icon.png" />
+
+        {/* <!-- Twitter --> */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://aarti-sangraha.himanshupatil.dev/" />
+        <meta property="twitter:title" content="आरती संग्रह" />
+        <meta property="twitter:description" content="आरती संग्रह" />
+        <meta property="twitter:image" content="/apple-touch-icon.png" />
+
+
         {/* 
           This viewport disables scaling which makes the mobile website act more like a native app.
           However this does reduce built-in accessibility. If you want to enable scaling, use this instead:
@@ -40,7 +61,7 @@ export default function Root({ children }: { children: React.ReactNode }) {
             MIT License
         https://github.com/rafgraph/spa-github-pages
        */}
-         <script dangerouslySetInnerHTML={{
+        <script dangerouslySetInnerHTML={{
           __html: `
           (function(l) {
             if (l.search[1] === '/' ) {
@@ -53,7 +74,7 @@ export default function Root({ children }: { children: React.ReactNode }) {
             }
           }(window.location))
           `
-        }} /> 
+        }} />
 
 
         {/* <!-- End Single Page Apps for GitHub Pages --> */}
