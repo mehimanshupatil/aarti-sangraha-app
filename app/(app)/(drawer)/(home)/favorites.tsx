@@ -8,7 +8,7 @@ import { router } from 'expo-router';
 
 const Favorites: React.FC = () => {
   const { colors } = useAppTheme();
-  const [aartis, searchValue] = useDataStore(s => [s.aartis, s.searchValue])
+  const [aartis, searchValue, favoritesKeys] = useDataStore(s => [s.aartis, s.searchValue, s.favoritesKeys])
 
   const pressHandler = (item: singleItemType) => {
     router.push(`/aarti-view/${item.key}`);
@@ -22,11 +22,11 @@ const Favorites: React.FC = () => {
       setLocalData(
         aartis.filter(
           (x) =>
-            x.isFavorite &&
+          favoritesKeys.includes(x.key)  &&
             (x.title.includes(searchValue) || x.body.includes(searchValue))
         )
       );
-    else setLocalData(aartis.filter((x) => x.isFavorite));
+    else setLocalData(aartis.filter((x) => favoritesKeys.includes(x.key)));
   }, [aartis, searchValue]);
 
   return (

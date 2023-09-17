@@ -10,7 +10,7 @@ import {
   TextInput,
 } from 'react-native';
 import { globalStyle } from '../../../../shared/styles';
-import {  useAppTheme } from '../../../../shared/types';
+import { useAppTheme } from '../../../../shared/types';
 import { useDataStore } from '../../../../store/store';
 import { Stack, router, useLocalSearchParams } from 'expo-router';
 
@@ -18,30 +18,28 @@ const AddNew: React.FC = () => {
   const { colors } = useAppTheme();
   const { key } = useLocalSearchParams();
 
-  const [aartis, addAarti, updateAarti] = useDataStore(s => [s.aartis,s.addAarti, s.updateAarti])
+  const [aartis, addAarti, updateAarti] = useDataStore(s => [s.aartis, s.addAarti, s.updateAarti])
 
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
   const [selectedItem, setSelectedItem] = useState(
     aartis.find((x) => x.key == key)
-);
-useEffect(() => {
+  );
+  useEffect(() => {
     const single = aartis.find((x) => x.key == key);
-    if(!single) return
+    if (!single) return
     setSelectedItem(single);
     setTitle(single.title)
     setBody(single.body)
-}, [aartis, key]);
+  }, [aartis, key]);
 
   const onOkPress = () => {
     const item = {
       title,
       body,
-      key: (aartis.length+1).toString(), //key between 100 to 1k
-      isFavorite: true,
-      tags: [],
-      isRemovable: true,
+      key: (aartis.length + 1).toString(), //key between 100 to 1k
+      tags: []
     };
     addAarti(item);
     // ToastAndroid.show('Added Successfully', ToastAndroid.SHORT);
@@ -49,7 +47,7 @@ useEffect(() => {
   };
 
   const update = () => {
-    if(!selectedItem) return;
+    if (!selectedItem) return;
     const data = {
       ...selectedItem,
       title: title,
@@ -84,15 +82,15 @@ useEffect(() => {
 
   return (
     <View style={{ ...globalStyle.homeRoot, backgroundColor: colors.background }}>
-         <Stack.Screen
-                options={{
-                    title: selectedItem ? 'Update' : 'Add',
-                    headerTintColor: colors.background,
-                    headerStyle: {
-                        backgroundColor: colors.text
-                    }
-                }}
-            />
+      <Stack.Screen
+        options={{
+          title: selectedItem ? 'Update' : 'Add',
+          headerTintColor: colors.background,
+          headerStyle: {
+            backgroundColor: colors.text
+          }
+        }}
+      />
       <ScrollView style={globalStyle.homecontainer} keyboardShouldPersistTaps='handled'>
         <TextInput
           placeholderTextColor={colors.primary}

@@ -10,11 +10,11 @@ const SingleItem: React.FC<{
   item: singleItemType;
 }> = ({ pressHandler, item }) => {
   const { colors } = useAppTheme();
-  const [toggleFav] = useDataStore(s => [s.toggleFav])
+  const [toggleFav, favoritesKeys] = useDataStore(s => [s.toggleFav, s.favoritesKeys])
 
   const iconPress = (item: singleItemType) => {
     // ToastAndroid.show(
-    //   !item.isFavorite ? "Added to Favorites" : "Removed from Favorites",
+    //   !favoritesKeys.includes(item.key) ? "Added to Favorites" : "Removed from Favorites",
     //   ToastAndroid.SHORT
     // );
     toggleFav(item.key)
@@ -45,7 +45,7 @@ const SingleItem: React.FC<{
               {item.title}
             </Text>
             <IconButton
-              icon={item.isFavorite ? "heart" : "heart-outline"}
+              icon={favoritesKeys.includes(item.key) ? "heart" : "heart-outline"}
               size={30}
               style={styles.unsetbuttonStyle}
               iconColor={colors.primary}

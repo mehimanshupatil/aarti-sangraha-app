@@ -1,14 +1,8 @@
 import { useTheme } from 'react-native-paper';
+import data from '../store/data';
 import { light } from '../app/_layout';
   
-export type singleItemType = {
-  key: string;
-  title: string;
-  body: string;
-  tags: string[];
-  isRemovable: boolean | undefined;
-  isFavorite: boolean | undefined;
-};
+export type singleItemType =typeof data[number];
 
 export type AppTheme = typeof light;
 

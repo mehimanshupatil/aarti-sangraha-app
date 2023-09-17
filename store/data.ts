@@ -1,4 +1,4 @@
-[
+const data = [
   {
     "key": "1",
     "title": "सुखकर्ता दुःखहर्ता",
@@ -318,3 +318,5 @@
     "tags": []
   }
 ]
+
+export default data

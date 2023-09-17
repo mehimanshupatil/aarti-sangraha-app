@@ -12,7 +12,7 @@ import { IconButton } from "react-native-paper";
 import { useDataStore } from '../../../../store/store';
 import { Stack, router, useLocalSearchParams } from 'expo-router';
 import { onShare } from '../../../../shared/helper';
-import { fontStyle as fontStyle } from '../../../../shared/styles'; 
+import { fontStyle as fontStyle } from '../../../../shared/styles';
 import Head from 'expo-router/head';
 
 const CommonTemplate: React.FC = () => {
@@ -23,7 +23,7 @@ const CommonTemplate: React.FC = () => {
     const [scrollHeight, setScrollHeight] = useState(0)
 
     const { colors } = useAppTheme();
-    const [aartis, fontSize] = useDataStore(s => [s.aartis, s.fontSize])
+    const [aartis, fontSize, favoritesKeys] = useDataStore(s => [s.aartis, s.fontSize, s.favoritesKeys])
     const [setFontSize, toggleFav, deleteAarti] = useDataStore(s => [s.setFontSize, s.toggleFav, s.deleteAarti])
 
     const [selectedItem, setSelectedItem] = useState(
@@ -62,7 +62,7 @@ const CommonTemplate: React.FC = () => {
         if (!item) return;
 
         // ToastAndroid.show(
-        //     !item.isFavorite ? "Added to Favorites" : "Removed from Favorites",
+        //     !favoritesKeys.includes(selectedItem?.key ?? '') ? "Added to Favorites" : "Removed from Favorites",
         //     ToastAndroid.SHORT
         // );
 
@@ -73,10 +73,10 @@ const CommonTemplate: React.FC = () => {
         if (!selectedItem) return;
         router.push(`/add-aarti/${key}`);
     };
- 
- 
+
+
     return (
-        <View 
+        <View
             style={{ flex: 1, backgroundColor: colors.background }}  >
             <Head>
                 <title>{selectedItem?.title}</title>
@@ -113,35 +113,35 @@ const CommonTemplate: React.FC = () => {
                 <View style={styles.buttonContainer}>
                     <View style={styles.fontButton}>
                         <IconButton
-                            icon={selectedItem?.isFavorite ? "heart" : "heart-outline"}
+                            icon={favoritesKeys.includes(selectedItem?.key ?? '') ? "heart" : "heart-outline"}
                             size={30}
                             style={styles.unsetbuttonStyle}
                             iconColor={colors.primary}
                             onPress={() => iconPress(selectedItem)}
                         />
-                        {selectedItem?.isRemovable && (
-                            <IconButton
-                                icon="delete-forever"
-                                size={30}
-                                style={styles.unsetbuttonStyle}
-                                iconColor={colors.primary}
-                                onPress={deletePress}
-                            />
-                        )}
+
+                        <IconButton
+                            icon="delete-forever"
+                            size={30}
+                            style={styles.unsetbuttonStyle}
+                            iconColor={colors.primary}
+                            onPress={deletePress}
+                        />
+
                     </View>
                     <View style={[styles.fontButton, { alignItems: "center" }]}>
                         <Text style={{ color: colors.primary, fontSize: 25 }}>
                             {selectedItem?.key}
                         </Text>
-                        {selectedItem?.isRemovable && (
-                            <IconButton
-                                icon="file-document-edit-outline"
-                                size={30}
-                                style={styles.unsetbuttonStyle}
-                                iconColor={colors.primary}
-                                onPress={addNew}
-                            />
-                        )}
+
+                        <IconButton
+                            icon="file-document-edit-outline"
+                            size={30}
+                            style={styles.unsetbuttonStyle}
+                            iconColor={colors.primary}
+                            onPress={addNew}
+                        />
+
                     </View>
                     <View style={styles.fontButton}>
                         <IconButton

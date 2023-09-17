@@ -4,15 +4,16 @@ import { singleItemType } from '../shared/types';
 import { ColorSchemeName } from "react-native";
 import { immer } from 'zustand/middleware/immer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import data from "./data.json";
+import data from "./data";
 import { shallow } from 'zustand/shallow'
 
 interface DataState {
-    aartis: singleItemType[];
-    updateAarti: (size: singleItemType) => void;
-    deleteAarti: (id: singleItemType['key']) => void;
+    aartis: singleItemType[]; 
+    favoritesKeys: string[];
     toggleFav: (id: singleItemType['key']) => void
-    addAarti: (size: singleItemType) => void;
+    addAarti: (item: singleItemType) => void;
+    updateAarti: (item: singleItemType) => void;
+    deleteAarti: (id: singleItemType['key']) => void;
     displayMode: NonNullable<ColorSchemeName>;
     setDisplayMode: (mode: NonNullable<ColorSchemeName>) => void
     fontSize: number;
@@ -28,19 +29,27 @@ export const useDataStore = createWithEqualityFn<DataState>()(
         persist(
             immer(
                 (set) => ({
-                    aartis: data.map((x) => ({ ...x, isRemovable: false, isFavorite: false })),
+                    aartis: data, 
+                    favoritesKeys: [] as DataState['favoritesKeys'],
                     fontSize: 20,
                     searchValue: '',
                     displayMode: 'light',
                     showSearch: false,
-                    setShowSearch: (arg) => 
+                    setShowSearch: (arg) =>
                         set(state => {
                             state.showSearch = arg
-                        }) ,
+                        }),
                     toggleFav: (key) =>
                         set(state => {
-                            const index = state.aartis.findIndex(x => x.key === key)
-                            if (index !== -1) state.aartis[index].isFavorite = !state.aartis[index].isFavorite
+                            const index = state.favoritesKeys.indexOf(key)
+
+                            if (index === -1) {
+                                // Key is not in the array, so add it
+                                state.favoritesKeys.push(key);
+                            } else {
+                                // Key is in the array, so remove it
+                                state.favoritesKeys.splice(index, 1);
+                            }
                         }),
                     addAarti: (aarti) =>
                         set(state => {
