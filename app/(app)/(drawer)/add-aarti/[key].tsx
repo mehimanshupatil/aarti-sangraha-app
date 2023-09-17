@@ -5,7 +5,6 @@ import {
   Text,
   TouchableOpacity,
   Alert,
-  ToastAndroid,
   Keyboard,
   ScrollView,
   TextInput,
@@ -45,7 +44,7 @@ useEffect(() => {
       isRemovable: true,
     };
     addAarti(item);
-    ToastAndroid.show('Added Successfully', ToastAndroid.SHORT);
+    // ToastAndroid.show('Added Successfully', ToastAndroid.SHORT);
     router.back();
   };
 
@@ -57,7 +56,7 @@ useEffect(() => {
       body: body,
     };
     updateAarti(data);
-    ToastAndroid.show('Updated Successfully', ToastAndroid.SHORT);
+    // ToastAndroid.show('Updated Successfully', ToastAndroid.SHORT);
     router.back();
   };
 

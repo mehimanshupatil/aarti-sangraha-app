@@ -5,7 +5,6 @@ import {
     View,
     Text,
     Alert,
-    ToastAndroid,
 } from "react-native";
 import { useKeepAwake } from "expo-keep-awake";
 import { singleItemType, useAppTheme } from "../../../../shared/types";
@@ -15,8 +14,7 @@ import { Stack, router, useLocalSearchParams } from 'expo-router';
 import { onShare } from '../../../../shared/helper';
 import { fontStyle as fontStyle } from '../../../../shared/styles';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import Animated, { Easing, useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
-
+import Animated, { Easing, useAnimatedStyle, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
 
 const CommonTemplate: React.FC = () => {
     useKeepAwake();
@@ -51,7 +49,7 @@ const CommonTemplate: React.FC = () => {
                     text: "ठीक आहे",
                     onPress: () => {
                         deleteAarti((selectedItem?.key ?? 0).toString());
-                        ToastAndroid.show("यशस्वीरित्या हटविले", ToastAndroid.SHORT);
+                        // ToastAndroid.show("यशस्वीरित्या हटविले", ToastAndroid.SHORT);
                         router.back();
                     },
                 },
@@ -64,10 +62,10 @@ const CommonTemplate: React.FC = () => {
     ) => {
         if (!item) return;
 
-        ToastAndroid.show(
-            !item.isFavorite ? "Added to Favorites" : "Removed from Favorites",
-            ToastAndroid.SHORT
-        );
+        // ToastAndroid.show(
+        //     !item.isFavorite ? "Added to Favorites" : "Removed from Favorites",
+        //     ToastAndroid.SHORT
+        // );
 
         toggleFav(item.key);
     };
@@ -123,7 +121,9 @@ const CommonTemplate: React.FC = () => {
     return (
         <Swipeable
             friction={50}
-            onSwipeableClose={nextPrev} containerStyle={{ flex: 1, backgroundColor: colors.background, }}  >
+            onSwipeableClose={nextPrev}
+            childrenContainerStyle={{ flex: 1 }}
+            containerStyle={{ flex: 1, backgroundColor: colors.background }}  >
             <Stack.Screen
                 options={{
                     title: selectedItem?.title,
@@ -212,11 +212,11 @@ const CommonTemplate: React.FC = () => {
                         />
                     </View>
                 </View>
+                
                 <ScrollView onLayout={(evt) => {
                     const { height, y } = evt.nativeEvent.layout;
-
-                    setScrollHeight(Math.round(height) - y - (fontSize))
-                }}>
+                     setScrollHeight(Math.round(height) - y - (fontSize))
+                }} >
                     <Text style={[{ color: colors.primary, fontSize: fontSize }, fontStyle.font]}>
                         {selectedItem?.body}
                     </Text>
@@ -227,6 +227,7 @@ const CommonTemplate: React.FC = () => {
                         संचित नयनरेखा ठेवण्यासाठी जागा सोडली आहे.
                     </Text>
                 </ScrollView>
+               
             </Animated.View>
         </Swipeable>
     );
@@ -235,6 +236,7 @@ const CommonTemplate: React.FC = () => {
 const styles = StyleSheet.create({
     container: {
         padding: 20,
+        height: '100%', 
     },
     buttonContainer: {
         flexDirection: "row",

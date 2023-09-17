@@ -4,7 +4,7 @@ import { MD3DarkTheme, DefaultTheme, Provider as PaperProvider } from 'react-nat
 import { useDataStore } from '../store/store';
 import { SplashScreen, Stack, router } from 'expo-router';
 import { useFonts } from 'expo-font';
-import { BackHandler, ToastAndroid } from 'react-native';
+import { BackHandler } from 'react-native';
 
 declare global {
     namespace ReactNativePaper {
@@ -80,7 +80,7 @@ export default function RootLayout2() {
                 }
 
                 backPressed++;
-                ToastAndroid.show('Press Again To Exit', ToastAndroid.SHORT);
+                // ToastAndroid.show('Press Again To Exit', ToastAndroid.SHORT);
                 setTimeout(() => {
                     backPressed = 0;
                 }, 2000);

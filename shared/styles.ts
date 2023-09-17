@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 export const globalStyle = StyleSheet.create({
   homeRoot: {
     flexGrow: 1,
+    height: '100%'
   },
   homecontainer: {
     margin: 20,

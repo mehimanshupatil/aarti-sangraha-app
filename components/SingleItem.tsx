@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, ToastAndroid } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { singleItemType, useAppTheme } from "../shared/types";
 import { IconButton, TouchableRipple } from "react-native-paper";
 import { useDataStore } from '../store/store';
@@ -13,10 +13,10 @@ const SingleItem: React.FC<{
   const [toggleFav] = useDataStore(s => [s.toggleFav])
 
   const iconPress = (item: singleItemType) => {
-    ToastAndroid.show(
-      !item.isFavorite ? "Added to Favorites" : "Removed from Favorites",
-      ToastAndroid.SHORT
-    );
+    // ToastAndroid.show(
+    //   !item.isFavorite ? "Added to Favorites" : "Removed from Favorites",
+    //   ToastAndroid.SHORT
+    // );
     toggleFav(item.key)
 
   };

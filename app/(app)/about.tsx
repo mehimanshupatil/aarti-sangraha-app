@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, ToastAndroid, Alert, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, Alert, ScrollView } from 'react-native';
 import * as Linking from 'expo-linking';
 import { singleItemType, useAppTheme } from '../../shared/types';
 
@@ -26,7 +26,7 @@ const About: React.FC = () => {
             try {
               const data: singleItemType[] = require('../shared/data.json');
               //  dispatch({ type: 'INITIALIZE', data });
-              ToastAndroid.show('Data Cleared Successfully', ToastAndroid.SHORT);
+              // ToastAndroid.show('Data Cleared Successfully', ToastAndroid.SHORT);
 
             } catch (error) {
               console.error(error);

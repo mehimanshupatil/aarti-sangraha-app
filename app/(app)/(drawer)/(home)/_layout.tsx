@@ -12,8 +12,9 @@ export default function HomeLayout() {
         backgroundColor: colors.text
       },
       tabBarActiveTintColor: colors.background,
-      tabBarInactiveTintColor: colors.background + '80'
+      tabBarInactiveTintColor: colors.background + '80',
     }}
+
   >
     <Tabs.Screen name='index' options={{
       title: 'Home',
