@@ -16,7 +16,7 @@ const fun  = async ()=> {
       }
 
       // Perform the replacement
-      const replacedData = data.replace(/%5C/g, '%255C');
+      const replacedData = data.replace(/\/_expo\//g, '/expo/').replace(/%5C/g, '%255C')
 
       // Write the updated content back to the file
       fs.writeFile(filePath, replacedData, 'utf8', (writeErr) => {
@@ -29,6 +29,15 @@ const fun  = async ()=> {
       });
     });
   });
+
+  fs.rename('./dist/_expo', './dist/expo', (err) => {
+    if (err) {
+      console.error('Error renaming folder:', err);
+    } else {
+      console.log('Folder renamed successfully.');
+    }
+  });
+ 
  
 }
 

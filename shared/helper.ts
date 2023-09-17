@@ -14,7 +14,9 @@ export const onShare = async (aarti: singleItemType | undefined) => {
       
       https://galaxy.store/aarti
       
-      https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha \`\`\``
+      https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha 
+      
+      or view web Version https://aarti-sangraha.himanshupatil.dev/\`\`\``
 
       if (Platform.OS === "web") {
         await Clipboard.setStringAsync(message)

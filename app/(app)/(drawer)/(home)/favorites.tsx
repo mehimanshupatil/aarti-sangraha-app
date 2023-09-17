@@ -12,7 +12,7 @@ const Favorites: React.FC = () => {
 
   const pressHandler = (item: singleItemType) => {
     router.push(`/aarti-view/${item.key}`);
-    router.setParams({favorites: 'true'})
+    
   };
 
   const [localData, setLocalData] = useState<singleItemType[]>([]);

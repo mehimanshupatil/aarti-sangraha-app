@@ -12,15 +12,13 @@ import { IconButton } from "react-native-paper";
 import { useDataStore } from '../../../../store/store';
 import { Stack, router, useLocalSearchParams } from 'expo-router';
 import { onShare } from '../../../../shared/helper';
-import { fontStyle as fontStyle } from '../../../../shared/styles';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
-import Animated, { Easing, useAnimatedStyle, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
+import { fontStyle as fontStyle } from '../../../../shared/styles'; 
 import Head from 'expo-router/head';
 
 const CommonTemplate: React.FC = () => {
     useKeepAwake();
 
-    const { key, favorites } = useLocalSearchParams();
+    const { key } = useLocalSearchParams();
 
     const [scrollHeight, setScrollHeight] = useState(0)
 
@@ -75,56 +73,11 @@ const CommonTemplate: React.FC = () => {
         if (!selectedItem) return;
         router.push(`/add-aarti/${key}`);
     };
-
-    const opacity = useSharedValue(0);
-
-    const textStyles = useAnimatedStyle(() => {
-        return {
-            opacity: opacity.value,
-        };
-    });
-
-    const handlePress = () => {
-        opacity.value = withSequence(
-            withTiming(0, { duration: 0, easing: Easing.ease }),
-            withTiming(1, { duration: 500, easing: Easing.ease })
-        );
-    };
-
-    useEffect(() => {
-        handlePress()
-    }, [])
-
-    const nextPrev = (direction: "left" | "right") => {
-
-        const isFavFilter = favorites === 'true';
-
-        const tempList = aartis
-            .filter((x) => (isFavFilter ? x.isFavorite : true))
-            .map((x) => x.key);
-
-        const index = tempList.findIndex((x) => x === key);
-
-        let newKey: string;
-
-        if (direction === 'right') {
-            // If at the end, wrap around to the beginning
-            newKey = index === tempList.length - 1 ? tempList[0] : tempList[index + 1];
-        } else {
-            // If at the beginning, wrap around to the end
-            newKey = index === 0 ? tempList[tempList.length - 1] : tempList[index - 1];
-        }
-
-        handlePress()
-        router.setParams({ key: newKey });
-    }
-
+ 
+ 
     return (
-        <Swipeable
-            friction={50}
-            onSwipeableClose={nextPrev}
-            childrenContainerStyle={{ flex: 1 }}
-            containerStyle={{ flex: 1, backgroundColor: colors.background }}  >
+        <View 
+            style={{ flex: 1, backgroundColor: colors.background }}  >
             <Head>
                 <title>{selectedItem?.title}</title>
                 <meta name="description" content={selectedItem?.body} />
@@ -152,11 +105,10 @@ const CommonTemplate: React.FC = () => {
                     }
                 }}
             />
-            <Animated.View style={[{
+            <View style={[{
                 ...styles.container,
                 paddingTop: 5,
-            },
-                textStyles
+            }
             ]}>
                 <View style={styles.buttonContainer}>
                     <View style={styles.fontButton}>
@@ -232,9 +184,8 @@ const CommonTemplate: React.FC = () => {
                         संचित नयनरेखा ठेवण्यासाठी जागा सोडली आहे.
                     </Text>
                 </ScrollView>
-
-            </Animated.View>
-        </Swipeable>
+            </View>
+        </View>
     );
 };
 

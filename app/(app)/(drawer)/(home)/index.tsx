@@ -14,7 +14,7 @@ const Home: React.FC = () => {
 
   const pressHandler = (item: singleItemType) => {
     router.push(`/aarti-view/${item.key}`);
-    router.setParams({ favorites: 'false' })
+    
   };
   const addNew = () => {
     router.push(`/add-aarti/0`);
@@ -56,7 +56,7 @@ const Home: React.FC = () => {
             />
           )}
         />
-      H</View>
+      </View>
     </View>
   );
 };
