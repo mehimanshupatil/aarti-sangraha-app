@@ -1,0 +1,19 @@
+{
+  "name": "Marathi Aarti Sangraha",
+  "short_name": "Marathi Aarti Sangraha",
+  "icons": [
+    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#FFE065",
+  "background_color": "#FFE065",
+  "display": "standalone",
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha",
+      "id": "com.mehimanshupatil.aartisangraha"
+    }
+  ]
+  
+}
