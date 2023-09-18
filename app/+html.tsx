@@ -1,4 +1,5 @@
 import { ScrollViewStyleReset } from 'expo-router/html';
+import { domainUrl } from '../shared/const';
 
 // This file is web-only and used to configure the root HTML for every
 // web page during static rendering.
@@ -20,18 +21,18 @@ export default function Root({ children }: { children: React.ReactNode }) {
         {/* <!-- Primary Meta Tags --> */}
         
         <meta name="title" content="आरती संग्रह" />
-        <meta name="description" content="marathi aarti sangraha" />
+        <meta name="description" content="आरती संग्रह" />
 
         {/* <!-- Open Graph / Facebook --> */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://aarti-sangraha.himanshupatil.dev/" />
+        <meta property="og:url" content={domainUrl} />
         <meta property="og:title" content="आरती संग्रह" />
         <meta property="og:description" content="आरती संग्रह" />
         <meta property="og:image" content="/apple-touch-icon.png" />
 
         {/* <!-- Twitter --> */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://aarti-sangraha.himanshupatil.dev/" />
+        <meta property="twitter:url" content={domainUrl} />
         <meta property="twitter:title" content="आरती संग्रह" />
         <meta property="twitter:description" content="आरती संग्रह" />
         <meta property="twitter:image" content="/apple-touch-icon.png" />

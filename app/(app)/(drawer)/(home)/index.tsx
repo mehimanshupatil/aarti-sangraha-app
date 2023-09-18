@@ -13,7 +13,7 @@ const Home: React.FC = () => {
   const [aartis, searchValue] = useDataStore(s => [s.aartis, s.searchValue])
 
   const pressHandler = (item: singleItemType) => {
-    router.push(`/aarti-view/${item.key}`);
+    router.push(`/aarti-view/${item.slug}`);
     
   };
   const addNew = () => {

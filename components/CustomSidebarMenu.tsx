@@ -11,6 +11,7 @@ import { IconButton } from 'react-native-paper';
 import { useAppTheme } from '../shared/types';
 import { useDataStore } from '../store/store';
 import * as Clipboard from 'expo-clipboard';
+import { domainUrl } from '../shared/const';
 
 const CustomSidebarMenu = (props: DrawerContentComponentProps) => {
   const { colors } = useAppTheme();
@@ -30,7 +31,7 @@ const CustomSidebarMenu = (props: DrawerContentComponentProps) => {
     
     https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha 
     
-    or view web Version https://aarti-sangraha.himanshupatil.dev/\`\`\``
+    or view web Version ${domainUrl}\`\`\``
    
     if (Platform.OS === "web") {
       await Clipboard.setStringAsync(message)

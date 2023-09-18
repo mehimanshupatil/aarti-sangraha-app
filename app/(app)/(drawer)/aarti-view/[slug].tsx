@@ -15,10 +15,17 @@ import { onShare } from '../../../../shared/helper';
 import { fontStyle as fontStyle } from '../../../../shared/styles';
 import Head from 'expo-router/head';
 
+export async function generateStaticParams(): Promise<Record<string, string>[]> {
+    const aartis = await require('../../../../store/data');
+
+    return aartis.default
+}
+
 const CommonTemplate: React.FC = () => {
     useKeepAwake();
 
-    const { key } = useLocalSearchParams();
+    // slug used for html name
+    const { slug, title, body } = useLocalSearchParams();
 
     const [scrollHeight, setScrollHeight] = useState(0)
 
@@ -27,12 +34,12 @@ const CommonTemplate: React.FC = () => {
     const [setFontSize, toggleFav, deleteAarti] = useDataStore(s => [s.setFontSize, s.toggleFav, s.deleteAarti])
 
     const [selectedItem, setSelectedItem] = useState(
-        aartis.find((x) => x.key == key)
+        aartis.find((x) => x.slug == slug)
     );
     useEffect(() => {
-        const single = aartis.find((x) => x.key == key);
+        const single = aartis.find((x) => x.slug == slug);
         setSelectedItem(single);
-    }, [aartis, key]);
+    }, [aartis, slug]);
 
     const deletePress = () => {
         Alert.alert(
@@ -71,17 +78,17 @@ const CommonTemplate: React.FC = () => {
 
     const addNew = () => {
         if (!selectedItem) return;
-        router.push(`/add-aarti/${key}`);
+        router.push(`/add-aarti/${selectedItem.key}`);
     };
 
 
-    return (
+    return (<>
+        <Head>
+            <title>{title ?? selectedItem?.title}</title>
+            <meta name="description" content={(body as string) ?? selectedItem?.body} />
+        </Head>
         <View
             style={{ flex: 1, backgroundColor: colors.background }}  >
-            <Head>
-                <title>{selectedItem?.title}</title>
-                <meta name="description" content={selectedItem?.body} />
-            </Head>
             <Stack.Screen
                 options={{
                     title: selectedItem?.title,
@@ -186,6 +193,7 @@ const CommonTemplate: React.FC = () => {
                 </ScrollView>
             </View>
         </View>
+    </>
     );
 };
 

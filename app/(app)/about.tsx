@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, Alert, ScrollView } from 'react-native';
 import * as Linking from 'expo-linking';
 import { singleItemType, useAppTheme } from '../../shared/types';
+import { domainUrl } from '../../shared/const';
 
 const About: React.FC = () => {
   const { colors } = useAppTheme();
@@ -63,10 +64,10 @@ const About: React.FC = () => {
             {' '}
             Samsung Store{' '}
           </Text>
-           also web Version of app is available at 
-          <Text style={styles.texturl} onPress={() => handlePress('https://aarti-sangraha.himanshupatil.dev/')}>
-            {' '} 
-          https://aarti-sangraha.himanshupatil.dev/
+          also web Version of app is available at
+          <Text style={styles.texturl} onPress={() => handlePress(domainUrl)}>
+            {' '}
+            {domainUrl}
           </Text>
           {'\n'}
           {'\n'}

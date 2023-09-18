@@ -1,6 +1,7 @@
 import { Platform, Share } from 'react-native';
 import { singleItemType } from './types';
 import * as Clipboard from 'expo-clipboard';
+import { domainUrl } from './const';
 
 export const onShare = async (aarti: singleItemType | undefined) => {
     try {
@@ -16,7 +17,7 @@ export const onShare = async (aarti: singleItemType | undefined) => {
       
       https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha 
       
-      or view web Version https://aarti-sangraha.himanshupatil.dev/\`\`\``
+      or view web Version ${domainUrl}\`\`\``
 
       if (Platform.OS === "web") {
         await Clipboard.setStringAsync(message)

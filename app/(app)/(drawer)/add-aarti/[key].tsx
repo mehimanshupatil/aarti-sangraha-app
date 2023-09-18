@@ -37,6 +37,7 @@ const AddNew: React.FC = () => {
   const onOkPress = () => {
     const item = {
       title,
+      slug: title.replace(/\s+/g, '-'),
       body,
       key: (aartis.length + 1).toString(), //key between 100 to 1k
       tags: []

@@ -13,7 +13,7 @@ export default function RootLayout() {
                     header: ({ navigation }) => <Header title='आरती संग्रह' navigation={navigation} showSearchButton />,
                 }}
             />
-            <Stack.Screen name='aarti-view/[key]' />
+            <Stack.Screen name='aarti-view/[slug]' />
             <Stack.Screen name='add-aarti/[key]' />
         </Stack>
 
