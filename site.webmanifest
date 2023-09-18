@@ -1,6 +1,6 @@
 {
-  "name": "Marathi Aarti Sangraha",
-  "short_name": "Marathi Aarti Sangraha",
+  "name": "आरती संग्रह",
+  "short_name": "आरती संग्रह",
   "start_url": "/",
   "icons": [
     { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
