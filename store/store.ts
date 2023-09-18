@@ -8,9 +8,10 @@ import data from "./data";
 import { shallow } from 'zustand/shallow'
 
 interface DataState {
-    aartis: singleItemType[]; 
+    aartis: singleItemType[];
     favoritesKeys: string[];
     toggleFav: (id: singleItemType['key']) => void
+    initializeAarti: () => void
     addAarti: (item: singleItemType) => void;
     updateAarti: (item: singleItemType) => void;
     deleteAarti: (id: singleItemType['key']) => void;
@@ -29,7 +30,7 @@ export const useDataStore = createWithEqualityFn<DataState>()(
         persist(
             immer(
                 (set) => ({
-                    aartis: data, 
+                    aartis: data,
                     favoritesKeys: [] as DataState['favoritesKeys'],
                     fontSize: 20,
                     searchValue: '',
@@ -51,6 +52,11 @@ export const useDataStore = createWithEqualityFn<DataState>()(
                                 state.favoritesKeys.splice(index, 1);
                             }
                         }),
+                    initializeAarti: () => {
+                        set(state => {
+                            state.aartis = data
+                        })
+                    },
                     addAarti: (aarti) =>
                         set(state => {
                             state.aartis.push(aarti)

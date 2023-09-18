@@ -15,17 +15,16 @@ import { onShare } from '../../../../shared/helper';
 import { fontStyle as fontStyle } from '../../../../shared/styles';
 import Head from 'expo-router/head';
 
-export async function generateStaticParams(): Promise<Record<string, string>[]> {
-    const aartis = await require('../../../../store/data');
-
-    return aartis.default
-}
+// export async function generateStaticParams(): Promise<Record<string, string>[]> {
+//     const aartis = await require('../../../../store/data');
+//     return aartis.default
+// }
 
 const CommonTemplate: React.FC = () => {
     useKeepAwake();
 
     // slug used for html name
-    const { slug, title, body } = useLocalSearchParams();
+    const { slug } = useLocalSearchParams();
 
     const [scrollHeight, setScrollHeight] = useState(0)
 
@@ -34,10 +33,11 @@ const CommonTemplate: React.FC = () => {
     const [setFontSize, toggleFav, deleteAarti] = useDataStore(s => [s.setFontSize, s.toggleFav, s.deleteAarti])
 
     const [selectedItem, setSelectedItem] = useState(
-        aartis.find((x) => x.slug == slug)
+        aartis.find((x) => x.slug == decodeURI((slug ?? '') as string))
     );
+
     useEffect(() => {
-        const single = aartis.find((x) => x.slug == slug);
+        const single = aartis.find((x) => x.slug == decodeURI((slug ?? '') as string));
         setSelectedItem(single);
     }, [aartis, slug]);
 
@@ -84,8 +84,8 @@ const CommonTemplate: React.FC = () => {
 
     return (<>
         <Head>
-            <title>{title ?? selectedItem?.title}</title>
-            <meta name="description" content={(body as string) ?? selectedItem?.body} />
+            <title>{selectedItem?.title}</title>
+            <meta name="description" content={selectedItem?.body} />
         </Head>
         <View
             style={{ flex: 1, backgroundColor: colors.background }}  >

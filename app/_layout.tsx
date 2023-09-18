@@ -51,6 +51,14 @@ export default function RootLayout2() {
         'nono_devanagari': require('../assets/fonts/NotoSansDevanagari.ttf')
     });
 
+    const [aartis, initializeAarti] = useDataStore(s => [s.aartis, s.initializeAarti])
+
+    useEffect(() => {
+        if (aartis.length === 0 || !aartis[0].slug) {
+            initializeAarti()
+        }
+    }, [aartis])
+
     const [showSearch, setShowSearch, setSearchValue, displayMode] = useDataStore(s => [
         s.showSearch,
         s.setShowSearch,
