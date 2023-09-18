@@ -12,7 +12,6 @@ const Favorites: React.FC = () => {
 
   const pressHandler = (item: singleItemType) => {
     router.push(`/aarti-view/${item.slug}`);
-    
   };
 
   const [localData, setLocalData] = useState<singleItemType[]>([]);
@@ -27,7 +26,7 @@ const Favorites: React.FC = () => {
         )
       );
     else setLocalData(aartis.filter((x) => favoritesKeys.includes(x.key)));
-  }, [aartis, searchValue]);
+  }, [aartis, searchValue, favoritesKeys.length]);
 
   return (
     <View
