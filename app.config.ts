@@ -23,7 +23,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     "android": {
       "package": "com.mehimanshupatil.aartisangraha",
-      "versionCode": 15,
+      "versionCode": 16,
       "permissions": [],
       "userInterfaceStyle": "automatic",
       "splash": {
@@ -50,7 +50,8 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       "expo-router"
     ],
     "experiments": {
-      "typedRoutes": true
+      "typedRoutes": true,
+      "baseUrl": ""
     }
   })
 };

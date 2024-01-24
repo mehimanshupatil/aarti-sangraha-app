@@ -19,6 +19,13 @@ import Head from 'expo-router/head';
 //     const aartis = await require('../../../../store/data');
 //     return aartis.default
 // }
+import data from "../../../../store/data";
+
+export async function generateStaticParams(): Promise<Record<string, string>[]> {
+   
+    return data.map((x) => ({ slug: x.slug }))
+}
+
 
 const CommonTemplate: React.FC = () => {
     useKeepAwake();

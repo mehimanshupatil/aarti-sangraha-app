@@ -62,7 +62,7 @@ export default function Root({ children }: { children: React.ReactNode }) {
             MIT License
         https://github.com/rafgraph/spa-github-pages
        */}
-        <script dangerouslySetInnerHTML={{
+        {/* <script dangerouslySetInnerHTML={{
           __html: `
           (function(l) {
             if (l.search[1] === '/' ) {
@@ -75,7 +75,7 @@ export default function Root({ children }: { children: React.ReactNode }) {
             }
           }(window.location))
           `
-        }} />
+        }} /> */}
 
 
         {/* <!-- End Single Page Apps for GitHub Pages --> */}

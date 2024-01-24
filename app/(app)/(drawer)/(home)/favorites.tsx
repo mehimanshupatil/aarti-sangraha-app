@@ -4,15 +4,12 @@ import SingleItem from "../../../../components/SingleItem";
 import { globalStyle } from "../../../../shared/styles";
 import { useDataStore } from '../../../../store/store';
 import { singleItemType, useAppTheme } from "../../../../shared/types";
-import { router } from 'expo-router';
-
+ 
 const Favorites: React.FC = () => {
   const { colors } = useAppTheme();
   const [aartis, searchValue, favoritesKeys] = useDataStore(s => [s.aartis, s.searchValue, s.favoritesKeys])
 
-  const pressHandler = (item: singleItemType) => {
-    router.push(`/aarti-view/${item.slug}`);
-  };
+  
 
   const [localData, setLocalData] = useState<singleItemType[]>([]);
 
@@ -37,7 +34,7 @@ const Favorites: React.FC = () => {
           <FlatList
             data={localData}
             renderItem={({ item }) => (
-              <SingleItem item={item} pressHandler={pressHandler} />
+              <SingleItem item={item} />
             )}
             showsVerticalScrollIndicator={false}
           />

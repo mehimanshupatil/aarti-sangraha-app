@@ -47,6 +47,23 @@ export default function RootLayout2() {
                 }}
                 name='about'
             />
+              <Drawer.Screen
+                options={{
+                    header: ({ navigation }) => (
+                        <Header title='Setting' navigation={navigation} showSearchButton={false} />
+                    ),
+                    drawerLabel: 'Setting',
+                    drawerIcon: () => (
+                        <IconButton
+                            iconColor={colors.primary}
+                            style={styles.drawerIcon}
+                            icon='nut'
+                            size={28}
+                        />
+                    ),
+                }}
+                name='setting'
+            />
         </Drawer>
     );
 }

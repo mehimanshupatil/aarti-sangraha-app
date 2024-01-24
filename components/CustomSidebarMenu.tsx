@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, Image, Dimensions, Text, Share, Platform } from 'react-native';
+import { SafeAreaView, StyleSheet, Image, Dimensions, Text, Share, Platform, View } from 'react-native';
 import {
   DrawerContentComponentProps,
   DrawerContentScrollView,
@@ -7,7 +7,7 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import Constants from 'expo-constants';
-import { IconButton } from 'react-native-paper';
+import { Icon, IconButton } from 'react-native-paper';
 import { useAppTheme } from '../shared/types';
 import { useDataStore } from '../store/store';
 import * as Clipboard from 'expo-clipboard';
@@ -60,12 +60,13 @@ const CustomSidebarMenu = (props: DrawerContentComponentProps) => {
           labelStyle={{ color: colors.text }}
           label={`${displayMode === 'light' ? 'Light' : 'Dark'} Theme`}
           icon={() => (
-            <IconButton
-              iconColor={colors.primary}
-              style={styles.drawerIcon}
-              icon='theme-light-dark'
-              size={28}
+            <View style={styles.drawerIcon}>
+            <Icon 
+              color={colors.primary} 
+              source='theme-light-dark' 
+              size={28} 
             />
+            </View>
           )}
           onPress={() => {
             const mode = displayMode === 'light' ? 'dark' : 'light';
@@ -77,12 +78,13 @@ const CustomSidebarMenu = (props: DrawerContentComponentProps) => {
           labelStyle={{ color: colors.text }}
           label='Share App'
           icon={({ }) => (
-            <IconButton
-              iconColor={colors.primary}
-              style={styles.drawerIcon}
-              icon='share-variant'
+            <View style={styles.drawerIcon}>
+            <Icon
+            color={colors.primary} 
+              source='share-variant'
               size={28}
             />
+            </View>
           )}
           onPress={onShare}
         />
@@ -107,6 +109,10 @@ const styles = StyleSheet.create({
   },
   drawerIcon: {
     margin: 0,
+    width: 44,
+    height: 44, 
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 });
 

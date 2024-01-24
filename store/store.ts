@@ -34,7 +34,7 @@ export const useDataStore = createWithEqualityFn<DataState>()(
                     favoritesKeys: [] as DataState['favoritesKeys'],
                     fontSize: 20,
                     searchValue: '',
-                    displayMode: 'light',
+                    displayMode: 'light' as NonNullable<ColorSchemeName>,
                     showSearch: false,
                     setShowSearch: (arg) =>
                         set(state => {

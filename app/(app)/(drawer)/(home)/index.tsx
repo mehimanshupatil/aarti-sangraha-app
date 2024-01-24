@@ -3,7 +3,7 @@ import { StyleSheet, View, FlatList } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import SingleItem from '../../../../components/SingleItem';
 import { globalStyle } from '../../../../shared/styles';
-import { singleItemType, useAppTheme } from '../../../../shared/types';
+import { useAppTheme } from '../../../../shared/types';
 import { useDataStore } from '../../../../store/store';
 import { router } from 'expo-router';
 import Head from 'expo-router/head';
@@ -12,10 +12,6 @@ const Home: React.FC = () => {
   const { colors } = useAppTheme();
   const [aartis, searchValue] = useDataStore(s => [s.aartis, s.searchValue])
 
-  const pressHandler = (item: singleItemType) => {
-    router.push(`/aarti-view/${item.slug}`);
-    
-  };
   const addNew = () => {
     router.push(`/add-aarti/0`);
   };
@@ -39,7 +35,7 @@ const Home: React.FC = () => {
       <View style={globalStyle.homecontainer}>
         <FlatList
           data={localData}
-          renderItem={({ item }) => <SingleItem item={item} pressHandler={pressHandler} />}
+          renderItem={({ item }) => <SingleItem item={item} />}
           showsVerticalScrollIndicator={false}
           ListFooterComponent={() => (
             <IconButton

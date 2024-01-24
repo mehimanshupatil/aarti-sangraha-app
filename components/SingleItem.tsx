@@ -4,11 +4,11 @@ import { singleItemType, useAppTheme } from "../shared/types";
 import { IconButton, TouchableRipple } from "react-native-paper";
 import { useDataStore } from '../store/store';
 import { fontStyle } from '../shared/styles';
+import { Link } from 'expo-router';
 
 const SingleItem: React.FC<{
-  pressHandler: (arg0: singleItemType) => void;
   item: singleItemType;
-}> = ({ pressHandler, item }) => {
+}> = ({ item }) => {
   const { colors } = useAppTheme();
   const [toggleFav, favoritesKeys] = useDataStore(s => [s.toggleFav, s.favoritesKeys])
 
@@ -30,51 +30,52 @@ const SingleItem: React.FC<{
         shadowColor: colors.background,
       }}
     >
-      <TouchableRipple
-        borderless
-        style={styles.ripple}
-        onPress={() => pressHandler(item)}
-      >
-        <View>
-          <View style={styles.firstLine}>
-            <Text
-              style={[{ ...styles.title, color: colors.text }, fontStyle.font]}
-              ellipsizeMode="tail"
-              numberOfLines={1}
-            >
-              {item.title}
-            </Text>
-            <IconButton
-              icon={favoritesKeys.includes(item.key) ? "heart" : "heart-outline"}
-              size={30}
-              style={styles.unsetbuttonStyle}
-              iconColor={colors.primary}
-              onPress={() => iconPress(item)}
-            /> 
+      <Link  href={`/aarti-view/${item.slug}`} asChild>
+        <TouchableRipple
+          borderless
+          style={styles.ripple}
+         >
+          <View>
+            <View style={styles.firstLine}>
+              <Text
+                style={[{ ...styles.title, color: colors.text }, fontStyle.font]}
+                ellipsizeMode="tail"
+                numberOfLines={1}
+              >
+                {item.title}
+              </Text>
+              <IconButton
+                icon={favoritesKeys.includes(item.key) ? "heart" : "heart-outline"}
+                size={30}
+                style={styles.unsetbuttonStyle}
+                iconColor={colors.primary}
+                onPress={() => iconPress(item)}
+              />
+            </View>
+            <View style={styles.firstLine}>
+              <Text
+                style={[{
+                  flex: 1,
+                  color: colors.text,
+                }, fontStyle.font]}
+                ellipsizeMode="tail"
+                numberOfLines={1}
+              >
+                {item.body.split("\n")[0]}
+              </Text>
+              <Text
+                style={{
+                  paddingLeft: 5,
+                  paddingRight: 15,
+                  color: colors.primary,
+                }}
+              >
+                {item.key}
+              </Text>
+            </View>
           </View>
-          <View style={styles.firstLine}>
-            <Text
-              style={[{
-                flex: 1,
-                color: colors.text,
-              }, fontStyle.font]}
-              ellipsizeMode="tail"
-              numberOfLines={1}
-            >
-              {item.body.split("\n")[0]}
-            </Text>
-            <Text
-              style={{
-                paddingLeft: 5,
-                paddingRight: 15,
-                color: colors.primary,
-              }}
-            >
-              {item.key}
-            </Text>
-          </View>
-        </View>
-      </TouchableRipple>
+        </TouchableRipple>
+      </Link>
     </View>
   );
 };
