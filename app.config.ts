@@ -47,7 +47,8 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       "output": "static"
     },
     "plugins": [
-      "expo-router"
+      "expo-router" ,
+        "expo-font" 
     ],
     "experiments": {
       "typedRoutes": true,

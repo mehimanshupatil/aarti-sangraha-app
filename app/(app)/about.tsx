@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Alert, ScrollView } from 'react-native';
 import * as Linking from 'expo-linking';
-import { singleItemType, useAppTheme } from '../../shared/types';
+import {  useAppTheme } from '../../shared/types';
 import { domainUrl } from '../../shared/const';
 
 const About: React.FC = () => {
@@ -11,32 +11,7 @@ const About: React.FC = () => {
     Linking.openURL(url);
   };
 
-  const reset = async () => {
-    Alert.alert(
-      'Alert',
-      `This action will delete customized and modified Aarti. This action cannot be undone`,
-      [
-        {
-          text: 'रद्द करा',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {
-          text: 'ठीक आहे',
-          onPress: () => {
-            try {
-              const data: singleItemType[] = require('../shared/data.json');
-              //  dispatch({ type: 'INITIALIZE', data });
-              // ToastAndroid.show('Data Cleared Successfully', ToastAndroid.SHORT);
-
-            } catch (error) {
-              console.error(error);
-            }
-          },
-        },
-      ]
-    );
-  };
+ 
 
   return (
     <ScrollView
@@ -71,9 +46,7 @@ const About: React.FC = () => {
           </Text>
           {'\n'}
           {'\n'}
-          {/* <Text onPress={reset}>Click here to reset customised data</Text> */}
-          {/* {'\n'}
-          {'\n'} */}
+          
           If you have suggestions, questions, or encounter any issues, don't hesitate to reach out:{'\n'}
           <Text
             style={styles.texturl}
