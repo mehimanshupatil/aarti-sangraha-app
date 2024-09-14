@@ -23,7 +23,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     "android": {
       "package": "com.mehimanshupatil.aartisangraha",
-      "versionCode": 16,
+      "versionCode": 17,
       "permissions": [],
       "userInterfaceStyle": "automatic",
       "splash": {
