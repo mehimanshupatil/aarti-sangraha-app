@@ -1,1 +1,1 @@
-export const domainUrl ='https://aarti-sangraha.himanshupatil.dev/';
+export const domainUrl = "https://aarti-sangraha.himanshupatil.dev/";

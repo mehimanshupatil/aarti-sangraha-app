@@ -1,13 +1,13 @@
-import { Platform, Share } from 'react-native';
-import { singleItemType } from './types';
-import * as Clipboard from 'expo-clipboard';
-import { domainUrl } from './const';
+import { Platform, Share } from "react-native";
+import { singleItemType } from "./types";
+import * as Clipboard from "expo-clipboard";
+import { domainUrl } from "./const";
 
 export const onShare = async (aarti: singleItemType | undefined) => {
-    try {
-      if (!aarti) return;
+	try {
+		if (!aarti) return;
 
-      const message = `*${aarti.title}*
+		const message = `*${aarti.title}*
   
       ${aarti.body}
       
@@ -17,16 +17,18 @@ export const onShare = async (aarti: singleItemType | undefined) => {
       
       https://play.google.com/store/apps/details?id=com.mehimanshupatil.aartisangraha 
       
-      or view web Version ${domainUrl}\`\`\``
+      or view web Version ${domainUrl}\`\`\``;
 
-      if (Platform.OS === "web") {
-        await Clipboard.setStringAsync(message)
-        alert(`The following message was copied to your clipboard.\n\n${message}`)
-        return
-      }
+		if (Platform.OS === "web") {
+			await Clipboard.setStringAsync(message);
+			alert(
+				`The following message was copied to your clipboard.\n\n${message}`,
+			);
+			return;
+		}
 
-      Share.share({    message   });
-    } catch (error) {
-      alert(error);
-    }
-  };
+		Share.share({ message });
+	} catch (error) {
+		alert(error);
+	}
+};
