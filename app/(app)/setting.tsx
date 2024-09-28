@@ -40,7 +40,7 @@ const setting: React.FC = () => {
 			}}
 		>
 			<View style={styles.container}>
-				<Text style={{ fontSize: 20, color: colors.primary }}>
+				<Text style={{ fontSize: 20, color: colors.text }}>
 					<Text onPress={reset}>Click here to reset customised data</Text>
 				</Text>
 			</View>

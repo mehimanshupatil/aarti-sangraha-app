@@ -50,7 +50,7 @@ const CommonTemplate: React.FC = () => {
 	const deletePress = () => {
 		Alert.alert(
 			"Alert",
-			`Are you sure you want to delete ${selectedItem?.title}. This action cannot be undone`,
+			`Are you sure you want to delete ${selectedItem?.title.original}. This action cannot be undone`,
 			[
 				{
 					text: "रद्द करा",
@@ -109,7 +109,7 @@ const CommonTemplate: React.FC = () => {
 						},
 						headerTintColor: colors.background,
 						headerStyle: {
-							backgroundColor: colors.text,
+							backgroundColor: colors.primary,
 						},
 					}}
 				/>
@@ -131,7 +131,9 @@ const CommonTemplate: React.FC = () => {
 								}
 								size={30}
 								style={styles.unsetbuttonStyle}
-								iconColor={colors.primary}
+
+								iconColor={favoritesKeys.includes(selectedItem?.key ?? "") ? colors.accent : colors.text}
+
 								onPress={() => iconPress(selectedItem)}
 							/>
 
@@ -139,12 +141,12 @@ const CommonTemplate: React.FC = () => {
 								icon="delete-forever"
 								size={30}
 								style={styles.unsetbuttonStyle}
-								iconColor={colors.primary}
+								iconColor={colors.accent}
 								onPress={deletePress}
 							/>
 						</View>
 						<View style={[styles.fontButton, { alignItems: "center" }]}>
-							<Text style={{ color: colors.primary, fontSize: 25 }}>
+							<Text style={{ color: colors.text, fontSize: 25 }}>
 								{selectedItem?.key}
 							</Text>
 
@@ -152,7 +154,7 @@ const CommonTemplate: React.FC = () => {
 								icon="file-document-edit-outline"
 								size={30}
 								style={styles.unsetbuttonStyle}
-								iconColor={colors.primary}
+								iconColor={colors.accent}
 								onPress={addNew}
 							/>
 						</View>
@@ -161,7 +163,7 @@ const CommonTemplate: React.FC = () => {
 								icon={translate === 'original' ? 'translate-off' : "translate"}
 								size={30}
 								style={styles.unsetbuttonStyle}
-								iconColor={colors.primary}
+								iconColor={colors.accent}
 								onPress={() => {
 									setTranslate(translate === 'original' ? 'transliteration' : 'original')
 								}}
@@ -170,7 +172,7 @@ const CommonTemplate: React.FC = () => {
 								icon="plus-circle"
 								size={30}
 								style={styles.unsetbuttonStyle}
-								iconColor={colors.primary}
+								iconColor={colors.accent}
 								onPress={() => {
 									if (fontSize < 40) {
 										setFontSize(fontSize + 3);
@@ -182,7 +184,7 @@ const CommonTemplate: React.FC = () => {
 								icon="minus-circle"
 								size={30}
 								style={styles.unsetbuttonStyle}
-								iconColor={colors.primary}
+								iconColor={colors.accent}
 								onPress={() => {
 									if (fontSize > 15) {
 										setFontSize(fontSize - 3);
@@ -200,7 +202,7 @@ const CommonTemplate: React.FC = () => {
 					>
 						<Text
 							style={[
-								{ color: colors.primary, fontSize: fontSize },
+								{ color: colors.text, fontSize: fontSize },
 								fontStyle[translate === 'original' ? 'fontOriginal' : 'fontItalic'],
 							]}
 						>
@@ -209,7 +211,7 @@ const CommonTemplate: React.FC = () => {
 						<Text
 							style={[
 								{
-									color: colors.primary,
+									color: colors.text,
 									paddingTop: scrollHeight,
 								},
 								styles.helperText,

@@ -19,11 +19,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "web:build": "npx expo export --platform web && node ./scripts/postBuild.js",
+    "web:build": "npx expo export --platform web",
     "eject": "expo eject",
-    "__predeploy": "npm run web:build",
-    "deploy": "gh-pages -t -d dist",
-    "predeploy": "expo export -p web ",
     "lint": "npx @biomejs/biome lint --write ",
     "format": "npx @biomejs/biome format --write "
   },
@@ -57,7 +54,6 @@
     "@biomejs/biome": "1.9.1",
     "@types/react": "~18.2.79",
     "babel-preset-expo": "~11.0.0",
-    "gh-pages": "^6.0.0",
     "glob": "^10.3.4",
     "prettier": "^3.0.2",
     "typescript": "~5.3.3"

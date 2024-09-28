@@ -145,7 +145,7 @@ const AddNew: React.FC = () => {
 				>
 					<Text
 						style={{
-							color: colors.primary,
+							color: colors.text,
 							fontWeight: "bold",
 							fontSize: 15,
 						}}

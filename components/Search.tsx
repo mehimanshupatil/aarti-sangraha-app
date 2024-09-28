@@ -23,11 +23,11 @@ const Search: React.FC = () => {
 			<TextInput
 				style={{
 					...styles.inputStyle,
-					color: colors.background,
-					borderColor: colors.background,
+					color: colors.surface,
+					borderColor: colors.surface,
 				}}
 				placeholder="Type here Search"
-				placeholderTextColor={colors.background}
+				placeholderTextColor={colors.text}
 				autoFocus={true}
 				onChangeText={(text) => searchInput(text)}
 				value={searchValue}
@@ -39,7 +39,7 @@ const Search: React.FC = () => {
 					searchInput("");
 				}}
 				size={24}
-				iconColor={colors.background}
+				iconColor={colors.surface}
 				style={styles.searchIcon}
 			/>
 		</View>

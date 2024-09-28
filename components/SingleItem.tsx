@@ -28,7 +28,7 @@ const SingleItem: React.FC<{
 				...styles.container,
 				borderColor: colors.primary,
 				backgroundColor: colors.background,
-				shadowColor: colors.background,
+				shadowColor: colors.primary,
 			}}
 		>
 			<Link href={`/aarti-view/${item.metadata.slug}`} asChild>
@@ -37,7 +37,7 @@ const SingleItem: React.FC<{
 						<View style={styles.firstLine}>
 							<Text
 								style={[
-									{ ...styles.title, color: colors.primary },
+									{ ...styles.title, color: colors.text },
 									fontStyle[translate === 'original' ? 'fontOriginal' : 'fontItalic'],
 
 								]}
@@ -52,7 +52,7 @@ const SingleItem: React.FC<{
 								}
 								size={30}
 								style={styles.unsetbuttonStyle}
-								iconColor={colors.primary}
+								iconColor={favoritesKeys.includes(item.key) ? colors.accent : colors.text}
 								onPress={() => iconPress(item)}
 							/>
 						</View>
@@ -61,7 +61,7 @@ const SingleItem: React.FC<{
 								style={[
 									{
 										flex: 1,
-										color: colors.primary,
+										color: colors.text,
 									},
 									fontStyle[translate === 'original' ? 'fontOriginal' : 'fontItalic'],
 
@@ -75,7 +75,7 @@ const SingleItem: React.FC<{
 								style={{
 									paddingLeft: 5,
 									paddingRight: 15,
-									color: colors.primary,
+									color: colors.text,
 								}}
 							>
 								{item.key}
@@ -94,11 +94,14 @@ const styles = StyleSheet.create({
 	container: {
 		marginTop: 16,
 		borderWidth: 1,
-		borderRadius: 10,
-		elevation: 3,
-		shadowOffset: { width: 1, height: 1 },
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
 		shadowOpacity: 0.3,
-		shadowRadius: 2,
+		shadowRadius: 4,
+		elevation: 5,
+		borderRadius: 8,
 	},
 	ripple: {
 		borderRadius: 10,

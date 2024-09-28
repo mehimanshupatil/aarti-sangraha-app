@@ -7,9 +7,9 @@ export const onShare = async (aarti: singleItemType | undefined) => {
 	try {
 		if (!aarti) return;
 
-		const message = `*${aarti.title}*
+		const message = `*${aarti.title.original}*
   
-      ${aarti.body}
+      ${aarti.body.original}
       
       \`\`\`Download Aarti Sangrah from Play Store / Samsung Galaxy Store.
       

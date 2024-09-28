@@ -19,7 +19,7 @@ const About: React.FC = () => {
 			}}
 		>
 			<View style={styles.container}>
-				<Text style={{ fontSize: 20, color: colors.primary }}>
+				<Text style={{ fontSize: 20, color: colors.text }}>
 					If you're enjoying the app, please consider sharing your feedback with
 					a 5-star rating
 					<Text
@@ -87,7 +87,7 @@ const About: React.FC = () => {
 				</Text>
 			</View>
 			<View style={{ alignItems: "center" }}>
-				<Text style={{ fontSize: 20, color: colors.primary }}>
+				<Text style={{ fontSize: 20, color: colors.text }}>
 					{"🧑‍💻 with ♥️ in 🇮🇳"}
 				</Text>
 			</View>

@@ -10,10 +10,10 @@ export default function HomeLayout() {
 			screenOptions={{
 				headerShown: false,
 				tabBarStyle: {
-					backgroundColor: colors.primary,
+					backgroundColor: colors.surface,
 				},
-				tabBarActiveTintColor: colors.background,
-				tabBarInactiveTintColor: `${colors.background}80`,
+				tabBarActiveTintColor: colors.accent,
+				tabBarInactiveTintColor: colors.text,
 			}}
 		>
 			<Tabs.Screen

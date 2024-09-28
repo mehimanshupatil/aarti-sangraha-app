@@ -97,7 +97,7 @@ const CustomSidebarMenu = (props: DrawerContentComponentProps) => {
 					onPress={onShare}
 				/>
 			</DrawerContentScrollView>
-			<Text style={{ ...styles.textVersion, color: colors.primary }}>
+			<Text style={{ ...styles.textVersion, color: colors.text }}>
 				version {Constants.expoConfig?.version}.
 				{Constants.expoConfig?.android?.versionCode}
 			</Text>

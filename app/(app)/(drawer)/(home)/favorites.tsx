@@ -40,7 +40,7 @@ const Favorites: React.FC = () => {
 						showsVerticalScrollIndicator={false}
 					/>
 				) : (
-					<Text style={{ ...styles.text, color: colors.primary }}>
+					<Text style={{ ...styles.text, color: colors.text }}>
 						No Favorites Found.
 					</Text>
 				)}

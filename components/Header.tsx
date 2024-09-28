@@ -44,13 +44,13 @@ const Header: React.FC<{
 						icon="menu"
 						size={28}
 						onPress={openMenu}
-						iconColor={colors.background}
+						iconColor={colors.surface}
 						style={styles.menuIcon}
 					/>
 					<View>
 						<Text
 							style={[
-								{ ...styles.headerText, color: colors.background },
+								{ ...styles.headerText, color: colors.surface },
 
 								fontStyle[translate === 'original' ? 'fontOriginal' : 'fontItalic'],
 
@@ -64,7 +64,7 @@ const Header: React.FC<{
 							icon="text-box-search-outline"
 							onPress={() => setShowSearch(true)}
 							size={28}
-							iconColor={colors.background}
+							iconColor={colors.surface}
 							style={styles.searchIcon}
 						/>
 					)}

@@ -47,112 +47,36 @@ declare global {
 // 	},
 // };
 
-const lightModeC = [
-	{
-		primary: "#181C3F",
-		text: "#181C3F",
-		accent: "#181C3F",
-		background: "#FFE065",
-		surface: "#FFE065",
-	},
-	{
-		"primary": "#003366",
-		"text": "#000000",
-		"accent": "#FFCC00",
-		"background": "#F0F0F0",
-		"surface": "#FFFFFF"
-	},
-	{
-		"primary": "#004d99",
-		"text": "#333333",
-		"accent": "#ff6600",
-		"background": "#ffffff",
-		"surface": "#f5f5f5"
-	},
-	{
-		"primary": "#005073",
-		"text": "#000000",
-		"accent": "#7d8c8d",
-		"background": "#e0f7fa",
-		"surface": "#ffffff"
-	},
-	{
-		"primary": "#0a3d62",
-		"text": "#333333",
-		"accent": "#6ab04c",
-		"background": "#d6eaf8",
-		"surface": "#ffffff"
-	}
-].map(x => ({
+
+
+export const light = {
 	...DefaultTheme,
 	colors: {
 		...DefaultTheme.colors,
-		...x,
-		// blue: "#FFE065",
-		// yellow: "#181C3F",
+		primary: "#8D99AE", // Soft grayish-blue
+		text: "#2B2D42",    // Charcoal gray for text
+		accent: "#D8D8D8",  // Light gray for accents
+		background: "#F8F9FA", // Very light gray background
+		surface: "#FFFFFF",   // White for content areas
+		border: "#B0B0B0",    // Medium gray for borders
 	},
-
-}))
-
-const darkModeC = [
-	{
-		primary: "#FFE065", //yellow
-		text: "#FFE065",
-		accent: "#FFE065",
-		background: "#181C3F", //blue
-		surface: "#181C3F",
-	},
-	{
-		"primary": "#FFFFFF",
-		"text": "#EAEAEA",
-		"accent": "#EAEAEA",
-		"background": "#181C3F",
-		"surface": "#2C2C2C"
-	},
-	{
-		"primary": "#FFCC00",
-		"text": "#F0F0F0",
-		"accent": "#003366",
-		"background": "#000000",
-		"surface": "#1A1A1A"
-	},
-	{
-		"primary": "#004d99",
-		"text": "#f0f0f0",
-		"accent": "#ff6600",
-		"background": "#1a1a1a",
-		"surface": "#333333"
-	},
-	{
-		"primary": "#005073",
-		"text": "#e0f7fa",
-		"accent": "#7d8c8d",
-		"background": "#121212",
-		"surface": "#1c1c1c"
-	},
-	{
-		"primary": "#0a3d62",
-		"text": "#f5f5f5",
-		"accent": "#6ab04c",
-		"background": "#1e1e1e",
-		"surface": "#2a2a2a"
-	}
-].map(x => ({
+};
+const dark = {
 	...MD3DarkTheme,
 	colors: {
 		...MD3DarkTheme.colors,
-		...x,
-		// blue: "#FFE065",
-		// yellow: "#181C3F",
+		primary: "#F1FA8C", // Soft pastel yellow
+		text: "#FFFFFF",     // Pure white for high contrast
+		accent: "#FF6F61",   // Coral for accents
+		background: "#2D2A32", // Deep gray for background
+		surface: "#4A4E69",   // Muted slate gray for surface areas
+		border: "#F1FA8C",    // Matches primary color for borders
 	},
-
-}))
+};
 
 SplashScreen.preventAutoHideAsync();
 
 let backPressed = 0;
-
-const selectedINd = 4
 
 export default function RootLayout2() {
 	const [fontsLoaded, fontError] = useFonts({
@@ -221,11 +145,11 @@ export default function RootLayout2() {
 		return null;
 	}
 	return (
-		<PaperProvider theme={displayMode === "dark" ? darkModeC[selectedINd] : lightModeC[selectedINd]}>
+		<PaperProvider theme={displayMode === "dark" ? dark : light}>
 			<Stack
 				screenOptions={{
 					statusBarStyle: displayMode === "dark" ? "dark" : "light",
-					statusBarColor: displayMode === "dark" ? darkModeC[selectedINd].colors.primary : lightModeC[selectedINd].colors.primary,
+					statusBarColor: displayMode === "dark" ? dark.colors.primary : light.colors.primary,
 					headerShown: false,
 				}}
 			>
