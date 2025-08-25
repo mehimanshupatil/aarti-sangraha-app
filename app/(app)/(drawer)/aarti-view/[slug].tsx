@@ -33,8 +33,9 @@ const CommonTemplate: React.FC = () => {
 	const aartis = useDataStore((s) => s.aartis);
 	const fontSize = useDataStore((s) => s.fontSize);
 	const favoritesKeys = useDataStore((s) => s.favoritesKeys);
-	const translate = useDataStore(s => s.translate);
-	const { setFontSize, toggleFav, deleteAarti, setTranslate } = useDataStoreActions();
+	const translate = useDataStore((s) => s.translate);
+	const { setFontSize, toggleFav, deleteAarti, setTranslate } =
+		useDataStoreActions();
 
 	const [selectedItem, setSelectedItem] = useState(
 		aartis.find((x) => x.metadata.slug === decodeURI((slug ?? "") as string)),
@@ -100,7 +101,6 @@ const CommonTemplate: React.FC = () => {
 								icon="share-variant"
 								size={24}
 								iconColor={colors.background}
-								style={{ marginRight: 10 }}
 								onPress={() => onShare(selectedItem)}
 							/>
 						),
@@ -131,9 +131,11 @@ const CommonTemplate: React.FC = () => {
 								}
 								size={30}
 								style={styles.unsetbuttonStyle}
-
-								iconColor={favoritesKeys.includes(selectedItem?.key ?? "") ? colors.accent : colors.text}
-
+								iconColor={
+									favoritesKeys.includes(selectedItem?.key ?? "")
+										? colors.accent
+										: colors.text
+								}
 								onPress={() => iconPress(selectedItem)}
 							/>
 
@@ -160,12 +162,14 @@ const CommonTemplate: React.FC = () => {
 						</View>
 						<View style={styles.fontButton}>
 							<IconButton
-								icon={translate === 'original' ? 'translate-off' : "translate"}
+								icon={translate === "original" ? "translate-off" : "translate"}
 								size={30}
 								style={styles.unsetbuttonStyle}
 								iconColor={colors.accent}
 								onPress={() => {
-									setTranslate(translate === 'original' ? 'transliteration' : 'original')
+									setTranslate(
+										translate === "original" ? "transliteration" : "original",
+									);
 								}}
 							/>
 							<IconButton
@@ -203,7 +207,9 @@ const CommonTemplate: React.FC = () => {
 						<Text
 							style={[
 								{ color: colors.text, fontSize: fontSize },
-								fontStyle[translate === 'original' ? 'fontOriginal' : 'fontItalic'],
+								fontStyle[
+									translate === "original" ? "fontOriginal" : "fontItalic"
+								],
 							]}
 						>
 							{selectedItem?.body[translate]}

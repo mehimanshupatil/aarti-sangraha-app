@@ -9,7 +9,7 @@ import { useDataStore, useDataStoreActions } from "../store/store";
 import { SplashScreen, Stack, router } from "expo-router";
 import { useFonts } from "expo-font";
 import { BackHandler } from "react-native";
-import { Roboto_400Regular_Italic } from '@expo-google-fonts/roboto';
+import { Roboto_400Regular_Italic } from "@expo-google-fonts/roboto";
 
 declare global {
 	namespace ReactNativePaper {
@@ -47,18 +47,16 @@ declare global {
 // 	},
 // };
 
-
-
 export const light = {
 	...DefaultTheme,
 	colors: {
 		...DefaultTheme.colors,
 		primary: "#8D99AE", // Soft grayish-blue
-		text: "#2B2D42",    // Charcoal gray for text
-		accent: "#D8D8D8",  // Light gray for accents
+		text: "#2B2D42", // Charcoal gray for text
+		accent: "#D8D8D8", // Light gray for accents
 		background: "#F8F9FA", // Very light gray background
-		surface: "#FFFFFF",   // White for content areas
-		border: "#B0B0B0",    // Medium gray for borders
+		surface: "#FFFFFF", // White for content areas
+		border: "#B0B0B0", // Medium gray for borders
 	},
 };
 const dark = {
@@ -66,11 +64,11 @@ const dark = {
 	colors: {
 		...MD3DarkTheme.colors,
 		primary: "#F1FA8C", // Soft pastel yellow
-		text: "#FFFFFF",     // Pure white for high contrast
-		accent: "#FF6F61",   // Coral for accents
+		text: "#FFFFFF", // Pure white for high contrast
+		accent: "#FF6F61", // Coral for accents
 		background: "#2D2A32", // Deep gray for background
-		surface: "#4A4E69",   // Muted slate gray for surface areas
-		border: "#F1FA8C",    // Matches primary color for borders
+		surface: "#4A4E69", // Muted slate gray for surface areas
+		border: "#F1FA8C", // Matches primary color for borders
 	},
 };
 
@@ -81,7 +79,7 @@ let backPressed = 0;
 export default function RootLayout2() {
 	const [fontsLoaded, fontError] = useFonts({
 		nono_devanagari: require("../assets/fonts/NotoSansDevanagari.ttf"),
-		Roboto_400Regular_Italic
+		Roboto_400Regular_Italic,
 	});
 
 	const aartis = useDataStore((s) => s.aartis);
@@ -96,7 +94,7 @@ export default function RootLayout2() {
 		}
 	}, [aartis]);
 
-	const showSearchRef = useRef<boolean>();
+	const showSearchRef = useRef<boolean>(false);
 
 	useEffect(() => {
 		showSearchRef.current = showSearch;
@@ -149,7 +147,6 @@ export default function RootLayout2() {
 			<Stack
 				screenOptions={{
 					statusBarStyle: displayMode === "dark" ? "dark" : "light",
-					statusBarColor: displayMode === "dark" ? dark.colors.primary : light.colors.primary,
 					headerShown: false,
 				}}
 			>

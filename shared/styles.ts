@@ -8,7 +8,7 @@ export const globalStyle = StyleSheet.create({
 	homecontainer: {
 		margin: 20,
 		marginTop: 0,
-		marginBottom: 20,
+		marginBottom: 0,
 		flex: 1,
 	},
 });
@@ -19,6 +19,6 @@ export const fontStyle = StyleSheet.create({
 	},
 	fontItalic: {
 		fontFamily: "Roboto_400Regular_Italic",
-		fontStyle: 'italic'
+		fontStyle: "italic",
 	},
 });

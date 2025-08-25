@@ -4,8 +4,8 @@ import { ColorSchemeName } from "react-native";
 import { immer } from "zustand/middleware/immer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import data from "./data";
-import { shallow } from "zustand/shallow";
 import { create } from "zustand";
+import { useShallow } from "zustand/shallow";
 
 interface DataState {
 	aartis: singleItemType[];
@@ -23,11 +23,11 @@ interface DataState {
 	setShowSearch: (arg: boolean) => void;
 	searchValue: string;
 	setSearchValue: (text: string) => void;
-	translate: TextDisplayType,
-	setTranslate: (arg0: TextDisplayType) => void,
+	translate: TextDisplayType;
+	setTranslate: (arg0: TextDisplayType) => void;
 }
 
-export type TextDisplayType = 'original' | 'transliteration';
+export type TextDisplayType = "original" | "transliteration";
 
 export const useDataStore = create<DataState>()(
 	devtools(
@@ -37,10 +37,11 @@ export const useDataStore = create<DataState>()(
 				favoritesKeys: [] as DataState["favoritesKeys"],
 				fontSize: 20,
 				searchValue: "",
-				translate: 'original',
-				setTranslate: (arg0) => set((state) => {
-					state.translate = arg0;
-				}),
+				translate: "original",
+				setTranslate: (arg0) =>
+					set((state) => {
+						state.translate = arg0;
+					}),
 				displayMode: "light" as NonNullable<ColorSchemeName>,
 				showSearch: false,
 				setShowSearch: (arg) =>
@@ -100,15 +101,17 @@ export const useDataStore = create<DataState>()(
 );
 
 export const useDataStoreActions = () =>
-	useDataStore((s) => ({
-		toggleFav: s.toggleFav,
-		initializeAarti: s.initializeAarti,
-		addAarti: s.addAarti,
-		updateAarti: s.updateAarti,
-		deleteAarti: s.deleteAarti,
-		setDisplayMode: s.setDisplayMode,
-		setFontSize: s.setFontSize,
-		setShowSearch: s.setShowSearch,
-		setSearchValue: s.setSearchValue,
-		setTranslate: s.setTranslate,
-	}));
+	useDataStore(
+		useShallow((s) => ({
+			toggleFav: s.toggleFav,
+			initializeAarti: s.initializeAarti,
+			addAarti: s.addAarti,
+			updateAarti: s.updateAarti,
+			deleteAarti: s.deleteAarti,
+			setDisplayMode: s.setDisplayMode,
+			setFontSize: s.setFontSize,
+			setShowSearch: s.setShowSearch,
+			setSearchValue: s.setSearchValue,
+			setTranslate: s.setTranslate,
+		})),
+	);

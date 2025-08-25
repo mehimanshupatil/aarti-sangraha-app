@@ -1,25 +1,31 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 import Search from "./Search";
 import { IconButton } from "react-native-paper";
-import {
-	useSafeAreaFrame,
-	useSafeAreaInsets,
-} from "react-native-safe-area-context";
-import { getDefaultHeaderHeight } from "@react-navigation/elements";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAppTheme } from "../shared/types";
 import { fontStyle } from "../shared/styles";
 import { useDataStore, useDataStoreActions } from "../store/store";
+
+const APPBAR_HEIGHT = Platform.OS === "ios" ? 50 : 56;
 
 const Header: React.FC<{
 	title: string;
 	navigation?: any;
 	showSearchButton: boolean;
 }> = ({ title, navigation, showSearchButton }) => {
-	const frame = useSafeAreaFrame();
-	const insets = useSafeAreaInsets();
+	// https://github.com/expo/expo/blob/c3a83979d5e1103d3d259ea537823a3ec3972fa6/apps/native-component-list/src/screens/SearchScreen.tsx#L89
+	const { top } = useSafeAreaInsets();
+	// @todo: this is static and we don't know if it's visible or not on iOS.
+	// need to use a more reliable and cross-platform API when one exists, like
+	// LayoutContext. We also don't know if it's translucent or not on Android
+	// and depend on react-native-safe-area-context to tell us.
+	const STATUSBAR_HEIGHT = top || 8;
 
-	const headerHeight = getDefaultHeaderHeight(frame, false, insets.top);
+	// const frame = useSafeAreaFrame();
+	// const insets = useSafeAreaInsets();
+
+	// const headerHeight = getDefaultHeaderHeight(frame, false, insets.top);
 
 	const { colors } = useAppTheme();
 	const translate = useDataStore((s) => s.translate);
@@ -34,7 +40,10 @@ const Header: React.FC<{
 		<View
 			style={{
 				...styles.header,
-				height: headerHeight,
+				...{
+					paddingTop: STATUSBAR_HEIGHT,
+					height: STATUSBAR_HEIGHT + APPBAR_HEIGHT,
+				},
 				backgroundColor: colors.primary,
 			}}
 		>
@@ -51,15 +60,15 @@ const Header: React.FC<{
 						<Text
 							style={[
 								{ ...styles.headerText, color: colors.surface },
-
-								fontStyle[translate === 'original' ? 'fontOriginal' : 'fontItalic'],
-
+								fontStyle[
+									translate === "original" ? "fontOriginal" : "fontItalic"
+								],
 							]}
 						>
 							{title}
 						</Text>
 					</View>
-					{showSearchButton && (
+					{showSearchButton ? (
 						<IconButton
 							icon="text-box-search-outline"
 							onPress={() => setShowSearch(true)}
@@ -67,6 +76,8 @@ const Header: React.FC<{
 							iconColor={colors.surface}
 							style={styles.searchIcon}
 						/>
+					) : (
+						<IconButton icon="" size={28} style={styles.searchIcon} />
 					)}
 				</>
 			) : (
@@ -79,24 +90,17 @@ const Header: React.FC<{
 const styles = StyleSheet.create({
 	header: {
 		width: "100%",
-		height: "100%",
 		flexDirection: "row",
 		alignItems: "center",
-		justifyContent: "center",
+		justifyContent: "space-between",
 	},
 	headerText: {
 		fontWeight: "bold",
 		fontSize: 20,
 		letterSpacing: 1,
 	},
-	menuIcon: {
-		position: "absolute",
-		left: 12,
-	},
-	searchIcon: {
-		position: "absolute",
-		right: 12,
-	},
+	menuIcon: {},
+	searchIcon: {},
 });
 
 export default Header;
