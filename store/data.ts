@@ -169,40 +169,6 @@ const data = [
 		},
 	},
 	{
-		key: "11",
-		title: {
-			original: "प्रथम तुला वंदितो",
-			transliteration: "Pratham Tula Vandito",
-		},
-		body: {
-			original:
-				"प्रथम तुला वंदितो, कृपाळा \nगजानना गणराया \n \nविघ्‍नविनाशक, गुणिजन पालक \nदुरित तिमीरहारका \nसुखकारक तू, दुःख विदारक \nतूच तुझ्यासारखा \nवक्रतुंड ब्रह्मांडनायका \nविनायका प्रभुराया \n \nसिद्धीविनायक तूच अनंता \nशिवात्मजा मंगला \nसिंदूर वदना, विद्याधिशा \nगणाधीपा वत्सला \nतूच ईश्वरा सहाय्य करावे \nहा भवसिंधू तराया \n \nगजवदना तव रूप मनोहर \nशुक्लांबर शिवसूता \nचिंतामणी तू अष्टविनायक \nसकलांची देवता \nरिद्धीसिद्धीच्या वरा, दयाळा \nदेई कृपेची छाया",
-			transliteration:
-				"Pratham Tula Vandito, Kripaala \nGajaanana Ganaraya \n \nVighnnasha, Gunijan Paalak \nDurit Timirhaaraka \nSukhakarak Tu, Dukha Vidaarak \nTuch Tuzhyaasarkha \nVakratuṇḍ Brahmanda Naayaka \nVinaayaka Prabhu Raaya \n \nSiddhivinayak Tuch Ananta \nShivaatmaja Mangala \nSindoor Vadaana, Vidyadhisha \nGanadhipa Vatsala \nTuch Eeshwara Saahyya Karave \nHaa Bhavasindhu Taraaya \n \nGajavadana Tava Roopa Manohar \nShuklaambara Shivsoota \nChintamani Tu Ashtavinayak \nSakalaanchi Devata \nRiddhisiddhicha Vara, Dayala \nDei Krpechi Chhaayaa",
-		},
-		metadata: {
-			tags: [],
-			slug: "pratham-tula-vandito",
-		},
-	},
-	{
-		key: "12",
-		title: {
-			original: "ॐकार प्रधान",
-			transliteration: "Omkar Pradhan",
-		},
-		body: {
-			original:
-				"ॐकार प्रधान रूप गणेशाचे । \nहे तिन्ही देवांचे जन्मस्थान ॥ १ ॥ \n \nअकार तो ब्रह्मा, उकार तो विष्णु । \nमकार महेश जाणियेला ॥ २ ॥ \n \nऐसे तिन्ही देव जेथोनी उत्पन्‍न । \nतो हा गजानन मायबाप ॥ ३ ॥ \n \nतुका ह्मणे ऐसी आहे वेदवाणी । \nपहावी पुराणे व्यासाचिया ॥ ४ ॥",
-			transliteration:
-				"Omkar Pradhan Roop Ganeshache \nHe Tinhī Devānche Janmasthan || 1 || \n \nAkār To Brahmā, Ukār To Vishnu \nMakār Mahesh Jāṇiyelā || 2 || \n \nAise Tinhī Dev Jethoni Utpan \nTo Hā Gajaanan Māyabāp || 3 || \n \nTukā Hmane Āsī Āhe Vedavāṇī \nPahāvi Purāṇe Vyāsāchiyā || 4 ||",
-		},
-		metadata: {
-			tags: [],
-			slug: "omkar-pradhan",
-		},
-	},
-	{
 		key: "13",
 		title: {
 			original: "शंकराची आरती",
@@ -253,74 +219,7 @@ const data = [
 			slug: "om-jai-jagdish-hare",
 		},
 	},
-	{
-		key: "16",
-		title: {
-			original: "हे भोळया शंकरा",
-			transliteration: "He Bhōḷyā Shankārā",
-		},
-		body: {
-			original:
-				"हे भोळ्या शंकरा, \nहे भोळा शंकरा \nआवड तुला बेलाची, \nआवड़ तुला बेलाची, \nबेलाच्या पानाची, \nहे भोळ्या शंकरा शंकरा, \nहे भोळ्या शंकरा महादेवा ।। ध्रु ।। \n \nगळ्यामध्ये रुद्राक्षाचा माळा \nलावितो भस्म कपाळा ।। १ ।। \n \nत्रिशूल डमरू हाथी, \nसंगे नाचे पार्वती ।। २ ।। \n \nभोलेनाथ आलो तुमच्या द्वारी, \nकोठे दिसे ना पुजारी ।। ३ ।। \n \nहाथां मध्ये घेउन झारी, \nनंदयावरी करितो सवारी ।। ४ ।। \n \nमाथ्यावर चंद्राची कोर, \nगड्या मध्ये सर्पाची हार ।। ५ ।।",
-			transliteration:
-				"He Bhōḷyā Shankārā \nHe Bhōḷā Shankārā \nĀvaḍ Tulā Belācī \nĀvaḍ Tulā Belācī \nBelācyā Pānācī \nHe Bhōḷyā Shankārā Shankārā \nHe Bhōḷyā Shankārā Mahādevā || Dhru || \n \nGaḷyāmadhe Rudrākṣācā Māḷā \nLāvitō Bhasma Kapāḷā || 1 || \n \nTriśūla Ḍamarū Hāthī \nSange Nāce Pārvatī || 2 || \n \nBhōlēnāth Ālo Tumcyā Dvārī \nKoṭhe Dise Nā Pujārī || 3 || \n \nHāthāṃ Madhye Gheuṃ Jhārī \nNandayāvari Karitō Savārī || 4 || \n \nMāthyāvar Chandrācī Kōra \nGaḍyāṃ Madhye Sarpācī Hāra || 5 ||",
-		},
-		metadata: {
-			tags: [],
-			slug: "he-bholya-shankara",
-		},
-	},
-	{
-		key: "17",
-		title: {
-			original: "अगडबम् अगडबम् वाजे डमरू",
-			transliteration: "Agaḍabam Agaḍabam Vāje Ḍamarū",
-		},
-		body: {
-			original:
-				"अगडबम् बम् बम् वाजे डमरू \nनाच रे सदाशिव जगदगुरू || धृ || \n \nनाचे ब्रम्हा नाचे विष्णु नाचे महादेव \nजहाँ देखे पार्वती नाचे सदाशिव || १ || \n \nपान खाये चान खाये नाचे कलियादुत \nयोगियो के पीछे नाचे नंगे अवधुत ||२|| \n \nकाशिविश्व नाच नाम राजे विराजे \nआगे भैरव पिछे हनुमान साई ||३||",
-			transliteration:
-				"Agaḍabam Bam Bam Vāje Ḍamarū \nNāca Re Sadāśiva Jagadguru || Dhru || \n \nNāce Brahmā Nāce Viṣṇu Nāce Mahādev \nJahāṃ Dekhe Pārvatī Nāce Sadāśiva || 1 || \n \nPān Khāye Chān Khāye Nāce Kaliyādut \nYogīyo Ke Pīche Nāce Naṅge Avadhūt || 2 || \n \nKāśivishva Nāca Nāma Rājē Virājē \nĀge Bhairav Piccē Hanumān Sāī || 3 ||",
-		},
-		metadata: {
-			tags: [],
-			slug: "agadbam-agadbam-vaje-damaru",
-		},
-	},
-	{
-		key: "18",
-		title: {
-			original: "जैजुरिच्या खंडेराया जागराला या या",
-			transliteration: "Jaijurichyā Khaṇḍerāyā Jāgarālā Yā Yā",
-		},
-		body: {
-			original:
-				"जेजुरीसम पुण्यक्षेत्र या नाही धरणीवरी \nअन्‌ तिथे नांदतो सदानंद हर उंच डोंगरी, कडावरी \n \nयळकोट यळकोट जय मल्हार \n \nजेजुरीच्या खंडेराया जागराला या या \nवाईच्या तू गणराया जागराला या या \nपसरणीच्या भैरी देवा जागराला या या \n \nजेजुरगडा वाजे चौघडा वाजे चौघडा \nपुणं धरती ही पलिकडं, गड जेजुरी अलिकडं \n \nरूप दावून बानू गेली, स्वारी देवाची येडी झाली \nबानूबाईचं याड लागलं, मल्हारी देव मल्हारी \n \nइसरून गेला कुण्या झाडाला भंडारी देव भंडारी \nयेळकोट येळकोट बोलती हो नितकाय भंडार उधळती \nनवलाख पायरी गडाला हो, चिरा जोडिला खडकाला \nअवं बोला हो तुम्ही बोला, अवं म्हाळसा नारीला \n \nअन्‌ भंडारा वाहू देवाला हो मल्हारी रायाला \nमल्हारी मल्हारी माझा कैवारी देव मल्हारी \n \nअवं गळा घालतো भंडारी देव मल्हारी \nमल्हारी मार्तंड जय मल्हार \n \nरुसला का मजवरी मल्हारी रुसला का मजवरी \nबानू नार आणली घरी मल्हारी रुसला का मजवरी \nलखलख दिवट्या जळती पाजळली दीपमाळ \nरुसला का मजवरी मल्हारी रुसला का मजवरी \n \nकडेकपारी त्रिशूळ द्वारी वर उधळे भंडार \nनाथ निरंजन सद्गुरू स्वामी घेतलासे अवतार \nघेतलासे अवतार देवा लोटलासे भंडार \nरुसला का मजवरी मल्हारी रुसला का मजवरी \n \nमल्हार धनी मी म्हाळसा राणी \nकर जोडुनी लागतो चरणी \nप्रीत नको तुजवरी, प्रीत नको तुजवरी \nरुसला का मजवरी मल्हारी रुसला का मजवरी \n",
-			transliteration:
-				"Jejuriṣama Puṇyakṣetra Yā Nāhī Dharaṇīvarī \nAn Tithe Nāndato Sadānanda Hara Uṃca Ḍōṅgarī, Kaḍāvarī \n \nYaḷakōṭ Yaḷakōṭ Jay Malhāra \n \nJejuriçyā Khaṇḍerāyā Jāgarālā Yā Yā \nVaīcyā Tū Gaṇarāyā Jāgarālā Yā Yā \nPasaraṇīcyā Bhairī Devā Jāgarālā Yā Yā \n \nJejuragaḍā Vāje Chauḍhaḍā Vāje Chauḍhaḍā \nPuṇa Dharaṭī Hī Palikadāṃ, Gaḍ Jejuri Alikadāṃ \n \nRūpa Dāvūna Bānū Gelī \nSwārī Devācī Yēḍī Jhālī \nBānūbāīcā Yāḍa Lāgaḷā \nMalhārī Dev Malhārī \n \nIsarūna Gelā Kuṇyā Jhāḍālā Bhāṇḍārī Dev Bhāṇḍārī \nYaḷakōṭ Yaḷakōṭ Bōlatī hō Nītakāya Bhāṇḍār Udhaḷatī \nNavalākh Pāyarī Gaḍālā Hō \nCira Jōḍilā Khadakālā \nAvaṃ Bōlā Hō Tumhī Bōlā \nAvaṃ Mhāḷasā Nārilā \n \nAn Bhāṇḍārā Vāhū Devālā Hō Malhārī Rāyālā \nMalhārī Malhārī Mājhā Kaivārī Dev Malhārī \n \nAvaṃ Gaḷā Ghālitō Bhāṇḍārī Dev Malhārī \nMalhārī Mārtāṇḍa Jay Malhār \n \nRuslā Kā Majavarī Malhārī Ruslā Kā Majavarī \nBānū Nāra Āṇalī Gharī Malhārī Ruslā Kā Majavarī \nLakh lakh Divṭyā Jaḷatī Pāḍhaḷalī Dīpamāḷa \nRuslā Kā Majavarī Malhārī Ruslā Kā Majavarī \n \nKaḍēkapārī Triśūḷa Dvārī Var Udhaḷe Bhāṇḍār \nNātha Niranjana Sadguru Swāmī Ghetalāse Avatāra \nGhetalāse Avatāra Devā Lōṭalāse Bhāṇḍār \nRuslā Kā Majavarī Malhārī Ruslā Kā Majavarī \n \nMalhār Dhani Mī Mhāḷasā Rāṇī \nKara Jōḍunī Lāgatō Charāṇī \nPrīta Nāko Tujhvarī \nPrīta Nāko Tujhvarī \nRuslā Kā Majavarī Malhārī Ruslā Kā Majavarī",
-		},
-		metadata: {
-			tags: [],
-			slug: "jaijurichya-khanderaya-jagarala-ya-ya",
-		},
-	},
-	{
-		key: "19",
-		title: {
-			original: "नाम तुझे बरवे गा शंकरा",
-			transliteration: "Nāma Tujhe Barve Gā Shankārā",
-		},
-		body: {
-			original:
-				"नाम तुझे बरवे गा शंकरा । \nहर हर बरवे गा देवा शंकरा ।। \n \nगायिल्या ऐकिल्या होय वैष्णवा गती । \nराम नामे टरले नेणो किती ।। \n \nऐसा सदा आनंद राउळी । \nविष्णुदास नामा पंढरपुरी ।।",
-			transliteration:
-				"Nāma Tujhe Barve Gā Shankārā \nHar Har Barve Gā Devā Shankārā || \n \nGāyilyā Āikilā Hoy Vaiṣṇavā Gati \nRāma Nāme Ṭaralē Neṇō Kitī || \n \nAisā Sadā Ānanda Rāuḷī \nViṣṇudāsa Nāma Paṇḍharpurī ||",
-		},
-		metadata: {
-			tags: [],
-			slug: "nama-tujhe-barve-ga-shankara",
-		},
-	},
+
 	{
 		key: "20",
 		title: {
@@ -407,40 +306,6 @@ const data = [
 		},
 	},
 	{
-		key: "25",
-		title: {
-			original: "आरती सप्रेम जय जय संतोषी माता",
-			transliteration: "Ārātī Saprem Jaya Jaya Santoṣī Mātā",
-		},
-		body: {
-			original:
-				"आरती सप्रेम जय जय संतोषी माता \nभक्त गणाने तुझिया चरणी ठेविला माथा || धृ || \n \nअवदुंबर तु अवतरली तु कन्या गणेशाची \nझन कल्याणी गाय भवानी नाथ महेशाची \nअंतर्यामी नारदाने लिहीली तवगाथा || १ || \n \nआंबट खाता कोधाने तु करशील आकांत \nचणे गुळाचा प्रसाद घेता होईल मन शांत \nभाग्य उदय हे खरोखर गुण तुझे गाया || २ || \n",
-			transliteration:
-				"Ārātī Saprem Jaya Jaya Santoṣī Mātā \nBhakta Gaṇānē Tujhiyā Caraṇī Ṭhēvilā Māthā || Dhru || \n \nAvadumbaṙa Tu Avataralī Tu Kanyā Gaṇēśācī \nJhana Kalyāṇī Gāya Bhavānī Nātha Mahēśācī \nAntaryāmī Nārādānē Lihīlī Tavagāthā || 1 || \n \nĀmbāṭa Khātā Kōdhānē Tu Karśīla Ākānta \nCaṇē Guḷācā Prasāda Ghētā Hō'īla Mana Śānta \nBhāgya Udaya Hē Kharōkhara Guṇa Tujhē Gāyā || 2 ||",
-		},
-		metadata: {
-			tags: [],
-			slug: "arati-saprem-jaya-jaya-santoshi-mata",
-		},
-	},
-	{
-		key: "26",
-		title: {
-			original: "श्री संतोषीमातेची आरती",
-			transliteration: "Śrī Santoṣīmātēcī Ārātī",
-		},
-		body: {
-			original:
-				"मैं तो आरती उतारूँ रे संतोषी माता की । \nमैं तो आरती उतारूँ रे संतोषी माता की । \nजय जय संतोषी माता जय जय माँ॥ \nजय जय संतोषी माता जय जय माँ \nजय जय संतोषी माता जय जय माँ || धृ || \n \nबड़ी ममता है बड़ा प्यार माँ की आँखों मे। \nमाँ की आँखों मे। \nबड़ी करुणा माया दुलार माँ की आँखों मे। \nमाँ की आँखों मे। \nक्यूँ ना देखूँ मैं बारम्बार माँ की आँखों मे। \nमाँ की आँखों मे। \nदिखे हर घड़ी नया चमत्कार आँखों मे। \nमाँ की आँखों मे। \nनृत्य करो झूम झूम, छम छमा छम झूम झूम, \nझांकी निहारो रे || १ || \n \nसदा होती है जय जय कार माँ के मंदिर मे। \nमाँ के मंदिर मे। \nनित्त झांझर की होवे झंकार माँ के मंदिर मे। \nमाँ के मंदिर मे। \nसदा मंजीरे करते पुकार माँ के मंदिर मे। \nमाँ के मंदिर मे। \nवरदान के भरे हैं भंडार, माँ के मंदिर मे। \nमाँ के मंदिर मे। \nदीप धरो धूप करूँ, प्रेम सहित भक्ति करूँ, \nजीवन सुधारो रे || २ ||",
-			transliteration:
-				"Maiṁ tō Ārātī Utārūṁ Rē Santoṣī Mātā Kī. \nMaiṁ tō Ārātī Utārūṁ Rē Santoṣī Mātā Kī. \nJaya Jaya Santoṣī Mātā Jaya Jaya Māṁ || \nJaya Jaya Santoṣī Mātā Jaya Jaya Māṁ \nJaya Jaya Santoṣī Mātā Jaya Jaya Māṁ || Dhru || \n \nBaṛī Mamatā Hai Baṛā Pyāra Māṁ Kī Āṅkhōṁ Mē. \nMāṁ Kī Āṅkhōṁ Mē. \nBaṛī Karuṇā Māyā Dulāra Māṁ Kī Āṅkhōṁ Mē. \nMāṁ Kī Āṅkhōṁ Mē. \nKyuṁ Nā Dēkhūṁ Maiṁ Bārambār Māṁ Kī Āṅkhōṁ Mē. \nMāṁ Kī Āṅkhōṁ Mē. \nDikhē Har Ghaḍī Nayā Camatkār Āṅkhōṁ Mē. \nMāṁ Kī Āṅkhōṁ Mē. \nNritya Karō Jhūma Jhūma, Chama Chāmā Chama Jhūma Jhūma, \nJhāṅkī Nīhāraō Rē || 1 || \n \nSadā Hōtī Hai Jaya Jaya Kāra Māṁ Kē Mandira Mē. \nMāṁ Kē Mandira Mē. \nNitta Jhāṅjhara Kī Hōvē Jhāṅkāra Māṁ Kē Mandira Mē. \nMāṁ Kē Mandira Mē. \nSadā Mañjīrē Kartē Pūkara Māṁ Kē Mandira Mē. \nMāṁ Kē Mandira Mē. \nVaradāna Kē Bharē Haiṁ Bhaṇḍāra, Māṁ Kē Mandira Mē. \nMāṁ Kē Mandira Mē. \nDīpa Dharo Dhūpa Karūṁ, Prema Sahita Bhakti Karūṁ, \nJīvana Sudhāro Rē || 2 ||",
-		},
-		metadata: {
-			tags: [],
-			slug: "shri-santoshi-matechi-arati",
-		},
-	},
-	{
 		key: "27",
 		title: {
 			original: "आईचा जोगवा",
@@ -475,24 +340,6 @@ const data = [
 		},
 	},
 	{
-		key: "29",
-		title: {
-			original: "दिगंबरा दिगंबरा श्रीपाद वल्लभ दिगंबरा",
-			transliteration: "Digambarā Digambarā Śrīpāda Vallabha Digambarā",
-		},
-		body: {
-			original:
-				"दिगंबरा दिगंबरा श्रीपाद वल्लभ दिगंबरा \n \nनिघालो घेऊन दत्ताची पालखी \nआम्ही भाग्यवान आनंद निधान \nझुलते हळूच दत्ताची पालखी \n \nरत्नांची आरास साज मखमली \nत्यावर सुगंधी फुले गोड ओली \nझुळूक कोवळी चंदनासारखी \n \nसातजन्मांची ही लाभली पुण्याई \nम्हणून जाहलो पालखीचे भोई \nशांत माया मूर्ती पहाटेसारखी \n \nवाट वळणाची जिवाला या ओढी \nदिसते समोर नरसोबाची वाडी \nडोळियांत गंगा जाहली बोलकी",
-			transliteration:
-				"Digambarā Digambarā Śrīpāda Vallabha Digambarā \n \nNighālo Ghē'uṇa Dattācī Pālakhī \nĀmhī Bhāgyavān Ānanda Nidhāna \nJhūlatē Haḷūca Dattācī Pālakhī \n \nRatnāṅcī Ārāsa Sāja Makhmalī \nTyāvara Sugandhī Phulē Gōḍa Ōlī \nJhūḷūka Kōvaḷī Candanāsārakhī \n \nSātjanmāṅcī Hī Lābhalī Puṇyā'ī \nMhaṇūna Jāhlō Pālakhīcē Bhō'ī \nŚānta Māyā Mūrtī Pahāṭēsārakhī \n \nVāṭa Vaḷaṇācī Jivālā Yā Ōḍhī \nDisatē Samōra Narasōbācī Vāḍī \nḌōḷyāṁt Ganga Jāhlī Bōlki",
-		},
-		metadata: {
-			tags: [],
-			slug: "digambara-digambara-shripad-vallabh-digambara",
-		},
-	},
-
-	{
 		key: "30",
 		title: {
 			original: "धन्य धन्य हो प्रदक्षिणा",
@@ -526,40 +373,8 @@ const data = [
 			slug: "arati-sadgururayachi",
 		},
 	},
-	{
-		key: "32",
-		title: {
-			original: "पावना शंभो",
-			transliteration: "Pāvanā Śaṃbhō",
-		},
-		body: {
-			original:
-				"पावना शंभो पावना शंभो पावना शंभो \nपतीत पावना शंभो \nहे वनमाळी सावळया नारायण हरी \nया भक्तजनी सावळया हे रे वनमाळी \nपावना दत्ता दत्ता दत्ता पावना दत्ता \nपावना दत्ता पतीत पावना दत्ता \nवंदीला गुरू वंदीला गुरू वंदीला गुरू \nआज म्या वंदीला गुरू ......  \nभजु राधे गोविंद भजु राधे गोविंद \nभजु राधे गोविंद भजु राधे गोविंद \nभजु राधे गोबिंद भजु राधे गोविंद \nहरी भजनी मोर नाचतो अंगणी पायाकडे पाहूनी \nपायाकडे पाहूनी नाचतो पायाकडे पाहूनी \nहरी भजनी मोर नाचतो अंगणी पायाकडे पाहूनी  \nलाल फुलाचा मऊ विछाना साईला झोप लागेना \nलाल फुलाचा मऊ बिछाना बाबाला झोप लागेना \nगोविंद बोलो हरी गोपाल बोलो ... २ वेळा \nराधा रमण हरी गोपाल बोलो  \nपायी हळुहळु चाला मुखाने साईनाथ बोला ... ३ वेळा \n",
-			transliteration:
-				"Pāvanā Śaṃbhō Pāvanā Śaṃbhō Pāvanā Śaṃbhō \nPatīta Pāvanā Śaṃbhō \nHe Vanamāḷī Sāvaḷayā Nārayāṇa Hari \nYā Bhaktajani Sāvaḷayā He Rē Vanamāḷī \nPāvanā Dattā Dattā Dattā Pāvanā Dattā \nPāvanā Dattā Patīta Pāvanā Dattā \nVaṃdīlā Gurū Vaṃdīlā Gurū Vaṃdīlā Gurū \nĀj Mya Vaṃdīlā Gurū ...... \nBhaju Rādhē Govinda Bhaju Rādhē Govinda \nBhaju Rādhē Govinda Bhaju Rādhē Govinda \nBhaju Rādhē Gobinda Bhaju Rādhē Govinda \nHarī Bhajanī Mōra Nācatō Aṅgaṇī Pāyākaḍē Pāhūnī \nPāyākaḍē Pāhūnī Nācatō Pāyākaḍē Pāhūnī \nHarī Bhajanī Mōra Nācatō Aṅgaṇī Pāyākaḍē Pāhūnī \nLāla Phulācā Mawū Vichānā Sāīlā Zhōpa Lāgēnā \nLāla Phulācā Mawū Bicānā Bābālā Zhōpa Lāgēnā \nGovinda Bōlō Harī Gōpāla Bōlō ... 2 Vēlā \nRādhā Ramana Harī Gōpāla Bōlō \nPāyī Haḷuhāḷu Cālā Mukhanē Sāīnātha Bōlā ... 3 Vēlā",
-		},
-		metadata: {
-			tags: [],
-			slug: "pavana-shambho",
-		},
-	},
-	{
-		key: "33",
-		title: {
-			original: "ॐकार स्वरूपा",
-			transliteration: "Omkar Swaroopa",
-		},
-		body: {
-			original:
-				"ॐकारस्वरूपा सद्गुरू समर्था । \nअनाथाच्या नाथा तुज नमो ॥ १ ॥ \n\nनमो मायबापा गुरुकृपाघना । \nतोडी या बंधना मायामोहा ॥ \nमोहोजाळ माझें कोण निरशील । \nतुजवीण दयाळा सद्गुरुराया ॥ २ ॥ \n\nसद्गुरुराया माझा आनंदसागर । \nत्रैलोक्या आधार गुरुराव ।। \nगुरुराव स्वामी असे स्वयंप्रकाश । \nज्यापुढें उदास चंद्र-रवि ॥ \nरवि शशि अग्‍नि नेणती ज्या रूपा । \nस्वप्रकाशरूपा नेणें वेद ॥ ३ ॥ \n\nएका जनार्दनीं गुरु परब्रह्म । \nतयाचें पैं नाम सदा मुखीं ॥ ४ ॥",
-			transliteration:
-				"Omkar Swaroopa Sadguru Samartha\nAnathachya Natha tuza namo ॥ 1 ॥\n\nNamo Mayabapa Gurukrupaghana\nTodi ya bandhana mayamoha\nMohojal maze kon nirshil\nTujavin dayala Sadgururaya ॥ 2 ॥\n\nSadgururaya maza anandsagar\nTrailokya adhar Gururav ॥\nGururav Swami ase svayamprakash\nJya pude udas Chandra-Ravi\nRavi Shashi agni nenati jya roopa\nSwayamprakasharoopa nene Ved ॥ 3 ॥\n\nEka Janardani Guru Parabrahma\nTyache pai naam sada mukhi ॥ 4 ॥",
-		},
-		metadata: {
-			tags: [],
-			slug: "omkar-swaroopa",
-		},
-	},
+
+
 	{
 		key: "34",
 		title: {
@@ -595,108 +410,6 @@ const data = [
 		},
 	},
 	{
-		key: "36",
-		title: {
-			original: "विठुमाउली तू माउली जगाची",
-			transliteration: "Vithumauli Tu Mauli Jagachi",
-		},
-		body: {
-			original:
-				"विठुमाउली तू माउली जगाची \nमाउलीत मूर्ति विठ्ठलाची, विठ्ठला मायबापा \n\nकाय तुझी माया सांगु शिरीरंगा \nसंसाराचि पंढरी तू केली पांडुरंगा \nडोळ्यांतून वाहे माय चंद्रभागा \nअमृताची गोडी आज आलीया अभंगा \nविठ्ठला पांडुरंगा \nअभंगाला जोड टाळचिपळ्यांची \nमाउलीत मूर्ति विठ्ठलाची, विठ्ठला मायबापा \n\nलेकरांची सेवा केलीस तू आई \nकसं पांग फेडू, कसं होऊ उतराई \nतुझ्या उपकारा जगी तोड नाही \nओवाळीन जीव माझा सावळे विठाई \nविठ्ठला मायबापा \nजन्मभरी पूजा तुझ्या पाउलांची \nमाउलीत मूर्ति विठ्ठलाची, विठ्ठला मायबापा",
-			transliteration:
-				"Vithumauli tu mauli jagachi\nMaulit murti Vitthalachi, Vitthala maibapa.\n\nKaya tuzhi maya sangu Shiriranga\nSansarach Pandhari tu keli Panduranga\nDolyatun vahe mai Chandrabhaga\nAmritachi godi aaj aaliya abhanga\nVitthala Panduranga\nAbhangala jod talchiplyanchi\nMaulit murti Vitthalachi, Vitthala maibapa.\n\nLekaranachi seva kelis tu aai\nKas pang fedu, kas hou utarai\nTuzhya upkara jagi tod nahi\nOwalin jiv maza sawale Vithai\nVitthala maibapa\nJanmabhari pooja tuzhya paulanachi\nMaulit murti Vitthalachi, Vitthala maibapa.",
-		},
-		metadata: {
-			tags: [],
-			slug: "vithumauli-tu-mauli-jagachi",
-		},
-	},
-	{
-		key: "37",
-		title: {
-			original: "अबीर गुलाल उधळीत",
-			transliteration: "Abir Gulal Udhalit",
-		},
-		body: {
-			original:
-				"अबीर गुलाल उधळीत रंग । \nनाथा घरी नाचे माझा सखा पांडुरंग ॥ धृ ॥ \n \nउंबरठ्यासी कैसे शिवू? आह्मी जाती हीन । \nरूप तुझे कैसे पाहूं? त्यात आह्मी दीन । \nपायरीशी होऊ दंग गावूनी अभंग ॥ १ ॥ \n \nवाळवंटी गावू आह्मी वाळवंटी नाचू । \nचंद्रभागेच्या पाण्याने अंग अंग न्हाऊ । \nविठ्ठलाचे नाम घेऊ हो‌उनी निःसंग ॥ २ ॥ \n \nआषाढी-कार्तिकी भक्तजन येती । \nपंढरीच्या वाळवंटी संत गोळा होती । \nचोखा ह्मणे नाम घेता भक्त होती दंग ॥ ३ ॥",
-			transliteration:
-				"Abir Gulal Udhalit Rang | \nNatha Ghari Nache Maza Sakha Pandurang || Dhru || \n\nUmbarthyasi Kaise Shivu? Aahmi Jaati Hin | \nRoop Tujhe Kaise Pahu? Tyat Aahmi Deen | \nPayarishi Hou Dang Gavuni Abhang || 1 || \n\nValvanti Gavu Aahmi Valvanti Nachu | \nChandrbhagechya Panyane Ang Ang Nahu | \nVitthalache Naam Gheu Houni Nisanga || 2 || \n\nAshadhi-Kartiki Bhaktajan Yeti | \nPandharichya Valvanti Sant Gola Hoti | \nChokha Mhane Naam Gheta Bhakt Hoti Dang || 3 ||",
-		},
-		metadata: {
-			tags: [],
-			slug: "abir-gulal-udhalit",
-		},
-	},
-	{
-		key: "38",
-		title: {
-			original: "कानडा राजा पंढरीचा",
-			transliteration: "Kanada raja pandharicha",
-		},
-		body: {
-			original:
-				"कानडा राजा पंढरीचा \nवेदांनाही नाही कळला अंतपार याचा \n \nनिराकार तो निर्गुण ईश्वर \nकसा प्रकटला असा विटेवर \nउभय ठेविले हात कटिवर, पुतळा चैतन्याचा \n \nपरब्रह्म हे भक्तांसाठी \nमुके ठाकले भीमेकाठी \nउभा राहिला भाव सावयव, जणू की पुंडलिकाचा \n \nहा नाम्याची खीर चाखतो \nचोखोबांची गुरे राखतो \nपुरंदराचा हा परमात्मा, वाली दामाजीचा",
-			transliteration:
-				"Kanada raja pandharicha \nVedannaahi naahi kalala antapar yacha \n\nNirakar to nirgun ishwar \nKasa prakatala asa vitevar \nUbhay thevile haath kativar, putala chaitanyacha \n\nParabrahma he bhaktansathi \nMuke thakle bhimekathi \nUbha rahila bhav savayav, janu ki pundalikacha \n\nHa namyachi kheer chakhato \nChokhobanchi gure rakhto \nPurandaracha ha paramatma, vali damajicha",
-		},
-		metadata: {
-			tags: [],
-			slug: "kanada-raja-pandharicha",
-		},
-	},
-	{
-		key: "39",
-		title: {
-			original: "या विठूचा गजर हरिनामाचा",
-			transliteration: "Ya vithucha gajar harinamacha",
-		},
-		body: {
-			original:
-				"या विठूचा गजर हरिनामाचा झेंडा रोविला । \nया संतांचा मेळा गोपाळांचा, झेंडा रोविला ॥१॥ \n \nकौल घेतला लिहून शंभर वर्षे जाण । \nनांगर धरिला सत्वाचा बैल मन पवनाचा ॥२॥ \n \nउखळण प्रेमाची काढिली, स्वस्थ बसुनी सद्गुरूजवळी । \nप्याला घेतला ज्ञानाचा, तोच अमृताचा ॥३॥ \n \nपंचतत्त्वांची गोफण, क्रोध पाखरें जाण । \nधोंडा घेतला ज्ञानाचा करीतसे जागरण । \nकेशवदास ह्मणे संतांचा मेळा गोपाळांचा ॥४॥",
-			transliteration:
-				"Ya vithucha gajar harinamacha jhenda rovilaa | \nYa santancha mela gopalanchaa, jhenda rovilaa || 1 || \n\nKaul ghetla lihun shambhar varsh jaane | \nNangar dharila satvacha bail man pavanacha || 2 || \n\nUkhalan premachi kadhili, swasth basuni sadgurujavali | \nPyala ghetla gnanacha, toch amritacha || 3 || \n\nPanchatvanchi gofan, krodh pakare jaane | \nDhonda ghetla gnanacha karitase jagarana | \nKeshavdas mhane santancha mela gopalanchaa || 4 ||",
-		},
-		metadata: {
-			tags: [],
-			slug: "ya-vithucha-gajar-harinamacha",
-		},
-	},
-	{
-		key: "40",
-		title: {
-			original: "आरती साईबाबा",
-			transliteration: "Aarti saibaba",
-		},
-		body: {
-			original:
-				"आरती साईबाबा । सौख्यदातार जीवा। \nचरणरजातली । द्यावा दासा विसावा, भक्ता विसावा ।। आ०।।ध्रु ०।। \n \nजाळुनियां अनंग। स्वस्वरूपी राहेदंग । \nमुमुक्षूजनां दावी । निज डोळा श्रीरंग ।। आ०।। १ ।। \n \nजयामनी जैसा भाव । तया तैसा अनुभव । \nदाविसी दयाघना । ऐसी तुझीही माव ।। आ०।। २ ।। \n \nतुमचे नाम ध्याता । हरे संस्कृती व्यथा । \nअगाध तव करणी । मार्ग दाविसी अनाथा ।। आ०।। ३ ।। \n \nकलियुगी अवतार । सगुण परब्रह्मः साचार । \nअवतीर्ण झालासे । स्वामी दत्त दिगंबर ।। आ०।। ४ ।। \n \nआठा दिवसा गुरुवारी । भक्त करिती वारी । \nप्रभुपद पहावया । भवभय निवारी ।। आ०।। ५ ।। \n \nमाझा निजद्रव्यठेवा । तव चरणरज सेवा । \nमागणे हेचि आता । तुम्हा देवाधिदेवा ।। आ०।। ६ ।। \n \nइच्छित दिन चातक। निर्मल तोय निजसुख । \nपाजावे माधवा या । सांभाळ आपुली भाक ।। आ०।। ७ ।।",
-			transliteration:
-				"Aarti saibaba | Saukhyadataar jeeva | \nCharanrajatli | Dyava dasa visava, bhakta visava || A || Dhru 0 || \n\nJaluniya anang | Swaswarupi rahedang | \nMumukshujnana davi | Nij dola shrirang || A || 1 || \n\nJayamani jaisa bhav | Taya taisa anubhav | \nDavisi dayaghana | Aisi tujihi mav || A || 2 || \n\nTumche naam dhyata | Hare sanskriti vyatha | \nAgadh tav karani | Marg davisi anatha || A || 3 || \n\nKaliyugi avatar | Sagun parabrahmah sachar | \nAvatirn zhalase | Swami datt digambar || A || 4 || \n\nAtha divasa guruvāri | Bhakt kariti vari | \nPrabhupada pahavaya | Bhavabhaya nivari || A || 5 || \n\nMajha nijadravyathewa | Tav charanraja seva | \nMagane hechi aata | Tumha devadhideva || A || 6 || \n\nIchchhit din chatak | Nirmal toy nijsukh | \nPajave madhava ya | Sambhal apuli bhak || A || 7 ||",
-		},
-		metadata: {
-			tags: [],
-			slug: "aarti-saibaba",
-		},
-	},
-	{
-		key: "41",
-		title: {
-			original: "लिंबाखाली प्रगट झाला",
-			transliteration: "Limbakhali pragat zala",
-		},
-		body: {
-			original:
-				"लिंबा खाली प्रगट झाला (४) \nऐसा साईनाथ माझा लिंबा खाली प्रगट झाला || धृ || \n \nगोदामायीच्या तीरावर, गोदामायीच्या तीरावर (२) \nईक दिन घडले अपार (२) निर्गुण झाला साकार (२) \nआठ वर्षाचा बाळ, बाळ हा चिमुकला || १ || \n \nनामा झाला नाम मय (२) कबीर झाले राममय (२) \nसाई झाले समद्धय, बाबा झाले समद्ध, \nमंदिर मस्जिद त्यानें, संगम केला || २ || \n \nशिंपियाच्या पोटी नामा जन्मलेला,  \nकमल दलातून कबीर उगवला \nऐसा साईनाथ माझा, लिंबा खाली प्रगट झाला || ३ ||",
-			transliteration:
-				"Limba khali pragat zala (4) \nAisa sainath maza limba khali pragat zala || Dhru || \n\nGodamayi cha tiravar, godamayi cha tiravar (2) \nEk din ghadale apar (2) Nirgun zala sakar (2) \nAath varshacha baal, baal ha chimukla || 1 || \n\nNama zala nam may (2) Kabir zale ramamay (2) \nSai zale samaddhya, baba zale samaddhya, \nMandir masjid tyane, sangam kela || 2 || \n\nShimpiya cha poti nama janmalela, \nKamal dalatun kabir ugavala \nAisa sainath maza, limba khali pragat zala || 3 ||",
-		},
-		metadata: {
-			tags: [],
-			slug: "limbakhali-pragat-zala",
-		},
-	},
-	{
 		key: "42",
 		title: {
 			original: "तू ये र बा साईबाबा",
@@ -713,23 +426,7 @@ const data = [
 			slug: "tu-ye-r-ba-saibaba",
 		},
 	},
-	{
-		key: "43",
-		title: {
-			original: "ओवाळू आरती माइया सदगुरुनाथा, साईनाथा",
-			transliteration: "Ovalu aarti maiya sadgurunatha, sainatha",
-		},
-		body: {
-			original:
-				"ओंवाळू आरती माइया सदगुरुनाथा, साईनाथा ।। \nपांचाही तत्वांचा दीप लाविला आतां ।। \n \nनिर्गुणाची स्थिति कैसी आकारा आली ।।  \nसर्वा घटी भरुनि उरली सांई माउली ।। ओवाळू || \n \nरज तम सत्व तिघे माया प्रसवली ।। \nमायेचिये पोटी कैसी माया उद्घवली ।। ओंवाळू || \n \nसातसागरी कैसा खेळ मांडीला || \nखेळूनियां खेळ अवघा विस्तार केला || ओंवालूं || \n \nब्रहांडींची रचना दाखविली डोळां ।। \nतुका म्हणे माझा स्वामी कृपाळू भोळा || \nसदगुरु (साई सदगुरु) भोळा || ओंवाळू ।।",
-			transliteration:
-				"Ovalu aarti maiya sadgurunatha, sainatha || \nPanchahi tatvacha deep lavila ata || \n\nNirgunachi sthiti kaisi akara aali || \nSarva ghati bharuni urli sai mauli || Ovalu || \n\nRaj tam satva tighe maya prasavli || \nMayechiye poti kaisi maya udghavli || Ovalu || \n\nSatsagari kaisa khel mandila || \nKheluniya khel avagha vistar kela || Ovalu || \n\nBrahmandinchi rachna dakhavili dola || \nTuka mhane maza swami krupaloo bhola || \nSadguru (sai sadguru) bhola || Ovalu ||",
-		},
-		metadata: {
-			tags: [],
-			slug: "ovalu-aarti-maiya-sadgurunatha-sainatha",
-		},
-	},
+
 	{
 		key: "44",
 		title: {
@@ -815,23 +512,7 @@ const data = [
 			slug: "shri-ashtavinayak-aarti",
 		},
 	},
-	{
-		key: "49",
-		title: {
-			original: "आरती वेंकटेशा",
-			transliteration: "Aarti Venkatesha",
-		},
-		body: {
-			original:
-				"आरती वेंकटेशा \nमहालक्ष्मी वल्लभा\nतूचि रे मोक्षदाता\nभक्तवत्सला नाथा\n      वत्सला नाथा\nआरती वेंकटेशा..।। धृ.।।\nदिव्य चरण तुझे \nस्वर्ग भक्तांसि भासे \nलीन तये होऊनी \nद्वारी पावती मोक्षा\n       पावती मोक्षा\nआरती वेंकटेशा.....।। १।।\nमाता सर्व जगता \nपद्मा वक्षे तुझिया\n\nविहरूनी लीलया\nहरिप्रिया चंचला\n     प्रिया चंचला\nआरती वेंकटेशा.....।।२।।\nपूजिती दिव्यमूर्ती\nगाती भाविक कीर्ती\nकिरीट रत्नांकित\nशोभे सुंदर माथा\n       सुंदर माथा\nआरती वेंकटेशा.....।।३।।\nपापे भक्तांची वारी\nतव तू पुष्कराक्षा \nशरण तुज आता\nतारी मज कृपाळा\n       मज कृपाळा\nआरती वेंकटेशा.....।। ४ ।।",
-			transliteration:
-				"Aarti Venkatesha\nMahalakshmi Vallabha\nTuchi re Mokshadaata\nBhaktavatsala Natha\n      Vatsala Natha\nAarti Venkatesha.. Dhru..\nDivya charan tujhe\nSwarga bhaktansi bhase\nLeen taye houni\nDwari pavati moksha\n      Pavati moksha\nAarti Venkatesha..... 1..\nMata sarva jagata\nPadma vakshe tujhiya\nViharuuni leelaya\nHaripriya chanchala\n     Priya chanchala\nAarti Venkatesha..... 2..\nPujiti divya murti\nGati bhavik kirti\nKirit ratnankit\nShobhe sundar matha\n      Sundar matha\nAarti Venkatesha..... 3..\nPape bhaktanchi vari\nTava tu pushkaraksha\nSharan tuj aata\nTari maj krupala\n      Maj krupala\nAarti Venkatesha..... 4..",
-		},
-		metadata: {
-			tags: [],
-			slug: "aarti-venkatesha",
-		},
-	},
+
 
 	{
 		key: "50",
@@ -883,23 +564,7 @@ const data = [
 			tags: [],
 			slug: "niroop-aarti",
 		},
-	},
-	{
-		key: "53",
-		title: {
-			original: "पसायदान",
-			transliteration: "",
-		},
-		body: {
-			original:
-				"आतां विश्वात्मके देवे, येणे वाग्यज्ञे तोषावे, \nतोषोनि मज द्यावे, पसायदान हे ||१|| \n \nजे खळांचि व्यंकटी सांडो, तया सत्कर्मी रती वाढो, \nभूतां परस्परे जडो, मैत्र जीवांचे ||२|| \n \nदुरितांचे तिमिर जावो, विश्व स्वधर्म सूर्ये पाहो, \nजो जे वांछील तो ते लाहो, प्राणिजात ||३|| \n \nवर्षत सकळ मंडळी, ईश्वरनिष्ठांची मांदियाळी, \nअनवरत भूमंडळी, भेटतु भूता ||४|| \n \nचला कल्पतरूंचे आरव, चेतनाचिंतामणींचे गाव, \nबोलती जे अर्णव, पीयूषांचे ||५|| \n \nचन्द्रमेंजे अलांछन, मार्तण्ड जे तापहीन, \nते सर्वाही सदा सज्जन, सोयरे होतु ||६|| \n \nकिंबहुना सर्व सुखी, पूर्ण होवोनि तिहीं लोकी, \nभजिजो आदिपुरुषीं, अखण्डित ||७|| \n \nआणि ग्रंथोपजिवीये, विशेषी लोकी इये, \nदृष्टादृष्टविजये, होआवेजी ॥८॥ \n \nयेथ म्हणे श्री विश्वेश्वरावो, हा होईल दानपसावो, \nयेणे वरे ज्ञानदेवो, सुखिया झाला ||९||",
-			transliteration: "",
-		},
-		metadata: {
-			tags: [],
-			slug: "पसायदान",
-		},
-	},
+	}
 ];
 
 export default data;

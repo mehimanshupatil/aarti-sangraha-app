@@ -1,6 +1,5 @@
 import React from "react";
 import {
-	SafeAreaView,
 	StyleSheet,
 	Image,
 	Dimensions,
@@ -9,6 +8,7 @@ import {
 	Platform,
 	View,
 } from "react-native";
+import { SafeAreaView } from 'react-native-safe-area-context'
 import {
 	DrawerContentComponentProps,
 	DrawerContentScrollView,
