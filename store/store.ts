@@ -1,20 +1,30 @@
-import { createJSONStorage, devtools, persist } from "zustand/middleware";
-import { singleItemType } from "../shared/types";
-import { ColorSchemeName } from "react-native";
-import { immer } from "zustand/middleware/immer";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import data from "./data";
 import { create } from "zustand";
+import { createJSONStorage, devtools, persist } from "zustand/middleware";
+import { immer } from "zustand/middleware/immer";
 import { useShallow } from "zustand/shallow";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ColorSchemeName } from "react-native";
+import { singleItemType } from "../shared/types";
+import data from "./data";
 
-interface DataState {
+export type TextDisplayType = "original" | "transliteration";
+export type SortOrder = "default" | "az" | "deity";
+
+// --- Data slice: aarti list + favourites + recently viewed ---
+interface DataSlice {
 	aartis: singleItemType[];
 	favoritesKeys: string[];
+	recentlyViewed: string[]; // aarti keys, most-recent-first, max 20
 	toggleFav: (id: singleItemType["key"]) => void;
 	initializeAarti: () => void;
 	addAarti: (item: singleItemType) => void;
 	updateAarti: (item: singleItemType) => void;
 	deleteAarti: (id: singleItemType["key"]) => void;
+	addToRecentlyViewed: (key: string) => void;
+}
+
+// --- UI slice: display preferences ---
+interface UISlice {
 	displayMode: NonNullable<ColorSchemeName>;
 	setDisplayMode: (mode: NonNullable<ColorSchemeName>) => void;
 	fontSize: number;
@@ -24,47 +34,33 @@ interface DataState {
 	searchValue: string;
 	setSearchValue: (text: string) => void;
 	translate: TextDisplayType;
-	setTranslate: (arg0: TextDisplayType) => void;
+	setTranslate: (arg: TextDisplayType) => void;
+	selectedDeity: string | null;
+	setSelectedDeity: (deity: string | null) => void;
+	sortOrder: SortOrder;
+	setSortOrder: (order: SortOrder) => void;
 }
 
-export type TextDisplayType = "original" | "transliteration";
+type DataState = DataSlice & UISlice;
 
 export const useDataStore = create<DataState>()(
 	devtools(
 		persist(
 			immer((set) => ({
+				// Data slice
 				aartis: data,
-				favoritesKeys: [] as DataState["favoritesKeys"],
-				fontSize: 20,
-				searchValue: "",
-				translate: "original",
-				setTranslate: (arg0) =>
-					set((state) => {
-						state.translate = arg0;
-					}),
-				displayMode: "light" as NonNullable<ColorSchemeName>,
-				showSearch: false,
-				setShowSearch: (arg) =>
-					set((state) => {
-						state.showSearch = arg;
-					}),
+				favoritesKeys: [] as string[],
+				recentlyViewed: [] as string[],
 				toggleFav: (key) =>
 					set((state) => {
 						const index = state.favoritesKeys.indexOf(key);
-
-						if (index === -1) {
-							// Key is not in the array, so add it
-							state.favoritesKeys.push(key);
-						} else {
-							// Key is in the array, so remove it
-							state.favoritesKeys.splice(index, 1);
-						}
+						if (index === -1) state.favoritesKeys.push(key);
+						else state.favoritesKeys.splice(index, 1);
 					}),
-				initializeAarti: () => {
+				initializeAarti: () =>
 					set((state) => {
 						state.aartis = data;
-					});
-				},
+					}),
 				addAarti: (aarti) =>
 					set((state) => {
 						state.aartis.push(aarti);
@@ -78,18 +74,51 @@ export const useDataStore = create<DataState>()(
 					set((state) => {
 						const index = state.aartis.findIndex((x) => x.key === key);
 						if (index !== -1) state.aartis.splice(index, 1);
+						state.recentlyViewed = state.recentlyViewed.filter((k) => k !== key);
+					}),
+				addToRecentlyViewed: (key) =>
+					set((state) => {
+						const existing = state.recentlyViewed.indexOf(key);
+						if (existing !== -1) state.recentlyViewed.splice(existing, 1);
+						state.recentlyViewed.unshift(key);
+						if (state.recentlyViewed.length > 20) state.recentlyViewed.pop();
+					}),
+
+				// UI slice
+				displayMode: "light" as NonNullable<ColorSchemeName>,
+				fontSize: 20,
+				showSearch: false,
+				searchValue: "",
+				translate: "original" as TextDisplayType,
+				selectedDeity: null,
+				sortOrder: "default" as SortOrder,
+				setDisplayMode: (mode) =>
+					set((state) => {
+						state.displayMode = mode;
 					}),
 				setFontSize: (size) =>
 					set((state) => {
 						state.fontSize = size;
 					}),
+				setShowSearch: (arg) =>
+					set((state) => {
+						state.showSearch = arg;
+					}),
 				setSearchValue: (text) =>
 					set((state) => {
 						state.searchValue = text;
 					}),
-				setDisplayMode: (mode) =>
+				setTranslate: (arg) =>
 					set((state) => {
-						state.displayMode = mode;
+						state.translate = arg;
+					}),
+				setSelectedDeity: (deity) =>
+					set((state) => {
+						state.selectedDeity = deity;
+					}),
+				setSortOrder: (order) =>
+					set((state) => {
+						state.sortOrder = order;
 					}),
 			})),
 			{
@@ -100,6 +129,7 @@ export const useDataStore = create<DataState>()(
 	),
 );
 
+/** Actions for aarti data management */
 export const useDataStoreActions = () =>
 	useDataStore(
 		useShallow((s) => ({
@@ -108,10 +138,20 @@ export const useDataStoreActions = () =>
 			addAarti: s.addAarti,
 			updateAarti: s.updateAarti,
 			deleteAarti: s.deleteAarti,
+			addToRecentlyViewed: s.addToRecentlyViewed,
+		})),
+	);
+
+/** Actions for UI/display preferences */
+export const useUIStoreActions = () =>
+	useDataStore(
+		useShallow((s) => ({
 			setDisplayMode: s.setDisplayMode,
 			setFontSize: s.setFontSize,
 			setShowSearch: s.setShowSearch,
 			setSearchValue: s.setSearchValue,
 			setTranslate: s.setTranslate,
+			setSelectedDeity: s.setSelectedDeity,
+			setSortOrder: s.setSortOrder,
 		})),
 	);

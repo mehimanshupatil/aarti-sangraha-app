@@ -1,6 +1,6 @@
 import { useTheme } from "react-native-paper";
-import data from "../store/data";
 import { light } from "../app/_layout";
+import data from "../store/data";
 
 export type singleItemType = (typeof data)[number];
 

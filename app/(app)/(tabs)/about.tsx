@@ -1,8 +1,8 @@
 import React from "react";
-import { StyleSheet, View, Text, Alert, ScrollView } from "react-native";
+import { StyleSheet, View, Text, ScrollView } from "react-native";
 import * as Linking from "expo-linking";
-import { useAppTheme } from "../../shared/types";
-import { domainUrl } from "../../shared/const";
+import { useAppTheme } from "../../../shared/types";
+import { domainUrl } from "../../../shared/const";
 
 const About: React.FC = () => {
 	const { colors } = useAppTheme();
@@ -107,7 +107,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		fontSize: 30,
 	},
-
 	texturl: {
 		color: "green",
 	},

@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import {
-	StyleSheet,
-	View,
-	Text,
-	TouchableOpacity,
 	Alert,
 	Keyboard,
 	ScrollView,
+	StyleSheet,
+	Text,
 	TextInput,
+	TouchableOpacity,
+	View,
 } from "react-native";
-import { globalStyle } from "../../../../shared/styles";
-import { useAppTheme, singleItemType } from "../../../../shared/types";
-import { useDataStore, useDataStoreActions } from "../../../../store/store";
 import { Stack, router, useLocalSearchParams } from "expo-router";
+import { globalStyle } from "../../../shared/styles";
+import { singleItemType, useAppTheme } from "../../../shared/types";
+import { useDataStore, useDataStoreActions } from "../../../store/store";
 
 const AddNew: React.FC = () => {
 	const { colors } = useAppTheme();
@@ -23,10 +23,10 @@ const AddNew: React.FC = () => {
 
 	const [title, setTitle] = useState("");
 	const [body, setBody] = useState("");
-
 	const [selectedItem, setSelectedItem] = useState(
 		aartis.find((x) => x.key === key),
 	);
+
 	useEffect(() => {
 		const single = aartis.find((x) => x.key === key);
 		if (!single) return;
@@ -37,58 +37,39 @@ const AddNew: React.FC = () => {
 
 	const onOkPress = () => {
 		const item: singleItemType = {
-			title: {
-				original: title,
-				transliteration: "",
-			},
-			body: {
-				original: body,
-				transliteration: "",
-			},
-			key: (aartis.length + 1).toString(), //key between 100 to 1k
+			title: { original: title, transliteration: "" },
+			body: { original: body, transliteration: "" },
+			key: `custom-${Date.now()}`,
 			metadata: {
 				tags: [],
-				slug: title.replace(/\s+/g, "-"),
+				slug: `custom-${Date.now()}`,
 			},
 		};
 		addAarti(item);
-		// ToastAndroid.show('Added Successfully', ToastAndroid.SHORT);
 		router.back();
 	};
 
-	const update = () => {
+	const onUpdatePress = () => {
 		if (!selectedItem) return;
-		const data: singleItemType = {
+		updateAarti({
 			...selectedItem,
-			title: {
-				original: title,
-				transliteration: "",
-			},
-			body: {
-				original: body,
-				transliteration: "",
-			},
-		};
-		updateAarti(data);
-		// ToastAndroid.show('Updated Successfully', ToastAndroid.SHORT);
+			title: { original: title, transliteration: "" },
+			body: { original: body, transliteration: "" },
+		});
 		router.back();
 	};
 
 	const addItem = () => {
 		if (!title || !body) return;
 		Alert.alert(
-			"Alert",
-			`The data is stored Locally on your Device. So clearing or uninstalling app will remove customized data.`,
+			"Confirm",
+			"Data is stored locally. Clearing app data or uninstalling will remove it.",
 			[
-				{
-					text: "Cancel",
-					onPress: () => console.log("Cancel Pressed"),
-					style: "cancel",
-				},
+				{ text: "Cancel", style: "cancel" },
 				{
 					text: "OK",
 					onPress: () => {
-						selectedItem ? update() : onOkPress();
+						selectedItem ? onUpdatePress() : onOkPress();
 						Keyboard.dismiss();
 					},
 				},
@@ -97,22 +78,16 @@ const AddNew: React.FC = () => {
 	};
 
 	return (
-		<View
-			style={{ ...globalStyle.homeRoot, backgroundColor: colors.background }}
-		>
+		<View style={{ ...globalStyle.homeRoot, backgroundColor: colors.background }}>
 			<Stack.Screen
 				options={{
 					title: selectedItem ? "Update" : "Add",
 					headerTintColor: colors.background,
-					headerStyle: {
-						backgroundColor: colors.primary,
-					},
+					headerStyle: { backgroundColor: colors.primary },
+					headerShown: true,
 				}}
 			/>
-			<ScrollView
-				style={globalStyle.homecontainer}
-				keyboardShouldPersistTaps="handled"
-			>
+			<ScrollView style={globalStyle.homecontainer} keyboardShouldPersistTaps="handled">
 				<TextInput
 					placeholderTextColor={colors.primary}
 					style={{
@@ -123,7 +98,7 @@ const AddNew: React.FC = () => {
 					}}
 					placeholder="Title"
 					value={title}
-					onChangeText={(text) => setTitle(text)}
+					onChangeText={setTitle}
 				/>
 				<TextInput
 					placeholderTextColor={colors.primary}
@@ -135,21 +110,15 @@ const AddNew: React.FC = () => {
 					}}
 					placeholder="Body"
 					value={body}
-					onChangeText={(text) => setBody(text)}
+					onChangeText={setBody}
 					numberOfLines={20}
 					multiline={true}
 				/>
 				<TouchableOpacity
-					style={{ ...styles.buttonText, borderColor: colors.primary }}
+					style={{ ...styles.button, borderColor: colors.primary }}
 					onPress={addItem}
 				>
-					<Text
-						style={{
-							color: colors.text,
-							fontWeight: "bold",
-							fontSize: 15,
-						}}
-					>
+					<Text style={{ color: colors.text, fontWeight: "bold", fontSize: 15 }}>
 						{selectedItem ? "Update" : "Add"}
 					</Text>
 				</TouchableOpacity>
@@ -169,7 +138,7 @@ const styles = StyleSheet.create({
 		textAlignVertical: "top",
 		padding: 10,
 	},
-	buttonText: {
+	button: {
 		alignItems: "center",
 		padding: 10,
 		marginTop: 10,

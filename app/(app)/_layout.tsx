@@ -1,87 +1,12 @@
-import { Drawer } from "expo-router/drawer";
+import { Stack } from "expo-router";
 import React from "react";
-import Header from "../../components/Header";
-import { useAppTheme } from "../../shared/types";
-import CustomSidebarMenu from "../../components/CustomSidebarMenu";
-import { IconButton } from "react-native-paper";
-import { StyleSheet } from "react-native";
 
-export default function RootLayout2() {
-	const { colors } = useAppTheme();
+export default function AppLayout() {
 	return (
-		<Drawer
-			screenOptions={{
-				drawerStyle: {
-					backgroundColor: colors.background,
-					width: "60%",
-				},
-				drawerInactiveTintColor: colors.primary,
-			}}
-			drawerContent={(props) => <CustomSidebarMenu {...props} />}
-		>
-			<Drawer.Screen
-				name="(drawer)"
-				options={{
-					headerShown: false,
-					drawerLabel: "Home",
-					drawerIcon: () => (
-						<IconButton
-							iconColor={colors.primary}
-							style={styles.drawerIcon}
-							icon="home"
-							size={28}
-						/>
-					),
-				}}
-			/>
-			<Drawer.Screen
-				options={{
-					header: ({ navigation }) => (
-						<Header
-							title="About"
-							navigation={navigation}
-							showSearchButton={false}
-						/>
-					),
-					drawerLabel: "About",
-					drawerIcon: () => (
-						<IconButton
-							iconColor={colors.primary}
-							style={styles.drawerIcon}
-							icon="information"
-							size={28}
-						/>
-					),
-				}}
-				name="about"
-			/>
-			<Drawer.Screen
-				options={{
-					header: ({ navigation }) => (
-						<Header
-							title="Setting"
-							navigation={navigation}
-							showSearchButton={false}
-						/>
-					),
-					drawerLabel: "Setting",
-					drawerIcon: () => (
-						<IconButton
-							iconColor={colors.primary}
-							style={styles.drawerIcon}
-							icon="nut"
-							size={28}
-						/>
-					),
-				}}
-				name="setting"
-			/>
-		</Drawer>
+		<Stack screenOptions={{ animation: "slide_from_right" }}>
+			<Stack.Screen name="(tabs)" options={{ headerShown: false, animation: "none" }} />
+			<Stack.Screen name="aarti-view/[slug]" options={{ headerShown: false }} />
+			<Stack.Screen name="add-aarti/[key]" options={{ headerShown: false }} />
+		</Stack>
 	);
 }
-
-const styles = StyleSheet.create({
-	drawerIcon: {
-		margin: 0,
-	},
-});

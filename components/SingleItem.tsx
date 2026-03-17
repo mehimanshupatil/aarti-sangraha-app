@@ -15,10 +15,6 @@ const SingleItem: React.FC<{
 	const { toggleFav } = useDataStoreActions();
 
 	const iconPress = (item: singleItemType) => {
-		// ToastAndroid.show(
-		//   !favoritesKeys.includes(item.key) ? "Added to Favorites" : "Removed from Favorites",
-		//   ToastAndroid.SHORT
-		// );
 		toggleFav(item.key);
 	};
 
