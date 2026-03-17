@@ -5,46 +5,61 @@ import { fontStyle } from "../shared/styles";
 import { domainUrl } from "../shared/const";
 
 const CARD_WIDTH = 380;
-const PRIMARY = "#b5451b";
-const ACCENT = "#ffde5b";
-const BG = "#fffbf0";
-const TEXT = "#2d1a0e";
-const MUTED = "#9b7b5e";
+
+const LIGHT = {
+	primary: "#b5451b",
+	accent: "#ffde5b",
+	bg: "#fffbf0",
+	text: "#2d1a0e",
+	muted: "#9b7b5e",
+	onPrimary: "#fffbf2",
+};
+
+const DARK = {
+	primary: "#DDAA55",
+	accent: "#DDAA55",
+	bg: "#1C1812",
+	text: "#E8D9BC",
+	muted: "#9b8b6e",
+	onPrimary: "#1C1812",
+};
 
 type Props = {
 	item: singleItemType;
 	translate: "original" | "transliteration";
 	fontSize: number;
+	isDark?: boolean;
 };
 
-const AartiShareCard = forwardRef<View, Props>(({ item, translate, fontSize }, ref) => {
+const AartiShareCard = forwardRef<View, Props>(({ item, translate, fontSize, isDark = false }, ref) => {
+	const C = isDark ? DARK : LIGHT;
 	const title = item.title[translate];
 	const body = item.body[translate];
 
 	return (
-		<View ref={ref} style={styles.card} collapsable={false}>
+		<View ref={ref} style={[styles.card, { backgroundColor: C.bg }]} collapsable={false}>
 			{/* Header */}
-			<View style={styles.header}>
+			<View style={[styles.header, { backgroundColor: C.primary }]}>
 				<Image
 					source={require("../assets/icon.png")}
-					style={styles.logo}
+					style={[styles.logo, { borderColor: C.accent }]}
 					resizeMode="contain"
 				/>
 				<View>
-					<Text style={styles.appName}>आरती संग्रह</Text>
-					<Text style={styles.appSub}>Aarti Sangrah</Text>
+					<Text style={[styles.appName, { color: C.onPrimary }]}>आरती संग्रह</Text>
+					<Text style={[styles.appSub, { color: `${C.onPrimary}99` }]}>Aarti Sangrah</Text>
 				</View>
 			</View>
 
 			{/* Divider with om symbol */}
 			<View style={styles.ornamentRow}>
-				<View style={styles.ornamentLine} />
-				<Text style={styles.ornamentText}>  ॐ  </Text>
-				<View style={styles.ornamentLine} />
+				<View style={[styles.ornamentLine, { backgroundColor: C.primary }]} />
+				<Text style={[styles.ornamentText, { color: C.primary }]}>  ॐ  </Text>
+				<View style={[styles.ornamentLine, { backgroundColor: C.primary }]} />
 			</View>
 
 			{/* Title */}
-			<Text style={[styles.title, fontStyle[translate === "original" ? "fontOriginal" : "fontItalic"]]}>
+			<Text style={[styles.title, { color: C.primary }, fontStyle[translate === "original" ? "fontOriginal" : "fontItalic"]]}>
 				{title}
 			</Text>
 
@@ -52,7 +67,7 @@ const AartiShareCard = forwardRef<View, Props>(({ item, translate, fontSize }, r
 			<Text
 				style={[
 					styles.body,
-					{ fontSize: Math.min(fontSize, 20) },
+					{ fontSize: Math.min(fontSize, 20), color: C.text },
 					fontStyle[translate === "original" ? "fontOriginal" : "fontItalic"],
 				]}
 			>
@@ -61,11 +76,11 @@ const AartiShareCard = forwardRef<View, Props>(({ item, translate, fontSize }, r
 
 			{/* Footer */}
 			<View style={styles.ornamentRow}>
-				<View style={styles.ornamentLine} />
-				<Text style={styles.ornamentText}>  ✦  </Text>
-				<View style={styles.ornamentLine} />
+				<View style={[styles.ornamentLine, { backgroundColor: C.primary }]} />
+				<Text style={[styles.ornamentText, { color: C.primary }]}>  ✦  </Text>
+				<View style={[styles.ornamentLine, { backgroundColor: C.primary }]} />
 			</View>
-			<Text style={styles.footer}>{domainUrl}</Text>
+			<Text style={[styles.footer, { color: C.muted }]}>{domainUrl}</Text>
 		</View>
 	);
 });
@@ -77,7 +92,6 @@ export default AartiShareCard;
 const styles = StyleSheet.create({
 	card: {
 		width: CARD_WIDTH,
-		backgroundColor: BG,
 		borderRadius: 16,
 		overflow: "hidden",
 		shadowColor: "#000",
@@ -86,7 +100,6 @@ const styles = StyleSheet.create({
 		elevation: 6,
 	},
 	header: {
-		backgroundColor: PRIMARY,
 		flexDirection: "row",
 		alignItems: "center",
 		paddingHorizontal: 20,
@@ -98,16 +111,13 @@ const styles = StyleSheet.create({
 		height: 44,
 		borderRadius: 10,
 		borderWidth: 2,
-		borderColor: ACCENT,
 	},
 	appName: {
-		color: ACCENT,
 		fontSize: 20,
 		fontWeight: "bold",
 		letterSpacing: 0.5,
 	},
 	appSub: {
-		color: "rgba(255,222,91,0.7)",
 		fontSize: 12,
 		letterSpacing: 1,
 	},
@@ -120,30 +130,25 @@ const styles = StyleSheet.create({
 	ornamentLine: {
 		flex: 1,
 		height: 1,
-		backgroundColor: PRIMARY,
 		opacity: 0.25,
 	},
 	ornamentText: {
-		color: PRIMARY,
 		fontSize: 16,
 		fontWeight: "bold",
 	},
 	title: {
 		fontSize: 22,
 		fontWeight: "bold",
-		color: PRIMARY,
 		textAlign: "center",
 		marginHorizontal: 20,
 		marginBottom: 12,
 	},
 	body: {
-		color: TEXT,
 		lineHeight: 28,
 		marginHorizontal: 20,
 		marginBottom: 4,
 	},
 	footer: {
-		color: MUTED,
 		fontSize: 11,
 		textAlign: "center",
 		paddingBottom: 16,

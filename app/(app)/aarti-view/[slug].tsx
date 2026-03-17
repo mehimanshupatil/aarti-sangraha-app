@@ -70,6 +70,7 @@ const AartiView: React.FC = () => {
 	const fontSize = useDataStore((s) => s.fontSize);
 	const favoritesKeys = useDataStore((s) => s.favoritesKeys);
 	const translate = useDataStore((s) => s.translate);
+	const displayMode = useDataStore((s) => s.displayMode);
 
 	const { toggleFav, deleteAarti, addToRecentlyViewed } = useDataStoreActions();
 	const { setFontSize, setTranslate } = useUIStoreActions();
@@ -355,6 +356,7 @@ const AartiView: React.FC = () => {
 							item={selectedItem}
 							translate={translate}
 							fontSize={fontSize}
+							isDark={displayMode === "dark"}
 						/>
 					</View>
 				)}
