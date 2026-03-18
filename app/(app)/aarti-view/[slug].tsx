@@ -364,7 +364,11 @@ const AartiView: React.FC = () => {
 				/>
 
 				{selectedItem && (
-					<View className="absolute top-0" style={{ left: -9999 }} pointerEvents="none">
+					<View
+						className="absolute top-0"
+						style={{ left: -9999 }}
+						pointerEvents="none"
+					>
 						<AartiShareCard
 							ref={shareCardRef}
 							item={selectedItem}
@@ -588,9 +592,13 @@ const AartiView: React.FC = () => {
 						{/* Bottom action bar */}
 						<View
 							className="flex-row items-center rounded-xl py-1 mb-1.5"
-							style={{ borderWidth: 0.5, borderColor: colors.border, backgroundColor: colors.surface }}
+							style={{
+								borderWidth: 0.5,
+								borderColor: colors.border,
+								backgroundColor: colors.surface,
+							}}
 						>
-							<View className="flex-row flex-1 items-center justify-center">
+							<View className="flex-row flex-1 items-center justify-evenly">
 								<IconBtn
 									icon={autoScroll ? 'pause-circle' : 'play-circle-outline'}
 									size={26}
@@ -607,7 +615,7 @@ const AartiView: React.FC = () => {
 									onPress={() => setFocusMode((v) => !v)}
 								/>
 							</View>
-							<View className="flex-row flex-1 items-center justify-center">
+							<View className="flex-row flex-1 items-center justify-evenly">
 								<IconBtn
 									icon="minus-circle-outline"
 									size={26}
@@ -629,7 +637,7 @@ const AartiView: React.FC = () => {
 									onPress={() => fontSize < 40 && setFontSize(fontSize + 3)}
 								/>
 							</View>
-							<View className="flex-row flex-1 items-center justify-center">
+							<View className="flex-row flex-1 items-center justify-evenly">
 								<IconBtn
 									icon={isFav ? 'heart' : 'heart-outline'}
 									style={iconButtonReset}
@@ -721,7 +729,10 @@ const AartiView: React.FC = () => {
 							<View className="flex-row justify-between items-center pb-2">
 								<Text
 									className="text-xs"
-									style={{ color: colors.border, opacity: displayIndex > 0 ? 1 : 0 }}
+									style={{
+										color: colors.border,
+										opacity: displayIndex > 0 ? 1 : 0,
+									}}
 								>
 									‹ prev
 								</Text>

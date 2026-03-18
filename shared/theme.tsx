@@ -8,8 +8,6 @@ export const lightColors = {
 	background: '#FAF4E8',
 	surface: '#F3EAD5',
 	border: '#C4A47A',
-	blue: '',
-	yellow: '',
 };
 
 export const darkColors = {
@@ -20,8 +18,6 @@ export const darkColors = {
 	background: '#1C1812',
 	surface: '#262018',
 	border: '#DDAA55',
-	blue: '',
-	yellow: '',
 };
 
 export type AppColors = typeof lightColors;
