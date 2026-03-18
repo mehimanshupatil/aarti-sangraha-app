@@ -10,6 +10,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     "scheme": "aartisangraha",
     "version": "1.0.0", 
     "orientation": "default",
+    "userInterfaceStyle": "automatic",
     "icon": "./assets/icon.png",
     "updates": {
       "fallbackToCacheTimeout": 0

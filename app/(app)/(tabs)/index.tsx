@@ -1,35 +1,36 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState } from 'react';
 import {
 	FlatList,
 	ScrollView,
-	StyleSheet,
 	Text,
 	TouchableOpacity,
 	View,
-} from "react-native";
-import { IconButton, Menu } from "react-native-paper";
-import { router } from "expo-router";
-import Head from "expo-router/head";
-import SingleItem from "../../../components/SingleItem";
-import { globalStyle, spacing } from "../../../shared/styles";
-import { useAppTheme } from "../../../shared/types";
-import { useDataStore, useUIStoreActions } from "../../../store/store";
-import { useFilteredAartis } from "../../../hooks/useFilteredAartis";
-import type { SortOrder } from "../../../store/store";
+} from 'react-native';
+import { Menu, MenuItem, MenuItemLabel } from '../../../components/ui/menu';
+import IconBtn from '../../../components/ui/IconBtn';
+import { router } from 'expo-router';
+import Head from 'expo-router/head';
+import SingleItem from '../../../components/SingleItem';
+import { spacing } from '../../../shared/styles';
+import { useAppTheme } from '../../../shared/types';
+import { useDataStore, useUIStoreActions } from '../../../store/store';
+import { useFilteredAartis } from '../../../hooks/useFilteredAartis';
+import type { SortOrder } from '../../../store/store';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const DEITY_LABELS: Record<string, string> = {
-	ganesh: "गणपती",
-	shiva: "शिव",
-	vishnu: "विष्णू",
-	hanuman: "हनुमान",
-	devi: "देवी",
-	lakshmi: "लक्ष्मी",
-	dattatreya: "दत्तात्रेय",
-	vitthala: "विठ्ठल",
-	saibaba: "साई बाबा",
-	ram: "राम",
-	sant: "संत",
-	general: "सर्व",
+	ganesh: 'गणपती',
+	shiva: 'शिव',
+	vishnu: 'विष्णू',
+	hanuman: 'हनुमान',
+	devi: 'देवी',
+	lakshmi: 'लक्ष्मी',
+	dattatreya: 'दत्तात्रेय',
+	vitthala: 'विठ्ठल',
+	saibaba: 'साई बाबा',
+	ram: 'राम',
+	sant: 'संत',
+	general: 'सर्व',
 };
 
 const Home: React.FC = () => {
@@ -39,8 +40,6 @@ const Home: React.FC = () => {
 	const selectedDeity = useDataStore((s) => s.selectedDeity);
 	const sortOrder = useDataStore((s) => s.sortOrder);
 	const { setSelectedDeity, setSortOrder } = useUIStoreActions();
-
-	const [sortMenuVisible, setSortMenuVisible] = useState(false);
 
 	// Unique deities present in the data
 	const deities = useMemo(() => {
@@ -62,13 +61,13 @@ const Home: React.FC = () => {
 	const filteredAartis = useFilteredAartis(aartis, searchValue);
 
 	const sortLabels: Record<SortOrder, string> = {
-		default: "Default",
-		az: "A → Z",
-		deity: "By Deity",
+		default: 'Default',
+		az: 'A → Z',
+		deity: 'By Deity',
 	};
 
 	return (
-		<View style={{ ...globalStyle.homeRoot, backgroundColor: colors.background }}>
+		<View className="flex-grow h-full bg-app-bg">
 			<Head>
 				<title>आरती संग्रह</title>
 				<meta name="description" content="आरती संग्रह" />
@@ -77,14 +76,14 @@ const Home: React.FC = () => {
 			{/* Aarti of the Day — hidden during search */}
 			{!searchValue && todayAarti && (
 				<TouchableOpacity
-					style={[styles.todayCard, { backgroundColor: colors.surface, borderColor: colors.primary }]}
+					className="mx-5 mt-4 mb-2 p-4 rounded-[10px] border border-app-primary bg-app-surface"
 					onPress={() => router.push(`/aarti-view/${todayAarti.metadata.slug}`)}
 				>
-					<Text style={[styles.todayLabel, { color: colors.primary }]}>
+					<Text className="text-[11px] font-bold tracking-[0.5px] mb-1 text-app-primary">
 						✨ आजची आरती
 					</Text>
 					<Text
-						style={[styles.todayTitle, { color: colors.text }]}
+						className="text-[18px] font-bold text-app-text"
 						numberOfLines={1}
 					>
 						{todayAarti.title.original}
@@ -94,39 +93,55 @@ const Home: React.FC = () => {
 
 			{/* Deity chips + sort button */}
 			{deities.length > 0 && (
-				<View style={styles.filterRow}>
+				<View className="flex-row items-center pl-5">
 					<ScrollView
 						horizontal
 						showsHorizontalScrollIndicator={false}
-						contentContainerStyle={styles.chipsContainer}
+						contentContainerStyle={{ gap: spacing.sm, paddingRight: spacing.sm, paddingVertical: spacing.sm }}
 					>
 						<TouchableOpacity
-							style={[
-								styles.chip,
-								{
-									backgroundColor: selectedDeity === null ? colors.primary : colors.surface,
-									borderColor: colors.primary,
-								},
-							]}
+							style={{
+								backgroundColor:
+									selectedDeity === null ? colors.primary : colors.surface,
+								borderColor: colors.primary,
+							}}
+							className="px-[14px] py-[6px] rounded-[20px] border"
 							onPress={() => setSelectedDeity(null)}
 						>
-							<Text style={[styles.chipText, { color: selectedDeity === null ? colors.background : colors.primary }]}>
+							<Text
+								style={{
+									color:
+										selectedDeity === null
+											? colors.background
+											: colors.primary,
+								}}
+								className="text-[13px] font-semibold"
+							>
 								सर्व
 							</Text>
 						</TouchableOpacity>
 						{deities.map((deity) => (
 							<TouchableOpacity
 								key={deity}
-								style={[
-									styles.chip,
-									{
-										backgroundColor: selectedDeity === deity ? colors.primary : colors.surface,
-										borderColor: colors.primary,
-									},
-								]}
-								onPress={() => setSelectedDeity(selectedDeity === deity ? null : deity)}
+								style={{
+									backgroundColor:
+										selectedDeity === deity ? colors.primary : colors.surface,
+									borderColor: colors.primary,
+								}}
+								className="px-[14px] py-[6px] rounded-[20px] border"
+								onPress={() =>
+									setSelectedDeity(selectedDeity === deity ? null : deity)
+								}
 							>
-								<Text style={[styles.chipText, { color: selectedDeity === deity ? colors.background : colors.primary }]}>
+								<Text
+									style={{
+										color:
+											selectedDeity === deity
+												? colors.background
+												: colors.primary,
+									}}
+									className="text-[13px] font-semibold"
+								>
 									{DEITY_LABELS[deity] ?? deity}
 								</Text>
 							</TouchableOpacity>
@@ -134,51 +149,64 @@ const Home: React.FC = () => {
 					</ScrollView>
 
 					<Menu
-						visible={sortMenuVisible}
-						onDismiss={() => setSortMenuVisible(false)}
-						contentStyle={{ backgroundColor: colors.surface }}
-						anchor={
-							<IconButton
+						trigger={(triggerProps) => (
+							<IconBtn
+								{...triggerProps}
 								icon="sort"
 								size={22}
-								iconColor={sortOrder !== "default" ? colors.accent : colors.text}
-								onPress={() => setSortMenuVisible(true)}
-								style={styles.sortButton}
+								iconColor={
+									sortOrder !== 'default' ? colors.accent : colors.text
+								}
+								style={{ marginRight: 4 }}
 							/>
-						}
+						)}
+						placement="bottom right"
+						useRNModal
+						offset={4}
+						className="bg-app-surface"
+						closeOnSelect
 					>
-						{(["default", "az", "deity"] as SortOrder[]).map((order) => (
-							<Menu.Item
+						{(['default', 'az', 'deity'] as SortOrder[]).map((order) => (
+							<MenuItem
 								key={order}
-								title={sortLabels[order]}
-								titleStyle={{ color: colors.text }}
-								trailingIcon={sortOrder === order ? "check" : undefined}
-								onPress={() => {
-									setSortOrder(order);
-									setSortMenuVisible(false);
-								}}
-							/>
+								textValue={sortLabels[order]}
+								onPress={() => setSortOrder(order)}
+							>
+								{sortOrder === order && (
+									<MaterialCommunityIcons
+										name="check"
+										size={18}
+										color={colors.accent}
+										style={{ marginRight: 12 }}
+									/>
+								)}
+								<MenuItemLabel className="text-app-text">
+									{sortLabels[order]}
+								</MenuItemLabel>
+							</MenuItem>
 						))}
 					</Menu>
 				</View>
 			)}
 
-			<View style={globalStyle.homecontainer}>
+			<View className="mx-5 mt-0 mb-0 flex-1">
 				<FlatList
 					data={filteredAartis}
 					keyExtractor={(item) => item.key}
 					renderItem={({ item }) => <SingleItem item={item} />}
 					showsVerticalScrollIndicator={false}
 					ListFooterComponent={() => (
-						<IconButton
+						<IconBtn
 							icon="plus"
+							className="my-4 mx-0 items-center w-full border rounded-[10px] border-app-primary bg-app-bg"
 							style={{
-								...styles.addButton,
-								borderColor: colors.primary,
-								backgroundColor: colors.background,
+								elevation: 3,
 								shadowColor: colors.background,
+								shadowOffset: { width: 1, height: 1 },
+								shadowOpacity: 0.3,
+								shadowRadius: 2,
 							}}
-							onPress={() => router.push("/add-aarti/0")}
+							onPress={() => router.push('/add-aarti/0')}
 							iconColor={colors.primary}
 							size={50}
 						/>
@@ -190,59 +218,3 @@ const Home: React.FC = () => {
 };
 
 export default Home;
-
-const styles = StyleSheet.create({
-	todayCard: {
-		marginHorizontal: spacing.lg,
-		marginTop: spacing.md,
-		marginBottom: spacing.sm,
-		padding: spacing.md,
-		borderRadius: 10,
-		borderWidth: 1,
-	},
-	todayLabel: {
-		fontSize: 11,
-		fontWeight: "bold",
-		letterSpacing: 0.5,
-		marginBottom: 4,
-	},
-	todayTitle: {
-		fontSize: 18,
-		fontWeight: "bold",
-	},
-	filterRow: {
-		flexDirection: "row",
-		alignItems: "center",
-		paddingLeft: spacing.lg,
-	},
-	chipsContainer: {
-		gap: spacing.sm,
-		paddingRight: spacing.sm,
-		paddingVertical: spacing.sm,
-	},
-	chip: {
-		paddingHorizontal: 14,
-		paddingVertical: 6,
-		borderRadius: 20,
-		borderWidth: 1,
-	},
-	chipText: {
-		fontSize: 13,
-		fontWeight: "600",
-	},
-	sortButton: {
-		marginRight: 4,
-	},
-	addButton: {
-		marginVertical: 16,
-		marginHorizontal: 0,
-		alignItems: "center",
-		width: "100%",
-		borderWidth: 1,
-		borderRadius: 10,
-		elevation: 3,
-		shadowOffset: { width: 1, height: 1 },
-		shadowOpacity: 0.3,
-		shadowRadius: 2,
-	},
-});

@@ -1,22 +1,20 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
 	Alert,
 	Modal,
 	Platform,
+	Pressable,
 	ScrollView,
 	Share,
-	StyleSheet,
 	Text,
 	TextInput,
-	TouchableOpacity,
 	View,
-} from "react-native";
-import { Icon } from "react-native-paper";
-import * as Clipboard from "expo-clipboard";
-import { useAppTheme } from "../../../shared/types";
-import { useDataStore, useDataStoreActions, useUIStoreActions } from "../../../store/store";
-import { shareApp } from "../../../shared/helper";
-import { spacing } from "../../../shared/styles";
+} from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import * as Clipboard from 'expo-clipboard';
+import { useAppTheme } from '../../../shared/types';
+import { useDataStore, useDataStoreActions, useUIStoreActions } from '../../../store/store';
+import { shareApp } from '../../../shared/helper';
 
 const Setting: React.FC = () => {
 	const { colors } = useAppTheme();
@@ -26,35 +24,35 @@ const Setting: React.FC = () => {
 	const { setDisplayMode } = useUIStoreActions();
 
 	const [importVisible, setImportVisible] = useState(false);
-	const [importText, setImportText] = useState("");
+	const [importText, setImportText] = useState('');
 
 	const reset = () => {
 		Alert.alert(
-			"Reset Data",
-			"This will delete all customized and modified Aartis. This action cannot be undone.",
+			'Reset Data',
+			'This will delete all customized and modified Aartis. This action cannot be undone.',
 			[
-				{ text: "रद्द करा", style: "cancel" },
-				{ text: "ठीक आहे", onPress: initializeAarti },
+				{ text: 'रद्द करा', style: 'cancel' },
+				{ text: 'ठीक आहे', onPress: initializeAarti },
 			],
 		);
 	};
 
 	const exportCustomAartis = async () => {
-		const custom = aartis.filter((x) => x.key.startsWith("custom-"));
+		const custom = aartis.filter((x) => x.key.startsWith('custom-'));
 		if (custom.length === 0) {
-			Alert.alert("Export", "No custom aartis to export.");
+			Alert.alert('Export', 'No custom aartis to export.');
 			return;
 		}
 		const json = JSON.stringify(custom, null, 2);
 		try {
-			if (Platform.OS === "web") {
+			if (Platform.OS === 'web') {
 				await Clipboard.setStringAsync(json);
-				Alert.alert("Exported", "JSON copied to clipboard.");
+				Alert.alert('Exported', 'JSON copied to clipboard.');
 			} else {
 				await Share.share({ message: json });
 			}
 		} catch {
-			Alert.alert("Error", "Could not export aartis.");
+			Alert.alert('Error', 'Could not export aartis.');
 		}
 	};
 
@@ -71,78 +69,83 @@ const Setting: React.FC = () => {
 				addAarti(item as Parameters<typeof addAarti>[0]);
 				added++;
 			}
-			Alert.alert("Import", `Added ${added} aarti(s).`);
+			Alert.alert('Import', `Added ${added} aarti(s).`);
 			setImportVisible(false);
-			setImportText("");
+			setImportText('');
 		} catch {
-			Alert.alert("Error", "Invalid JSON. Could not import.");
+			Alert.alert('Error', 'Invalid JSON. Could not import.');
 		}
 	};
 
 	return (
 		<>
 			<ScrollView
-				contentContainerStyle={[styles.root, { backgroundColor: colors.background }]}
+				contentContainerClassName="flex-grow p-5 gap-3 bg-app-bg"
 			>
-				<TouchableOpacity
-					style={[styles.row, { borderColor: colors.border }]}
-					onPress={() => setDisplayMode(displayMode === "light" ? "dark" : "light")}
+				<Pressable
+					className="flex-row items-center gap-3 py-[14px] px-4 border rounded-[10px] border-app-border"
+					onPress={() => setDisplayMode(displayMode === 'light' ? 'dark' : 'light')}
+					android_ripple={{ color: `${colors.primary}22` }}
 				>
-					<Icon source="theme-light-dark" color={colors.primary} size={24} />
-					<Text style={[styles.label, { color: colors.text }]}>
-						{displayMode === "light" ? "Switch to Dark Theme" : "Switch to Light Theme"}
+					<MaterialCommunityIcons name="theme-light-dark" color={colors.primary} size={24} />
+					<Text className="text-base text-app-text">
+						{displayMode === 'light' ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
 					</Text>
-				</TouchableOpacity>
+				</Pressable>
 
-				<TouchableOpacity
-					style={[styles.row, { borderColor: colors.border }]}
+				<Pressable
+					className="flex-row items-center gap-3 py-[14px] px-4 border rounded-[10px] border-app-border"
 					onPress={shareApp}
+					android_ripple={{ color: `${colors.primary}22` }}
 				>
-					<Icon source="share-variant" color={colors.primary} size={24} />
-					<Text style={[styles.label, { color: colors.text }]}>Share App</Text>
-				</TouchableOpacity>
+					<MaterialCommunityIcons name="share-variant" color={colors.primary} size={24} />
+					<Text className="text-base text-app-text">Share App</Text>
+				</Pressable>
 
-				<TouchableOpacity
-					style={[styles.row, { borderColor: colors.border }]}
+				<Pressable
+					className="flex-row items-center gap-3 py-[14px] px-4 border rounded-[10px] border-app-border"
 					onPress={exportCustomAartis}
+					android_ripple={{ color: `${colors.primary}22` }}
 				>
-					<Icon source="export" color={colors.primary} size={24} />
-					<Text style={[styles.label, { color: colors.text }]}>Export Custom Aartis</Text>
-				</TouchableOpacity>
+					<MaterialCommunityIcons name="export" color={colors.primary} size={24} />
+					<Text className="text-base text-app-text">Export Custom Aartis</Text>
+				</Pressable>
 
-				<TouchableOpacity
-					style={[styles.row, { borderColor: colors.border }]}
+				<Pressable
+					className="flex-row items-center gap-3 py-[14px] px-4 border rounded-[10px] border-app-border"
 					onPress={() => setImportVisible(true)}
+					android_ripple={{ color: `${colors.primary}22` }}
 				>
-					<Icon source="import" color={colors.primary} size={24} />
-					<Text style={[styles.label, { color: colors.text }]}>Import Custom Aartis</Text>
-				</TouchableOpacity>
+					<MaterialCommunityIcons name="import" color={colors.primary} size={24} />
+					<Text className="text-base text-app-text">Import Custom Aartis</Text>
+				</Pressable>
 
-				<TouchableOpacity
-					style={[styles.row, { borderColor: colors.border }]}
+				<Pressable
+					className="flex-row items-center gap-3 py-[14px] px-4 border rounded-[10px] border-app-border"
 					onPress={reset}
+					android_ripple={{ color: `${colors.accent}22` }}
 				>
-					<Icon source="delete-forever" color={colors.accent} size={24} />
-					<Text style={[styles.label, { color: colors.accent }]}>
+					<MaterialCommunityIcons name="delete-forever" color={colors.accent} size={24} />
+					<Text className="text-base text-app-accent">
 						Reset customised data
 					</Text>
-				</TouchableOpacity>
+				</Pressable>
 			</ScrollView>
 
-			{/* Import modal */}
 			<Modal
 				visible={importVisible}
 				animationType="slide"
 				transparent
 				onRequestClose={() => setImportVisible(false)}
 			>
-				<View style={styles.modalOverlay}>
-					<View style={[styles.modalCard, { backgroundColor: colors.surface }]}>
-						<Text style={[styles.modalTitle, { color: colors.text }]}>
+				<View className="flex-1 bg-black/50 justify-end">
+					<View className="p-5 rounded-tl-2xl rounded-tr-2xl gap-3 bg-app-surface">
+						<Text className="text-base font-bold text-app-text">
 							Paste exported JSON
 						</Text>
 						<TextInput
-							style={[styles.importInput, { borderColor: colors.border, color: colors.text }]}
+							className="border rounded-lg p-[10px] text-[13px] min-h-[120px] border-app-border text-app-text"
+							style={{ textAlignVertical: 'top' }}
 							multiline
 							numberOfLines={8}
 							placeholder="Paste JSON here…"
@@ -151,19 +154,19 @@ const Setting: React.FC = () => {
 							onChangeText={setImportText}
 							autoFocus
 						/>
-						<View style={styles.modalButtons}>
-							<TouchableOpacity
-								style={[styles.modalBtn, { borderColor: colors.border }]}
-								onPress={() => { setImportVisible(false); setImportText(""); }}
+						<View className="flex-row gap-[10px] justify-end">
+							<Pressable
+								className="px-5 py-[10px] rounded-lg border border-app-border"
+								onPress={() => { setImportVisible(false); setImportText(''); }}
 							>
-								<Text style={{ color: colors.text }}>Cancel</Text>
-							</TouchableOpacity>
-							<TouchableOpacity
-								style={[styles.modalBtn, { borderColor: colors.primary, backgroundColor: colors.primary }]}
+								<Text className="text-app-text">Cancel</Text>
+							</Pressable>
+							<Pressable
+								className="px-5 py-[10px] rounded-lg border border-app-primary bg-app-primary"
 								onPress={importCustomAartis}
 							>
-								<Text style={{ color: colors.background, fontWeight: "bold" }}>Import</Text>
-							</TouchableOpacity>
+								<Text className="text-app-bg font-bold">Import</Text>
+							</Pressable>
 						</View>
 					</View>
 				</View>
@@ -173,57 +176,3 @@ const Setting: React.FC = () => {
 };
 
 export default Setting;
-
-const styles = StyleSheet.create({
-	root: {
-		flexGrow: 1,
-		padding: spacing.lg,
-		gap: 12,
-	},
-	row: {
-		flexDirection: "row",
-		alignItems: "center",
-		gap: 12,
-		paddingVertical: 14,
-		paddingHorizontal: 16,
-		borderWidth: 1,
-		borderRadius: 10,
-	},
-	label: {
-		fontSize: 16,
-	},
-	modalOverlay: {
-		flex: 1,
-		backgroundColor: "rgba(0,0,0,0.5)",
-		justifyContent: "flex-end",
-	},
-	modalCard: {
-		padding: spacing.lg,
-		borderTopLeftRadius: 16,
-		borderTopRightRadius: 16,
-		gap: 12,
-	},
-	modalTitle: {
-		fontSize: 16,
-		fontWeight: "bold",
-	},
-	importInput: {
-		borderWidth: 1,
-		borderRadius: 8,
-		padding: 10,
-		textAlignVertical: "top",
-		fontSize: 13,
-		minHeight: 120,
-	},
-	modalButtons: {
-		flexDirection: "row",
-		gap: 10,
-		justifyContent: "flex-end",
-	},
-	modalBtn: {
-		paddingHorizontal: 20,
-		paddingVertical: 10,
-		borderRadius: 8,
-		borderWidth: 1,
-	},
-});

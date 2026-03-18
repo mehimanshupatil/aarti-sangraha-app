@@ -1,8 +1,8 @@
-import React from "react";
-import { StyleSheet, View, TextInput } from "react-native";
-import { IconButton } from "react-native-paper";
-import { useAppTheme } from "../shared/types";
-import { useDataStore, useUIStoreActions } from "../store/store";
+import React from 'react';
+import { TextInput, View } from 'react-native';
+import { useAppTheme } from '../shared/types';
+import { useDataStore, useUIStoreActions } from '../store/store';
+import IconBtn from './ui/IconBtn';
 
 const Search: React.FC = () => {
 	const { colors } = useAppTheme();
@@ -10,50 +10,26 @@ const Search: React.FC = () => {
 	const { setSearchValue, setShowSearch } = useUIStoreActions();
 
 	return (
-		<View style={styles.container}>
+		<View className="flex-1 flex-row items-center mx-2 gap-1">
 			<TextInput
-				style={{
-					...styles.inputStyle,
-					color: colors.surface,
-					borderColor: colors.surface,
-				}}
-				placeholder="Type here to search"
-				placeholderTextColor={colors.text}
-				autoFocus={true}
+				className="flex-1 h-[38px] rounded-md border border-app-on-primary text-app-on-primary px-3"
+				placeholder="Search…"
+				placeholderTextColor={`${colors.onPrimary}99`}
+				autoFocus
 				onChangeText={setSearchValue}
 				value={searchValue}
 			/>
-			<IconButton
+			<IconBtn
 				icon="close"
 				onPress={() => {
 					setShowSearch(false);
-					setSearchValue("");
+					setSearchValue('');
 				}}
-				size={24}
-				iconColor={colors.surface}
-				style={styles.searchIcon}
+				size={22}
+				iconColor={colors.onPrimary}
 			/>
 		</View>
 	);
 };
-
-const styles = StyleSheet.create({
-	container: {
-		flexGrow: 1,
-		margin: 10,
-		justifyContent: "center",
-	},
-	inputStyle: {
-		paddingRight: 40,
-		height: 40,
-		borderRadius: 5,
-		borderWidth: 1,
-		textAlign: "center",
-	},
-	searchIcon: {
-		position: "absolute",
-		right: 12,
-	},
-});
 
 export default Search;

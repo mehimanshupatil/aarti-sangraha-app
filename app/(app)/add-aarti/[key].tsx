@@ -3,7 +3,6 @@ import {
 	Alert,
 	Keyboard,
 	ScrollView,
-	StyleSheet,
 	Text,
 	TextInput,
 	TouchableOpacity,
@@ -78,7 +77,7 @@ const AddNew: React.FC = () => {
 	};
 
 	return (
-		<View style={{ ...globalStyle.homeRoot, backgroundColor: colors.background }}>
+		<View className="flex-grow h-full bg-app-bg">
 			<Stack.Screen
 				options={{
 					title: selectedItem ? "Update" : "Add",
@@ -90,24 +89,16 @@ const AddNew: React.FC = () => {
 			<ScrollView style={globalStyle.homecontainer} keyboardShouldPersistTaps="handled">
 				<TextInput
 					placeholderTextColor={colors.primary}
-					style={{
-						...styles.input,
-						color: colors.primary,
-						backgroundColor: colors.background,
-						borderColor: colors.primary,
-					}}
+					className="mt-5 text-[20px] rounded-[5px] border p-[10px] border-app-primary text-app-primary bg-app-bg"
+					style={{ textAlignVertical: 'top' }}
 					placeholder="Title"
 					value={title}
 					onChangeText={setTitle}
 				/>
 				<TextInput
 					placeholderTextColor={colors.primary}
-					style={{
-						...styles.input,
-						color: colors.primary,
-						backgroundColor: colors.background,
-						borderColor: colors.primary,
-					}}
+					className="mt-5 text-[20px] rounded-[5px] border p-[10px] border-app-primary text-app-primary bg-app-bg"
+					style={{ textAlignVertical: 'top' }}
 					placeholder="Body"
 					value={body}
 					onChangeText={setBody}
@@ -115,10 +106,10 @@ const AddNew: React.FC = () => {
 					multiline={true}
 				/>
 				<TouchableOpacity
-					style={{ ...styles.button, borderColor: colors.primary }}
+					className="items-center p-[10px] mt-[10px] rounded-[5px] border border-app-primary"
 					onPress={addItem}
 				>
-					<Text style={{ color: colors.text, fontWeight: "bold", fontSize: 15 }}>
+					<Text className="text-app-text font-bold text-[15px]">
 						{selectedItem ? "Update" : "Add"}
 					</Text>
 				</TouchableOpacity>
@@ -128,21 +119,3 @@ const AddNew: React.FC = () => {
 };
 
 export default AddNew;
-
-const styles = StyleSheet.create({
-	input: {
-		marginTop: 20,
-		fontSize: 20,
-		borderRadius: 5,
-		borderWidth: 1,
-		textAlignVertical: "top",
-		padding: 10,
-	},
-	button: {
-		alignItems: "center",
-		padding: 10,
-		marginTop: 10,
-		borderRadius: 5,
-		borderWidth: 1,
-	},
-});

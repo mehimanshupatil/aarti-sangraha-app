@@ -37,5 +37,5 @@ export const fontStyle = StyleSheet.create({
 	},
 });
 
-/** Reusable style for react-native-paper IconButton to reset default margins */
-export const iconButtonReset = { margin: 0 } as const;
+/** Padding reset for icon buttons */
+export const iconButtonReset = { padding: 6 } as const;

@@ -1,14 +1,19 @@
-import React from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
-import { IconButton } from "react-native-paper";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Animated, { FadeIn, FadeOut, SlideInRight, SlideOutRight } from "react-native-reanimated";
-import { useAppTheme } from "../shared/types";
-import { fontStyle } from "../shared/styles";
-import { useDataStore, useUIStoreActions } from "../store/store";
-import Search from "./Search";
+import React from 'react';
+import { Platform, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Animated, {
+	FadeIn,
+	FadeOut,
+	SlideInRight,
+	SlideOutRight,
+} from 'react-native-reanimated';
+import { useAppTheme } from '../shared/types';
+import { fontStyle } from '../shared/styles';
+import { useDataStore, useUIStoreActions } from '../store/store';
+import Search from './Search';
+import IconBtn from './ui/IconBtn';
 
-const APPBAR_HEIGHT = Platform.OS === "ios" ? 50 : 56;
+const APPBAR_HEIGHT = Platform.OS === 'ios' ? 50 : 56;
 
 const Header: React.FC<{
 	title: string;
@@ -24,11 +29,10 @@ const Header: React.FC<{
 
 	return (
 		<View
+			className="bg-app-primary w-full justify-center overflow-hidden pr-[10px]"
 			style={{
-				...styles.header,
 				paddingTop: STATUSBAR_HEIGHT,
 				height: STATUSBAR_HEIGHT + APPBAR_HEIGHT,
-				backgroundColor: colors.primary,
 			}}
 		>
 			{!showSearch ? (
@@ -36,27 +40,28 @@ const Header: React.FC<{
 					key="title-bar"
 					entering={FadeIn.duration(200)}
 					exiting={FadeOut.duration(100)}
-					style={styles.titleRow}
+					className="flex-row items-center justify-between flex-1"
 				>
-					<View style={styles.placeholder} />
+					<View className="w-11 h-11" />
 					<Text
+						className="text-app-on-primary font-bold text-[20px] tracking-[1px]"
 						style={[
-							{ ...styles.headerText, color: colors.onPrimary },
-							fontStyle[translate === "original" ? "fontOriginal" : "fontItalic"],
+							fontStyle[
+								translate === 'original' ? 'fontOriginal' : 'fontItalic'
+							],
 						]}
 					>
 						{title}
 					</Text>
 					{showSearchButton ? (
-						<IconButton
+						<IconBtn
 							icon="text-box-search-outline"
 							onPress={() => setShowSearch(true)}
 							size={28}
 							iconColor={colors.onPrimary}
-							style={styles.searchIcon}
 						/>
 					) : (
-						<View style={styles.placeholder} />
+						<View className="w-11 h-11" />
 					)}
 				</Animated.View>
 			) : (
@@ -64,7 +69,7 @@ const Header: React.FC<{
 					key="search-bar"
 					entering={SlideInRight.duration(250)}
 					exiting={SlideOutRight.duration(200)}
-					style={styles.titleRow}
+					className="flex-row items-center justify-between flex-1"
 				>
 					<Search />
 				</Animated.View>
@@ -72,28 +77,5 @@ const Header: React.FC<{
 		</View>
 	);
 };
-
-const styles = StyleSheet.create({
-	header: {
-		width: "100%",
-		justifyContent: "center",
-	},
-	titleRow: {
-		flexDirection: "row",
-		alignItems: "center",
-		justifyContent: "space-between",
-		flex: 1,
-	},
-	headerText: {
-		fontWeight: "bold",
-		fontSize: 20,
-		letterSpacing: 1,
-	},
-	placeholder: {
-		width: 44,
-		height: 44,
-	},
-	searchIcon: {},
-});
 
 export default Header;

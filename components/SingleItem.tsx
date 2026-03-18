@@ -1,10 +1,10 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { singleItemType, useAppTheme } from "../shared/types";
-import { IconButton, TouchableRipple } from "react-native-paper";
-import { useDataStore, useDataStoreActions } from "../store/store";
-import { fontStyle } from "../shared/styles";
-import { Link } from "expo-router";
+import React from 'react';
+import { Pressable, Text, View } from 'react-native';
+import { singleItemType, useAppTheme } from '../shared/types';
+import { useDataStore, useDataStoreActions } from '../store/store';
+import { fontStyle } from '../shared/styles';
+import { router } from 'expo-router';
+import IconBtn from './ui/IconBtn';
 
 const SingleItem: React.FC<{
 	item: singleItemType;
@@ -14,107 +14,60 @@ const SingleItem: React.FC<{
 	const favoritesKeys = useDataStore((s) => s.favoritesKeys);
 	const { toggleFav } = useDataStoreActions();
 
-	const iconPress = (item: singleItemType) => {
-		toggleFav(item.key);
-	};
-
 	return (
 		<View
+			className="mt-4 border border-app-primary bg-app-bg rounded-lg"
 			style={{
-				...styles.container,
-				borderColor: colors.primary,
-				backgroundColor: colors.background,
 				shadowColor: colors.primary,
+				shadowOffset: { width: 0, height: 2 },
+				shadowOpacity: 0.3,
+				shadowRadius: 4,
+				elevation: 5,
 			}}
 		>
-			<Link href={`/aarti-view/${item.metadata.slug}`} asChild>
-				<TouchableRipple borderless style={styles.ripple}>
-					<View>
-						<View style={styles.firstLine}>
-							<Text
-								style={[
-									{ ...styles.title, color: colors.text },
-									fontStyle[translate === 'original' ? 'fontOriginal' : 'fontItalic'],
-
-								]}
-								ellipsizeMode="tail"
-								numberOfLines={1}
-							>
-								{item.title[translate]}
-							</Text>
-							<IconButton
-								icon={
-									favoritesKeys.includes(item.key) ? "heart" : "heart-outline"
-								}
-								size={30}
-								style={styles.unsetbuttonStyle}
-								iconColor={favoritesKeys.includes(item.key) ? colors.accent : colors.text}
-								onPress={() => iconPress(item)}
-							/>
-						</View>
-						<View style={styles.firstLine}>
-							<Text
-								style={[
-									{
-										flex: 1,
-										color: colors.text,
-									},
-									fontStyle[translate === 'original' ? 'fontOriginal' : 'fontItalic'],
-
-								]}
-								ellipsizeMode="tail"
-								numberOfLines={1}
-							>
-								{item.body[translate].split("\n")[0]}
-							</Text>
-							<Text
-								style={{
-									paddingLeft: 5,
-									paddingRight: 15,
-									color: colors.text,
-								}}
-							>
-								{item.key}
-							</Text>
-						</View>
+			<Pressable
+				className="rounded-[10px] p-3 pb-4 px-4"
+				onPress={() => router.push(`/aarti-view/${item.metadata.slug}`)}
+				android_ripple={{ color: `${colors.primary}22`, borderless: true }}
+			>
+				<View>
+					<View className="flex-row justify-between">
+						<Text
+							className="text-app-text flex-1 flex-wrap text-[30px]"
+							style={[
+								fontStyle[translate === 'original' ? 'fontOriginal' : 'fontItalic'],
+							]}
+							ellipsizeMode="tail"
+							numberOfLines={1}
+						>
+							{item.title[translate]}
+						</Text>
+						<IconBtn
+							icon={favoritesKeys.includes(item.key) ? 'heart' : 'heart-outline'}
+							size={30}
+							iconColor={favoritesKeys.includes(item.key) ? colors.accent : colors.text}
+							onPress={() => toggleFav(item.key)}
+						/>
 					</View>
-				</TouchableRipple>
-			</Link>
+					<View className="flex-row justify-between">
+						<Text
+							className="text-app-text flex-1"
+							style={[
+								fontStyle[translate === 'original' ? 'fontOriginal' : 'fontItalic'],
+							]}
+							ellipsizeMode="tail"
+							numberOfLines={1}
+						>
+							{item.body[translate].split('\n')[0]}
+						</Text>
+						<Text className="text-app-text pl-[5px] pr-[15px]">
+							{item.key}
+						</Text>
+					</View>
+				</View>
+			</Pressable>
 		</View>
 	);
 };
 
 export default SingleItem;
-
-const styles = StyleSheet.create({
-	container: {
-		marginTop: 16,
-		borderWidth: 1,
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		shadowOpacity: 0.3,
-		shadowRadius: 4,
-		elevation: 5,
-		borderRadius: 8,
-	},
-	ripple: {
-		borderRadius: 10,
-		padding: 12,
-		paddingBottom: 16,
-		paddingHorizontal: 16,
-	},
-	firstLine: {
-		flexDirection: "row",
-		justifyContent: "space-between",
-	},
-	title: {
-		flex: 1,
-		flexWrap: "wrap",
-		fontSize: 30,
-	},
-	unsetbuttonStyle: {
-		margin: 0,
-	},
-});

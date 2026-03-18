@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { Icon } from 'react-native-paper';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Header from '../../../components/Header';
 import { useAppTheme } from '../../../shared/types';
 import { useUIStoreActions } from '../../../store/store';
@@ -20,6 +20,7 @@ export default function TabLayout() {
 				tabBarActiveTintColor: colors.accent,
 				tabBarInactiveTintColor: colors.text,
 				animation: 'shift',
+				sceneStyle: { backgroundColor: colors.background },
 			}}
 			screenListeners={{ tabPress: resetSearch }}
 		>
@@ -29,7 +30,11 @@ export default function TabLayout() {
 					title: 'Home',
 					header: () => <Header title="आरती संग्रह" showSearchButton />,
 					tabBarIcon: ({ color, size }) => (
-						<Icon source="home-outline" size={size} color={color} />
+						<MaterialCommunityIcons
+							name="home-outline"
+							size={size}
+							color={color}
+						/>
 					),
 				}}
 			/>
@@ -39,7 +44,11 @@ export default function TabLayout() {
 					title: 'Favorites',
 					header: () => <Header title="Favorites" showSearchButton />,
 					tabBarIcon: ({ color, size }) => (
-						<Icon source="heart-outline" size={size} color={color} />
+						<MaterialCommunityIcons
+							name="heart-outline"
+							size={size}
+							color={color}
+						/>
 					),
 				}}
 			/>
@@ -49,7 +58,7 @@ export default function TabLayout() {
 					title: 'Recent',
 					header: () => <Header title="Recent" showSearchButton />,
 					tabBarIcon: ({ color, size }) => (
-						<Icon source="history" size={size} color={color} />
+						<MaterialCommunityIcons name="history" size={size} color={color} />
 					),
 				}}
 			/>
@@ -60,7 +69,11 @@ export default function TabLayout() {
 					headerStyle: { backgroundColor: colors.primary },
 					headerTintColor: colors.onPrimary,
 					tabBarIcon: ({ color, size }) => (
-						<Icon source="information-outline" size={size} color={color} />
+						<MaterialCommunityIcons
+							name="information-outline"
+							size={size}
+							color={color}
+						/>
 					),
 				}}
 			/>
@@ -71,7 +84,11 @@ export default function TabLayout() {
 					headerStyle: { backgroundColor: colors.primary },
 					headerTintColor: colors.onPrimary,
 					tabBarIcon: ({ color, size }) => (
-						<Icon source="nut" size={size} color={color} />
+						<MaterialCommunityIcons
+							name="cog-outline"
+							size={size}
+							color={color}
+						/>
 					),
 				}}
 			/>

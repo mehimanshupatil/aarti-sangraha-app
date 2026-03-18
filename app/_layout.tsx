@@ -1,58 +1,22 @@
-import React, { useEffect, useRef } from "react";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import '../global.css';
+import React, { useEffect, useRef } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {
-	MD3DarkTheme,
-	DefaultTheme,
-	Provider as PaperProvider,
-} from "react-native-paper";
-import { useDataStore, useDataStoreActions, useUIStoreActions } from "../store/store";
-import { SplashScreen, Stack, router } from "expo-router";
-import { useFonts } from "expo-font";
-import { BackHandler } from "react-native";
-import { Roboto_400Regular_Italic } from "@expo-google-fonts/roboto";
-
-declare global {
-	namespace ReactNativePaper {
-		interface ThemeColors {
-			onPrimary: string;
-			blue: string;
-			yellow: string;
-		}
-	}
-}
-
-export const light = {
-	...DefaultTheme,
-	colors: {
-		...DefaultTheme.colors,
-		primary: "#B84512",    // Rich saffron-terracotta — vibrant, warm
-		onPrimary: "#FFFBF2",  // Cream white — text/icons on primary header
-		text: "#3A2B1A",       // Warm dark brown — easy on eyes, not pure black
-		accent: "#C47A3A",     // Muted amber — favorites, icons
-		background: "#FAF4E8", // Warm parchment — reduced blue light
-		surface: "#F3EAD5",    // Soft tan — cards, slightly distinct from bg
-		border: "#C4A47A",     // Soft golden tan — gentle card borders
-	},
-};
-const dark = {
-	...MD3DarkTheme,
-	colors: {
-		...MD3DarkTheme.colors,
-		primary: "#DDAA55",    // Muted warm gold — headers, NOT harsh yellow
-		onPrimary: "#1C1812",  // Dark brown — text/icons on gold header
-		text: "#E8D9BC",       // Warm cream — reduced contrast, not pure white
-		accent: "#CC7A3A",     // Muted warm orange — favorites, icons
-		background: "#1C1812", // Warm very dark brown — not pure black
-		surface: "#262018",    // Slightly lighter warm dark — cards
-		border: "#DDAA55",     // Matches primary gold
-	},
-};
+	useDataStore,
+	useDataStoreActions,
+	useUIStoreActions,
+} from '../store/store';
+import { SplashScreen, Stack, router } from 'expo-router';
+import { useFonts } from 'expo-font';
+import { BackHandler } from 'react-native';
+import { Roboto_400Regular_Italic } from '@expo-google-fonts/roboto';
+import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
 
 SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout2() {
+export default function RootLayout() {
 	const [fontsLoaded, fontError] = useFonts({
-		nono_devanagari: require("../assets/fonts/NotoSansDevanagari.ttf"),
+		nono_devanagari: require('../assets/fonts/NotoSansDevanagari.ttf'),
 		Roboto_400Regular_Italic,
 	});
 
@@ -86,7 +50,7 @@ export default function RootLayout2() {
 					return true;
 				} else if (showSearchRef.current) {
 					setShowSearch(false);
-					setSearchValue("");
+					setSearchValue('');
 					return true;
 				}
 
@@ -99,7 +63,7 @@ export default function RootLayout2() {
 			return true;
 		};
 		const backHandler = BackHandler.addEventListener(
-			"hardwareBackPress",
+			'hardwareBackPress',
 			backAction,
 		);
 		return () => backHandler.remove();
@@ -114,18 +78,19 @@ export default function RootLayout2() {
 	if (!fontsLoaded && !fontError) {
 		return null;
 	}
+
 	return (
-		<GestureHandlerRootView style={{ flex: 1 }}>
-			<PaperProvider theme={displayMode === "dark" ? dark : light}>
+		<GluestackUIProvider mode={displayMode === 'dark' ? 'dark' : 'light'}>
+			<GestureHandlerRootView style={{ flex: 1 }}>
 				<Stack
 					screenOptions={{
-						statusBarStyle: displayMode === "dark" ? "light" : "dark",
+						statusBarStyle: displayMode === 'dark' ? 'light' : 'dark',
 						headerShown: false,
 					}}
 				>
 					<Stack.Screen name="(app)" />
 				</Stack>
-			</PaperProvider>
-		</GestureHandlerRootView>
+			</GestureHandlerRootView>
+		</GluestackUIProvider>
 	);
 }
