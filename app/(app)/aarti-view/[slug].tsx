@@ -380,7 +380,7 @@ const AartiView: React.FC = () => {
 				)}
 
 				<GestureDetector gesture={swipeGesture}>
-					<Animated.View className="pt-2 px-5 h-full" style={animatedStyle}>
+					<Animated.View style={[{ paddingTop: 8, paddingHorizontal: 20, height: '100%' }, animatedStyle]}>
 						{/* Scroll area */}
 						<View
 							className="flex-1"
@@ -442,8 +442,8 @@ const AartiView: React.FC = () => {
 									{/* Dim above band */}
 									<Animated.View
 										pointerEvents="none"
-										className="absolute left-0 right-0 top-0"
 										style={[
+											{ position: 'absolute', left: 0, right: 0, top: 0 },
 											topDimStyle,
 											{ backgroundColor: colors.background, opacity: 0.88 },
 										]}
@@ -451,8 +451,8 @@ const AartiView: React.FC = () => {
 
 									{/* Focus band — transparent window with border */}
 									<Animated.View
-										className="absolute left-0 right-0 border-t-[1.5px] border-b-[1.5px]"
 										style={[
+											{ position: 'absolute', left: 0, right: 0, borderTopWidth: 1.5, borderBottomWidth: 1.5 },
 											bandContainerStyle,
 											{ borderColor: colors.primary },
 										]}
@@ -462,8 +462,8 @@ const AartiView: React.FC = () => {
 									{/* Dim below band */}
 									<Animated.View
 										pointerEvents="none"
-										className="absolute left-0 right-0 top-0"
 										style={[
+											{ position: 'absolute', left: 0, right: 0, top: 0 },
 											bottomDimStyle,
 											{
 												bottom: 0,
@@ -475,8 +475,10 @@ const AartiView: React.FC = () => {
 
 									{/* Band controls — below the band */}
 									<Animated.View
-										className="absolute left-0 right-0 flex-row items-center justify-between pt-1"
-										style={bandControlsStyle}
+										style={[
+											{ position: 'absolute', left: 0, right: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingTop: 4 },
+											bandControlsStyle,
+										]}
 										pointerEvents="box-none"
 									>
 										{/* Right: line count control */}

@@ -40,7 +40,12 @@ const Header: React.FC<{
 					key="title-bar"
 					entering={FadeIn.duration(200)}
 					exiting={FadeOut.duration(100)}
-					className="flex-row items-center justify-between flex-1"
+					style={{
+						flexDirection: 'row',
+						alignItems: 'center',
+						justifyContent: 'space-between',
+						flex: 1,
+					}}
 				>
 					<View className="w-11 h-11" />
 					<Text
@@ -69,7 +74,12 @@ const Header: React.FC<{
 					key="search-bar"
 					entering={SlideInRight.duration(250)}
 					exiting={SlideOutRight.duration(200)}
-					className="flex-row items-center justify-between flex-1"
+					style={{
+						flexDirection: 'row',
+						alignItems: 'center',
+						justifyContent: 'space-between',
+						flex: 1,
+					}}
 				>
 					<Search />
 				</Animated.View>
