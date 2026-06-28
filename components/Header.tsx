@@ -8,7 +8,7 @@ import Animated, {
 	SlideOutRight,
 } from 'react-native-reanimated';
 import { useAppTheme } from '../shared/types';
-import { fontStyle } from '../shared/styles';
+import { getFontStyle } from '../shared/styles';
 import { useDataStore, useUIStoreActions } from '../store/store';
 import Search from './Search';
 import IconBtn from './ui/IconBtn';
@@ -40,21 +40,13 @@ const Header: React.FC<{
 					key="title-bar"
 					entering={FadeIn.duration(200)}
 					exiting={FadeOut.duration(100)}
-					style={{
-						flexDirection: 'row',
-						alignItems: 'center',
-						justifyContent: 'space-between',
-						flex: 1,
-					}}
+					style={{"flexDirection": "row", alignItems: 'center',justifyContent:'space-between'}}
+					className="flex-1 flex-row items-center justify-between"
 				>
 					<View className="w-11 h-11" />
 					<Text
 						className="text-app-on-primary font-bold text-[20px] tracking-[1px]"
-						style={[
-							fontStyle[
-								translate === 'original' ? 'fontOriginal' : 'fontItalic'
-							],
-						]}
+						style={getFontStyle(translate)}
 					>
 						{title}
 					</Text>
@@ -74,12 +66,7 @@ const Header: React.FC<{
 					key="search-bar"
 					entering={SlideInRight.duration(250)}
 					exiting={SlideOutRight.duration(200)}
-					style={{
-						flexDirection: 'row',
-						alignItems: 'center',
-						justifyContent: 'space-between',
-						flex: 1,
-					}}
+					className="flex-1 flex-row items-center"
 				>
 					<Search />
 				</Animated.View>

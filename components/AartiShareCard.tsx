@@ -1,65 +1,48 @@
 import React, { forwardRef } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import type { singleItemType } from "../shared/types";
-import { fontStyle } from "../shared/styles";
+import { getFontStyle } from "../shared/styles";
 import { domainUrl } from "../shared/const";
+import { useAppTheme } from "../shared/types";
+import { useDataStore } from "../store/store";
 
 const CARD_WIDTH = 380;
 
-const LIGHT = {
-	primary: "#b5451b",
-	accent: "#ffde5b",
-	bg: "#fffbf0",
-	text: "#2d1a0e",
-	muted: "#9b7b5e",
-	onPrimary: "#fffbf2",
-};
-
-const DARK = {
-	primary: "#DDAA55",
-	accent: "#DDAA55",
-	bg: "#1C1812",
-	text: "#E8D9BC",
-	muted: "#9b8b6e",
-	onPrimary: "#1C1812",
-};
-
 type Props = {
 	item: singleItemType;
-	translate: "original" | "transliteration";
-	fontSize: number;
-	isDark?: boolean;
 };
 
-const AartiShareCard = forwardRef<View, Props>(({ item, translate, fontSize, isDark = false }, ref) => {
-	const C = isDark ? DARK : LIGHT;
+const AartiShareCard = forwardRef<View, Props>(({ item }, ref) => {
+	const { colors } = useAppTheme();
+	const translate = useDataStore((s) => s.translate);
+	const fontSize = useDataStore((s) => s.fontSize);
 	const title = item.title[translate];
 	const body = item.body[translate];
 
 	return (
-		<View ref={ref} style={[styles.card, { backgroundColor: C.bg }]} collapsable={false}>
+		<View ref={ref} style={[styles.card, { backgroundColor: colors.background }]} collapsable={false}>
 			{/* Header */}
-			<View style={[styles.header, { backgroundColor: C.primary }]}>
+			<View style={[styles.header, { backgroundColor: colors.primary }]}>
 				<Image
 					source={require("../assets/icon.png")}
-					style={[styles.logo, { borderColor: C.accent }]}
+					style={[styles.logo, { borderColor: colors.accent }]}
 					resizeMode="contain"
 				/>
 				<View>
-					<Text style={[styles.appName, { color: C.onPrimary }]}>आरती संग्रह</Text>
-					<Text style={[styles.appSub, { color: `${C.onPrimary}99` }]}>Aarti Sangrah</Text>
+					<Text style={[styles.appName, { color: colors.onPrimary }]}>आरती संग्रह</Text>
+					<Text style={[styles.appSub, { color: `${colors.onPrimary}99` }]}>Aarti Sangrah</Text>
 				</View>
 			</View>
 
 			{/* Divider with om symbol */}
 			<View style={styles.ornamentRow}>
-				<View style={[styles.ornamentLine, { backgroundColor: C.primary }]} />
-				<Text style={[styles.ornamentText, { color: C.primary }]}>  ॐ  </Text>
-				<View style={[styles.ornamentLine, { backgroundColor: C.primary }]} />
+				<View style={[styles.ornamentLine, { backgroundColor: colors.primary }]} />
+				<Text style={[styles.ornamentText, { color: colors.primary }]}>  ॐ  </Text>
+				<View style={[styles.ornamentLine, { backgroundColor: colors.primary }]} />
 			</View>
 
 			{/* Title */}
-			<Text style={[styles.title, { color: C.primary }, fontStyle[translate === "original" ? "fontOriginal" : "fontItalic"]]}>
+			<Text style={[styles.title, { color: colors.primary }, getFontStyle(translate)]}>
 				{title}
 			</Text>
 
@@ -67,8 +50,8 @@ const AartiShareCard = forwardRef<View, Props>(({ item, translate, fontSize, isD
 			<Text
 				style={[
 					styles.body,
-					{ fontSize: Math.min(fontSize, 20), color: C.text },
-					fontStyle[translate === "original" ? "fontOriginal" : "fontItalic"],
+					{ fontSize: Math.min(fontSize, 20), color: colors.text },
+					getFontStyle(translate),
 				]}
 			>
 				{body}
@@ -76,11 +59,11 @@ const AartiShareCard = forwardRef<View, Props>(({ item, translate, fontSize, isD
 
 			{/* Footer */}
 			<View style={styles.ornamentRow}>
-				<View style={[styles.ornamentLine, { backgroundColor: C.primary }]} />
-				<Text style={[styles.ornamentText, { color: C.primary }]}>  ✦  </Text>
-				<View style={[styles.ornamentLine, { backgroundColor: C.primary }]} />
+				<View style={[styles.ornamentLine, { backgroundColor: colors.primary }]} />
+				<Text style={[styles.ornamentText, { color: colors.primary }]}>  ✦  </Text>
+				<View style={[styles.ornamentLine, { backgroundColor: colors.primary }]} />
 			</View>
-			<Text style={[styles.footer, { color: C.muted }]}>{domainUrl}</Text>
+			<Text style={[styles.footer, { color: colors.border }]}>{domainUrl}</Text>
 		</View>
 	);
 });

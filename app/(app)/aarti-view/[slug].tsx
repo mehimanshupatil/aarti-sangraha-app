@@ -34,10 +34,12 @@ import {
 	useUIStoreActions,
 } from '../../../store/store';
 import { shareAarti } from '../../../shared/helper';
-import { fontStyle, iconButtonReset } from '../../../shared/styles';
+import { getFontStyle, iconButtonReset } from '../../../shared/styles';
+import { findAartiBySlug } from '../../../shared/aarti';
 import data from '../../../store/data';
 import AartiShareCard from '../../../components/AartiShareCard';
 import { scheduleOnRN } from 'react-native-worklets';
+import { useFocusBand } from '../../../hooks/useFocusBand';
 
 export async function generateStaticParams(): Promise<
 	Record<string, string>[]
@@ -52,7 +54,6 @@ const SPEED_STEP = 10;
 const SPEED_MIN = 5;
 const SPEED_MAX = 200;
 const SPEED_DEFAULT = 60;
-const LINE_HEIGHT_RATIO = 1.65;
 
 const AartiView: React.FC = () => {
 	useKeepAwake();
@@ -61,7 +62,6 @@ const AartiView: React.FC = () => {
 	const [scrollHeight, setScrollHeight] = useState(0);
 	const [autoScroll, setAutoScroll] = useState(false);
 	const [focusMode, setFocusMode] = useState(false);
-	const [focusLineCount, setFocusLineCount] = useState(3);
 	const [scrollSpeed, setScrollSpeed] = useState(SPEED_DEFAULT);
 
 	const { colors } = useAppTheme();
@@ -69,14 +69,11 @@ const AartiView: React.FC = () => {
 	const fontSize = useDataStore((s) => s.fontSize);
 	const favoritesKeys = useDataStore((s) => s.favoritesKeys);
 	const translate = useDataStore((s) => s.translate);
-	const displayMode = useDataStore((s) => s.displayMode);
 
 	const { toggleFav, deleteAarti, addToRecentlyViewed } = useDataStoreActions();
 	const { setFontSize, setTranslate } = useUIStoreActions();
 
-	const initialIndex = aartis.findIndex(
-		(x) => x.metadata.slug === decodeURI((slug ?? '') as string),
-	);
+	const initialIndex = findAartiBySlug(aartis, (slug ?? '') as string);
 	const [displayIndex, setDisplayIndex] = useState(
 		initialIndex >= 0 ? initialIndex : 0,
 	);
@@ -93,59 +90,20 @@ const AartiView: React.FC = () => {
 	const contentH = useSharedValue(0);
 	const containerH = useSharedValue(0);
 
-	// Focus band — shared values so overlays animate on UI thread
-	const scrollAreaH = useSharedValue(0); // pixel height of scroll area
-	const bandTop = useSharedValue(0); // distance from top of scroll area
-	const bandHeight = useSharedValue(0); // total band height
-	const bandDragStart = useSharedValue(0); // capture position on drag begin
-	// JS-side copy of bandTop used for text paddingTop (updated on drag end)
-	const [bandTopJS, setBandTopJS] = useState(0);
-
-	// Initialise bandTop when scroll area is first measured
-	useEffect(() => {
-		if (scrollAreaH.value > 0 && bandTop.value === 0) {
-			const initial = scrollAreaH.value * 0.3;
-			bandTop.value = initial;
-			setBandTopJS(initial);
-		}
-	}, [scrollAreaH.value]);
-
-	// Keep bandHeight in sync with JS state
-	useEffect(() => {
-		bandHeight.value = focusLineCount * fontSize * LINE_HEIGHT_RATIO;
-	}, [focusLineCount, fontSize]);
-
-	// Animated styles for the three overlay layers
-	const topDimStyle = useAnimatedStyle(() => ({
-		height: bandTop.value,
-	}));
-	const bandContainerStyle = useAnimatedStyle(() => ({
-		top: bandTop.value,
-		height: bandHeight.value,
-	}));
-	const bandControlsStyle = useAnimatedStyle(() => ({
-		top: bandTop.value + bandHeight.value,
-	}));
-	const bottomDimStyle = useAnimatedStyle(() => ({
-		top: bandTop.value + bandHeight.value,
-	}));
-
-	// Drag gesture for the band grip handle — vertical only
-	const bandDragGesture = Gesture.Pan()
-		.activeOffsetY([-4, 4])
-		.onBegin(() => {
-			bandDragStart.value = bandTop.value;
-		})
-		.onUpdate((e) => {
-			const maxTop = scrollAreaH.value - bandHeight.value;
-			bandTop.value = Math.max(
-				0,
-				Math.min(bandDragStart.value + e.translationY, maxTop),
-			);
-		})
-		.onEnd(() => {
-			scheduleOnRN(setBandTopJS, bandTop.value);
-		});
+	const {
+		bandTopJS,
+		focusLineCount,
+		canDecrementLines,
+		canIncrementLines,
+		decrementLines,
+		incrementLines,
+		topDimStyle,
+		bandContainerStyle,
+		bandControlsStyle,
+		bottomDimStyle,
+		bandDragGesture,
+		onScrollAreaLayout,
+	} = useFocusBand();
 
 	// Auto-scroll: single withTiming drives scrollY
 	useAnimatedReaction(
@@ -184,7 +142,10 @@ const AartiView: React.FC = () => {
 
 	const animatedStyle = useAnimatedStyle(() => ({
 		transform: [{ translateX: translateX.value }],
-		flex: 1,
+		flex: 1, 
+		paddingTop: 8,
+		paddingLeft: 20,
+		paddingRight: 20
 	}));
 
 	const updateIndex = (newIndex: number) => {
@@ -302,7 +263,7 @@ const AartiView: React.FC = () => {
 				<title>{selectedItem?.title[translate]}</title>
 				<meta name="description" content={selectedItem?.body[translate]} />
 			</Head>
-			<View className="flex-1" style={{ backgroundColor: colors.background }}>
+			<View className="flex-1 bg-app-bg">
 				<Stack.Screen
 					options={{
 						title: selectedItem?.title[translate],
@@ -321,7 +282,7 @@ const AartiView: React.FC = () => {
 								placement="bottom right"
 								useRNModal
 								offset={4}
-								style={{ backgroundColor: colors.surface }}
+								className="bg-app-surface"
 								closeOnSelect
 							>
 								<MenuItem
@@ -333,9 +294,9 @@ const AartiView: React.FC = () => {
 										name="text"
 										size={18}
 										color={colors.text}
-										style={{ marginRight: 12 }}
+										className="mr-3"
 									/>
-									<MenuItemLabel style={{ color: colors.text }}>
+									<MenuItemLabel className="text-app-text">
 										Share as Text
 									</MenuItemLabel>
 								</MenuItem>
@@ -348,9 +309,9 @@ const AartiView: React.FC = () => {
 										name="image"
 										size={18}
 										color={colors.text}
-										style={{ marginRight: 12 }}
+										className="mr-3"
 									/>
-									<MenuItemLabel style={{ color: colors.text }}>
+									<MenuItemLabel className="text-app-text">
 										Share as Image
 									</MenuItemLabel>
 								</MenuItem>
@@ -372,26 +333,19 @@ const AartiView: React.FC = () => {
 						<AartiShareCard
 							ref={shareCardRef}
 							item={selectedItem}
-							translate={translate}
-							fontSize={fontSize}
-							isDark={displayMode === 'dark'}
 						/>
 					</View>
 				)}
 
 				<GestureDetector gesture={swipeGesture}>
-					<Animated.View style={[{ paddingTop: 8, paddingHorizontal: 20, height: '100%' }, animatedStyle]}>
+					<Animated.View
+						className="pt-2 px-5 h-full"
+						style={animatedStyle}
+					>
 						{/* Scroll area */}
 						<View
 							className="flex-1"
-							onLayout={(e) => {
-								const h = e.nativeEvent.layout.height;
-								scrollAreaH.value = h;
-								if (bandTop.value === 0) {
-									bandTop.value = h * 0.3;
-									setBandTopJS(h * 0.3);
-								}
-							}}
+							onLayout={(e) => onScrollAreaLayout(e.nativeEvent.layout.height)}
 						>
 							<Animated.ScrollView
 								ref={animScrollRef}
@@ -421,16 +375,14 @@ const AartiView: React.FC = () => {
 											fontSize,
 											paddingTop: focusMode ? bandTopJS : 0,
 										},
-										fontStyle[
-											translate === 'original' ? 'fontOriginal' : 'fontItalic'
-										],
+										getFontStyle(translate),
 									]}
 								>
 									{selectedItem?.body[translate]}
 								</Text>
 								<Text
-									className="text-xs text-center pb-3"
-									style={{ color: colors.text, paddingTop: scrollHeight }}
+									className="text-xs text-center pb-3 text-app-text"
+									style={{ paddingTop: scrollHeight }}
 								>
 									संचित नयनरेखा ठेवण्यासाठी जागा सोडली आहे.
 								</Text>
@@ -442,86 +394,60 @@ const AartiView: React.FC = () => {
 									{/* Dim above band */}
 									<Animated.View
 										pointerEvents="none"
-										style={[
-											{ position: 'absolute', left: 0, right: 0, top: 0 },
-											topDimStyle,
-											{ backgroundColor: colors.background, opacity: 0.88 },
-										]}
+										className="absolute inset-x-0 top-0 bg-app-bg opacity-[0.88]"
+										style={topDimStyle}
 									/>
 
 									{/* Focus band — transparent window with border */}
 									<Animated.View
-										style={[
-											{ position: 'absolute', left: 0, right: 0, borderTopWidth: 1.5, borderBottomWidth: 1.5 },
-											bandContainerStyle,
-											{ borderColor: colors.primary },
-										]}
+										className="absolute inset-x-0 border-app-primary"
+										style={[{ borderTopWidth: 1.5, borderBottomWidth: 1.5 }, bandContainerStyle]}
 										pointerEvents="none"
 									/>
 
 									{/* Dim below band */}
 									<Animated.View
 										pointerEvents="none"
-										style={[
-											{ position: 'absolute', left: 0, right: 0, top: 0 },
-											bottomDimStyle,
-											{
-												bottom: 0,
-												backgroundColor: colors.background,
-												opacity: 0.88,
-											},
-										]}
+										className="absolute inset-x-0 top-0 bottom-0 bg-app-bg opacity-[0.88]"
+										style={bottomDimStyle}
 									/>
 
 									{/* Band controls — below the band */}
 									<Animated.View
-										style={[
-											{ position: 'absolute', left: 0, right: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingTop: 4 },
-											bandControlsStyle,
-										]}
+										className="absolute inset-x-0 flex-row items-center justify-between pt-1"
+										style={bandControlsStyle}
 										pointerEvents="box-none"
 									>
 										{/* Right: line count control */}
 										<View
-											className="flex-row items-center rounded-[20px] px-1.5 py-[3px] mr-2.5 gap-1"
-											style={{
-												borderWidth: 0.5,
-												backgroundColor: colors.surface,
-												borderColor: colors.border,
-											}}
+											className="flex-row items-center rounded-[20px] px-1.5 py-[3px] mr-2.5 gap-1 bg-app-surface border-app-border"
+											style={{ borderWidth: 0.5 }}
 										>
 											<TouchableOpacity
-												onPress={() =>
-													setFocusLineCount((c) => Math.max(1, c - 1))
-												}
+												onPress={decrementLines}
 												className="px-1.5 py-0.5"
-												style={{ opacity: focusLineCount <= 1 ? 0.3 : 1 }}
-												disabled={focusLineCount <= 1}
+												style={{ opacity: canDecrementLines ? 1 : 0.3 }}
+												disabled={!canDecrementLines}
 											>
 												<Text
-													className="text-lg font-bold leading-[22px]"
-													style={{ color: colors.primary }}
+													className="text-lg font-bold leading-[22px] text-app-primary"
 												>
 													−
 												</Text>
 											</TouchableOpacity>
 											<Text
-												className="text-[11px] font-semibold min-w-[18px] text-center"
-												style={{ color: colors.text }}
+												className="text-[11px] font-semibold min-w-[18px] text-center text-app-text"
 											>
 												{focusLineCount}L
 											</Text>
 											<TouchableOpacity
-												onPress={() =>
-													setFocusLineCount((c) => Math.min(6, c + 1))
-												}
+												onPress={incrementLines}
 												className="px-1.5 py-0.5"
-												style={{ opacity: focusLineCount >= 6 ? 0.3 : 1 }}
-												disabled={focusLineCount >= 6}
+												style={{ opacity: canIncrementLines ? 1 : 0.3 }}
+												disabled={!canIncrementLines}
 											>
 												<Text
-													className="text-lg font-bold leading-[22px]"
-													style={{ color: colors.primary }}
+													className="text-lg font-bold leading-[22px] text-app-primary"
 												>
 													+
 												</Text>
@@ -531,8 +457,8 @@ const AartiView: React.FC = () => {
 										<GestureDetector gesture={bandDragGesture}>
 											<View className="py-2.5 px-3.5 justify-center items-center">
 												<Text
-													className="text-xl"
-													style={{ lineHeight: 22, color: colors.primary }}
+													className="text-xl text-app-primary"
+													style={{ lineHeight: 22 }}
 												>
 													⠿
 												</Text>
@@ -546,11 +472,7 @@ const AartiView: React.FC = () => {
 						{/* Speed control bar — only when auto-scrolling */}
 						{autoScroll && (
 							<View
-								className="flex-row items-center justify-center border rounded-[10px] py-0.5 px-3 mb-1.5 gap-4"
-								style={{
-									borderColor: colors.border,
-									backgroundColor: colors.surface,
-								}}
+								className="flex-row items-center justify-center border rounded-[10px] py-0.5 px-3 mb-1.5 gap-4 border-app-border bg-app-surface"
 							>
 								<TouchableOpacity
 									className="px-2 py-0.5"
@@ -560,17 +482,11 @@ const AartiView: React.FC = () => {
 									}
 									disabled={scrollSpeed <= SPEED_MIN}
 								>
-									<Text
-										className="text-[22px] font-bold leading-7"
-										style={{ color: colors.primary }}
-									>
+									<Text className="text-[22px] font-bold leading-7 text-app-primary">
 										−
 									</Text>
 								</TouchableOpacity>
-								<Text
-									className="text-[13px] font-semibold min-w-[60px] text-center"
-									style={{ color: colors.text }}
-								>
+								<Text className="text-[13px] font-semibold min-w-[60px] text-center text-app-text">
 									{scrollSpeed} px/s
 								</Text>
 								<TouchableOpacity
@@ -581,10 +497,7 @@ const AartiView: React.FC = () => {
 									}
 									disabled={scrollSpeed >= SPEED_MAX}
 								>
-									<Text
-										className="text-[22px] font-bold leading-7"
-										style={{ color: colors.primary }}
-									>
+									<Text className="text-[22px] font-bold leading-7 text-app-primary">
 										+
 									</Text>
 								</TouchableOpacity>
@@ -593,12 +506,8 @@ const AartiView: React.FC = () => {
 
 						{/* Bottom action bar */}
 						<View
-							className="flex-row items-center rounded-xl py-1 mb-1.5"
-							style={{
-								borderWidth: 0.5,
-								borderColor: colors.border,
-								backgroundColor: colors.surface,
-							}}
+							className="flex-row items-center rounded-xl py-1 mb-1.5 bg-app-surface border-app-border"
+							style={{ borderWidth: 0.5 }}
 						>
 							<View className="flex-row flex-1 items-center justify-evenly">
 								<IconBtn
@@ -625,10 +534,7 @@ const AartiView: React.FC = () => {
 									iconColor={colors.text}
 									onPress={() => fontSize > 15 && setFontSize(fontSize - 3)}
 								/>
-								<Text
-									className="text-[13px] font-semibold min-w-6 text-center"
-									style={{ color: colors.text }}
-								>
+								<Text className="text-[13px] font-semibold min-w-6 text-center text-app-text">
 									{fontSize}
 								</Text>
 								<IconBtn
@@ -662,7 +568,7 @@ const AartiView: React.FC = () => {
 									placement="top right"
 									useRNModal
 									offset={4}
-									style={{ backgroundColor: colors.surface }}
+									className="bg-app-surface"
 									closeOnSelect
 								>
 									<MenuItem
@@ -682,9 +588,9 @@ const AartiView: React.FC = () => {
 											}
 											size={18}
 											color={colors.text}
-											style={{ marginRight: 12 }}
+											className="mr-3"
 										/>
-										<MenuItemLabel style={{ color: colors.text }}>
+										<MenuItemLabel className="text-app-text">
 											{translate === 'original'
 												? 'Transliteration'
 												: 'Original'}
@@ -702,9 +608,9 @@ const AartiView: React.FC = () => {
 											name="pencil-outline"
 											size={18}
 											color={colors.text}
-											style={{ marginRight: 12 }}
+											className="mr-3"
 										/>
-										<MenuItemLabel style={{ color: colors.text }}>
+										<MenuItemLabel className="text-app-text">
 											Edit
 										</MenuItemLabel>
 									</MenuItem>
@@ -717,9 +623,9 @@ const AartiView: React.FC = () => {
 											name="delete-outline"
 											size={18}
 											color={colors.accent}
-											style={{ marginRight: 12 }}
+											className="mr-3"
 										/>
-										<MenuItemLabel style={{ color: colors.accent }}>
+										<MenuItemLabel className="text-app-accent">
 											Delete
 										</MenuItemLabel>
 									</MenuItem>
@@ -730,23 +636,17 @@ const AartiView: React.FC = () => {
 						{aartis.length > 1 && (
 							<View className="flex-row justify-between items-center pb-2">
 								<Text
-									className="text-xs"
-									style={{
-										color: colors.border,
-										opacity: displayIndex > 0 ? 1 : 0,
-									}}
+									className="text-xs text-app-border"
+									style={{ opacity: displayIndex > 0 ? 1 : 0 }}
 								>
 									‹ prev
 								</Text>
-								<Text className="text-xs" style={{ color: colors.border }}>
+								<Text className="text-xs text-app-border">
 									{displayIndex + 1} / {aartis.length}
 								</Text>
 								<Text
-									className="text-xs"
-									style={{
-										color: colors.border,
-										opacity: displayIndex < aartis.length - 1 ? 1 : 0,
-									}}
+									className="text-xs text-app-border"
+									style={{ opacity: displayIndex < aartis.length - 1 ? 1 : 0 }}
 								>
 									next ›
 								</Text>

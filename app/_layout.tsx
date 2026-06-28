@@ -6,6 +6,7 @@ import {
 	useDataStoreActions,
 	useUIStoreActions,
 } from '../store/store';
+import { useAppTheme } from '../shared/types';
 import { SplashScreen, Stack, router } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { BackHandler } from 'react-native';
@@ -20,6 +21,7 @@ export default function RootLayout() {
 		Roboto_400Regular_Italic,
 	});
 
+	const { colors } = useAppTheme();
 	const aartis = useDataStore((s) => s.aartis);
 	const showSearch = useDataStore((s) => s.showSearch);
 	const displayMode = useDataStore((s) => s.displayMode);
@@ -81,11 +83,12 @@ export default function RootLayout() {
 
 	return (
 		<GluestackUIProvider mode={displayMode === 'dark' ? 'dark' : 'light'}>
-			<GestureHandlerRootView style={{ flex: 1 }}>
+			<GestureHandlerRootView className="flex-1" >
 				<Stack
 					screenOptions={{
 						statusBarStyle: displayMode === 'dark' ? 'light' : 'dark',
 						headerShown: false,
+						contentStyle: { backgroundColor: colors.background },
 					}}
 				>
 					<Stack.Screen name="(app)" />

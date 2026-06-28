@@ -1,20 +1,14 @@
 import React from "react";
 import { FlatList, Text, View } from "react-native";
 import SingleItem from "../../../components/SingleItem";
-import { globalStyle } from "../../../shared/styles";
-import { useDataStore } from "../../../store/store";
-import { useFilteredAartis } from "../../../hooks/useFilteredAartis";
+import { useRecentAartis } from "../../../hooks/useFilteredAartis";
 
 const Recent: React.FC = () => {
-	const aartis = useDataStore((s) => s.aartis);
-	const searchValue = useDataStore((s) => s.searchValue);
-	const recentlyViewed = useDataStore((s) => s.recentlyViewed);
-
-	const filteredAartis = useFilteredAartis(aartis, searchValue, undefined, recentlyViewed);
+	const filteredAartis = useRecentAartis();
 
 	return (
-		<View className="bg-app-bg" style={globalStyle.homeRoot}>
-			<View style={globalStyle.homecontainer}>
+		<View className="bg-app-bg flex-grow h-full">
+			<View className="m-5 mt-0 mb-0 flex-1">
 				{filteredAartis.length > 0 ? (
 					<FlatList
 						data={filteredAartis}

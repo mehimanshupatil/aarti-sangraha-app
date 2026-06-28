@@ -9,7 +9,6 @@ import {
 	View,
 } from "react-native";
 import { Stack, router, useLocalSearchParams } from "expo-router";
-import { globalStyle } from "../../../shared/styles";
 import { singleItemType, useAppTheme } from "../../../shared/types";
 import { useDataStore, useDataStoreActions } from "../../../store/store";
 
@@ -86,7 +85,7 @@ const AddNew: React.FC = () => {
 					headerShown: true,
 				}}
 			/>
-			<ScrollView style={globalStyle.homecontainer} keyboardShouldPersistTaps="handled">
+			<ScrollView className="mx-5 flex-1" keyboardShouldPersistTaps="handled">
 				<TextInput
 					placeholderTextColor={colors.primary}
 					className="mt-5 text-[20px] rounded-[5px] border p-[10px] border-app-primary text-app-primary bg-app-bg"

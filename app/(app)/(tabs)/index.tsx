@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import clsx from 'clsx';
 import {
 	FlatList,
 	ScrollView,
@@ -11,27 +12,14 @@ import IconBtn from '../../../components/ui/IconBtn';
 import { router } from 'expo-router';
 import Head from 'expo-router/head';
 import SingleItem from '../../../components/SingleItem';
-import { spacing } from '../../../shared/styles';
 import { useAppTheme } from '../../../shared/types';
 import { useDataStore, useUIStoreActions } from '../../../store/store';
-import { useFilteredAartis } from '../../../hooks/useFilteredAartis';
+import { useAartiList } from '../../../hooks/useFilteredAartis';
+import { getDailyAarti, getDeity } from '../../../shared/aarti';
+import { DEITY_LABELS } from '../../../shared/const';
 import type { SortOrder } from '../../../store/store';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const DEITY_LABELS: Record<string, string> = {
-	ganesh: 'गणपती',
-	shiva: 'शिव',
-	vishnu: 'विष्णू',
-	hanuman: 'हनुमान',
-	devi: 'देवी',
-	lakshmi: 'लक्ष्मी',
-	dattatreya: 'दत्तात्रेय',
-	vitthala: 'विठ्ठल',
-	saibaba: 'साई बाबा',
-	ram: 'राम',
-	sant: 'संत',
-	general: 'सर्व',
-};
 
 const Home: React.FC = () => {
 	const { colors } = useAppTheme();
@@ -45,20 +33,15 @@ const Home: React.FC = () => {
 	const deities = useMemo(() => {
 		const set = new Set<string>();
 		aartis.forEach((x) => {
-			const d = (x as { deity?: string }).deity;
+			const d = getDeity(x);
 			if (d) set.add(d);
 		});
 		return [...set];
 	}, [aartis]);
 
-	// Deterministic aarti of the day
-	const todayAarti = useMemo(() => {
-		const start = new Date(new Date().getFullYear(), 0, 0).getTime();
-		const dayOfYear = Math.floor((Date.now() - start) / 86_400_000);
-		return aartis[dayOfYear % aartis.length];
-	}, [aartis]);
+	const todayAarti = getDailyAarti(aartis);
 
-	const filteredAartis = useFilteredAartis(aartis, searchValue);
+	const filteredAartis = useAartiList();
 
 	const sortLabels: Record<SortOrder, string> = {
 		default: 'Default',
@@ -97,51 +80,23 @@ const Home: React.FC = () => {
 					<ScrollView
 						horizontal
 						showsHorizontalScrollIndicator={false}
-						contentContainerStyle={{ gap: spacing.sm, paddingRight: spacing.sm, paddingVertical: spacing.sm }}
+						contentContainerClassName="gap-2 pr-2 py-2"
 					>
 						<TouchableOpacity
-							style={{
-								backgroundColor:
-									selectedDeity === null ? colors.primary : colors.surface,
-								borderColor: colors.primary,
-							}}
-							className="px-[14px] py-[6px] rounded-[20px] border"
+							className={clsx('px-[14px] py-[6px] rounded-[20px] border border-app-primary', selectedDeity === null ? 'bg-app-primary' : 'bg-app-surface')}
 							onPress={() => setSelectedDeity(null)}
 						>
-							<Text
-								style={{
-									color:
-										selectedDeity === null
-											? colors.background
-											: colors.primary,
-								}}
-								className="text-[13px] font-semibold"
-							>
+							<Text className={clsx('text-[13px] font-semibold', selectedDeity === null ? 'text-app-bg' : 'text-app-primary')}>
 								सर्व
 							</Text>
 						</TouchableOpacity>
 						{deities.map((deity) => (
 							<TouchableOpacity
 								key={deity}
-								style={{
-									backgroundColor:
-										selectedDeity === deity ? colors.primary : colors.surface,
-									borderColor: colors.primary,
-								}}
-								className="px-[14px] py-[6px] rounded-[20px] border"
-								onPress={() =>
-									setSelectedDeity(selectedDeity === deity ? null : deity)
-								}
+								className={clsx('px-[14px] py-[6px] rounded-[20px] border border-app-primary', selectedDeity === deity ? 'bg-app-primary' : 'bg-app-surface')}
+								onPress={() => setSelectedDeity(selectedDeity === deity ? null : deity)}
 							>
-								<Text
-									style={{
-										color:
-											selectedDeity === deity
-												? colors.background
-												: colors.primary,
-									}}
-									className="text-[13px] font-semibold"
-								>
+								<Text className={clsx('text-[13px] font-semibold', selectedDeity === deity ? 'text-app-bg' : 'text-app-primary')}>
 									{DEITY_LABELS[deity] ?? deity}
 								</Text>
 							</TouchableOpacity>
@@ -157,7 +112,7 @@ const Home: React.FC = () => {
 								iconColor={
 									sortOrder !== 'default' ? colors.accent : colors.text
 								}
-								style={{ marginRight: 4 }}
+								className="mr-1"
 							/>
 						)}
 						placement="bottom right"
@@ -177,7 +132,7 @@ const Home: React.FC = () => {
 										name="check"
 										size={18}
 										color={colors.accent}
-										style={{ marginRight: 12 }}
+										className="mr-3"
 									/>
 								)}
 								<MenuItemLabel className="text-app-text">

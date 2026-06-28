@@ -2,7 +2,7 @@ import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { singleItemType, useAppTheme } from '../shared/types';
 import { useDataStore, useDataStoreActions } from '../store/store';
-import { fontStyle } from '../shared/styles';
+import { getFontStyle } from '../shared/styles';
 import { router } from 'expo-router';
 import IconBtn from './ui/IconBtn';
 
@@ -35,7 +35,7 @@ const SingleItem: React.FC<{
 						<Text
 							className="text-app-text flex-1 flex-wrap text-[30px]"
 							style={[
-								fontStyle[translate === 'original' ? 'fontOriginal' : 'fontItalic'],
+								getFontStyle(translate),
 							]}
 							ellipsizeMode="tail"
 							numberOfLines={1}
@@ -53,7 +53,7 @@ const SingleItem: React.FC<{
 						<Text
 							className="text-app-text flex-1"
 							style={[
-								fontStyle[translate === 'original' ? 'fontOriginal' : 'fontItalic'],
+								getFontStyle(translate),
 							]}
 							ellipsizeMode="tail"
 							numberOfLines={1}

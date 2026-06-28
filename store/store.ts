@@ -5,6 +5,7 @@ import { useShallow } from "zustand/shallow";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ColorSchemeName } from "react-native";
 import { singleItemType } from "../shared/types";
+import { type ThemeId, DEFAULT_THEME } from "../shared/themes";
 import data from "./data";
 
 export type TextDisplayType = "original" | "transliteration";
@@ -39,6 +40,8 @@ interface UISlice {
 	setSelectedDeity: (deity: string | null) => void;
 	sortOrder: SortOrder;
 	setSortOrder: (order: SortOrder) => void;
+	selectedTheme: ThemeId;
+	setSelectedTheme: (theme: ThemeId) => void;
 }
 
 type DataState = DataSlice & UISlice;
@@ -92,6 +95,7 @@ export const useDataStore = create<DataState>()(
 				translate: "original" as TextDisplayType,
 				selectedDeity: null,
 				sortOrder: "default" as SortOrder,
+				selectedTheme: DEFAULT_THEME,
 				setDisplayMode: (mode) =>
 					set((state) => {
 						state.displayMode = mode;
@@ -119,6 +123,10 @@ export const useDataStore = create<DataState>()(
 				setSortOrder: (order) =>
 					set((state) => {
 						state.sortOrder = order;
+					}),
+				setSelectedTheme: (theme) =>
+					set((state) => {
+						state.selectedTheme = theme;
 					}),
 			})),
 			{
@@ -153,5 +161,6 @@ export const useUIStoreActions = () =>
 			setTranslate: s.setTranslate,
 			setSelectedDeity: s.setSelectedDeity,
 			setSortOrder: s.setSortOrder,
+			setSelectedTheme: s.setSelectedTheme,
 		})),
 	);

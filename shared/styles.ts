@@ -14,19 +14,6 @@ export const radius = {
 	lg: 10,
 } as const;
 
-export const globalStyle = StyleSheet.create({
-	homeRoot: {
-		flexGrow: 1,
-		height: "100%",
-	},
-	homecontainer: {
-		margin: spacing.lg,
-		marginTop: 0,
-		marginBottom: 0,
-		flex: 1,
-	},
-});
-
 export const fontStyle = StyleSheet.create({
 	fontOriginal: {
 		fontFamily: "nono_devanagari",
@@ -39,3 +26,7 @@ export const fontStyle = StyleSheet.create({
 
 /** Padding reset for icon buttons */
 export const iconButtonReset = { padding: 6 } as const;
+
+export function getFontStyle(translate: 'original' | 'transliteration') {
+	return fontStyle[translate === 'original' ? 'fontOriginal' : 'fontItalic'];
+}

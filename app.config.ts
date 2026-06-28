@@ -53,7 +53,8 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     ],
     "experiments": {
       "typedRoutes": true,
-      "baseUrl": ""
+      "baseUrl": "",
+      "reactCompiler": true
     }
   })
 };

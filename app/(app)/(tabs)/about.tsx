@@ -10,8 +10,7 @@ const About: React.FC = () => {
 
 	return (
 		<ScrollView
-			contentContainerStyle={{ flexGrow: 1, justifyContent: "space-between", padding: 20 }}
-			className="bg-app-bg"
+			contentContainerClassName="flex-grow justify-between p-5 bg-app-bg"
 		>
 			<View className="flex-1">
 				<Text className="text-app-text text-[20px]">

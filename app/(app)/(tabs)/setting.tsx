@@ -15,16 +15,21 @@ import * as Clipboard from 'expo-clipboard';
 import { useAppTheme } from '../../../shared/types';
 import { useDataStore, useDataStoreActions, useUIStoreActions } from '../../../store/store';
 import { shareApp } from '../../../shared/helper';
+import { themes } from '../../../shared/themes';
+import type { ThemeId } from '../../../shared/themes';
 
 const Setting: React.FC = () => {
 	const { colors } = useAppTheme();
 	const displayMode = useDataStore((s) => s.displayMode);
+	const selectedTheme = useDataStore((s) => s.selectedTheme);
 	const aartis = useDataStore((s) => s.aartis);
 	const { initializeAarti, addAarti } = useDataStoreActions();
-	const { setDisplayMode } = useUIStoreActions();
+	const { setDisplayMode, setSelectedTheme } = useUIStoreActions();
 
 	const [importVisible, setImportVisible] = useState(false);
 	const [importText, setImportText] = useState('');
+
+	const isDark = displayMode === 'dark';
 
 	const reset = () => {
 		Alert.alert(
@@ -79,19 +84,77 @@ const Setting: React.FC = () => {
 
 	return (
 		<>
-			<ScrollView
-				contentContainerClassName="flex-grow p-5 gap-3 bg-app-bg"
-			>
+			<ScrollView contentContainerClassName=" p-5 gap-3 bg-app-bg">
+
+				{/* ── Theme picker ── */}
+				<Text className="text-xs font-semibold uppercase tracking-widest text-app-border mb-1">
+					Color Theme
+				</Text>
+				<ScrollView
+					horizontal
+					showsHorizontalScrollIndicator={false}
+					className="mb-1" 
+				>
+					<View className="flex-row gap-4 pb-1 items-start">
+						{(Object.keys(themes) as ThemeId[]).map((id) => {
+							const t = themes[id];
+							const c = isDark ? t.dark : t.light;
+							const isSelected = selectedTheme === id;
+							return (
+								<Pressable
+									key={id}
+									onPress={() => setSelectedTheme(id)}
+									className="items-center gap-1.5"
+									style={{ width: 64 }}
+								>
+									{/* Split swatch: left = primary, right = accent */}
+									<View
+										style={{
+											width: 52,
+											height: 52,
+											borderRadius: 26,
+											overflow: 'hidden',
+											borderWidth: isSelected ? 3 : 1.5,
+											borderColor: isSelected ? colors.text : colors.border,
+										}}
+									>
+										<View style={{ flex: 1, flexDirection: 'row' }}>
+											<View style={{ flex: 1, backgroundColor: c.primary }} />
+											<View style={{ flex: 1, backgroundColor: c.accent }} />
+										</View>
+									</View>
+									<Text
+										className="text-center"
+										style={{ fontSize: 10, color: isSelected ? colors.primary : colors.text, fontWeight: isSelected ? '700' : '400' }}
+										numberOfLines={2}
+									>
+										{t.name}
+									</Text>
+								</Pressable>
+							);
+						})}
+					</View>
+				</ScrollView>
+
+				{/* ── Other settings ── */}
+				<Text className="text-xs font-semibold uppercase tracking-widest text-app-border mb-1 mt-2">
+					Display
+				</Text>
+
 				<Pressable
 					className="flex-row items-center gap-3 py-[14px] px-4 border rounded-[10px] border-app-border"
-					onPress={() => setDisplayMode(displayMode === 'light' ? 'dark' : 'light')}
+					onPress={() => setDisplayMode(isDark ? 'light' : 'dark')}
 					android_ripple={{ color: `${colors.primary}22` }}
 				>
 					<MaterialCommunityIcons name="theme-light-dark" color={colors.primary} size={24} />
 					<Text className="text-base text-app-text">
-						{displayMode === 'light' ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
+						{isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
 					</Text>
 				</Pressable>
+
+				<Text className="text-xs font-semibold uppercase tracking-widest text-app-border mb-1 mt-2">
+					Data
+				</Text>
 
 				<Pressable
 					className="flex-row items-center gap-3 py-[14px] px-4 border rounded-[10px] border-app-border"
@@ -126,9 +189,7 @@ const Setting: React.FC = () => {
 					android_ripple={{ color: `${colors.accent}22` }}
 				>
 					<MaterialCommunityIcons name="delete-forever" color={colors.accent} size={24} />
-					<Text className="text-base text-app-accent">
-						Reset customised data
-					</Text>
+					<Text className="text-base text-app-accent">Reset customised data</Text>
 				</Pressable>
 			</ScrollView>
 
