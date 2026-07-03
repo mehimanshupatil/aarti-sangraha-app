@@ -6,9 +6,9 @@ export default ({ config }: ConfigContext): ExpoConfig => {
   return ({
     ...config,
     "name": "आरती संग्रह",
-    "slug": "aartisangraha", 
+    "slug": "aartisangraha",
     "scheme": "aartisangraha",
-    "version": "1.0.0", 
+    "version": "1.0.0",
     "orientation": "default",
     "userInterfaceStyle": "automatic",
     "icon": "./assets/icon.png",
@@ -23,7 +23,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     "android": {
       "package": "com.mehimanshupatil.aartisangraha",
-      "versionCode": 18,
+      "versionCode": 19,
       "permissions": [],
       "userInterfaceStyle": "automatic",
       "splash": {
