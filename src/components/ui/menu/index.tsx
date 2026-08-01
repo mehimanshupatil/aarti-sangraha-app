@@ -2,7 +2,7 @@
 import React from 'react';
 import { createMenu } from '@gluestack-ui/core/menu/creator';
 import { tva } from '@gluestack-ui/utils/nativewind-utils';
-import { cssInterop } from 'nativewind';
+import { cssInterop } from 'react-native-css-interop';
 import { Pressable, Text, View, ViewStyle } from 'react-native';
 import {
 	Motion,
@@ -17,25 +17,23 @@ type IMotionViewProps = React.ComponentProps<typeof View> &
 const MotionView = Motion.View as React.ComponentType<IMotionViewProps>;
 
 const menuStyle = tva({
-	base: 'rounded-md bg-background-0 border border-outline-100 p-1 shadow-hard-5',
+	base: 'rounded-md bg-card border border-border p-1 shadow-md',
 });
 
 const menuItemStyle = tva({
-	base: 'min-w-[200px] p-3 flex-row items-center rounded data-[hover=true]:bg-background-50 data-[active=true]:bg-background-100 data-[focus=true]:bg-background-50 data-[focus=true]:web:outline-none data-[focus=true]:web:outline-0 data-[disabled=true]:opacity-40 data-[disabled=true]:web:cursor-not-allowed data-[focus-visible=true]:web:outline-2 data-[focus-visible=true]:web:outline-primary-700 data-[focus-visible=true]:web:outline data-[focus-visible=true]:web:cursor-pointer data-[disabled=true]:data-[focus=true]:bg-transparent',
+	base: 'min-w-[200px] p-3 flex-row items-center rounded data-[hover=true]:bg-muted data-[active=true]:bg-secondary data-[focus=true]:bg-muted data-[focus=true]:web:outline-none data-[focus=true]:web:outline-0 data-[disabled=true]:opacity-40 data-[disabled=true]:web:cursor-not-allowed data-[focus-visible=true]:web:outline-2 data-[focus-visible=true]:web:outline-primary data-[focus-visible=true]:web:outline data-[focus-visible=true]:web:cursor-pointer data-[disabled=true]:data-[focus=true]:bg-transparent',
 });
 
 const menuBackdropStyle = tva({
 	base: 'absolute top-0 bottom-0 left-0 right-0 web:cursor-default',
-	// add this classnames if you want to give background color to backdrop
-	// opacity-50 bg-background-500,
 });
 
 const menuSeparatorStyle = tva({
-	base: 'bg-background-200 h-px w-full',
+	base: 'bg-border h-px w-full',
 });
 
 const menuItemLabelStyle = tva({
-	base: 'text-typography-700 font-normal font-body',
+	base: 'text-foreground font-normal',
 
 	variants: {
 		isTruncated: {

@@ -2,6 +2,8 @@
 
 Expo Router app (CNG — no `ios/` or `android/` dirs). Static web export deployed to GitHub Pages. Single developer.
 
+All app code lives under `src/` (`src/app`, `src/components`, `src/store`, `src/shared`, `src/hooks`). `assets/`, `public/`, and config files stay at repo root. The `@/*` path alias resolves to `src/*`.
+
 ## Commands
 
 ```bash
@@ -24,7 +26,7 @@ npx expo-doctor     # check dependency health
 
 ## Architecture
 
-### Store (`store/store.ts`)
+### Store (`src/store/store.ts`)
 
 Single Zustand store with two slices:
 
@@ -43,14 +45,14 @@ Action hooks use `useShallow` to prevent re-renders on unrelated mutations.
 
 ### Data flow
 
-Static aarti data lives in `store/data.ts`. On first launch, `initializeAarti()` loads it into the store. User-added aartis are stored in the same array with keys prefixed `custom-{timestamp}`. The `useFilteredAartis()` hook applies deity/sort/search filters — use it on list screens instead of filtering inline.
+Static aarti data lives in `src/store/data.ts`. On first launch, `initializeAarti()` loads it into the store. User-added aartis are stored in the same array with keys prefixed `custom-{timestamp}`. The `useFilteredAartis()` hook applies deity/sort/search filters — use it on list screens instead of filtering inline.
 
 ### Routing
 
-File-based. Structure:
+File-based, rooted at `src/app` (Expo Router auto-detects `src/app` over root-level `app/`). Structure:
 
 ```
-app/
+src/app/
   _layout.tsx               root layout (fonts, GestureHandler, GluestackUI)
   (app)/
     _layout.tsx             Stack navigator (slide_from_right)
@@ -69,11 +71,11 @@ New screen = new `.tsx` file in the right subfolder. Expo Router picks it up aut
 
 ### Styling
 
-NativeWind classes for everything. `StyleSheet.create` only for animated styles and shadows. Custom theme tokens are CSS variables defined in `components/ui/gluestack-ui-provider/config.ts` — use `bg-app-primary`, `text-app-text`, etc.
+NativeWind classes for everything. `StyleSheet.create` only for animated styles and shadows. Custom theme tokens are CSS variables defined in `src/components/ui/gluestack-ui-provider/config.ts` — use `bg-app-primary`, `text-app-text`, etc.
 
-Shared spacing/radius constants: `shared/styles.ts` (`spacing.md = 16`, `radius.lg = 10`).
+Shared spacing/radius constants: `src/shared/styles.ts` (`spacing.md = 16`, `radius.lg = 10`).
 
-For colors in JS (e.g. animated borders): use `useAppTheme()` from `shared/types.ts`.
+For colors in JS (e.g. animated borders): use `useAppTheme()` from `src/shared/types.ts`.
 
 ## Non-obvious workarounds — do not remove without understanding
 
@@ -94,11 +96,11 @@ scheduleOnRN(setStateFn, value); // call React state setters from worklets
 
 NativeWind depends on it but pnpm doesn't hoist it automatically. It's listed as a direct dependency so Metro can resolve `react-native-css-interop/jsx-runtime`. Don't remove it.
 
-### Animated auto-scroll (`aarti-view/[slug].tsx`)
+### Animated auto-scroll (`src/app/(app)/aarti-view/[slug].tsx`)
 
 Auto-scroll uses Reanimated shared values + `scrollTo()` on the UI thread — no `setTimeout`, no JS bridge. `useAnimatedReaction` drives scroll position; `scheduleOnRN` bridges back to React state when scroll ends.
 
-### Back button double-tap (`app/_layout.tsx`)
+### Back button double-tap (`src/app/_layout.tsx`)
 
 Android back press is ref-tracked (not state) to avoid stale closures. First press closes search or pops stack; second press within 2s exits app. The ref stores search visibility — don't convert to state.
 

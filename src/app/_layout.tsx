@@ -17,7 +17,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
 	const [fontsLoaded, fontError] = useFonts({
-		nono_devanagari: require('../assets/fonts/NotoSansDevanagari.ttf'),
+		nono_devanagari: require('../../assets/fonts/NotoSansDevanagari.ttf'),
 		Roboto_400Regular_Italic,
 	});
 

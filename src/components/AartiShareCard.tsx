@@ -24,7 +24,7 @@ const AartiShareCard = forwardRef<View, Props>(({ item }, ref) => {
 			{/* Header */}
 			<View style={[styles.header, { backgroundColor: colors.primary }]}>
 				<Image
-					source={require("../assets/icon.png")}
+					source={require("../../assets/icon.png")}
 					style={[styles.logo, { borderColor: colors.accent }]}
 					resizeMode="contain"
 				/>

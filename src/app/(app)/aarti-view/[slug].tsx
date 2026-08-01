@@ -1,3 +1,8 @@
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useKeepAwake } from 'expo-keep-awake';
+import { router, Stack, useLocalSearchParams } from 'expo-router';
+import Head from 'expo-router/head';
+import * as Sharing from 'expo-sharing';
 import React, { useEffect, useRef, useState } from 'react';
 import {
 	Alert,
@@ -7,16 +12,10 @@ import {
 	TouchableOpacity,
 	View,
 } from 'react-native';
-import { Stack, router, useLocalSearchParams } from 'expo-router';
-import Head from 'expo-router/head';
-import { Menu, MenuItem, MenuItemLabel } from '../../../components/ui/menu';
-import IconBtn from '../../../components/ui/IconBtn';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useKeepAwake } from 'expo-keep-awake';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
-	Easing,
 	cancelAnimation,
+	Easing,
 	scrollTo,
 	useAnimatedReaction,
 	useAnimatedRef,
@@ -26,20 +25,21 @@ import Animated, {
 	withTiming,
 } from 'react-native-reanimated';
 import { captureRef } from 'react-native-view-shot';
-import * as Sharing from 'expo-sharing';
+import { scheduleOnRN } from 'react-native-worklets';
+import AartiShareCard from '../../../components/AartiShareCard';
+import IconBtn from '../../../components/ui/IconBtn';
+import { Menu, MenuItem, MenuItemLabel } from '../../../components/ui/menu';
+import { useFocusBand } from '../../../hooks/useFocusBand';
+import { findAartiBySlug } from '../../../shared/aarti';
+import { shareAarti } from '../../../shared/helper';
+import { getFontStyle, iconButtonReset } from '../../../shared/styles';
 import { singleItemType, useAppTheme } from '../../../shared/types';
+import data from '../../../store/data';
 import {
 	useDataStore,
 	useDataStoreActions,
 	useUIStoreActions,
 } from '../../../store/store';
-import { shareAarti } from '../../../shared/helper';
-import { getFontStyle, iconButtonReset } from '../../../shared/styles';
-import { findAartiBySlug } from '../../../shared/aarti';
-import data from '../../../store/data';
-import AartiShareCard from '../../../components/AartiShareCard';
-import { scheduleOnRN } from 'react-native-worklets';
-import { useFocusBand } from '../../../hooks/useFocusBand';
 
 export async function generateStaticParams(): Promise<
 	Record<string, string>[]
@@ -142,10 +142,10 @@ const AartiView: React.FC = () => {
 
 	const animatedStyle = useAnimatedStyle(() => ({
 		transform: [{ translateX: translateX.value }],
-		flex: 1, 
+		flex: 1,
 		paddingTop: 8,
 		paddingLeft: 20,
-		paddingRight: 20
+		paddingRight: 20,
 	}));
 
 	const updateIndex = (newIndex: number) => {
@@ -330,18 +330,12 @@ const AartiView: React.FC = () => {
 						style={{ left: -9999 }}
 						pointerEvents="none"
 					>
-						<AartiShareCard
-							ref={shareCardRef}
-							item={selectedItem}
-						/>
+						<AartiShareCard ref={shareCardRef} item={selectedItem} />
 					</View>
 				)}
 
 				<GestureDetector gesture={swipeGesture}>
-					<Animated.View
-						className="pt-2 px-5 h-full"
-						style={animatedStyle}
-					>
+					<Animated.View className="pt-2 px-5 h-full" style={animatedStyle}>
 						{/* Scroll area */}
 						<View
 							className="flex-1"
@@ -401,7 +395,10 @@ const AartiView: React.FC = () => {
 									{/* Focus band — transparent window with border */}
 									<Animated.View
 										className="absolute inset-x-0 border-app-primary"
-										style={[{ borderTopWidth: 1.5, borderBottomWidth: 1.5 }, bandContainerStyle]}
+										style={[
+											{ borderTopWidth: 1.5, borderBottomWidth: 1.5 },
+											bandContainerStyle,
+										]}
 										pointerEvents="none"
 									/>
 
@@ -429,15 +426,11 @@ const AartiView: React.FC = () => {
 												style={{ opacity: canDecrementLines ? 1 : 0.3 }}
 												disabled={!canDecrementLines}
 											>
-												<Text
-													className="text-lg font-bold leading-[22px] text-app-primary"
-												>
+												<Text className="text-lg font-bold leading-[22px] text-app-primary">
 													−
 												</Text>
 											</TouchableOpacity>
-											<Text
-												className="text-[11px] font-semibold min-w-[18px] text-center text-app-text"
-											>
+											<Text className="text-[11px] font-semibold min-w-[18px] text-center text-app-text">
 												{focusLineCount}L
 											</Text>
 											<TouchableOpacity
@@ -446,9 +439,7 @@ const AartiView: React.FC = () => {
 												style={{ opacity: canIncrementLines ? 1 : 0.3 }}
 												disabled={!canIncrementLines}
 											>
-												<Text
-													className="text-lg font-bold leading-[22px] text-app-primary"
-												>
+												<Text className="text-lg font-bold leading-[22px] text-app-primary">
 													+
 												</Text>
 											</TouchableOpacity>
@@ -471,9 +462,7 @@ const AartiView: React.FC = () => {
 
 						{/* Speed control bar — only when auto-scrolling */}
 						{autoScroll && (
-							<View
-								className="flex-row items-center justify-center border rounded-[10px] py-0.5 px-3 mb-1.5 gap-4 border-app-border bg-app-surface"
-							>
+							<View className="flex-row items-center justify-center border rounded-[10px] py-0.5 px-3 mb-1.5 gap-4 border-app-border bg-app-surface">
 								<TouchableOpacity
 									className="px-2 py-0.5"
 									style={{ opacity: scrollSpeed <= SPEED_MIN ? 0.3 : 1 }}

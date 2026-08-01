@@ -23,9 +23,10 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     "android": {
       "package": "com.mehimanshupatil.aartisangraha",
-      "versionCode": 19,
+      "versionCode": 20,
       "permissions": [],
       "userInterfaceStyle": "automatic",
+      // @ts-expect-error android.splash removed from types in SDK 57, still valid for EAS builds
       "splash": {
         "ldpi": "./assets/splash/drawable-ldpi.png",
         "mdpi": "./assets/splash/drawable-mdpi.png",

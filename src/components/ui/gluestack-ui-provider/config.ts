@@ -5,13 +5,13 @@ import { hexToRgb } from '../../../shared/colors';
 
 function makeVars(c: AppColors) {
 	return vars({
-		'--color-app-primary':    hexToRgb(c.primary),
-		'--color-app-on-primary': hexToRgb(c.onPrimary),
-		'--color-app-text':       hexToRgb(c.text),
-		'--color-app-accent':     hexToRgb(c.accent),
-		'--color-app-bg':         hexToRgb(c.background),
-		'--color-app-surface':    hexToRgb(c.surface),
-		'--color-app-border':     hexToRgb(c.border),
+		'--app-primary':    hexToRgb(c.primary),
+		'--app-on-primary': hexToRgb(c.onPrimary),
+		'--app-text':       hexToRgb(c.text),
+		'--app-accent':     hexToRgb(c.accent),
+		'--app-bg':         hexToRgb(c.background),
+		'--app-surface':    hexToRgb(c.surface),
+		'--app-border':     hexToRgb(c.border),
 	});
 }
 

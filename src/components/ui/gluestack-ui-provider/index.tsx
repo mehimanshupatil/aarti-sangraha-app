@@ -21,7 +21,7 @@ export function GluestackUIProvider({
   const selectedTheme = useDataStore((s) => s.selectedTheme);
 
   useEffect(() => {
-    setColorScheme(mode);
+    setColorScheme(mode === 'system' ? 'unspecified' : mode);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode]);
 
@@ -33,7 +33,7 @@ export function GluestackUIProvider({
   return (
     <View
       style={[
-        themeConfig[colorScheme!],
+        themeConfig[colorScheme === 'unspecified' ? 'light' : colorScheme],
         { flex: 1, height: '100%', width: '100%' },
         props.style,
       ]}

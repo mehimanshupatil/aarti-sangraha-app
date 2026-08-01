@@ -8,10 +8,11 @@
 	"files": {
 		"ignoreUnknown": false,
 		"includes": [
-			"app/**/*",
-			"components/**/*",
-			"store/**/*",
-			"shared/**/*"
+			"src/app/**/*",
+			"src/components/**/*",
+			"src/store/**/*",
+			"src/shared/**/*",
+			"src/hooks/**/*"
 		]
 	},
 	"formatter": {
