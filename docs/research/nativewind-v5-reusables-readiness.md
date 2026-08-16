@@ -77,3 +77,15 @@ Checked https://reactnativereusables.com/docs/installation and https://reactnati
 2. **react-native-reusables has not officially adopted NativeWind v5.** Its own registry and showcase app still pin `nativewind: "^4.2.2"` (v4) as of 2026-08-16. Issue #548, tracking the specific NativeWind-v5 component compatibility gaps, remains **open and unmerged**. Issue #277 (dark/light mode toggle) is **closed via merged PR #295**, but that fix predates and is unrelated to NativeWind v5 — it resolved a v4-era bug, so it does not establish that the v5 dark-mode issue the ADR was tracking has been fixed. The project's own docs installation page does not state a NativeWind version requirement in prose; the package.json declarations are the only verifiable version signal.
 
 Both of the ADR's original blockers — no stable NativeWind v5, and unresolved v5-specific compatibility issues in react-native-reusables (#548 still open) — remain in place as of 2026-08-16.
+
+## Re-check — 2026-08-16 (same-day standing-check re-run)
+
+This is a repeat run of the same standing check, later the same day, to confirm the check is repeatable and to catch same-day changes.
+
+- `npm view nativewind version` → `4.2.6` (unchanged).
+- `npm view nativewind dist-tags --json` → `{"preview":"5.0.0-preview.4","nightly":"0.0.0-nightly.da9e3f1","latest":"4.2.6"}` (unchanged — still no stable non-preview 5.x release).
+- `gh api repos/founded-labs/react-native-reusables/contents/packages/registry/package.json` → `"nativewind": "^4.2.2"` (unchanged).
+- `gh api repos/founded-labs/react-native-reusables/contents/apps/showcase/package.json` → `"nativewind": "^4.2.2"` (unchanged).
+- `gh api repos/founded-labs/react-native-reusables/issues/548` → `state: OPEN`, `updated_at: 2026-07-21T12:00:00Z` (unchanged from the earlier run today — no new activity on the issue).
+
+**Conclusion: no change since the earlier check today.** Nothing to act on; the ADR's deferral decision still stands.
