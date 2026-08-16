@@ -107,3 +107,17 @@ Android back press is ref-tracked (not state) to avoid stale closures. First pre
 ## CI/CD
 
 Push to `master` → GitHub Actions builds `pnpm run web:build` → deploys `dist/` to GitHub Pages automatically.
+
+## Agent skills
+
+### Issue tracker
+
+Issues live in GitHub Issues (mehimanshupatil/aarti-sangraha-app), via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default five canonical labels, used as-is. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context — `CONTEXT.md` + `docs/adr/` at repo root (neither exists yet; created lazily by `/domain-modeling`). See `docs/agents/domain.md`.
