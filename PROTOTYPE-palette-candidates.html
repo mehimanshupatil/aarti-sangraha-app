@@ -1,0 +1,701 @@
+<title>Aarti Sangraha — Palette Candidates</title>
+<style>
+  :root {
+    --chrome-bg: #f4f2ee;
+    --chrome-surface: #ffffff;
+    --chrome-border: #e2ddd3;
+    --chrome-text: #2a2620;
+    --chrome-text-dim: #6b6459;
+    --chrome-accent: #a03d0f;
+    --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --serif: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --chrome-bg: #171613;
+      --chrome-surface: #201e1a;
+      --chrome-border: #35322b;
+      --chrome-text: #e9e4da;
+      --chrome-text-dim: #948c7d;
+      --chrome-accent: #e8955f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --chrome-bg: #171613;
+    --chrome-surface: #201e1a;
+    --chrome-border: #35322b;
+    --chrome-text: #e9e4da;
+    --chrome-text-dim: #948c7d;
+    --chrome-accent: #e8955f;
+  }
+  :root[data-theme="light"] {
+    --chrome-bg: #f4f2ee;
+    --chrome-surface: #ffffff;
+    --chrome-border: #e2ddd3;
+    --chrome-text: #2a2620;
+    --chrome-text-dim: #6b6459;
+    --chrome-accent: #a03d0f;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--chrome-bg);
+    color: var(--chrome-text);
+    font-family: var(--sans);
+    padding: 28px 20px 60px;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+
+  header.page {
+    margin-bottom: 22px;
+  }
+  header.page h1 {
+    font-size: 1.4rem;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  header.page p {
+    margin: 0;
+    color: var(--chrome-text-dim);
+    font-size: 0.92rem;
+    max-width: 66ch;
+    line-height: 1.5;
+  }
+  header.page code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    background: var(--chrome-surface);
+    border: 1px solid var(--chrome-border);
+    padding: 0.1em 0.4em;
+    border-radius: 4px;
+  }
+
+  /* Tab switcher */
+  .switcher {
+    display: flex;
+    gap: 6px;
+    margin: 22px 0 20px;
+    border-bottom: 1px solid var(--chrome-border);
+  }
+  .switcher button {
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    font-weight: 600;
+    background: none;
+    border: none;
+    color: var(--chrome-text-dim);
+    padding: 10px 16px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.15s ease;
+  }
+  .switcher button .sub {
+    display: block;
+    font-weight: 400;
+    font-size: 0.76rem;
+    margin-top: 2px;
+    opacity: 0.85;
+  }
+  .switcher button[aria-selected="true"] {
+    color: var(--chrome-text);
+    border-bottom-color: var(--chrome-accent);
+  }
+  .switcher button:focus-visible {
+    outline: 2px solid var(--chrome-accent);
+    outline-offset: 2px;
+  }
+
+  .variant-panel { display: none; }
+  .variant-panel[data-active="true"] { display: block; }
+
+  .variant-note {
+    font-size: 0.88rem;
+    color: var(--chrome-text-dim);
+    max-width: 72ch;
+    line-height: 1.55;
+    margin: 0 0 18px;
+  }
+
+  .columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+  @media (max-width: 780px) {
+    .columns { grid-template-columns: 1fr; }
+  }
+
+  .mode-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--chrome-text-dim);
+    margin: 0 0 8px;
+  }
+
+  /* --- app mockup --- */
+  .phone {
+    border-radius: 14px;
+    border: 1px solid var(--chrome-border);
+    overflow: hidden;
+    background: var(--app-bg);
+    color: var(--app-text);
+  }
+
+  .app-header {
+    background: var(--app-bg);
+    padding: 16px 16px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--app-border);
+  }
+  .app-title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--app-text);
+  }
+  .app-icon-btn {
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--app-accent);
+    font-size: 1rem;
+  }
+
+  .app-list {
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .app-item {
+    background: var(--app-surface);
+    border: 1px solid var(--app-border);
+    border-radius: 10px;
+    padding: 11px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .app-item-title {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    color: var(--app-text);
+  }
+  .app-item-deity {
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--app-primary);
+    background: color-mix(in srgb, var(--app-primary) 14%, var(--app-surface));
+    padding: 2px 7px;
+    border-radius: 5px;
+    white-space: nowrap;
+  }
+  .app-item-fav { color: var(--app-accent); font-size: 1rem; line-height: 1; }
+  .app-item-fav.inactive { color: var(--app-text); opacity: 0.35; }
+
+  .app-divider {
+    padding: 14px 16px 4px;
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--app-text);
+    opacity: 0.55;
+  }
+
+  .app-reading {
+    padding: 6px 16px 16px;
+  }
+  .app-reading .app-item-title {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .app-reading .body-text {
+    font-family: var(--serif);
+    font-size: 1.02rem;
+    line-height: 1.85;
+    color: var(--app-text);
+  }
+  .app-reading .body-text .stanza { margin: 0 0 10px; }
+
+  .app-actions {
+    display: flex;
+    gap: 10px;
+    padding: 4px 16px 18px;
+    align-items: center;
+  }
+  .app-btn-primary {
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    font-weight: 600;
+    background: var(--app-primary);
+    color: var(--app-on-primary);
+    padding: 8px 14px;
+    border-radius: 8px;
+  }
+  .app-menu-label {
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--app-accent);
+  }
+
+  .app-tabbar {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 8px 12px;
+    border-top: 1px solid var(--app-border);
+    background: var(--app-bg);
+  }
+  .app-tab {
+    font-family: var(--sans);
+    font-size: 0.66rem;
+    color: var(--app-text);
+    opacity: 0.5;
+    text-align: center;
+  }
+  .app-tab.active {
+    color: var(--app-accent);
+    opacity: 1;
+    font-weight: 700;
+  }
+  .app-tab .glyph { display: block; font-size: 1.05rem; margin-bottom: 2px; }
+
+  .app-settings-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-top: 1px solid var(--app-border);
+  }
+  .swatch {
+    width: 22px; height: 22px; border-radius: 6px;
+    background: var(--app-accent);
+    flex-shrink: 0;
+  }
+
+  /* contrast readout */
+  .ratios {
+    margin-top: 12px;
+    border: 1px solid var(--chrome-border);
+    border-radius: 10px;
+    background: var(--chrome-surface);
+    padding: 10px 12px;
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    line-height: 1.9;
+  }
+  .ratios .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .ratios .pass { color: #2f7d3c; font-weight: 700; }
+  .ratios .val { color: var(--chrome-text-dim); }
+  @media (prefers-color-scheme: dark) {
+    .ratios .pass { color: #6fcf7d; }
+  }
+  :root[data-theme="dark"] .ratios .pass { color: #6fcf7d; }
+  :root[data-theme="light"] .ratios .pass { color: #2f7d3c; }
+</style>
+
+<div class="wrap">
+  <header class="page">
+    <h1>Palette candidates — collapsing 8 themes into one light/dark theme</h1>
+    <p>
+      Resolving <code>Design the collapsed light/dark palette (Warm Parchment anchor, WCAG AA)</code>.
+      Three candidates, each shown as light + dark side by side, applied to the app's actual
+      surfaces: header, aarti list with deity tags, a reading view (the long devotional text block
+      this app exists for), and the two real spots that currently render <code>accent</code> as text
+      (Settings → “Reset customised data”, the aarti-view menu label) — the one pair that fails AA
+      in the current Warm Parchment theme at 2.17:1.
+    </p>
+  </header>
+
+  <div class="switcher" role="tablist">
+    <button role="tab" aria-selected="true" data-variant="a">A — Anchored<span class="sub">minimal fix</span></button>
+    <button role="tab" aria-selected="false" data-variant="b">B — Deeper Temple<span class="sub">richer, more separation</span></button>
+    <button role="tab" aria-selected="false" data-variant="c">C — Crisp Manuscript<span class="sub">max reading contrast</span></button>
+  </div>
+
+  <!-- ================= VARIANT A ================= -->
+  <section class="variant-panel" data-active="true" data-variant-panel="a">
+    <p class="variant-note">
+      Closest to today's default. Every value from the current "Warm Parchment" theme is kept
+      exactly — <code>primary #A03D0F</code>, <code>background #FAF4E8</code>, <code>surface #F3EAD5</code>,
+      <code>border #C4A47A</code> unchanged in light; the dark side is untouched too. The only change
+      anywhere is <code>accent</code> in light mode, deepened from <code>#D4A017</code> (2.17:1, fails)
+      to <code>#805C07</code> (5.55:1) so it's usable as text, not just decoration.
+    </p>
+    <div class="columns">
+      <div>
+        <p class="mode-label">Light</p>
+        <div class="phone" style="
+          --app-primary:#A03D0F; --app-on-primary:#FFFBF2; --app-text:#3A2B1A;
+          --app-accent:#805C07; --app-bg:#FAF4E8; --app-surface:#F3EAD5; --app-border:#C4A47A;
+        ">
+          <div class="app-header">
+            <span class="app-title">आरती संग्रह</span>
+            <span class="app-icon-btn">⚲</span>
+          </div>
+          <div class="app-list">
+            <div class="app-item">
+              <span><span class="app-item-title">Sukhakarta Dukhaharta</span><br><span class="app-item-deity">Ganesh</span></span>
+              <span class="app-item-fav">♥</span>
+            </div>
+            <div class="app-item">
+              <span><span class="app-item-title">Om Jai Jagdish Hare</span><br><span class="app-item-deity">Vishnu</span></span>
+              <span class="app-item-fav inactive">♥</span>
+            </div>
+          </div>
+          <div class="app-divider">Reading</div>
+          <div class="app-reading">
+            <span class="app-item-title">Shendur Laal Chadhaayo</span>
+            <div class="body-text">
+              <p class="stanza">शेंदुर लाल चढायो अच्छा गजमुखको ।<br>दोंदिल लाल बिराजे सुत गौरीहरको ॥</p>
+              <p class="stanza">हाथ लियें गुड़ लड्डू साई सुरवरको ।<br>महिमा कहे न जाय लागत हूं पदको ॥</p>
+            </div>
+          </div>
+          <div class="app-actions">
+            <span class="app-btn-primary">Share</span>
+            <span class="app-menu-label">Font size ▾</span>
+          </div>
+          <div class="app-settings-row">
+            <span class="swatch"></span>
+            <span class="app-menu-label">Reset customised data</span>
+          </div>
+          <div class="app-tabbar">
+            <span class="app-tab active"><span class="glyph">◆</span>Home</span>
+            <span class="app-tab"><span class="glyph">♥</span>Favorites</span>
+            <span class="app-tab"><span class="glyph">◷</span>Recent</span>
+            <span class="app-tab"><span class="glyph">⚙</span>Settings</span>
+          </div>
+        </div>
+        <div class="ratios">
+          <div class="row"><span>text / background</span><span class="val">12.45:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>text / surface</span><span class="val">11.39:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>onPrimary / primary</span><span class="val">6.42:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>accent / background (text use)</span><span class="val">5.55:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>accent / surface (text use)</span><span class="val">5.08:1 <span class="pass">PASS</span></span></div>
+        </div>
+      </div>
+
+      <div>
+        <p class="mode-label">Dark</p>
+        <div class="phone" style="
+          --app-primary:#DDAA55; --app-on-primary:#1C1812; --app-text:#E8D9BC;
+          --app-accent:#E8B025; --app-bg:#1C1812; --app-surface:#322A1E; --app-border:#6B5020;
+        ">
+          <div class="app-header">
+            <span class="app-title">आरती संग्रह</span>
+            <span class="app-icon-btn">⚲</span>
+          </div>
+          <div class="app-list">
+            <div class="app-item">
+              <span><span class="app-item-title">Sukhakarta Dukhaharta</span><br><span class="app-item-deity">Ganesh</span></span>
+              <span class="app-item-fav">♥</span>
+            </div>
+            <div class="app-item">
+              <span><span class="app-item-title">Om Jai Jagdish Hare</span><br><span class="app-item-deity">Vishnu</span></span>
+              <span class="app-item-fav inactive">♥</span>
+            </div>
+          </div>
+          <div class="app-divider">Reading</div>
+          <div class="app-reading">
+            <span class="app-item-title">Shendur Laal Chadhaayo</span>
+            <div class="body-text">
+              <p class="stanza">शेंदुर लाल चढायो अच्छा गजमुखको ।<br>दोंदिल लाल बिराजे सुत गौरीहरको ॥</p>
+              <p class="stanza">हाथ लियें गुड़ लड्डू साई सुरवरको ।<br>महिमा कहे न जाय लागत हूं पदको ॥</p>
+            </div>
+          </div>
+          <div class="app-actions">
+            <span class="app-btn-primary">Share</span>
+            <span class="app-menu-label">Font size ▾</span>
+          </div>
+          <div class="app-settings-row">
+            <span class="swatch"></span>
+            <span class="app-menu-label">Reset customised data</span>
+          </div>
+          <div class="app-tabbar">
+            <span class="app-tab active"><span class="glyph">◆</span>Home</span>
+            <span class="app-tab"><span class="glyph">♥</span>Favorites</span>
+            <span class="app-tab"><span class="glyph">◷</span>Recent</span>
+            <span class="app-tab"><span class="glyph">⚙</span>Settings</span>
+          </div>
+        </div>
+        <div class="ratios">
+          <div class="row"><span>text / background</span><span class="val">12.69:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>text / surface</span><span class="val">10.15:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>onPrimary / primary</span><span class="val">8.37:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>accent / background (text use)</span><span class="val">8.97:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>accent / surface (text use)</span><span class="val">7.18:1 <span class="pass">PASS</span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VARIANT B ================= -->
+  <section class="variant-panel" data-variant-panel="b">
+    <p class="variant-note">
+      Same warm family, pushed further: <code>surface</code> pulls away from <code>background</code>
+      more (so cards read as distinct objects, not just a faint tint), <code>primary</code> deepens
+      to a richer rust in light and warms to amber (not yellow-gold) in dark so it reads as a
+      genuinely different hue from <code>accent</code> rather than a lighter version of it.
+    </p>
+    <div class="columns">
+      <div>
+        <p class="mode-label">Light</p>
+        <div class="phone" style="
+          --app-primary:#8A2E0A; --app-on-primary:#FFF8ED; --app-text:#2E2013;
+          --app-accent:#7A5206; --app-bg:#FBF6EC; --app-surface:#EDE0C5; --app-border:#B08A55;
+        ">
+          <div class="app-header">
+            <span class="app-title">आरती संग्रह</span>
+            <span class="app-icon-btn">⚲</span>
+          </div>
+          <div class="app-list">
+            <div class="app-item">
+              <span><span class="app-item-title">Sukhakarta Dukhaharta</span><br><span class="app-item-deity">Ganesh</span></span>
+              <span class="app-item-fav">♥</span>
+            </div>
+            <div class="app-item">
+              <span><span class="app-item-title">Om Jai Jagdish Hare</span><br><span class="app-item-deity">Vishnu</span></span>
+              <span class="app-item-fav inactive">♥</span>
+            </div>
+          </div>
+          <div class="app-divider">Reading</div>
+          <div class="app-reading">
+            <span class="app-item-title">Shendur Laal Chadhaayo</span>
+            <div class="body-text">
+              <p class="stanza">शेंदुर लाल चढायो अच्छा गजमुखको ।<br>दोंदिल लाल बिराजे सुत गौरीहरको ॥</p>
+              <p class="stanza">हाथ लियें गुड़ लड्डू साई सुरवरको ।<br>महिमा कहे न जाय लागत हूं पदको ॥</p>
+            </div>
+          </div>
+          <div class="app-actions">
+            <span class="app-btn-primary">Share</span>
+            <span class="app-menu-label">Font size ▾</span>
+          </div>
+          <div class="app-settings-row">
+            <span class="swatch"></span>
+            <span class="app-menu-label">Reset customised data</span>
+          </div>
+          <div class="app-tabbar">
+            <span class="app-tab active"><span class="glyph">◆</span>Home</span>
+            <span class="app-tab"><span class="glyph">♥</span>Favorites</span>
+            <span class="app-tab"><span class="glyph">◷</span>Recent</span>
+            <span class="app-tab"><span class="glyph">⚙</span>Settings</span>
+          </div>
+        </div>
+        <div class="ratios">
+          <div class="row"><span>text / background</span><span class="val">14.63:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>text / surface</span><span class="val">12.06:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>onPrimary / primary</span><span class="val">8.04:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>accent / background (text use)</span><span class="val">6.42:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>accent / surface (text use)</span><span class="val">5.29:1 <span class="pass">PASS</span></span></div>
+        </div>
+      </div>
+
+      <div>
+        <p class="mode-label">Dark</p>
+        <div class="phone" style="
+          --app-primary:#E8A05C; --app-on-primary:#1A1108; --app-text:#F0E2C4;
+          --app-accent:#F2C34A; --app-bg:#15100C; --app-surface:#241A10; --app-border:#5C4520;
+        ">
+          <div class="app-header">
+            <span class="app-title">आरती संग्रह</span>
+            <span class="app-icon-btn">⚲</span>
+          </div>
+          <div class="app-list">
+            <div class="app-item">
+              <span><span class="app-item-title">Sukhakarta Dukhaharta</span><br><span class="app-item-deity">Ganesh</span></span>
+              <span class="app-item-fav">♥</span>
+            </div>
+            <div class="app-item">
+              <span><span class="app-item-title">Om Jai Jagdish Hare</span><br><span class="app-item-deity">Vishnu</span></span>
+              <span class="app-item-fav inactive">♥</span>
+            </div>
+          </div>
+          <div class="app-divider">Reading</div>
+          <div class="app-reading">
+            <span class="app-item-title">Shendur Laal Chadhaayo</span>
+            <div class="body-text">
+              <p class="stanza">शेंदुर लाल चढायो अच्छा गजमुखको ।<br>दोंदिल लाल बिराजे सुत गौरीहरको ॥</p>
+              <p class="stanza">हाथ लियें गुड़ लड्डू साई सुरवरको ।<br>महिमा कहे न जाय लागत हूं पदको ॥</p>
+            </div>
+          </div>
+          <div class="app-actions">
+            <span class="app-btn-primary">Share</span>
+            <span class="app-menu-label">Font size ▾</span>
+          </div>
+          <div class="app-settings-row">
+            <span class="swatch"></span>
+            <span class="app-menu-label">Reset customised data</span>
+          </div>
+          <div class="app-tabbar">
+            <span class="app-tab active"><span class="glyph">◆</span>Home</span>
+            <span class="app-tab"><span class="glyph">♥</span>Favorites</span>
+            <span class="app-tab"><span class="glyph">◷</span>Recent</span>
+            <span class="app-tab"><span class="glyph">⚙</span>Settings</span>
+          </div>
+        </div>
+        <div class="ratios">
+          <div class="row"><span>text / background</span><span class="val">14.74:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>text / surface</span><span class="val">13.31:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>onPrimary / primary</span><span class="val">8.53:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>accent / background (text use)</span><span class="val">11.41:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>accent / surface (text use)</span><span class="val">10.31:1 <span class="pass">PASS</span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VARIANT C ================= -->
+  <section class="variant-panel" data-variant-panel="c">
+    <p class="variant-note">
+      Optimized purely for long-text reading comfort — near-white paper and near-black ink in
+      light, near-true-black ground in dark, all ratios well past the AA floor (13–17:1). Trades
+      some of the "warm parchment" softness for the crispest possible reading experience in the
+      view that matters most: the aarti lyrics themselves.
+    </p>
+    <div class="columns">
+      <div>
+        <p class="mode-label">Light</p>
+        <div class="phone" style="
+          --app-primary:#9C3B12; --app-on-primary:#FFFFFF; --app-text:#241A10;
+          --app-accent:#6B4A05; --app-bg:#FFFDF8; --app-surface:#F0E6D2; --app-border:#B89868;
+        ">
+          <div class="app-header">
+            <span class="app-title">आरती संग्रह</span>
+            <span class="app-icon-btn">⚲</span>
+          </div>
+          <div class="app-list">
+            <div class="app-item">
+              <span><span class="app-item-title">Sukhakarta Dukhaharta</span><br><span class="app-item-deity">Ganesh</span></span>
+              <span class="app-item-fav">♥</span>
+            </div>
+            <div class="app-item">
+              <span><span class="app-item-title">Om Jai Jagdish Hare</span><br><span class="app-item-deity">Vishnu</span></span>
+              <span class="app-item-fav inactive">♥</span>
+            </div>
+          </div>
+          <div class="app-divider">Reading</div>
+          <div class="app-reading">
+            <span class="app-item-title">Shendur Laal Chadhaayo</span>
+            <div class="body-text">
+              <p class="stanza">शेंदुर लाल चढायो अच्छा गजमुखको ।<br>दोंदिल लाल बिराजे सुत गौरीहरको ॥</p>
+              <p class="stanza">हाथ लियें गुड़ लड्डू साई सुरवरको ।<br>महिमा कहे न जाय लागत हूं पदको ॥</p>
+            </div>
+          </div>
+          <div class="app-actions">
+            <span class="app-btn-primary">Share</span>
+            <span class="app-menu-label">Font size ▾</span>
+          </div>
+          <div class="app-settings-row">
+            <span class="swatch"></span>
+            <span class="app-menu-label">Reset customised data</span>
+          </div>
+          <div class="app-tabbar">
+            <span class="app-tab active"><span class="glyph">◆</span>Home</span>
+            <span class="app-tab"><span class="glyph">♥</span>Favorites</span>
+            <span class="app-tab"><span class="glyph">◷</span>Recent</span>
+            <span class="app-tab"><span class="glyph">⚙</span>Settings</span>
+          </div>
+        </div>
+        <div class="ratios">
+          <div class="row"><span>text / background</span><span class="val">16.79:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>text / surface</span><span class="val">13.78:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>onPrimary / primary</span><span class="val">6.89:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>accent / background (text use)</span><span class="val">7.92:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>accent / surface (text use)</span><span class="val">6.50:1 <span class="pass">PASS</span></span></div>
+        </div>
+      </div>
+
+      <div>
+        <p class="mode-label">Dark</p>
+        <div class="phone" style="
+          --app-primary:#D99A5C; --app-on-primary:#140D06; --app-text:#EDE3D0;
+          --app-accent:#D9A93E; --app-bg:#121008; --app-surface:#201808; --app-border:#5C4520;
+        ">
+          <div class="app-header">
+            <span class="app-title">आरती संग्रह</span>
+            <span class="app-icon-btn">⚲</span>
+          </div>
+          <div class="app-list">
+            <div class="app-item">
+              <span><span class="app-item-title">Sukhakarta Dukhaharta</span><br><span class="app-item-deity">Ganesh</span></span>
+              <span class="app-item-fav">♥</span>
+            </div>
+            <div class="app-item">
+              <span><span class="app-item-title">Om Jai Jagdish Hare</span><br><span class="app-item-deity">Vishnu</span></span>
+              <span class="app-item-fav inactive">♥</span>
+            </div>
+          </div>
+          <div class="app-divider">Reading</div>
+          <div class="app-reading">
+            <span class="app-item-title">Shendur Laal Chadhaayo</span>
+            <div class="body-text">
+              <p class="stanza">शेंदुर लाल चढायो अच्छा गजमुखको ।<br>दोंदिल लाल बिराजे सुत गौरीहरको ॥</p>
+              <p class="stanza">हाथ लियें गुड़ लड्डू साई सुरवरको ।<br>महिमा कहे न जाय लागत हूं पदको ॥</p>
+            </div>
+          </div>
+          <div class="app-actions">
+            <span class="app-btn-primary">Share</span>
+            <span class="app-menu-label">Font size ▾</span>
+          </div>
+          <div class="app-settings-row">
+            <span class="swatch"></span>
+            <span class="app-menu-label">Reset customised data</span>
+          </div>
+          <div class="app-tabbar">
+            <span class="app-tab active"><span class="glyph">◆</span>Home</span>
+            <span class="app-tab"><span class="glyph">♥</span>Favorites</span>
+            <span class="app-tab"><span class="glyph">◷</span>Recent</span>
+            <span class="app-tab"><span class="glyph">⚙</span>Settings</span>
+          </div>
+        </div>
+        <div class="ratios">
+          <div class="row"><span>text / background</span><span class="val">14.95:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>text / surface</span><span class="val">13.80:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>onPrimary / primary</span><span class="val">8.01:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>accent / background (text use)</span><span class="val">8.79:1 <span class="pass">PASS</span></span></div>
+          <div class="row"><span>accent / surface (text use)</span><span class="val">8.11:1 <span class="pass">PASS</span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  var tabs = document.querySelectorAll('.switcher button');
+  var panels = document.querySelectorAll('.variant-panel');
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var v = tab.getAttribute('data-variant');
+      tabs.forEach(function (t) { t.setAttribute('aria-selected', t === tab ? 'true' : 'false'); });
+      panels.forEach(function (p) {
+        p.setAttribute('data-active', p.getAttribute('data-variant-panel') === v ? 'true' : 'false');
+      });
+    });
+  });
+  document.addEventListener('keydown', function (e) {
+    var active = ['INPUT','TEXTAREA'].includes(document.activeElement.tagName) || document.activeElement.isContentEditable;
+    if (active) return;
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    var order = ['a','b','c'];
+    var current = document.querySelector('.switcher button[aria-selected="true"]').getAttribute('data-variant');
+    var idx = order.indexOf(current);
+    idx = e.key === 'ArrowRight' ? (idx + 1) % order.length : (idx - 1 + order.length) % order.length;
+    document.querySelector('.switcher button[data-variant="' + order[idx] + '"]').click();
+  });
+</script>
