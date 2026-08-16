@@ -15,14 +15,14 @@
                            wins on web. Ignored on native (no DOM). */
 @layer theme {
   :root {
-    /* App theme defaults (parchment light) — overridden at runtime by nativewind.vars() */
-    --app-primary:    160 61 15;
-    --app-on-primary: 255 251 242;
-    --app-text:       58 43 26;
-    --app-accent:     212 160 23;
-    --app-bg:         250 244 232;
-    --app-surface:    243 234 213;
-    --app-border:     196 164 122;
+    /* App theme defaults (light) — overridden at runtime by nativewind.vars() */
+    --app-primary:    138 46 10;
+    --app-on-primary: 255 248 237;
+    --app-text:       46 32 19;
+    --app-accent:     122 82 6;
+    --app-bg:         251 246 236;
+    --app-surface:    237 224 197;
+    --app-border:     176 138 85;
 
     --primary: 23 23 23;
     --primary-foreground: 250 250 250;
