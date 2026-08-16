@@ -2,18 +2,21 @@ import React from "react";
 import { View, Text, ScrollView } from "react-native";
 import * as Linking from "expo-linking";
 import { domainUrl } from "../../../shared/const";
+import { useAppTheme } from "../../../shared/types";
 
 const About: React.FC = () => {
+	const { colors } = useAppTheme();
 	const handlePress = (url: string) => {
 		Linking.openURL(url);
 	};
 
 	return (
 		<ScrollView
-			contentContainerClassName="flex-grow justify-between p-5 bg-app-bg"
+			contentContainerClassName="flex-grow justify-between p-5"
+			contentContainerStyle={{ backgroundColor: colors.background }}
 		>
 			<View className="flex-1">
-				<Text className="text-app-text text-[20px]">
+				<Text className="text-[20px]" style={{ color: colors.text }}>
 					If you're enjoying the app, please consider sharing your feedback with
 					a 5-star rating
 					<Text
@@ -81,7 +84,7 @@ const About: React.FC = () => {
 				</Text>
 			</View>
 			<View className="items-center">
-				<Text className="text-app-text text-[20px]">
+				<Text className="text-[20px]" style={{ color: colors.text }}>
 					{"🧑‍💻 with ♥️ in 🇮🇳"}
 				</Text>
 			</View>

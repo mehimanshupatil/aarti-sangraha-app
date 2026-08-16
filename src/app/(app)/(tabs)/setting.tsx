@@ -81,62 +81,70 @@ const Setting: React.FC = () => {
 
 	return (
 		<>
-			<ScrollView contentContainerClassName=" p-5 gap-3 bg-app-bg">
+			<ScrollView
+				contentContainerClassName=" p-5 gap-3"
+				contentContainerStyle={{ backgroundColor: colors.background }}
+			>
 
 				{/* ── Other settings ── */}
-				<Text className="text-xs font-semibold uppercase tracking-widest text-app-border mb-1">
+				<Text className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: colors.border }}>
 					Display
 				</Text>
 
 				<Pressable
-					className="flex-row items-center gap-3 py-[14px] px-4 border rounded-[10px] border-app-border"
+					className="flex-row items-center gap-3 py-[14px] px-4 border rounded-[10px]"
+					style={{ borderColor: colors.border }}
 					onPress={() => setDisplayMode(isDark ? 'light' : 'dark')}
 					android_ripple={{ color: `${colors.primary}22` }}
 				>
 					<MaterialCommunityIcons name="theme-light-dark" color={colors.primary} size={24} />
-					<Text className="text-base text-app-text">
+					<Text className="text-base" style={{ color: colors.text }}>
 						{isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
 					</Text>
 				</Pressable>
 
-				<Text className="text-xs font-semibold uppercase tracking-widest text-app-border mb-1 mt-2">
+				<Text className="text-xs font-semibold uppercase tracking-widest mb-1 mt-2" style={{ color: colors.border }}>
 					Data
 				</Text>
 
 				<Pressable
-					className="flex-row items-center gap-3 py-[14px] px-4 border rounded-[10px] border-app-border"
+					className="flex-row items-center gap-3 py-[14px] px-4 border rounded-[10px]"
+					style={{ borderColor: colors.border }}
 					onPress={shareApp}
 					android_ripple={{ color: `${colors.primary}22` }}
 				>
 					<MaterialCommunityIcons name="share-variant" color={colors.primary} size={24} />
-					<Text className="text-base text-app-text">Share App</Text>
+					<Text className="text-base" style={{ color: colors.text }}>Share App</Text>
 				</Pressable>
 
 				<Pressable
-					className="flex-row items-center gap-3 py-[14px] px-4 border rounded-[10px] border-app-border"
+					className="flex-row items-center gap-3 py-[14px] px-4 border rounded-[10px]"
+					style={{ borderColor: colors.border }}
 					onPress={exportCustomAartis}
 					android_ripple={{ color: `${colors.primary}22` }}
 				>
 					<MaterialCommunityIcons name="export" color={colors.primary} size={24} />
-					<Text className="text-base text-app-text">Export Custom Aartis</Text>
+					<Text className="text-base" style={{ color: colors.text }}>Export Custom Aartis</Text>
 				</Pressable>
 
 				<Pressable
-					className="flex-row items-center gap-3 py-[14px] px-4 border rounded-[10px] border-app-border"
+					className="flex-row items-center gap-3 py-[14px] px-4 border rounded-[10px]"
+					style={{ borderColor: colors.border }}
 					onPress={() => setImportVisible(true)}
 					android_ripple={{ color: `${colors.primary}22` }}
 				>
 					<MaterialCommunityIcons name="import" color={colors.primary} size={24} />
-					<Text className="text-base text-app-text">Import Custom Aartis</Text>
+					<Text className="text-base" style={{ color: colors.text }}>Import Custom Aartis</Text>
 				</Pressable>
 
 				<Pressable
-					className="flex-row items-center gap-3 py-[14px] px-4 border rounded-[10px] border-app-border"
+					className="flex-row items-center gap-3 py-[14px] px-4 border rounded-[10px]"
+					style={{ borderColor: colors.border }}
 					onPress={reset}
 					android_ripple={{ color: `${colors.accent}22` }}
 				>
 					<MaterialCommunityIcons name="delete-forever" color={colors.accent} size={24} />
-					<Text className="text-base text-app-accent">Reset customised data</Text>
+					<Text className="text-base" style={{ color: colors.accent }}>Reset customised data</Text>
 				</Pressable>
 			</ScrollView>
 
@@ -147,13 +155,13 @@ const Setting: React.FC = () => {
 				onRequestClose={() => setImportVisible(false)}
 			>
 				<View className="flex-1 bg-black/50 justify-end">
-					<View className="p-5 rounded-tl-2xl rounded-tr-2xl gap-3 bg-app-surface">
-						<Text className="text-base font-bold text-app-text">
+					<View className="p-5 rounded-tl-2xl rounded-tr-2xl gap-3" style={{ backgroundColor: colors.surface }}>
+						<Text className="text-base font-bold" style={{ color: colors.text }}>
 							Paste exported JSON
 						</Text>
 						<TextInput
-							className="border rounded-lg p-[10px] text-[13px] min-h-[120px] border-app-border text-app-text"
-							style={{ textAlignVertical: 'top' }}
+							className="border rounded-lg p-[10px] text-[13px] min-h-[120px]"
+							style={{ textAlignVertical: 'top', borderColor: colors.border, color: colors.text }}
 							multiline
 							numberOfLines={8}
 							placeholder="Paste JSON here…"
@@ -164,16 +172,18 @@ const Setting: React.FC = () => {
 						/>
 						<View className="flex-row gap-[10px] justify-end">
 							<Pressable
-								className="px-5 py-[10px] rounded-lg border border-app-border"
+								className="px-5 py-[10px] rounded-lg border"
+								style={{ borderColor: colors.border }}
 								onPress={() => { setImportVisible(false); setImportText(''); }}
 							>
-								<Text className="text-app-text">Cancel</Text>
+								<Text style={{ color: colors.text }}>Cancel</Text>
 							</Pressable>
 							<Pressable
-								className="px-5 py-[10px] rounded-lg border border-app-primary bg-app-primary"
+								className="px-5 py-[10px] rounded-lg border"
+								style={{ borderColor: colors.primary, backgroundColor: colors.primary }}
 								onPress={importCustomAartis}
 							>
-								<Text className="text-app-bg font-bold">Import</Text>
+								<Text className="font-bold" style={{ color: colors.background }}>Import</Text>
 							</Pressable>
 						</View>
 					</View>

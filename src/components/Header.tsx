@@ -29,8 +29,9 @@ const Header: React.FC<{
 
 	return (
 		<View
-			className="bg-app-primary w-full justify-center overflow-hidden pr-[10px]"
+			className="w-full justify-center overflow-hidden pr-[10px]"
 			style={{
+				backgroundColor: colors.primary,
 				paddingTop: STATUSBAR_HEIGHT,
 				height: STATUSBAR_HEIGHT + APPBAR_HEIGHT,
 			}}
@@ -45,8 +46,8 @@ const Header: React.FC<{
 				>
 					<View className="w-11 h-11" />
 					<Text
-						className="text-app-on-primary font-bold text-[20px] tracking-[1px]"
-						style={getFontStyle(translate)}
+						className="font-bold text-[20px] tracking-[1px]"
+						style={[{ color: colors.onPrimary }, getFontStyle(translate)]}
 					>
 						{title}
 					</Text>

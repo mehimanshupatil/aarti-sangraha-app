@@ -12,7 +12,8 @@ const Search: React.FC = () => {
 	return (
 		<View className="flex-1 flex-row items-center mx-2 gap-1">
 			<TextInput
-				className="flex-1 h-[38px] rounded-md border border-app-on-primary text-app-on-primary px-3"
+				className="flex-1 h-[38px] rounded-md border px-3"
+				style={{ borderColor: colors.onPrimary, color: colors.onPrimary }}
 				placeholder="Search…"
 				placeholderTextColor={`${colors.onPrimary}99`}
 				autoFocus

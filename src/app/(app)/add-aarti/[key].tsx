@@ -76,7 +76,7 @@ const AddNew: React.FC = () => {
 	};
 
 	return (
-		<View className="flex-grow h-full bg-app-bg">
+		<View className="flex-grow h-full" style={{ backgroundColor: colors.background }}>
 			<Stack.Screen
 				options={{
 					title: selectedItem ? "Update" : "Add",
@@ -88,16 +88,26 @@ const AddNew: React.FC = () => {
 			<ScrollView className="mx-5 flex-1" keyboardShouldPersistTaps="handled">
 				<TextInput
 					placeholderTextColor={colors.primary}
-					className="mt-5 text-[20px] rounded-[5px] border p-[10px] border-app-primary text-app-primary bg-app-bg"
-					style={{ textAlignVertical: 'top' }}
+					className="mt-5 text-[20px] rounded-[5px] border p-[10px]"
+					style={{
+						textAlignVertical: 'top',
+						borderColor: colors.primary,
+						color: colors.primary,
+						backgroundColor: colors.background,
+					}}
 					placeholder="Title"
 					value={title}
 					onChangeText={setTitle}
 				/>
 				<TextInput
 					placeholderTextColor={colors.primary}
-					className="mt-5 text-[20px] rounded-[5px] border p-[10px] border-app-primary text-app-primary bg-app-bg"
-					style={{ textAlignVertical: 'top' }}
+					className="mt-5 text-[20px] rounded-[5px] border p-[10px]"
+					style={{
+						textAlignVertical: 'top',
+						borderColor: colors.primary,
+						color: colors.primary,
+						backgroundColor: colors.background,
+					}}
 					placeholder="Body"
 					value={body}
 					onChangeText={setBody}
@@ -105,10 +115,11 @@ const AddNew: React.FC = () => {
 					multiline={true}
 				/>
 				<TouchableOpacity
-					className="items-center p-[10px] mt-[10px] rounded-[5px] border border-app-primary"
+					className="items-center p-[10px] mt-[10px] rounded-[5px] border"
+					style={{ borderColor: colors.primary }}
 					onPress={addItem}
 				>
-					<Text className="text-app-text font-bold text-[15px]">
+					<Text className="font-bold text-[15px]" style={{ color: colors.text }}>
 						{selectedItem ? "Update" : "Add"}
 					</Text>
 				</TouchableOpacity>

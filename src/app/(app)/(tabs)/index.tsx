@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from 'react';
-import clsx from 'clsx';
 import {
 	FlatList,
 	ScrollView,
@@ -50,7 +49,7 @@ const Home: React.FC = () => {
 	};
 
 	return (
-		<View className="flex-grow h-full bg-app-bg">
+		<View className="flex-grow h-full" style={{ backgroundColor: colors.background }}>
 			<Head>
 				<title>आरती संग्रह</title>
 				<meta name="description" content="आरती संग्रह" />
@@ -59,14 +58,16 @@ const Home: React.FC = () => {
 			{/* Aarti of the Day — hidden during search */}
 			{!searchValue && todayAarti && (
 				<TouchableOpacity
-					className="mx-5 mt-4 mb-2 p-4 rounded-[10px] border border-app-primary bg-app-surface"
+					className="mx-5 mt-4 mb-2 p-4 rounded-[10px] border"
+					style={{ borderColor: colors.primary, backgroundColor: colors.surface }}
 					onPress={() => router.push(`/aarti-view/${todayAarti.metadata.slug}`)}
 				>
-					<Text className="text-[11px] font-bold tracking-[0.5px] mb-1 text-app-primary">
+					<Text className="text-[11px] font-bold tracking-[0.5px] mb-1" style={{ color: colors.primary }}>
 						✨ आजची आरती
 					</Text>
 					<Text
-						className="text-[18px] font-bold text-app-text"
+						className="text-[18px] font-bold"
+						style={{ color: colors.text }}
 						numberOfLines={1}
 					>
 						{todayAarti.title.original}
@@ -83,20 +84,34 @@ const Home: React.FC = () => {
 						contentContainerClassName="gap-2 pr-2 py-2"
 					>
 						<TouchableOpacity
-							className={clsx('px-[14px] py-[6px] rounded-[20px] border border-app-primary', selectedDeity === null ? 'bg-app-primary' : 'bg-app-surface')}
+							className="px-[14px] py-[6px] rounded-[20px] border"
+							style={{
+								borderColor: colors.primary,
+								backgroundColor: selectedDeity === null ? colors.primary : colors.surface,
+							}}
 							onPress={() => setSelectedDeity(null)}
 						>
-							<Text className={clsx('text-[13px] font-semibold', selectedDeity === null ? 'text-app-bg' : 'text-app-primary')}>
+							<Text
+								className="text-[13px] font-semibold"
+								style={{ color: selectedDeity === null ? colors.background : colors.primary }}
+							>
 								सर्व
 							</Text>
 						</TouchableOpacity>
 						{deities.map((deity) => (
 							<TouchableOpacity
 								key={deity}
-								className={clsx('px-[14px] py-[6px] rounded-[20px] border border-app-primary', selectedDeity === deity ? 'bg-app-primary' : 'bg-app-surface')}
+								className="px-[14px] py-[6px] rounded-[20px] border"
+								style={{
+									borderColor: colors.primary,
+									backgroundColor: selectedDeity === deity ? colors.primary : colors.surface,
+								}}
 								onPress={() => setSelectedDeity(selectedDeity === deity ? null : deity)}
 							>
-								<Text className={clsx('text-[13px] font-semibold', selectedDeity === deity ? 'text-app-bg' : 'text-app-primary')}>
+								<Text
+									className="text-[13px] font-semibold"
+									style={{ color: selectedDeity === deity ? colors.background : colors.primary }}
+								>
 									{DEITY_LABELS[deity] ?? deity}
 								</Text>
 							</TouchableOpacity>
@@ -118,7 +133,7 @@ const Home: React.FC = () => {
 						placement="bottom right"
 						useRNModal
 						offset={4}
-						className="bg-app-surface"
+						style={{ backgroundColor: colors.surface }}
 						closeOnSelect
 					>
 						{(['default', 'az', 'deity'] as SortOrder[]).map((order) => (
@@ -135,7 +150,7 @@ const Home: React.FC = () => {
 										className="mr-3"
 									/>
 								)}
-								<MenuItemLabel className="text-app-text">
+								<MenuItemLabel style={{ color: colors.text }}>
 									{sortLabels[order]}
 								</MenuItemLabel>
 							</MenuItem>
@@ -153,8 +168,10 @@ const Home: React.FC = () => {
 					ListFooterComponent={() => (
 						<IconBtn
 							icon="plus"
-							className="my-4 mx-0 items-center w-full border rounded-[10px] border-app-primary bg-app-bg"
+							className="my-4 mx-0 items-center w-full border rounded-[10px]"
 							style={{
+								borderColor: colors.primary,
+								backgroundColor: colors.background,
 								elevation: 3,
 								shadowColor: colors.background,
 								shadowOffset: { width: 1, height: 1 },

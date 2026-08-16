@@ -16,8 +16,10 @@ const SingleItem: React.FC<{
 
 	return (
 		<View
-			className="mt-4 border border-app-primary bg-app-bg rounded-lg"
+			className="mt-4 border rounded-lg"
 			style={{
+				borderColor: colors.primary,
+				backgroundColor: colors.background,
 				shadowColor: colors.primary,
 				shadowOffset: { width: 0, height: 2 },
 				shadowOpacity: 0.3,
@@ -33,8 +35,9 @@ const SingleItem: React.FC<{
 				<View>
 					<View className="flex-row justify-between">
 						<Text
-							className="text-app-text flex-1 flex-wrap text-[30px]"
+							className="flex-1 flex-wrap text-[30px]"
 							style={[
+								{ color: colors.text },
 								getFontStyle(translate),
 							]}
 							ellipsizeMode="tail"
@@ -51,8 +54,9 @@ const SingleItem: React.FC<{
 					</View>
 					<View className="flex-row justify-between">
 						<Text
-							className="text-app-text flex-1"
+							className="flex-1"
 							style={[
+								{ color: colors.text },
 								getFontStyle(translate),
 							]}
 							ellipsizeMode="tail"
@@ -60,7 +64,7 @@ const SingleItem: React.FC<{
 						>
 							{item.body[translate].split('\n')[0]}
 						</Text>
-						<Text className="text-app-text pl-[5px] pr-[15px]">
+						<Text className="pl-[5px] pr-[15px]" style={{ color: colors.text }}>
 							{item.key}
 						</Text>
 					</View>
