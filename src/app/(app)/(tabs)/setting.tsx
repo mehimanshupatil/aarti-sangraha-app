@@ -15,16 +15,13 @@ import * as Clipboard from 'expo-clipboard';
 import { useAppTheme } from '../../../shared/types';
 import { useDataStore, useDataStoreActions, useUIStoreActions } from '../../../store/store';
 import { shareApp } from '../../../shared/helper';
-import { themes } from '../../../shared/themes';
-import type { ThemeId } from '../../../shared/themes';
 
 const Setting: React.FC = () => {
 	const { colors } = useAppTheme();
 	const displayMode = useDataStore((s) => s.displayMode);
-	const selectedTheme = useDataStore((s) => s.selectedTheme);
 	const aartis = useDataStore((s) => s.aartis);
 	const { initializeAarti, addAarti } = useDataStoreActions();
-	const { setDisplayMode, setSelectedTheme } = useUIStoreActions();
+	const { setDisplayMode } = useUIStoreActions();
 
 	const [importVisible, setImportVisible] = useState(false);
 	const [importText, setImportText] = useState('');
@@ -86,58 +83,8 @@ const Setting: React.FC = () => {
 		<>
 			<ScrollView contentContainerClassName=" p-5 gap-3 bg-app-bg">
 
-				{/* ── Theme picker ── */}
-				<Text className="text-xs font-semibold uppercase tracking-widest text-app-border mb-1">
-					Color Theme
-				</Text>
-				<ScrollView
-					horizontal
-					showsHorizontalScrollIndicator={false}
-					className="mb-1" 
-				>
-					<View className="flex-row gap-4 pb-1 items-start">
-						{(Object.keys(themes) as ThemeId[]).map((id) => {
-							const t = themes[id];
-							const c = isDark ? t.dark : t.light;
-							const isSelected = selectedTheme === id;
-							return (
-								<Pressable
-									key={id}
-									onPress={() => setSelectedTheme(id)}
-									className="items-center gap-1.5"
-									style={{ width: 64 }}
-								>
-									{/* Split swatch: left = primary, right = accent */}
-									<View
-										style={{
-											width: 52,
-											height: 52,
-											borderRadius: 26,
-											overflow: 'hidden',
-											borderWidth: isSelected ? 3 : 1.5,
-											borderColor: isSelected ? colors.text : colors.border,
-										}}
-									>
-										<View style={{ flex: 1, flexDirection: 'row' }}>
-											<View style={{ flex: 1, backgroundColor: c.primary }} />
-											<View style={{ flex: 1, backgroundColor: c.accent }} />
-										</View>
-									</View>
-									<Text
-										className="text-center"
-										style={{ fontSize: 10, color: isSelected ? colors.primary : colors.text, fontWeight: isSelected ? '700' : '400' }}
-										numberOfLines={2}
-									>
-										{t.name}
-									</Text>
-								</Pressable>
-							);
-						})}
-					</View>
-				</ScrollView>
-
 				{/* ── Other settings ── */}
-				<Text className="text-xs font-semibold uppercase tracking-widest text-app-border mb-1 mt-2">
+				<Text className="text-xs font-semibold uppercase tracking-widest text-app-border mb-1">
 					Display
 				</Text>
 

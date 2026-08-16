@@ -13,7 +13,7 @@ export default function Root({ children }: { children: React.ReactNode }) {
 				<meta charSet="utf-8" />
 				<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 				<title>आरती संग्रह</title>
-				<meta name="theme-color" content="#FFE065" />
+				<meta name="theme-color" content="#FBF6EC" />
 				<link
 					rel="apple-touch-icon"
 					sizes="180x180"
@@ -100,10 +100,10 @@ export default function Root({ children }: { children: React.ReactNode }) {
 
 const responsiveBackground = `
 body {
-  background-color: #fff;
+  background-color: #FBF6EC;
 }
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #000;
+    background-color: #15100C;
   }
 }`;

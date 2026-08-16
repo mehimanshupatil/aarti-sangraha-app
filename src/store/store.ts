@@ -4,7 +4,6 @@ import { create } from 'zustand';
 import { createJSONStorage, devtools, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import { useShallow } from 'zustand/shallow';
-import { DEFAULT_THEME, type ThemeId } from '../shared/themes';
 import { singleItemType } from '../shared/types';
 import data from './data';
 
@@ -40,8 +39,6 @@ interface UISlice {
 	setSelectedDeity: (deity: string | null) => void;
 	sortOrder: SortOrder;
 	setSortOrder: (order: SortOrder) => void;
-	selectedTheme: ThemeId;
-	setSelectedTheme: (theme: ThemeId) => void;
 }
 
 type DataState = DataSlice & UISlice;
@@ -97,7 +94,6 @@ export const useDataStore = create<DataState>()(
 				translate: 'original' as TextDisplayType,
 				selectedDeity: null,
 				sortOrder: 'default' as SortOrder,
-				selectedTheme: DEFAULT_THEME,
 				setDisplayMode: (mode) =>
 					set((state) => {
 						state.displayMode = mode;
@@ -126,14 +122,18 @@ export const useDataStore = create<DataState>()(
 					set((state) => {
 						state.sortOrder = order;
 					}),
-				setSelectedTheme: (theme) =>
-					set((state) => {
-						state.selectedTheme = theme;
-					}),
 			})),
 			{
 				name: 'aarti-storage',
 				storage: createJSONStorage(() => AsyncStorage),
+				version: 1,
+				migrate: (persistedState, version) => {
+					if (version === 0 && persistedState && typeof persistedState === 'object') {
+						const { selectedTheme: _selectedTheme, ...rest } = persistedState as Record<string, unknown>;
+						return rest;
+					}
+					return persistedState;
+				},
 			},
 		),
 	),
@@ -163,6 +163,5 @@ export const useUIStoreActions = () =>
 			setTranslate: s.setTranslate,
 			setSelectedDeity: s.setSelectedDeity,
 			setSortOrder: s.setSortOrder,
-			setSelectedTheme: s.setSelectedTheme,
 		})),
 	);

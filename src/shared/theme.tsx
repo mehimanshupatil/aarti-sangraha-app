@@ -1,11 +1,8 @@
 import { useColorScheme } from 'nativewind';
-import { themes, DEFAULT_THEME } from './themes';
-import { useDataStore } from '../store/store';
+import { appColors } from './themes';
 
 export function useAppTheme() {
 	const { colorScheme } = useColorScheme();
-	const selectedTheme = useDataStore((s) => s.selectedTheme);
-	const theme = themes[selectedTheme ?? DEFAULT_THEME];
-	const colors = colorScheme === 'dark' ? theme.dark : theme.light;
-	return { colors, theme };
+	const colors = colorScheme === 'dark' ? appColors.dark : appColors.light;
+	return { colors };
 }
