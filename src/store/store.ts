@@ -1,26 +1,26 @@
-import { create } from "zustand";
-import { createJSONStorage, devtools, persist } from "zustand/middleware";
-import { immer } from "zustand/middleware/immer";
-import { useShallow } from "zustand/shallow";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ColorSchemeName } from "react-native";
-import { singleItemType } from "../shared/types";
-import { type ThemeId, DEFAULT_THEME } from "../shared/themes";
-import data from "./data";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ColorSchemeName } from 'react-native';
+import { create } from 'zustand';
+import { createJSONStorage, devtools, persist } from 'zustand/middleware';
+import { immer } from 'zustand/middleware/immer';
+import { useShallow } from 'zustand/shallow';
+import { DEFAULT_THEME, type ThemeId } from '../shared/themes';
+import { singleItemType } from '../shared/types';
+import data from './data';
 
-export type TextDisplayType = "original" | "transliteration";
-export type SortOrder = "default" | "az" | "deity";
+export type TextDisplayType = 'original' | 'transliteration';
+export type SortOrder = 'default' | 'az' | 'deity';
 
 // --- Data slice: aarti list + favourites + recently viewed ---
 interface DataSlice {
 	aartis: singleItemType[];
 	favoritesKeys: string[];
 	recentlyViewed: string[]; // aarti keys, most-recent-first, max 20
-	toggleFav: (id: singleItemType["key"]) => void;
+	toggleFav: (id: singleItemType['key']) => void;
 	initializeAarti: () => void;
 	addAarti: (item: singleItemType) => void;
 	updateAarti: (item: singleItemType) => void;
-	deleteAarti: (id: singleItemType["key"]) => void;
+	deleteAarti: (id: singleItemType['key']) => void;
 	addToRecentlyViewed: (key: string) => void;
 }
 
@@ -77,7 +77,9 @@ export const useDataStore = create<DataState>()(
 					set((state) => {
 						const index = state.aartis.findIndex((x) => x.key === key);
 						if (index !== -1) state.aartis.splice(index, 1);
-						state.recentlyViewed = state.recentlyViewed.filter((k) => k !== key);
+						state.recentlyViewed = state.recentlyViewed.filter(
+							(k) => k !== key,
+						);
 					}),
 				addToRecentlyViewed: (key) =>
 					set((state) => {
@@ -88,13 +90,13 @@ export const useDataStore = create<DataState>()(
 					}),
 
 				// UI slice
-				displayMode: "light" as NonNullable<ColorSchemeName>,
+				displayMode: 'light' as NonNullable<ColorSchemeName>,
 				fontSize: 20,
 				showSearch: false,
-				searchValue: "",
-				translate: "original" as TextDisplayType,
+				searchValue: '',
+				translate: 'original' as TextDisplayType,
 				selectedDeity: null,
-				sortOrder: "default" as SortOrder,
+				sortOrder: 'default' as SortOrder,
 				selectedTheme: DEFAULT_THEME,
 				setDisplayMode: (mode) =>
 					set((state) => {
@@ -130,7 +132,7 @@ export const useDataStore = create<DataState>()(
 					}),
 			})),
 			{
-				name: "aarti-storage",
+				name: 'aarti-storage',
 				storage: createJSONStorage(() => AsyncStorage),
 			},
 		),

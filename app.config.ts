@@ -23,20 +23,9 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     "android": {
       "package": "com.mehimanshupatil.aartisangraha",
-      "versionCode": 20,
+      "versionCode": 21,
       "permissions": [],
-      "userInterfaceStyle": "automatic",
-      // @ts-expect-error android.splash removed from types in SDK 57, still valid for EAS builds
-      "splash": {
-        "ldpi": "./assets/splash/drawable-ldpi.png",
-        "mdpi": "./assets/splash/drawable-mdpi.png",
-        "hdpi": "./assets/splash/drawable-hdpi.png",
-        "xhdpi": "./assets/splash/drawable-xhdpi.png",
-        "xxhdpi": "./assets/splash/drawable-xxhdpi.png",
-        "xxxhdpi": "./assets/splash/drawable-xxxhdpi.png",
-        "resizeMode": "contain",
-        "backgroundColor": "#ffde5b"
-      }
+      "userInterfaceStyle": "automatic"
     },
     "extra": {
       "eas": {
@@ -50,7 +39,15 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     "plugins": [
       "expo-router",
       "expo-font",
-      "expo-sharing"
+      "expo-sharing",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#ffde5b"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

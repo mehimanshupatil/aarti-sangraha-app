@@ -16,7 +16,7 @@ npx expo-doctor     # check dependency health
 
 ## Stack
 
-- **Expo SDK 56** / React Native 0.85 / React 19
+- **Expo SDK 57** / React Native 0.86 / React 19
 - **Expo Router** — file-based routing
 - **Zustand** + immer + persist (AsyncStorage) — state
 - **NativeWind v4** + Tailwind v3 — styling
